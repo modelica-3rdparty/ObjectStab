@@ -1,0 +1,416 @@
+<HTML>
+<HEAD><META name="HTML-Generator" content="Dymola"><TITLE>ObjectStab</TITLE></HEAD>
+<BODY><P>
+<H2><IMG SRC="ObjectStab.Generators.Partials.GeneratorI.png" ALT="ObjectStab.Generators.Partials.Generator" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.Partials.Generator"></A><A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials"
+>ObjectStab.Generators.Partials</A>.Generator</H2>
+<IMG SRC="ObjectStab.Generators.Partials.GeneratorD.png" ALT="ObjectStab.Generators.Partials.Generator">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">model</font> Generator 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.OnePin"
+>Base.OnePin</A>;
+  <font color="blue">parameter </font>Boolean isSlack=false <font color="darkgreen">
+    &quot;Acts as slack node during initialization ? (true=yes)&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> V0=1 <font color="darkgreen">&quot;Initial Terminal Voltage&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.VoltageAngle"
+>Base.VoltageAngle</A> theta0=0 <font color="darkgreen">
+    &quot;Initial Voltage Angle (only used if isSlack=true)&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.ActivePower"
+>Base.ActivePower</A> Pg0=1 <font color="darkgreen">
+    &quot;Initial Generated Active Power (on system base, only used if isSlack=false)&quot;</font>
+    ;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Base.Time</A> TripTime=Modelica.Constants.inf <font color="darkgreen">&quot;Time of Tripping of Generator&quot;</font>;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> V=<font color="red">sqrt</font>((1 + T.va)*(1 + T.va) + T.vb*T.vb);
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.VoltageAngle"
+>Base.VoltageAngle</A> theta=<font color="red">Modelica.Math.atan2</font>(T.vb, (1 + T.va));
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.ActivePower"
+>Base.ActivePower</A> Pg=-((1 + T.va)*T.ia + T.vb*T.ib) <font color="darkgreen">
+    &quot;Generated Active Power&quot;</font>;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.ReactivePower"
+>Base.ReactivePower</A> Qg=-(T.vb*T.ia - (1 + T.va)*T.ib) <font color="darkgreen">
+    &quot;Generated Reactive Power&quot;</font>;
+  <font color="blue">inner </font>Boolean online=<font color="blue">if </font>time &lt; TripTime<font color="blue"> then </font>true<font color="blue"> else </font>false;
+  <font color="darkgreen"></font>
+<font color="blue">protected </font>
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.wRefContainer"
+>ObjectStab.Base.wRefContainer</A> wrl;
+  <font color="blue">outer </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.wRefContainer"
+>ObjectStab.Base.wRefContainer</A> wrcon;
+<font color="blue">equation </font>
+  <font color="red">connect</font>(wrcon.wr, wrl.wr);
+<font color="blue">end </font>Generator;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Generators.Partials.DetGenI.png" ALT="ObjectStab.Generators.Partials.DetGen" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.Partials.DetGen"></A><A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials"
+>ObjectStab.Generators.Partials</A>.DetGen</H2>
+<B>Common Definitions for Detailed Generator</B><p>
+<IMG SRC="ObjectStab.Generators.Partials.DetGenD.png" ALT="ObjectStab.Generators.Partials.DetGen">
+<H3>Information</H3>
+<PRE>Common definitions for detailed generator models, including the generator step-up
+transformer.  
+
+At least one slack node or detailed generator with its attribute 'isSlack' 
+set to true must be included in each network model. For this generator the 
+attribute Pg0 is not used. For generators with 'isSlack' set to false, the 
+attribute theta0 is not used. Tripping of the generator can be simulated 
+by setting the tripping time in the attribute 'TripTime'. 
+
+Each generator has it's own dq coordinate system, and its stator equations
+must therefore be related to the network (global) coordinate system using the
+so called Kron's transformations [1, pp. 90].
+
+
+---
+[1] J. Machowski, J.W. Bialek, and J.R. Bumby, Power System Dynamics and
+Stability, Number ISBN 0-471-97174. Wiley, 1993.
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+<TR><TD>Sbase</TD><TD>100</TD><TD>Generator rated power [MVA]</TD></TR>
+<TR><TD>H</TD><TD>6</TD><TD>Inertia Constant [s]</TD></TR>
+<TR><TD>D</TD><TD>0</TD><TD>Damping Coefficient [1]</TD></TR>
+<TR><TD>rt</TD><TD>0</TD><TD>Step-up Transformer Resistance [p.u.]</TD></TR>
+<TR><TD>xt</TD><TD>0.0</TD><TD>Step-up Transformer Reactance [p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">model</font> DetGen <font color="darkgreen">&quot;Common Definitions for Detailed Generator&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials.Generator"
+>Partials.Generator</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font>Real Sbase=100 <font color="darkgreen">&quot;Generator rated power [MVA]&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.InertiaConstant"
+>Base.InertiaConstant</A> H=6 <font color="darkgreen">&quot;Inertia Constant&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.DampingCoefficient"
+>Base.DampingCoefficient</A> D=0 <font color="darkgreen">&quot;Damping Coefficient&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Resistance"
+>Base.Resistance</A> rt=0 <font color="darkgreen">&quot;Step-up Transformer Resistance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>Base.Reactance</A> xt=0.0 <font color="darkgreen">&quot;Step-up Transformer Reactance&quot;</font>;
+  <font color="darkgreen"></font>
+  <font color="blue">inner </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.AngularVelocity"
+>Base.AngularVelocity</A> w(start=1, stateSelect=StateSelect.prefer) <font color="darkgreen">
+    &quot;Angular Speed&quot;</font>;
+  <font color="blue">inner </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.VoltageAngle"
+>Base.VoltageAngle</A> delta(start=0, stateSelect=StateSelect.prefer) <font color="darkgreen">
+    &quot;Rotor Angle&quot;</font>;
+  <font color="blue">inner </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.MechanicalPower"
+>Base.MechanicalPower</A> Pm(start=1) <font color="darkgreen">&quot;Mechanical Power&quot;</font>;
+  <font color="blue">inner </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> Efd(start=2) <font color="darkgreen">&quot;Field Voltage&quot;</font>;
+  <font color="blue">inner </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Current"
+>Base.Current</A> Iarm=<font color="red">sqrt</font>(id^2 + iq^2) <font color="darkgreen">&quot;Armature Current&quot;</font>;
+  <font color="blue">inner </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.ActivePower"
+>Base.ActivePower</A> Pe(start=1) <font color="darkgreen">&quot;Electrical Power&quot;</font>;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Current"
+>Base.Current</A> iq <font color="darkgreen">&quot;dq Armature Current&quot;</font>;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Current"
+>Base.Current</A> id;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> vq <font color="darkgreen">&quot;dq Armature Voltage&quot;</font>;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> vd;
+  <font color="blue">outer </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.AngularVelocity"
+>Base.AngularVelocity</A> wref;
+<font color="blue">equation </font>
+  <font color="darkgreen">//   swing equations</font>
+  <font color="red">der</font>(w) = 1/(2*H)*(Pm - Pe - D*(w - wref));
+  <font color="red">der</font>(delta) = Base.ws*(w - wref);
+  <font color="darkgreen"></font>
+  <font color="darkgreen">// Kron's transformation, see fig 3.30 in Machovski               </font>
+  <font color="darkgreen"></font>
+  <font color="darkgreen">
+    // to interface between generators own dq-frame and  system dq-frame          </font>
+  [T.ia; T.ib] = -[-<font color="red">sin</font>(delta), <font color="red">cos</font>(delta); <font color="red">cos</font>(delta), <font color="red">sin</font>(delta)]*[id; iq]*
+    Sbase/Base.Sbase;
+  <font color="darkgreen"></font>
+  [1 + T.va; T.vb] = [-<font color="red">sin</font>(delta), <font color="red">cos</font>(delta); <font color="red">cos</font>(delta), <font color="red">sin</font>(delta)]*([vd; vq
+    ] + [rt, -xt; xt, rt]*[id; iq]);
+  <font color="darkgreen"></font>
+  <font color="darkgreen">// contribute to angle reference calculation </font>
+  wrl.wr.Hwsum = <font color="blue">if </font>online<font color="blue"> then </font>H*w*(Sbase/Base.Sbase)<font color="blue"> else </font>0;
+  wrl.wr.Hsum = <font color="blue">if </font>online<font color="blue"> then </font>H*(Sbase/Base.Sbase)<font color="blue"> else </font>0;
+  <font color="darkgreen"></font>
+<font color="blue">initial </font><font color="blue">equation </font>
+  w = 1;
+  Pm = Pe;
+  V = V0;
+  <font color="blue">if </font>isSlack<font color="blue"> then</font>
+    theta = theta0;
+  <font color="blue">else</font>
+    Pg = Pg0;
+  <font color="blue">end if</font>;
+<font color="blue">end </font>DetGen;
+</PRE>
+<HR>
+<H2><A NAME="ObjectStab.Generators.Partials"></A><A HREF="ObjectStab_Generators.html#ObjectStab.Generators"
+>ObjectStab.Generators</A>.Partials</H2>
+<B>Contains uninstatiable classes related to generators</B>
+<P>
+<A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials.Generator"
+><IMG SRC="ObjectStab.Generators.Partials.GeneratorI.png" ALT="ObjectStab.Generators.Partials.Generator" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials.InfiniteBus"
+><IMG SRC="ObjectStab.Generators.Partials.InfiniteBusI.png" ALT="ObjectStab.Generators.Partials.InfiniteBus" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials.DetGen"
+><IMG SRC="ObjectStab.Generators.Partials.DetGenI.png" ALT="ObjectStab.Generators.Partials.DetGen" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials.DetGen3"
+><IMG SRC="ObjectStab.Generators.Partials.DetGen3I.png" ALT="ObjectStab.Generators.Partials.DetGen3" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials.DetGen6"
+><IMG SRC="ObjectStab.Generators.Partials.DetGen6I.png" ALT="ObjectStab.Generators.Partials.DetGen6" WIDTH=80  HEIGHT=80 ></A>
+<P><P>
+<HR>
+<H2><IMG SRC="ObjectStab.Generators.Partials.DetGen3I.png" ALT="ObjectStab.Generators.Partials.DetGen3" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.Partials.DetGen3"></A><A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials"
+>ObjectStab.Generators.Partials</A>.DetGen3</H2>
+<B>3rd Order Detailed Generator</B><p>
+<IMG SRC="ObjectStab.Generators.Partials.DetGen3D.png" ALT="ObjectStab.Generators.Partials.DetGen3">
+<H3>Information</H3>
+<PRE>The 3rd order detailed generator model corresponds to Model 3 in [1, pp 348],
+and extends the DetGen class. It adds a single transient EMF source in
+the quatradure axis and the field voltage input. This model neglects the effect
+of damper windings and the damping produced by rotor eddy-currents.
+The effect of this damping is usually included in the damping coefficient D.
+
+
+---
+[1] J. Machowski, J.W. Bialek, and J.R. Bumby, Power System Dynamics and
+Stability, Number ISBN 0-471-97174. Wiley, 1993.
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+<TR><TD>Sbase</TD><TD>100</TD><TD>Generator rated power [MVA]</TD></TR>
+<TR><TD>H</TD><TD>6</TD><TD>Inertia Constant [s]</TD></TR>
+<TR><TD>D</TD><TD>0</TD><TD>Damping Coefficient [1]</TD></TR>
+<TR><TD>rt</TD><TD>0</TD><TD>Step-up Transformer Resistance [p.u.]</TD></TR>
+<TR><TD>xt</TD><TD>0.0</TD><TD>Step-up Transformer Reactance [p.u.]</TD></TR>
+<TR><TD>ra</TD><TD>0</TD><TD>Armature Resistance [p.u.]</TD></TR>
+<TR><TD>xd</TD><TD>0.8948</TD><TD>Direct Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xq</TD><TD>0.84</TD><TD>Quadrature Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xdp</TD><TD>0.30</TD><TD>Direct Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>Td0p</TD><TD>7</TD><TD>Open-circuit Direct Axis Transient Time Constant [s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> DetGen3 <font color="darkgreen">&quot;3rd Order Detailed Generator&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials.DetGen"
+>DetGen</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Resistance"
+>Base.Resistance</A> ra=0 <font color="darkgreen">&quot;Armature Resistance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>Base.Reactance</A> xd=0.8948 <font color="darkgreen">&quot;Direct Axis Synchronous Reactance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>Base.Reactance</A> xq=0.84 <font color="darkgreen">&quot;Quadrature Axis Synchronous Reactance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>Base.Reactance</A> xdp=0.30 <font color="darkgreen">&quot;Direct Axis Transient Reactance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Base.Time</A> Td0p=7 <font color="darkgreen">&quot;Open-circuit Direct Axis Transient Time Constant&quot;</font>;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> Eqp(start=1, stateSelect=StateSelect.prefer);
+<font color="blue">equation </font>
+  <font color="darkgreen">// Transient EMF equation</font>
+  Td0p*<font color="red">der</font>(Eqp) = Efd - Eqp + id*(xd - xdp);
+  <font color="darkgreen"></font>
+  <font color="darkgreen">// stator equations</font>
+  <font color="darkgreen">//vd = -ra*id - xq*iq;</font>
+  <font color="darkgreen">//vq = Eqp + xdp*id - ra*iq;</font>
+  iq = <font color="blue">if </font>online<font color="blue"> then </font>-(vq*ra - Eqp*ra + xdp*vd)/(xdp*xq + ra^2)<font color="blue"> else </font>0;
+  id = <font color="blue">if </font>online<font color="blue"> then </font>-(vd*ra - xq*vq + xq*Eqp)/(xdp*xq + ra^2)<font color="blue"> else </font>0;
+  <font color="darkgreen"></font>
+  <font color="darkgreen">// electrical power</font>
+  Pe = Eqp*iq + (xdp - xq)*id*iq;
+  <font color="darkgreen"></font>
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="red">der</font>(Eqp) = 0;
+<font color="blue">end </font>DetGen3;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Generators.Partials.InfiniteBusI.png" ALT="ObjectStab.Generators.Partials.InfiniteBus" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.Partials.InfiniteBus"></A><A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials"
+>ObjectStab.Generators.Partials</A>.InfiniteBus</H2>
+<B>Infinite Bus Model</B><p>
+<IMG SRC="ObjectStab.Generators.Partials.InfiniteBusD.png" ALT="ObjectStab.Generators.Partials.InfiniteBus">
+<H3>Information</H3>
+<PRE>The variables Pg and Qg corresponds to the actual active and reactive power
+delivered to the network referred at the system base.
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> InfiniteBus <font color="darkgreen">&quot;Infinite Bus Model&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials.Generator"
+>Generator</A>;
+<font color="blue">equation </font>
+  <font color="blue">if </font>online<font color="blue"> then</font>
+    <font color="blue">if </font><font color="blue">not </font>isSlack<font color="blue"> then</font>
+      V = V0;
+      Pg = Pg0;
+    <font color="blue">else</font>
+      1 + T.va = V0*<font color="red">cos</font>(theta0);
+      T.vb = V0*<font color="red">sin</font>(theta0);
+    <font color="blue">end if</font>;
+  <font color="blue">else</font>
+    T.ia = 0;
+    T.ib = 0;
+  <font color="blue">end if</font>;
+  <font color="darkgreen">// contribute to angle reference calculation </font>
+  wrl.wr.Hwsum = <font color="blue">if </font>online<font color="blue"> then </font>Modelica.Constants.inf<font color="blue"> else </font>0;
+  wrl.wr.Hsum = <font color="blue">if </font>online<font color="blue"> then </font>Modelica.Constants.inf<font color="blue"> else </font>0;
+<font color="blue">end </font>InfiniteBus;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Generators.Partials.DetGen6I.png" ALT="ObjectStab.Generators.Partials.DetGen6" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.Partials.DetGen6"></A><A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials"
+>ObjectStab.Generators.Partials</A>.DetGen6</H2>
+<B>6th Order Detailed Generator</B><p>
+<IMG SRC="ObjectStab.Generators.Partials.DetGen6D.png" ALT="ObjectStab.Generators.Partials.DetGen6">
+<H3>Information</H3>
+<PRE>The 6th order detailed generator model extends the DetGen class and
+corresponds to Model 6 in [1, pp 347], and adds subtransient EMF voltage sources
+in both the direct quatradure axes and the field voltage input.
+
+This model includes the damping introduced by damper winding and eddy-currents in
+the rotor, and the damping coefficient D should only model the damping
+due to friction.
+
+---
+[1] J. Machowski, J.W. Bialek, and J.R. Bumby, Power System Dynamics and
+Stability, Number ISBN 0-471-97174. Wiley, 1993.
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+<TR><TD>Sbase</TD><TD>100</TD><TD>Generator rated power [MVA]</TD></TR>
+<TR><TD>H</TD><TD>6</TD><TD>Inertia Constant [s]</TD></TR>
+<TR><TD>D</TD><TD>0</TD><TD>Damping Coefficient [1]</TD></TR>
+<TR><TD>rt</TD><TD>0</TD><TD>Step-up Transformer Resistance [p.u.]</TD></TR>
+<TR><TD>xt</TD><TD>0.0</TD><TD>Step-up Transformer Reactance [p.u.]</TD></TR>
+<TR><TD>ra</TD><TD>0</TD><TD>Armature Resistance [p.u.]</TD></TR>
+<TR><TD>xd</TD><TD>0.8948</TD><TD>Direct Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xq</TD><TD>0.84</TD><TD>Quadrature Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xdp</TD><TD>0.30</TD><TD>Direct Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>xqp</TD><TD>0.10</TD><TD>Quadrature Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>xdpp</TD><TD>0.20</TD><TD>Direct Axis Subtransient Reactance [p.u.]</TD></TR>
+<TR><TD>xqpp</TD><TD>0.10</TD><TD>Quadrature Axis Subtransient Reactance [p.u.]</TD></TR>
+<TR><TD>Td0p</TD><TD>7</TD><TD>Open-circuit Direct Axis Transient Time Constant [s]</TD></TR>
+<TR><TD>Tq0p</TD><TD>0.44</TD><TD>Open-circuit Quadrature Axis Transient Time Constant [s]</TD></TR>
+<TR><TD>Td0pp</TD><TD>0.02</TD><TD>Open-circuit Direct Axis Subtransient Time Constant [s]</TD></TR>
+<TR><TD>Tq0pp</TD><TD>0.03</TD><TD>Open-circuit Quadrature Axis Subtransient Time Constant [s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> DetGen6 <font color="darkgreen">&quot;6th Order Detailed Generator&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials.DetGen"
+>DetGen</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Resistance"
+>Base.Resistance</A> ra=0 <font color="darkgreen">&quot;Armature Resistance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>Base.Reactance</A> xd=0.8948 <font color="darkgreen">&quot;Direct Axis Synchronous Reactance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>Base.Reactance</A> xq=0.84 <font color="darkgreen">&quot;Quadrature Axis Synchronous Reactance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>Base.Reactance</A> xdp=0.30 <font color="darkgreen">&quot;Direct Axis Transient Reactance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>Base.Reactance</A> xqp=0.10 <font color="darkgreen">&quot;Quadrature Axis Transient Reactance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>Base.Reactance</A> xdpp=0.20 <font color="darkgreen">&quot;Direct Axis Subtransient Reactance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>Base.Reactance</A> xqpp=0.10 <font color="darkgreen">&quot;Quadrature Axis Subtransient Reactance&quot;</font>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Base.Time</A> Td0p=7 <font color="darkgreen">&quot;Open-circuit Direct Axis Transient Time Constant&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Base.Time</A> Tq0p=0.44 <font color="darkgreen">&quot;Open-circuit Quadrature Axis Transient Time Constant&quot;</font>
+    ;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Base.Time</A> Td0pp=0.02 <font color="darkgreen">&quot;Open-circuit Direct Axis Subtransient Time Constant&quot;</font>
+    ;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Base.Time</A> Tq0pp=0.03 <font color="darkgreen">
+    &quot;Open-circuit Quadrature Axis Subtransient Time Constant&quot;</font>;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> Eqp(start=0, stateSelect=StateSelect.prefer);
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> Edp(start=0, stateSelect=StateSelect.prefer);
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> Eqpp(start=0, stateSelect=StateSelect.prefer);
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> Edpp(start=0, stateSelect=StateSelect.prefer);
+<font color="blue">equation </font>
+  <font color="darkgreen">// transient and subtransient equations</font>
+  Td0pp*<font color="red">der</font>(Eqpp) = Eqp - Eqpp + id*(xdp - xdpp);
+  Tq0pp*<font color="red">der</font>(Edpp) = Edp - Edpp - iq*(xqp - xqpp);
+  Td0p*<font color="red">der</font>(Eqp) = Efd - Eqp + id*(xd - xdp);
+  Tq0p*<font color="red">der</font>(Edp) = -Edp - iq*(xq - xqp);
+  <font color="darkgreen"></font>
+  <font color="darkgreen">// stator equations</font>
+  <font color="darkgreen">//  vd = Edpp - ra*id - xqpp*iq;</font>
+  <font color="darkgreen">//  vq = Eqpp + xdpp*id - ra*iq;</font>
+  iq = <font color="blue">if </font>online<font color="blue"> then </font>-(vq*ra - Eqpp*ra + xdpp*vd - xdpp*Edpp)/(xdpp*xqpp + ra^
+    2)<font color="blue"> else </font>0;
+  id = <font color="blue">if </font>online<font color="blue"> then </font>-(vd*ra - Edpp*ra - xqpp*vq + xqpp*Eqpp)/(xdpp*xqpp + ra^
+    2)<font color="blue"> else </font>0;
+  <font color="darkgreen"></font>
+  <font color="darkgreen">// electrical power</font>
+  Pe = (Edpp*id + Eqpp*iq) + (xdpp - xqpp)*id*iq;
+  <font color="darkgreen"></font>
+<font color="blue">initial </font><font color="blue">equation </font>
+  delta = <font color="red">Modelica.Math.atan2</font>(T.vb - 1/Sbase*Base.Sbase*rt*T.ib - 1/Sbase*Base.
+    Sbase*xt*T.ia - 1/Sbase*Base.Sbase*ra*T.ib - 1/Sbase*Base.Sbase*xq*T.ia, 
+    1.0 + T.va - 1/Sbase*Base.Sbase*rt*T.ia + 1/Sbase*Base.Sbase*xt*T.ib - 1/
+    Sbase*Base.Sbase*ra*T.ia + 1/Sbase*Base.Sbase*xq*T.ib);
+  <font color="red">der</font>(Eqp) = 0;
+  <font color="red">der</font>(Edp) = 0;
+  <font color="red">der</font>(Eqpp) = 0;
+  <font color="darkgreen">//  der(Edpp) = 0;      </font>
+<font color="blue">end </font>DetGen6;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.dynasim.se/">Dymola</a> Mon Sep 30 21:52:46 2002
+.
+</address></BODY>
+</HTML>

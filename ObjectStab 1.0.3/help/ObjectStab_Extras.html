@@ -1,0 +1,602 @@
+<HTML>
+<HEAD><META name="HTML-Generator" content="Dymola"><TITLE>ObjectStab</TITLE></HEAD>
+<BODY><P>
+<H2><A NAME="ObjectStab.Extras"></A><A HREF="ObjectStab.html#ObjectStab"
+>ObjectStab</A>.Extras</H2>
+<A HREF="ObjectStab_Extras.html#ObjectStab.Extras.PQPilink"
+><IMG SRC="ObjectStab.Extras.PQPilinkI.png" ALT="ObjectStab.Extras.PQPilink" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Extras.html#ObjectStab.Extras.OpenedPQPilink"
+><IMG SRC="ObjectStab.Extras.OpenedPQPilinkI.png" ALT="ObjectStab.Extras.OpenedPQPilink" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Extras.html#ObjectStab.Extras.FaultedPQPilink"
+><IMG SRC="ObjectStab.Extras.FaultedPQPilinkI.png" ALT="ObjectStab.Extras.FaultedPQPilink" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Extras.html#ObjectStab.Extras.ShedRelay"
+><IMG SRC="ObjectStab.Extras.ShedRelayI.png" ALT="ObjectStab.Extras.ShedRelay" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Extras.html#ObjectStab.Extras.UVLSLoad"
+><IMG SRC="ObjectStab.Extras.UVLSLoadI.png" ALT="ObjectStab.Extras.UVLSLoad" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Extras.html#ObjectStab.Extras.UFLSLoad"
+><IMG SRC="ObjectStab.Extras.UFLSLoadI.png" ALT="ObjectStab.Extras.UFLSLoad" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Extras.html#ObjectStab.Extras.DetGen0"
+><IMG SRC="ObjectStab.Extras.DetGen0I.png" ALT="ObjectStab.Extras.DetGen0" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Extras.html#ObjectStab.Extras.GovExcKundurGen"
+><IMG SRC="ObjectStab.Extras.GovExcKundurGenI.png" ALT="ObjectStab.Extras.GovExcKundurGen" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Extras.html#ObjectStab.Extras.ExtSlack"
+><IMG SRC="ObjectStab.Extras.ExtSlackI.png" ALT="ObjectStab.Extras.ExtSlack" WIDTH=80  HEIGHT=80 ></A>
+<P><P>
+<HR>
+<H2><IMG SRC="ObjectStab.Extras.PQPilinkI.png" ALT="ObjectStab.Extras.PQPilink" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Extras.PQPilink"></A><A HREF="ObjectStab_Extras.html#ObjectStab.Extras"
+>ObjectStab.Extras</A>.PQPilink</H2>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>R</TD><TD>0.0</TD><TD>Series Resistance [p.u.]</TD></TR>
+<TR><TD>X</TD><TD>0.1</TD><TD>Series Reactance [p.u.]</TD></TR>
+<TR><TD>B</TD><TD>0.1</TD><TD>Shunt Susceptance [p.u.]</TD></TR>
+<TR><TD>G</TD><TD>0.0</TD><TD>Shunt Conductance [p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> PQPilink 
+  <font color="blue">extends </font><A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>Network.Pilink</A>;
+  Real P1=T1.ib*T1.vb + T1.ia + T1.ia*T1.va;
+  Real Q1=T1.ia*T1.vb - T1.ib - T1.ib*T1.va;
+  Real P2=T2.ib*T2.vb + T2.ia + T2.ia*T2.va;
+  Real Q2=T2.ia*T2.vb - T2.ib - T2.ib*T2.va;
+  <font color="darkgreen"></font>
+  Real Ploss=<font color="red">noEvent</font>(<font color="red">abs</font>(P1 + P2));
+  Real Qloss=<font color="red">noEvent</font>(<font color="red">abs</font>(Q1 + Q2));
+  Real I1=<font color="red">sqrt</font>(T1.ia^2 + T1.ib^2);
+  Real I2=<font color="red">sqrt</font>(T2.ia^2 + T2.ib^2);
+<font color="blue">end </font>PQPilink;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Extras.OpenedPQPilinkI.png" ALT="ObjectStab.Extras.OpenedPQPilink" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Extras.OpenedPQPilink"></A><A HREF="ObjectStab_Extras.html#ObjectStab.Extras"
+>ObjectStab.Extras</A>.OpenedPQPilink</H2>
+<IMG SRC="ObjectStab.Extras.OpenedPQPilinkD.png" ALT="ObjectStab.Extras.OpenedPQPilink">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>R</TD><TD>0.0</TD><TD>Series Resistance [p.u.]</TD></TR>
+<TR><TD>X</TD><TD>0.1</TD><TD>Series Reactance [p.u.]</TD></TR>
+<TR><TD>B</TD><TD>0.1</TD><TD>Shunt Susceptance [p.u.]</TD></TR>
+<TR><TD>G</TD><TD>0.0</TD><TD>Shunt Conductance [p.u.]</TD></TR>
+<TR><TD>OpenTime</TD><TD>10</TD><TD>Time of branch opening [s]</TD></TR>
+<TR><TD>CloseTime</TD><TD>1e10</TD><TD>Duration of the branch opening [s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> OpenedPQPilink 
+  <font color="blue">extends </font><A HREF="ObjectStab_Network.html#ObjectStab.Network.OpenedPilink"
+>Network.OpenedPilink</A>;
+  <font color="darkgreen"></font>
+  Real P1=T1.ib*T1.vb + T1.ia + T1.ia*T1.va;
+  Real Q1=T1.ia*T1.vb - T1.ib - T1.ib*T1.va;
+  Real P2=T2.ib*T2.vb + T2.ia + T2.ia*T2.va;
+  Real Q2=T2.ia*T2.vb - T2.ib - T2.ib*T2.va;
+  <font color="darkgreen"></font>
+  Real Ploss=<font color="red">noEvent</font>(<font color="red">abs</font>(P1 + P2));
+  Real Qloss=<font color="red">noEvent</font>(<font color="red">abs</font>(Q1 + Q2));
+  Real I1=<font color="red">sqrt</font>(T1.ia^2 + T1.ib^2);
+  Real I2=<font color="red">sqrt</font>(T2.ia^2 + T2.ib^2);
+<font color="blue">end </font>OpenedPQPilink;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Extras.FaultedPQPilinkI.png" ALT="ObjectStab.Extras.FaultedPQPilink" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Extras.FaultedPQPilink"></A><A HREF="ObjectStab_Extras.html#ObjectStab.Extras"
+>ObjectStab.Extras</A>.FaultedPQPilink</H2>
+<IMG SRC="ObjectStab.Extras.FaultedPQPilinkD.png" ALT="ObjectStab.Extras.FaultedPQPilink">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>R</TD><TD>0.0</TD><TD>Series Resistance [p.u.]</TD></TR>
+<TR><TD>X</TD><TD>0.1</TD><TD>Series Reactance [p.u.]</TD></TR>
+<TR><TD>B</TD><TD>0.1</TD><TD>Shunt Susceptance [p.u.]</TD></TR>
+<TR><TD>G</TD><TD>0.0</TD><TD>Shunt Conductance [p.u.]</TD></TR>
+<TR><TD>FaultTime</TD><TD>1</TD><TD>Time of fault occurence [s] [s]</TD></TR>
+<TR><TD>ClearTime</TD><TD>0.07</TD><TD>Fault Clearing Time [s] [s]</TD></TR>
+<TR><TD>RecloseTime</TD><TD>1e60</TD><TD>Time of Reclosing [s] [s]</TD></TR>
+<TR><TD>alpha</TD><TD>0.5</TD><TD>Position of Fault</TD></TR>
+<TR><TD>FaultR</TD><TD>1e-5</TD><TD>Fault Resistance [p.u.]</TD></TR>
+<TR><TD>FaultX</TD><TD>0</TD><TD>Fault Reactance [p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> FaultedPQPilink 
+  <font color="blue">extends </font><A HREF="ObjectStab_Network.html#ObjectStab.Network.FaultedPilink"
+>Network.FaultedPilink</A>;
+  <font color="darkgreen"></font>
+  Real P1=T1.ib*T1.vb + T1.ia + T1.ia*T1.va;
+  Real Q1=T1.ia*T1.vb - T1.ib - T1.ib*T1.va;
+  Real P2=T2.ib*T2.vb + T2.ia + T2.ia*T2.va;
+  Real Q2=T2.ia*T2.vb - T2.ib - T2.ib*T2.va;
+  <font color="darkgreen"></font>
+  Real Ploss=<font color="red">noEvent</font>(<font color="red">abs</font>(P1 + P2));
+  Real Qloss=<font color="red">noEvent</font>(<font color="red">abs</font>(Q1 + Q2));
+  Real I1=<font color="red">sqrt</font>(T1.ia^2 + T1.ib^2);
+  Real I2=<font color="red">sqrt</font>(T2.ia^2 + T2.ib^2);
+<font color="blue">end </font>FaultedPQPilink;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Extras.ShedRelayI.png" ALT="ObjectStab.Extras.ShedRelay" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Extras.ShedRelay"></A><A HREF="ObjectStab_Extras.html#ObjectStab.Extras"
+>ObjectStab.Extras</A>.ShedRelay</H2>
+<IMG SRC="ObjectStab.Extras.ShedRelayD.png" ALT="ObjectStab.Extras.ShedRelay">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Threshold</TD><TD>0.95</TD><TD>&nbsp;</TD></TR>
+<TR><TD>DelayTime</TD><TD>1</TD><TD>&nbsp;</TD></TR>
+<TR><TD>ShedAmount</TD><TD>0.05</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">class</font> ShedRelay 
+  <font color="blue">extends </font><A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.SISO"
+>Modelica.Blocks.Interfaces.SISO</A>;
+  <font color="blue">parameter </font>Real Threshold=0.95;
+  <font color="blue">parameter </font>Real DelayTime=1;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font>Real ShedAmount=0.05;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>ObjectStab.Base.Time</A> timerstart(start=-1, fixed=true);
+  <font color="darkgreen"></font>
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> T1;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> T2;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Place12"
+>ModelicaAdditions.PetriNets.Place12</A> delay;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> T3;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Place21"
+>ModelicaAdditions.PetriNets.Place21</A> wait(initialState=true);
+<font color="blue">equation </font>
+  <font color="red">connect</font>(delay.inTransition, T1.outTransition);
+  <font color="red">connect</font>(T3.inTransition, delay.outTransition1);
+  <font color="red">connect</font>(delay.outTransition2, T2.inTransition);
+  <font color="red">connect</font>(T1.inTransition, wait.outTransition);
+  <font color="red">connect</font>(T2.outTransition, wait.inTransition2);
+  <font color="red">connect</font>(T3.outTransition, wait.inTransition1);
+  T1.condition = (u &lt; Threshold)<font color="blue"> and </font>(y &lt; ShedAmount/10);
+  T2.condition = (u &gt; Threshold);
+  T3.condition = time &gt; timerstart + DelayTime;
+  <font color="darkgreen"></font>
+  <font color="blue">when </font>delay.state<font color="blue"> then</font>
+    timerstart = time;
+  <font color="blue">end when</font>;
+  <font color="darkgreen"></font>
+  <font color="blue">when </font>T3.condition<font color="blue"> and </font>delay.state<font color="blue"> then</font>
+    outPort.signal[1] = ShedAmount;
+  <font color="blue">end when</font>;
+<font color="blue">initial </font><font color="blue">equation </font>
+  wait.state = true;
+  delay.state = true;
+  y = 0;
+<font color="blue">end </font>ShedRelay;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Extras.UVLSLoadI.png" ALT="ObjectStab.Extras.UVLSLoad" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Extras.UVLSLoad"></A><A HREF="ObjectStab_Extras.html#ObjectStab.Extras"
+>ObjectStab.Extras</A>.UVLSLoad</H2>
+<IMG SRC="ObjectStab.Extras.UVLSLoadD.png" ALT="ObjectStab.Extras.UVLSLoad">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>P0</TD><TD>1</TD><TD>Initial Active Load Power [p.u.]</TD></TR>
+<TR><TD>Q0</TD><TD>0.2</TD><TD>Initial Reactive Load Power [p.u.]</TD></TR>
+<TR><TD>as</TD><TD>1</TD><TD>Steady-state active power voltage dependency</TD></TR>
+<TR><TD>at</TD><TD>2</TD><TD>Transient active power voltage dependency</TD></TR>
+<TR><TD>bs</TD><TD>1</TD><TD>Steady-state reactive power voltage dependency</TD></TR>
+<TR><TD>bt</TD><TD>2</TD><TD>Transient reactive power voltage dependency</TD></TR>
+<TR><TD>Tp</TD><TD>60</TD><TD>Active power recovery time constant [s]</TD></TR>
+<TR><TD>Tq</TD><TD>60</TD><TD>Reactive power recovery time constant [s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> UVLSLoad 
+  <font color="blue">extends </font><A HREF="ObjectStab_Loads_Partials.html#ObjectStab.Loads.Partials.Load"
+>ObjectStab.Loads.Partials.Load</A>;
+  <font color="blue">parameter </font>Real as=1 <font color="darkgreen">&quot;Steady-state active power voltage dependency&quot;</font>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font>Real at=2 <font color="darkgreen">&quot;Transient active power voltage dependency&quot;</font>;
+  <font color="blue">parameter </font>Real bs=1 <font color="darkgreen">&quot;Steady-state reactive power voltage dependency&quot;</font>;
+  <font color="blue">parameter </font>Real bt=2 <font color="darkgreen">&quot;Transient reactive power voltage dependency&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Base.Time</A> Tp=60 <font color="darkgreen">&quot;Active power recovery time constant&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Base.Time</A> Tq=60 <font color="darkgreen">&quot;Reactive power recovery time constant&quot;</font>;
+  <font color="darkgreen"></font>
+  Real xp <font color="darkgreen">&quot;Internal Load State&quot;</font>;
+  Real xq <font color="darkgreen">&quot;Internal Load State&quot;</font>;
+  <font color="darkgreen"></font>
+  Real k;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Extras.html#ObjectStab.Extras.ShedRelay"
+>ShedRelay</A> Relay1(
+    Threshold=.8, 
+    DelayTime=1.5, 
+    ShedAmount=.05);
+  <A HREF="ObjectStab_Extras.html#ObjectStab.Extras.ShedRelay"
+>ShedRelay</A> Relay2(
+    Threshold=.82, 
+    DelayTime=3, 
+    ShedAmount=.05);
+  <A HREF="ObjectStab_Extras.html#ObjectStab.Extras.ShedRelay"
+>ShedRelay</A> Relay3(
+    DelayTime=6, 
+    ShedAmount=0.05, 
+    Threshold=.92);
+<font color="blue">equation </font>
+  Pl = (1 - k)*(xp/Tp + P0*(V/V0)^at);
+  Ql = (1 - k)*(xq/Tq + Q0*(V/V0)^bt);
+  <font color="red">der</font>(xp) = P0*((V/V0)^(as) - (V/V0)^at) - xp/Tp;
+  <font color="red">der</font>(xq) = Q0*((V/V0)^(bs) - (V/V0)^bt) - xq/Tq;
+  <font color="darkgreen"></font>
+  Relay1.u = V;
+  Relay2.u = V;
+  Relay3.u = V;
+  k = Relay1.y + Relay2.y + Relay3.y;
+  <font color="darkgreen"></font>
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="red">der</font>(xp) = 0;
+  <font color="red">der</font>(xq) = 0;
+<font color="blue">end </font>UVLSLoad;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Extras.UFLSLoadI.png" ALT="ObjectStab.Extras.UFLSLoad" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Extras.UFLSLoad"></A><A HREF="ObjectStab_Extras.html#ObjectStab.Extras"
+>ObjectStab.Extras</A>.UFLSLoad</H2>
+<IMG SRC="ObjectStab.Extras.UFLSLoadD.png" ALT="ObjectStab.Extras.UFLSLoad">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>P0</TD><TD>1</TD><TD>Initial Active Load Power [p.u.]</TD></TR>
+<TR><TD>Q0</TD><TD>0.2</TD><TD>Initial Reactive Load Power [p.u.]</TD></TR>
+<TR><TD>a</TD><TD>1</TD><TD>&nbsp;</TD></TR>
+<TR><TD>b</TD><TD>1</TD><TD>&nbsp;</TD></TR>
+<TR><TD>c</TD><TD>1</TD><TD>&nbsp;</TD></TR>
+<TR><TD>d</TD><TD>1</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> UFLSLoad 
+  <font color="darkgreen"></font>
+  <font color="blue">extends </font><A HREF="ObjectStab_Loads_Partials.html#ObjectStab.Loads.Partials.Load"
+>ObjectStab.Loads.Partials.Load</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font>Real a=1;
+  <font color="blue">parameter </font>Real b=1;
+  <font color="blue">parameter </font>Real c=1;
+  <font color="blue">parameter </font>Real d=1;
+  <font color="darkgreen"></font>
+  Real k;
+  <font color="blue">outer </font>Real wref;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Extras.html#ObjectStab.Extras.ShedRelay"
+>ShedRelay</A> Relay1(
+    DelayTime=0.1, 
+    ShedAmount=0.1, 
+    Threshold=.96);
+  <A HREF="ObjectStab_Extras.html#ObjectStab.Extras.ShedRelay"
+>ShedRelay</A> Relay2(
+    DelayTime=0.1, 
+    ShedAmount=0.1, 
+    Threshold=.956);
+  <A HREF="ObjectStab_Extras.html#ObjectStab.Extras.ShedRelay"
+>ShedRelay</A> Relay3(
+    DelayTime=0.1, 
+    ShedAmount=0.1, 
+    Threshold=.952);
+<font color="blue">equation </font>
+  Pl = (1 - k)*P0*(1 + (V - V0)*a + c*(wref - 1));
+  Ql = (1 - k)*Q0*(1 + (V - V0)*b + d*(wref - 1));
+  <font color="darkgreen"></font>
+  Relay1.u = wref;
+  Relay2.u = wref;
+  Relay3.u = wref;
+  k = Relay1.y + Relay2.y + Relay3.y;
+<font color="blue">end </font>UFLSLoad;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Extras.DetGen0I.png" ALT="ObjectStab.Extras.DetGen0" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Extras.DetGen0"></A><A HREF="ObjectStab_Extras.html#ObjectStab.Extras"
+>ObjectStab.Extras</A>.DetGen0</H2>
+<B>Detailed Static Generator Model</B><p>
+<IMG SRC="ObjectStab.Extras.DetGen0D.png" ALT="ObjectStab.Extras.DetGen0">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+<TR><TD>Sbase</TD><TD>100</TD><TD>Generator rated power [p.u.]</TD></TR>
+<TR><TD>ra</TD><TD>0</TD><TD>Armature Resistance [p.u.]</TD></TR>
+<TR><TD>xd</TD><TD>0.8948</TD><TD>Direct Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xq</TD><TD>0.84</TD><TD>Quadrature Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>K</TD><TD>50</TD><TD>Voltage Regulator Steady-State Gain</TD></TR>
+<TR><TD>Efmax</TD><TD>3.5</TD><TD>Maximum Field Voltage [p.u]</TD></TR>
+<TR><TD>Efmin</TD><TD>-3.5</TD><TD>Minimum Field Voltage [p.u]</TD></TR>
+<TR><TD>Iarmmax</TD><TD>1.05</TD><TD>Armature Current Limit [p.u.]</TD></TR>
+<TR><TD>rt</TD><TD>0</TD><TD>Step-up Transformer Resistance [p.u.]</TD></TR>
+<TR><TD>xt</TD><TD>0.0</TD><TD>Step-up Transformer Reactance [p.u.]</TD></TR>
+<TR><TD>Tdelay</TD><TD>20</TD><TD>[s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> DetGen0 <font color="darkgreen">&quot;Detailed Static Generator Model&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials.Generator"
+>ObjectStab.Generators.Partials.Generator</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.ApparentPower"
+>Base.ApparentPower</A> Sbase=100 <font color="darkgreen">&quot;Generator rated power&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Resistance"
+>ObjectStab.Base.Resistance</A> ra=0 <font color="darkgreen">&quot;Armature Resistance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>ObjectStab.Base.Reactance</A> xd=0.8948 <font color="darkgreen">&quot;Direct Axis Synchronous Reactance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>ObjectStab.Base.Reactance</A> xq=0.84 <font color="darkgreen">&quot;Quadrature Axis Synchronous Reactance&quot;</font>;
+  <font color="blue">parameter </font>Real K=50 <font color="darkgreen">&quot;Voltage Regulator Steady-State Gain&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>ObjectStab.Base.Voltage</A> Efmax=3.5 <font color="darkgreen">&quot;Maximum Field Voltage&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>ObjectStab.Base.Voltage</A> Efmin=-3.5 <font color="darkgreen">&quot;Minimum Field Voltage&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Current"
+>ObjectStab.Base.Current</A> Iarmmax=1.05 <font color="darkgreen">&quot;Armature Current Limit&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Resistance"
+>Base.Resistance</A> rt=0 <font color="darkgreen">&quot;Step-up Transformer Resistance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>Base.Reactance</A> xt=0.0 <font color="darkgreen">&quot;Step-up Transformer Reactance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Base.Time</A> Tdelay=20;
+  <font color="darkgreen"></font>
+  Boolean up_limit(start=false);
+  Boolean arm_limit(start=false);
+  Real vta(start=1);
+  Real vtb(start=1);
+  Real Pgt(start=1);
+  Real Qgt(start=1);
+  Real Efd(start=1);
+  Real Vt(start=1);
+  Real Iarm(start=1);
+  <font color="blue">discrete </font>Real Vref(start=1);
+  <font color="blue">discrete </font>Real Pm0(start=1);
+<font color="blue">equation </font>
+  <font color="darkgreen">//</font>
+  0 = <font color="blue">if </font>time &gt; TripTime<font color="blue"> then </font>Qgt<font color="blue"> else </font><font color="blue">if </font>arm_limit<font color="blue"> then </font>Qgt - <font color="red">sqrt</font>((Vt*Iarmmax
+    )^2 - Pgt^2)<font color="blue"> else </font><font color="blue">if </font>up_limit<font color="blue"> then </font>(Efd - Efmax)<font color="blue"> else </font>(Vt - (Vref - Efd/K))
+    ;
+  Pgt = <font color="blue">if </font>time &gt; TripTime<font color="blue"> then </font>0<font color="blue"> else </font>(Pm0 - ra*Iarm^2);
+  <font color="darkgreen"></font>
+  Vt = <font color="red">sqrt</font>((1 + vta)^2 + vtb^2);
+  Pgt = -((1 + vta)*T.ia + vtb*T.ib)/Sbase*Base.Sbase;
+  Qgt = -(vtb*T.ia - (1 + vta)*T.ib)/Sbase*Base.Sbase;
+  Efd = (Vt^4 + Vt^2*Qgt*xq + Qgt*xd*Vt^2 + Qgt^2*xd*xq + Pgt^2*xq*xd)/(<font color="red">sqrt</font>(
+    Pgt^2*xq^2 + Vt^4 + 2*Vt^2*Qgt*xq + Qgt^2*xq^2)*Vt);
+  [1 + T.va; T.vb] = [rt, -xt; xt, rt]*[T.ia; T.ib]/Sbase*Base.Sbase + [1 + vta
+    ; vtb];
+  <font color="darkgreen"></font>
+  <font color="darkgreen">// limiter logic</font>
+  up_limit = (<font color="red">pre</font>(up_limit)<font color="blue"> and </font>Vt &lt; (Vref))<font color="blue"> or </font><font color="blue">not </font><font color="red">pre</font>(up_limit)<font color="blue"> and </font>(<font color="red">delay</font>(
+    Efd, Tdelay) &gt; Efmax);
+  arm_limit = (<font color="red">pre</font>(arm_limit)<font color="blue"> and </font>V &lt; (Vref))<font color="blue"> or </font><font color="blue">not </font><font color="red">pre</font>(arm_limit)<font color="blue"> and </font>(<font color="red">delay</font>(
+    Iarm, Tdelay) &gt; Iarmmax);
+  Iarm = <font color="red">sqrt</font>(T.ia^2 + T.ib^2)/Sbase*Base.Sbase;
+  Vref = <font color="red">pre</font>(Vref);
+  Pm0 = <font color="red">pre</font>(Pm0);
+  <font color="darkgreen"></font>
+  <font color="darkgreen">// contribute to angle reference calculation </font>
+  wrl.wr.Hwsum = <font color="blue">if </font>time &lt; TripTime<font color="blue"> then </font>Modelica.Constants.inf<font color="blue"> else </font>0;
+  wrl.wr.Hsum = <font color="blue">if </font>time &lt; TripTime<font color="blue"> then </font>Modelica.Constants.inf<font color="blue"> else </font>0;
+  <font color="darkgreen"></font>
+<font color="blue">initial </font><font color="blue">equation </font>
+  V = V0;
+  <font color="blue">if </font>isSlack<font color="blue"> then</font>
+    theta = theta0;
+  <font color="blue">else</font>
+    Pg = Pg0;
+  <font color="blue">end if</font>;
+  <font color="darkgreen"></font>
+<font color="blue">end </font>DetGen0;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Extras.GovExcKundurGenI.png" ALT="ObjectStab.Extras.GovExcKundurGen" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Extras.GovExcKundurGen"></A><A HREF="ObjectStab_Extras.html#ObjectStab.Extras"
+>ObjectStab.Extras</A>.GovExcKundurGen</H2>
+<B>6th Order Detailed Generator according to Kundur sec 13.3</B><p>
+<IMG SRC="ObjectStab.Extras.GovExcKundurGenD.png" ALT="ObjectStab.Extras.GovExcKundurGen">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+<TR><TD>Sbase</TD><TD>100</TD><TD>Generator rated power [MVA]</TD></TR>
+<TR><TD>H</TD><TD>6</TD><TD>Inertia Constant [s]</TD></TR>
+<TR><TD>D</TD><TD>0</TD><TD>Damping Coefficient [1]</TD></TR>
+<TR><TD>rt</TD><TD>0</TD><TD>Step-up Transformer Resistance [p.u.]</TD></TR>
+<TR><TD>xt</TD><TD>0.0</TD><TD>Step-up Transformer Reactance [p.u.]</TD></TR>
+<TR><TD>ra</TD><TD>0</TD><TD>Armature Resistance [p.u.]</TD></TR>
+<TR><TD>xl</TD><TD>0.15</TD><TD>Leakage Reactance [p.u.]</TD></TR>
+<TR><TD>xd</TD><TD>0.8948</TD><TD>Direct Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xq</TD><TD>0.84</TD><TD>Quadrature Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xdp</TD><TD>0.30</TD><TD>Direct Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>xqp</TD><TD>0.10</TD><TD>Quadrature Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>xdpp</TD><TD>0.20</TD><TD>Direct Axis Subtransient Reactance [p.u.]</TD></TR>
+<TR><TD>xqpp</TD><TD>0.10</TD><TD>Quadrature Axis Subtransient Reactance [p.u.]</TD></TR>
+<TR><TD>Td0p</TD><TD>7</TD><TD>Open-circuit Direct Axis Transient Time Constant [s]</TD></TR>
+<TR><TD>Tq0p</TD><TD>0.44</TD><TD>Open-circuit Quadrature Axis Transient Time Constant [s]</TD></TR>
+<TR><TD>Td0pp</TD><TD>0.02</TD><TD>Open-circuit Direct Axis Subtransient Time Constant [s]</TD></TR>
+<TR><TD>Tq0pp</TD><TD>0.03</TD><TD>Open-circuit Quadrature Axis Subtransient Time Constant [s]</TD></TR>
+<TR><TD>Gov</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Exc</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> GovExcKundurGen <font color="darkgreen">
+  &quot;6th Order Detailed Generator according to Kundur sec 13.3&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials.DetGen"
+>ObjectStab.Generators.Partials.DetGen</A>;
+  <font color="darkgreen"></font>
+<font color="blue">public </font>
+  <font color="blue">constant </font>Real Ksd=1;
+  <font color="darkgreen">// generator saturation (not implemented keep at 1);</font>
+  <font color="blue">constant </font>Real Ksq=1;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Resistance"
+>ObjectStab.Base.Resistance</A> ra=0 <font color="darkgreen">&quot;Armature Resistance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>ObjectStab.Base.Reactance</A> xl=0.15 <font color="darkgreen">&quot;Leakage Reactance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>ObjectStab.Base.Reactance</A> xd=0.8948 <font color="darkgreen">&quot;Direct Axis Synchronous Reactance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>ObjectStab.Base.Reactance</A> xq=0.84 <font color="darkgreen">&quot;Quadrature Axis Synchronous Reactance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>ObjectStab.Base.Reactance</A> xdp=0.30 <font color="darkgreen">&quot;Direct Axis Transient Reactance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>ObjectStab.Base.Reactance</A> xqp=0.10 <font color="darkgreen">&quot;Quadrature Axis Transient Reactance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>ObjectStab.Base.Reactance</A> xdpp=0.20 <font color="darkgreen">&quot;Direct Axis Subtransient Reactance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>ObjectStab.Base.Reactance</A> xqpp=0.10 <font color="darkgreen">
+    &quot;Quadrature Axis Subtransient Reactance&quot;</font>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>ObjectStab.Base.Time</A> Td0p=7 <font color="darkgreen">
+    &quot;Open-circuit Direct Axis Transient Time Constant&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>ObjectStab.Base.Time</A> Tq0p=0.44 <font color="darkgreen">
+    &quot;Open-circuit Quadrature Axis Transient Time Constant&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>ObjectStab.Base.Time</A> Td0pp=0.02 <font color="darkgreen">
+    &quot;Open-circuit Direct Axis Subtransient Time Constant&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>ObjectStab.Base.Time</A> Tq0pp=0.03 <font color="darkgreen">
+    &quot;Open-circuit Quadrature Axis Subtransient Time Constant&quot;</font>;
+  <font color="darkgreen"></font>
+<font color="blue">protected </font>
+  <font color="blue">parameter </font>Real Ladu=xd - xl;
+  <font color="blue">parameter </font>Real Laqu=xq - xl;
+  <font color="blue">parameter </font>Real Lfd=-Ladu*(xdp - xl)/(xdp - xl - Ladu);
+  <font color="blue">parameter </font>Real L1q=-Laqu*(-xqp + xl)/(-xqp + xl + Laqu);
+  <font color="blue">parameter </font>Real L1d=-Ladu*Lfd*(-xdpp + xl)/(-xdpp*Ladu - xdpp*Lfd + xl*Ladu + 
+      xl*Lfd + Ladu*Lfd);
+  <font color="blue">parameter </font>Real L2q=-Laqu*L1q*(-xqpp + xl)/(-xqpp*Laqu - xqpp*L1q + xl*Laqu + 
+      xl*L1q + Laqu*L1q);
+  <font color="blue">parameter </font>Real Rfd=(Ladu + Lfd)/(Td0p*ObjectStab.Base.ws);
+  <font color="blue">parameter </font>Real R1d=(L1d + (Ladu*Lfd)/(Ladu + Lfd))/(Td0pp*ObjectStab.Base.ws)
+    ;
+  <font color="blue">parameter </font>Real R1q=(Laqu + L1q)/(Tq0p*ObjectStab.Base.ws);
+  <font color="blue">parameter </font>Real R2q=(L2q + (Laqu*L1q)/(Laqu + L1q))/(Tq0pp*ObjectStab.Base.ws)
+    ;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font>Real Ladspp=1/(1/(Ksd*Ladu) + 1/Lfd + 1/L1d);
+  <font color="blue">parameter </font>Real Laqspp=1/(1/(Ksq*Laqu) + 1/L1q + 1/L2q);
+  <font color="blue">parameter </font>Real Ldpp=xl + Ladspp;
+  <font color="blue">parameter </font>Real Lqpp=xl + Laqspp;
+<font color="blue">public </font>
+  Real lamfd(start=1);
+  Real lam1d;
+  Real lam1q;
+  Real lam2q;
+  Real lamad;
+  Real lamaq;
+  Real Ifd(start=1);
+  Real efd=Efd*Rfd/Ladu;
+  <font color="darkgreen"></font>
+  <font color="blue">replaceable </font><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.ConstPm"
+>ObjectStab.Generators.Controllers.ConstPm</A> Gov;
+  <font color="blue">replaceable </font><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.ConstEfd"
+>ObjectStab.Generators.Controllers.ConstEfd</A> Exc;
+<font color="blue">equation </font>
+  <font color="red">der</font>(lamfd) = ObjectStab.Base.ws*((Efd*Rfd/Ladu) + (lamad - lamfd)*Rfd/Lfd);
+  <font color="red">der</font>(lam1d) = ObjectStab.Base.ws*(lamad - lam1d)/L1d*R1d;
+  <font color="red">der</font>(lam1q) = ObjectStab.Base.ws*(lamaq - lam1q)/L1q*R1q;
+  <font color="red">der</font>(lam2q) = ObjectStab.Base.ws*(lamaq - lam2q)/L2q*R2q;
+  lamad = Ladspp*(-iq + lamfd/Lfd + lam1d/L1d);
+  lamaq = Laqspp*(-id + lam1q/L1q + lam2q/L2q);
+  <font color="darkgreen"></font>
+  <font color="darkgreen">// stator eqs </font>
+  <font color="darkgreen">//vq = -ra*iq + w*Lqpp*id + (-w*Laqspp*(lam1q/L1q + lam2q/L2q));</font>
+  <font color="darkgreen">//vd = -ra*id - w*Ldpp*iq + (w*Ladspp*(lamfd/Lfd + lam1d/L1d));</font>
+  <font color="blue">if </font>online<font color="blue"> then</font>
+    iq = -(w*Lqpp*L1q*L2q*vd*Lfd*L1d - w^2*Lqpp*L1q*L2q*Ladspp*lamfd*L1d - w^2*
+      Lqpp*L1q*L2q*Ladspp*lam1d*Lfd + vq*L1q*L2q*ra*Lfd*L1d + w*Laqspp*lam1q*
+      L2q*ra*Lfd*L1d + w*Laqspp*lam2q*L1q*ra*Lfd*L1d)/L1q/L2q/Lfd/L1d/(w^2*Lqpp
+      *Ldpp + ra^2);
+    id = (-vd*Lfd*L1d*L1q*L2q*ra + w*Ldpp*vq*L1q*L2q*Lfd*L1d + w^2*Ldpp*Laqspp*
+      lam1q*L2q*Lfd*L1d + w^2*Ldpp*Laqspp*lam2q*L1q*Lfd*L1d + w*Ladspp*lamfd*
+      L1d*L1q*L2q*ra + w*Ladspp*lam1d*Lfd*L1q*L2q*ra)/L1q/L2q/(w^2*Lqpp*Ldpp + 
+      ra^2)/Lfd/L1d;
+  <font color="blue">else</font>
+    iq = 0;
+    id = 0;
+  <font color="blue">end if</font>;
+  <font color="darkgreen"></font>
+  Pe = w*(lamad*id - lamaq*iq);
+  Ifd = Ladu*(lamfd - lamad)/Lfd;
+  <font color="darkgreen"></font>
+  <font color="darkgreen">// connection of governor and exciter</font>
+  Gov.u = w;
+  Pm = Gov.y;
+  Exc.u = <font color="red">sqrt</font>(vd^2 + vq^2);
+  Efd = Exc.y;
+  <font color="darkgreen"></font>
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="red">der</font>(lamfd) = 0;
+  <font color="red">der</font>(lam1d) = 0;
+  <font color="red">der</font>(lam1q) = 0;
+  <font color="red">der</font>(lam2q) = 0;
+<font color="blue">end </font>GovExcKundurGen;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Extras.ExtSlackI.png" ALT="ObjectStab.Extras.ExtSlack" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Extras.ExtSlack"></A><A HREF="ObjectStab_Extras.html#ObjectStab.Extras"
+>ObjectStab.Extras</A>.ExtSlack</H2>
+<IMG SRC="ObjectStab.Extras.ExtSlackD.png" ALT="ObjectStab.Extras.ExtSlack">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>true</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> ExtSlack 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials.Generator"
+>Generators.Partials.Generator</A>(isSlack=true);
+  <font color="darkgreen"></font>
+<font color="blue">public </font>
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.InPort"
+>Modelica.Blocks.Interfaces.InPort</A> InPort(n=1);
+<font color="blue">equation </font>
+  <font color="blue">if </font>online<font color="blue"> then</font>
+    <font color="blue">if </font><font color="blue">not </font>isSlack<font color="blue"> then</font>
+      V = V0;
+      Pg = Pg0;
+    <font color="blue">else</font>
+      1 + T.va = V0*<font color="red">cos</font>(theta0);
+      T.vb = V0*<font color="red">sin</font>(theta0);
+    <font color="blue">end if</font>;
+  <font color="blue">else</font>
+    T.ia = 0;
+    T.ib = 0;
+  <font color="blue">end if</font>;
+  <font color="darkgreen">// contribute to angle reference calculation </font>
+  wrl.wr.Hwsum = <font color="blue">if </font>online<font color="blue"> then </font>Modelica.Constants.inf<font color="blue"> else </font>0;
+  wrl.wr.Hsum = <font color="blue">if </font>online<font color="blue"> then </font>Modelica.Constants.inf<font color="blue"> else </font>0;
+<font color="blue">end </font>ExtSlack;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.dynasim.se/">Dymola</a> Mon Sep 30 21:52:03 2002
+.
+</address></BODY>
+</HTML>

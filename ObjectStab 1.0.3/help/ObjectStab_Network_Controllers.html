@@ -1,0 +1,336 @@
+<HTML>
+<HEAD><META name="HTML-Generator" content="Dymola"><TITLE>ObjectStab</TITLE></HEAD>
+<BODY><P>
+<H2><A NAME="ObjectStab.Network.Controllers"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.Controllers</H2>
+<B>Contains controller classes related to network components</B>
+<P>
+<A HREF="ObjectStab_Network_Controllers.html#ObjectStab.Network.Controllers.TCULController"
+><IMG SRC="ObjectStab.Network.Controllers.TCULControllerI.png" ALT="ObjectStab.Network.Controllers.TCULController" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network_Controllers.html#ObjectStab.Network.Controllers.TCULContinuous"
+><IMG SRC="ObjectStab.Network.Controllers.TCULContinuousI.png" ALT="ObjectStab.Network.Controllers.TCULContinuous" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network_Controllers.html#ObjectStab.Network.Controllers.TCULDiscrete"
+><IMG SRC="ObjectStab.Network.Controllers.TCULDiscreteI.png" ALT="ObjectStab.Network.Controllers.TCULDiscrete" WIDTH=80  HEIGHT=80 ></A>
+<P><P>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.Controllers.TCULDiscreteI.png" ALT="ObjectStab.Network.Controllers.TCULDiscrete" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.Controllers.TCULDiscrete"></A><A HREF="ObjectStab_Network_Controllers.html#ObjectStab.Network.Controllers"
+>ObjectStab.Network.Controllers</A>.TCULDiscrete</H2>
+<B>Discrete implementation of TCUL control system</B><p>
+<IMG SRC="ObjectStab.Network.Controllers.TCULDiscreteD.png" ALT="ObjectStab.Network.Controllers.TCULDiscrete">
+<H3>Information</H3>
+<PRE>Discrete implementation of Tap-Changing Under Load (TCUL) control system 
+according to method D1-D4 in [1] using a state-machine implementation of the 
+control system and tap changer mechanism.
+
+Ideally the variable 'tappos' should be initialized to give a voltage deviation
+within the deadband at the start of the simulatation. Failure to do so may result in
+convergence problems with the initial value solver.
+
+---
+[1] P.W. Sauer and M.A. Pai, &quot;A comparison of discrete vs. continuous
+dynamic models of tap-changing-under-load transformers&quot;, in Proceedings
+of NSF/ECC Workshop on Bulk power System Voltage Phenomena - III :
+Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>method</TD><TD>3</TD><TD>Method number</TD></TR>
+<TR><TD>n</TD><TD>1</TD><TD>Transformer Ratio [p.u.]</TD></TR>
+<TR><TD>stepsize</TD><TD>0.01</TD><TD>Step Size [p.u.]</TD></TR>
+<TR><TD>mintap</TD><TD>-12</TD><TD>Minimum tap step</TD></TR>
+<TR><TD>maxtap</TD><TD>12</TD><TD>Maximum tap step</TD></TR>
+<TR><TD>Tm0</TD><TD>10</TD><TD>Mechanical Time Delay [s]</TD></TR>
+<TR><TD>Td0</TD><TD>20</TD><TD>Controller Time Delay 1 [s]</TD></TR>
+<TR><TD>Td1</TD><TD>20</TD><TD>Controller Time Delay 2 [s]</TD></TR>
+<TR><TD>DB</TD><TD>0.03</TD><TD>TCUL Voltage Deadband (double-sided) [p.u]</TD></TR>
+<TR><TD>Vref</TD><TD>1</TD><TD>TCUL Voltage Reference [p.u]</TD></TR>
+<TR><TD>Vblock</TD><TD>0.82</TD><TD>Tap locking voltage [p.u]</TD></TR>
+<TR><TD>InitByVoltage</TD><TD>false</TD><TD>Initialize to V=Vref?</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> TCULDiscrete <font color="darkgreen">&quot;Discrete implementation of TCUL control system&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Network_Controllers.html#ObjectStab.Network.Controllers.TCULController"
+>TCULController</A>;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>ObjectStab.Base.Time</A> up_counter(start=-10, fixed=true);
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>ObjectStab.Base.Time</A> down_counter(start=-10, fixed=true);
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>ObjectStab.Base.Time</A> Td;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>ObjectStab.Base.Time</A> Tm;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials.Place32"
+>ObjectStab.Network.Partials.Place32</A> wait(initialState=true);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> Tr1(condLabel=&quot;Verr&lt;-DB/2&quot;);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> Tr2(condLabel=&quot;Verr&gt;-DB/2&quot;);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Place12"
+>ModelicaAdditions.PetriNets.Place12</A> countup;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> Tr3(condLabel=&quot;Timer&gt;Td&quot;);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Place11"
+>ModelicaAdditions.PetriNets.Place11</A> actionup;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> Tr4(condLabel=&quot;Timer&gt;Td+Tm&quot;);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> Tr6(condLabel=&quot;Verr&gt;DB/2&quot;);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> Tr7(condLabel=&quot;Verr&lt;DB/2&quot;);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Place12"
+>ModelicaAdditions.PetriNets.Place12</A> countdown;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> Tr8(condLabel=&quot;Timer&gt;Td&quot;);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> Tr9(condLabel=&quot;Timer&gt;Td&quot;);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Place11"
+>ModelicaAdditions.PetriNets.Place11</A> actiondown;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Place21"
+>ModelicaAdditions.PetriNets.Place21</A> updatetap;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> Tr5(condLabel=&quot;&quot;);
+<font color="blue">equation </font>
+  <font color="red">connect</font>(Tr1.outTransition, countup.inTransition);
+  <font color="red">connect</font>(countup.outTransition1, Tr2.inTransition);
+  <font color="red">connect</font>(countdown.inTransition, Tr6.outTransition);
+  <font color="red">connect</font>(countdown.outTransition2, Tr7.inTransition);
+  <font color="red">connect</font>(actionup.inTransition, Tr3.outTransition);
+  <font color="red">connect</font>(actiondown.inTransition, Tr9.outTransition);
+  <font color="red">connect</font>(Tr8.inTransition, actiondown.outTransition);
+  <font color="red">connect</font>(Tr3.inTransition, countup.outTransition2);
+  <font color="red">connect</font>(actionup.outTransition, Tr4.inTransition);
+  <font color="red">connect</font>(updatetap.inTransition2, Tr4.outTransition);
+  <font color="red">connect</font>(updatetap.inTransition1, Tr8.outTransition);
+  <font color="red">connect</font>(Tr5.inTransition, updatetap.outTransition);
+  <font color="red">connect</font>(Tr2.outTransition, wait.inTransition1);
+  <font color="red">connect</font>(Tr1.inTransition, wait.outTransition1);
+  <font color="red">connect</font>(wait.outTransition2, Tr6.inTransition);
+  <font color="red">connect</font>(Tr7.outTransition, wait.inTransition2);
+  <font color="red">connect</font>(Tr5.outTransition, wait.inTransition3);
+  <font color="red">connect</font>(Tr9.inTransition, countdown.outTransition1);
+  <font color="blue">if </font>(method == 1)<font color="blue"> then</font>
+    Td = Td0;
+    Tm = Tm0;
+  <font color="blue">elseif </font>(method == 2)<font color="blue"> then</font>
+    Td = Td0*DB/2/<font color="red">noEvent</font>(<font color="red">max</font>(<font color="red">abs</font>(udev), 1e-6));
+    Tm = Tm0;
+  <font color="blue">elseif </font>(method == 3)<font color="blue"> then</font>
+    Td = Td0*DB/2/<font color="red">noEvent</font>(<font color="red">max</font>(<font color="red">abs</font>(udev), 1e-6));
+    Tm = Tm0*DB/2/<font color="red">noEvent</font>(<font color="red">max</font>(<font color="red">abs</font>(udev), 1e-6));
+  <font color="blue">else</font>
+    Td = Td1 + Td0*DB/2/<font color="red">noEvent</font>(<font color="red">max</font>(<font color="red">abs</font>(udev), 1e-6));
+    Tm = Tm0;
+  <font color="blue">end if</font>;
+  <font color="darkgreen"></font>
+  <font color="darkgreen">
+    //  Td = if (method == 1) then Td0 else if (method == 2 or method == 3) then Td0*</font>
+  <font color="darkgreen">//    DB/2/abs(udev + 1e-6) else Td1 + Td0*DB/2/abs(1e-6 + udev);</font>
+  <font color="darkgreen">//  Tm = if method == 3 then Tm0*DB/2/abs(1e-6 + udev) else Tm0;</font>
+  <font color="darkgreen"></font>
+  Tr1.condition = (udev &lt; -DB/2)<font color="blue"> and </font>(tappos &lt; maxtap)<font color="blue"> and </font><font color="blue">not </font>blocked;
+  Tr2.condition = <font color="blue">not </font>((udev &lt; -DB/2)<font color="blue"> and </font>(tappos &lt; maxtap))<font color="blue"> or </font>blocked;
+  Tr3.condition = time - up_counter &gt; Td;
+  Tr4.condition = time - up_counter &gt; Td + Tm;
+  Tr5.condition = <font color="blue">not </font>(<font color="red">abs</font>(tappos - <font color="red">pre</font>(tappos)) &gt; stepsize/10);
+  Tr6.condition = ((udev &gt; DB/2)<font color="blue"> and </font>(tappos &gt; mintap));
+  Tr7.condition = <font color="blue">not </font>((udev &gt; DB/2)<font color="blue"> and </font>(tappos &gt; mintap));
+  Tr8.condition = time - down_counter &gt; Td + Tm;
+  Tr9.condition = time - down_counter &gt; Td;
+  <font color="darkgreen"></font>
+  <font color="blue">when </font>countup.state<font color="blue"> then</font>
+    up_counter = time;
+  <font color="blue">end when</font>;
+  <font color="darkgreen"></font>
+  <font color="blue">when </font>countdown.state<font color="blue"> then</font>
+    down_counter = time;
+  <font color="blue">end when</font>;
+  <font color="darkgreen"></font>
+  <font color="blue">when </font>updatetap.state<font color="blue"> then</font>
+    <font color="blue">if </font>(up_counter &gt; down_counter)<font color="blue"> then</font>
+      tappos = <font color="red">pre</font>(tappos) + 1;
+    <font color="blue">else</font>
+      tappos = <font color="red">pre</font>(tappos) - 1;
+    <font color="blue">end if</font>;
+  <font color="blue">end when</font>;
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="blue">if </font>InitByVoltage<font color="blue"> then</font>
+    udev = 0;
+  <font color="blue">else</font>
+    tappos = (n - 1)/stepsize;
+  <font color="blue">end if</font>;
+  wait.state = true;
+  countup.state = false;
+  countdown.state = false;
+  actionup.state = false;
+  actiondown.state = false;
+  updatetap.state = false;
+<font color="blue">end </font>TCULDiscrete;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.Controllers.TCULContinuousI.png" ALT="ObjectStab.Network.Controllers.TCULContinuous" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.Controllers.TCULContinuous"></A><A HREF="ObjectStab_Network_Controllers.html#ObjectStab.Network.Controllers"
+>ObjectStab.Network.Controllers</A>.TCULContinuous</H2>
+<B>Continuous approximation of TCUL control system</B><p>
+<IMG SRC="ObjectStab.Network.Controllers.TCULContinuousD.png" ALT="ObjectStab.Network.Controllers.TCULContinuous">
+<H3>Information</H3>
+<PRE>Continuous implementation of Tap-Changing Under Load (TCUL) control 
+system  according to method C1-C4 in [1] using a state-machine implementation 
+of the control system and tap changer mechanism.
+
+
+---
+[1] P.W. Sauer and M.A. Pai, &quot;A comparison of discrete vs. continuous
+dynamic models of tap-changing-under-load transformers&quot;, in Proceedings
+of NSF/ECC Workshop on Bulk power System Voltage Phenomena - III :
+Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>method</TD><TD>3</TD><TD>Method number</TD></TR>
+<TR><TD>n</TD><TD>1</TD><TD>Transformer Ratio [p.u.]</TD></TR>
+<TR><TD>stepsize</TD><TD>0.01</TD><TD>Step Size [p.u.]</TD></TR>
+<TR><TD>mintap</TD><TD>-12</TD><TD>Minimum tap step</TD></TR>
+<TR><TD>maxtap</TD><TD>12</TD><TD>Maximum tap step</TD></TR>
+<TR><TD>Tm0</TD><TD>10</TD><TD>Mechanical Time Delay [s]</TD></TR>
+<TR><TD>Td0</TD><TD>20</TD><TD>Controller Time Delay 1 [s]</TD></TR>
+<TR><TD>Td1</TD><TD>20</TD><TD>Controller Time Delay 2 [s]</TD></TR>
+<TR><TD>DB</TD><TD>0.03</TD><TD>TCUL Voltage Deadband (double-sided) [p.u]</TD></TR>
+<TR><TD>Vref</TD><TD>1</TD><TD>TCUL Voltage Reference [p.u]</TD></TR>
+<TR><TD>Vblock</TD><TD>0.82</TD><TD>Tap locking voltage [p.u]</TD></TR>
+<TR><TD>InitByVoltage</TD><TD>false</TD><TD>Initialize to V=Vref?</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> TCULContinuous <font color="darkgreen">
+  &quot;Continuous approximation of TCUL control system&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Network_Controllers.html#ObjectStab.Network.Controllers.TCULController"
+>TCULController</A>;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>ObjectStab.Base.Time</A> Tc;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.LimIntegrator"
+>Modelica.Blocks.Continuous.LimIntegrator</A> integrator(
+    k={1}, 
+    outMax={1 + maxtap*stepsize}, 
+    outMin={1 + mintap*stepsize}, 
+    y(start={n}));
+<font color="blue">equation </font>
+  <font color="red">connect</font>(integrator.outPort, outPort);
+  <font color="blue">if </font>(method == 2)<font color="blue"> then</font>
+    Tc = (Td0*DB/2 + Tm0*<font color="red">noEvent</font>(<font color="red">abs</font>(udev)))/stepsize;
+  <font color="blue">elseif </font>(method == 3)<font color="blue"> then</font>
+    Tc = (Tm0 + Td0)*DB/2/stepsize;
+  <font color="blue">else</font>
+    Tc = (Td0*DB/2 + (Tm0 + Td1)*<font color="red">noEvent</font>(<font color="red">abs</font>(udev)))/stepsize;
+  <font color="blue">end if</font>;
+  <font color="blue">if </font><font color="blue">not </font>blocked<font color="blue"> then</font>
+    integrator.u = {-udev/Tc};
+  <font color="blue">else</font>
+    integrator.u = {0};
+  <font color="blue">end if</font>;
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="blue">if </font>InitByVoltage<font color="blue"> then</font>
+    <font color="red">der</font>(integrator.y) = {0};
+  <font color="blue">else</font>
+    integrator.y = {n};
+  <font color="blue">end if</font>;
+<font color="blue">end </font>TCULContinuous;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.Controllers.TCULControllerI.png" ALT="ObjectStab.Network.Controllers.TCULController" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.Controllers.TCULController"></A><A HREF="ObjectStab_Network_Controllers.html#ObjectStab.Network.Controllers"
+>ObjectStab.Network.Controllers</A>.TCULController</H2>
+<B>Common definitions for TCUL control systems</B><p>
+<H3>Information</H3>
+<PRE>Common definitions for TCUL control systems according to [1]. 
+Using the parameter the characteristics of the mechanical delay time (Tm) 
+and the controlled delay time (Td) the TCUL can be influenced according
+to the table below:
+
+----------------------------------
+|method|    Td     |    Tm       |
+----------------------------------
+|  1   |  constant |  constant   |
+|  2   |  inverse  |  constant   |
+|  3   |  inverse  |  inverse    |
+|  4   |  both     |  constant   |
+----------------------------------
+
+Use the subclasses TCULContinuous for continuous approximation (more computationally)
+efficient or the the subclass TCULDiscrete for the true discrete realization.
+
+The tap changer is locked if the primary side voltage decreases below the 
+tap locking voltage specified in Vblock.
+
+---
+[1] P.W. Sauer and M.A. Pai, &quot;A comparison of discrete vs. continuous
+dynamic models of tap-changing-under-load transformers&quot;, in Proceedings
+of NSF/ECC Workshop on Bulk power System Voltage Phenomena - III :
+Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>method</TD><TD>3</TD><TD>Method number</TD></TR>
+<TR><TD>n</TD><TD>1</TD><TD>Transformer Ratio [p.u.]</TD></TR>
+<TR><TD>stepsize</TD><TD>0.01</TD><TD>Step Size [p.u.]</TD></TR>
+<TR><TD>mintap</TD><TD>-12</TD><TD>Minimum tap step</TD></TR>
+<TR><TD>maxtap</TD><TD>12</TD><TD>Maximum tap step</TD></TR>
+<TR><TD>Tm0</TD><TD>10</TD><TD>Mechanical Time Delay [s]</TD></TR>
+<TR><TD>Td0</TD><TD>20</TD><TD>Controller Time Delay 1 [s]</TD></TR>
+<TR><TD>Td1</TD><TD>20</TD><TD>Controller Time Delay 2 [s]</TD></TR>
+<TR><TD>DB</TD><TD>0.03</TD><TD>TCUL Voltage Deadband (double-sided) [p.u]</TD></TR>
+<TR><TD>Vref</TD><TD>1</TD><TD>TCUL Voltage Reference [p.u]</TD></TR>
+<TR><TD>Vblock</TD><TD>0.82</TD><TD>Tap locking voltage [p.u]</TD></TR>
+<TR><TD>InitByVoltage</TD><TD>false</TD><TD>Initialize to V=Vref?</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">model</font> TCULController <font color="darkgreen">
+  &quot;Common definitions for TCUL control systems&quot;</font> 
+  <font color="darkgreen"></font>
+  <font color="blue">extends </font><A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.SI2SO"
+>Modelica.Blocks.Interfaces.SI2SO</A>(y(start=1));
+  <font color="blue">parameter </font>Integer method=3 <font color="darkgreen">&quot;Method number&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.TapRatio"
+>Base.TapRatio</A> n=1 <font color="darkgreen">&quot;Transformer Ratio&quot;</font>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.TapRatio"
+>ObjectStab.Base.TapRatio</A> stepsize=0.01 <font color="darkgreen">&quot;Step Size&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.TapStep"
+>ObjectStab.Base.TapStep</A> mintap=-12 <font color="darkgreen">&quot;Minimum tap step&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.TapStep"
+>ObjectStab.Base.TapStep</A> maxtap=12 <font color="darkgreen">&quot;Maximum tap step&quot;</font>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Duration"
+>ObjectStab.Base.Duration</A> Tm0=10 <font color="darkgreen">&quot;Mechanical Time Delay&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Duration"
+>ObjectStab.Base.Duration</A> Td0=20 <font color="darkgreen">&quot;Controller Time Delay 1&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Duration"
+>ObjectStab.Base.Duration</A> Td1=20 <font color="darkgreen">&quot;Controller Time Delay 2&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>ObjectStab.Base.Voltage</A> DB=0.03 <font color="darkgreen">&quot;TCUL Voltage Deadband (double-sided)&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>ObjectStab.Base.Voltage</A> Vref=1 <font color="darkgreen">&quot;TCUL Voltage Reference&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>ObjectStab.Base.Voltage</A> Vblock=0.82 <font color="darkgreen">&quot;Tap locking voltage&quot;</font>;
+  <font color="blue">parameter </font>Boolean InitByVoltage=false <font color="darkgreen">&quot;Initialize to V=Vref?&quot;</font>;
+  Real tappos(start=(n - 1)/stepsize) <font color="darkgreen">&quot;Current tap step [number]&quot;</font>;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>ObjectStab.Base.Voltage</A> udev;
+  Boolean blocked=u2 &lt; Vblock <font color="darkgreen">&quot;Tap locked ?&quot;</font>;
+<font color="blue">equation </font>
+  tappos = (y - 1)/stepsize;
+  udev = u1 - Vref;
+<font color="blue">end </font>TCULController;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.dynasim.se/">Dymola</a> Mon Sep 30 21:52:49 2002
+.
+</address></BODY>
+</HTML>

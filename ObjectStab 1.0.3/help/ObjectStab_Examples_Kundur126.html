@@ -1,0 +1,307 @@
+<HTML>
+<HEAD><META name="HTML-Generator" content="Dymola"><TITLE>ObjectStab</TITLE></HEAD>
+<BODY><P>
+<H2><A NAME="ObjectStab.Examples.Kundur126"></A><A HREF="ObjectStab_Examples.html#ObjectStab.Examples"
+>ObjectStab.Examples</A>.Kundur126</H2>
+<B>Example 12.6 from Kundur's book</B>
+<P>
+<A HREF="ObjectStab_Examples_Kundur126.html#ObjectStab.Examples.Kundur126.Gen"
+><IMG SRC="ObjectStab.Examples.Kundur126.GenI.png" ALT="ObjectStab.Examples.Kundur126.Gen" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_Kundur126.html#ObjectStab.Examples.Kundur126.system"
+><IMG SRC="ObjectStab.Examples.Kundur126.systemI.png" ALT="ObjectStab.Examples.Kundur126.system" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_Kundur126.html#ObjectStab.Examples.Kundur126.linefault"
+><IMG SRC="ObjectStab.Examples.Kundur126.linefaultI.png" ALT="ObjectStab.Examples.Kundur126.linefault" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_Kundur126.html#ObjectStab.Examples.Kundur126.lineopen"
+><IMG SRC="ObjectStab.Examples.Kundur126.lineopenI.png" ALT="ObjectStab.Examples.Kundur126.lineopen" WIDTH=80  HEIGHT=80 ></A>
+<P><P>
+<H3>Information</H3>
+<PRE> 
+</PRE><P>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.Kundur126.GenI.png" ALT="ObjectStab.Examples.Kundur126.Gen" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.Kundur126.Gen"></A><A HREF="ObjectStab_Examples_Kundur126.html#ObjectStab.Examples.Kundur126"
+>ObjectStab.Examples.Kundur126</A>.Gen</H2>
+<IMG SRC="ObjectStab.Examples.Kundur126.GenD.png" ALT="ObjectStab.Examples.Kundur126.Gen">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+<TR><TD>Sbase</TD><TD>100</TD><TD>Generator rated power [MVA]</TD></TR>
+<TR><TD>H</TD><TD>6</TD><TD>Inertia Constant [s]</TD></TR>
+<TR><TD>D</TD><TD>0</TD><TD>Damping Coefficient [1]</TD></TR>
+<TR><TD>rt</TD><TD>0</TD><TD>Step-up Transformer Resistance [p.u.]</TD></TR>
+<TR><TD>xt</TD><TD>0</TD><TD>Step-up Transformer Reactance [p.u.]</TD></TR>
+<TR><TD>ra</TD><TD>0.0025</TD><TD>Armature Resistance [p.u.]</TD></TR>
+<TR><TD>xl</TD><TD>0.15</TD><TD>Leakage Reactance [p.u.]</TD></TR>
+<TR><TD>xd</TD><TD>1.8</TD><TD>Direct Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xq</TD><TD>1.7</TD><TD>Quadrature Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xdp</TD><TD>0.3</TD><TD>Direct Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>xqp</TD><TD>0.55</TD><TD>Quadrature Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>xdpp</TD><TD>0.25</TD><TD>Direct Axis Subtransient Reactance [p.u.]</TD></TR>
+<TR><TD>xqpp</TD><TD>0.25</TD><TD>Quadrature Axis Subtransient Reactance [p.u.]</TD></TR>
+<TR><TD>Td0p</TD><TD>8</TD><TD>Open-circuit Direct Axis Transient Time Constant [s]</TD></TR>
+<TR><TD>Tq0p</TD><TD>0.4</TD><TD>Open-circuit Quadrature Axis Transient Time Constant [s]</TD></TR>
+<TR><TD>Td0pp</TD><TD>0.03</TD><TD>Open-circuit Direct Axis Subtransient Time Constant [s]</TD></TR>
+<TR><TD>Tq0pp</TD><TD>0.05</TD><TD>Open-circuit Quadrature Axis Subtransient Time Constant [s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Gen 
+  <font color="darkgreen">//  extends ObjectStab.Generators.GovExc6thGen(</font>
+  <font color="blue">extends </font><A HREF="ObjectStab_Extras.html#ObjectStab.Extras.GovExcKundurGen"
+>ObjectStab.Extras.GovExcKundurGen</A>(
+    D=0, 
+    rt=0, 
+    xt=0, 
+    ra=0.0025, 
+    xd=1.8, 
+    xq=1.7, 
+    xdp=0.3, 
+    xqp=0.55, 
+    xdpp=0.25, 
+    xqpp=0.25, 
+    Td0p=8, 
+    Tq0p=0.4, 
+    Td0pp=0.03, 
+    Tq0pp=0.05, 
+    <font color="blue">redeclare </font><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.ExcST1A"
+>ObjectStab.Generators.Controllers.ExcST1A</A> Exc(
+      Kstab=20, 
+      Tw=10, 
+      T1=0.05, 
+      T2=0.02, 
+      Tr=0.01, 
+      vsmax=0.2, 
+      vsmin=-0.2, 
+      K=200, 
+      Efmin=-6.4, 
+      Efmax=7, 
+      T3=3, 
+      T4=5.4), 
+    <font color="blue">redeclare </font><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.FirstOrderGovernor"
+>ObjectStab.Generators.Controllers.FirstOrderGovernor</A> Gov);
+  <font color="darkgreen"></font>
+<font color="blue">end </font>Gen;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.Kundur126.systemI.png" ALT="ObjectStab.Examples.Kundur126.system" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.Kundur126.system"></A><A HREF="ObjectStab_Examples_Kundur126.html#ObjectStab.Examples.Kundur126"
+>ObjectStab.Examples.Kundur126</A>.system</H2>
+<IMG SRC="ObjectStab.Examples.Kundur126.systemD.png" ALT="ObjectStab.Examples.Kundur126.system">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>wmin</TD><TD>0.5</TD><TD>[p.u.]</TD></TR>
+<TR><TD>wmax</TD><TD>1.5</TD><TD>[p.u.]</TD></TR>
+<TR><TD>L78_1</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">class</font> system 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.System"
+>ObjectStab.Base.System</A>;
+  <A HREF="ObjectStab_Examples_Kundur126.html#ObjectStab.Examples.Kundur126.Gen"
+>Gen</A> G1(
+    V0=1.03, 
+    Pg0=7, 
+    Sbase=900, 
+    H=6.5);
+  <A HREF="ObjectStab_Examples_Kundur126.html#ObjectStab.Examples.Kundur126.Gen"
+>Gen</A> G2(
+    V0=1.01, 
+    Pg0=7, 
+    Sbase=900, 
+    H=6.5);
+  <A HREF="ObjectStab_Examples_Kundur126.html#ObjectStab.Examples.Kundur126.Gen"
+>Gen</A> G3(
+    V0=1.03, 
+    theta0=-6.8*Modelica.Constants.PI/180, 
+    Pg0=7, 
+    Sbase=900, 
+    H=6.175, 
+    isSlack=true);
+  <A HREF="ObjectStab_Examples_Kundur126.html#ObjectStab.Examples.Kundur126.Gen"
+>Gen</A> G4(
+    V0=1.01, 
+    Pg0=7, 
+    Sbase=900, 
+    H=6.175);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.FixTransformer"
+>ObjectStab.Network.FixTransformer</A> T15(X=0.15/9);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus1;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus2;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.FixTransformer"
+>ObjectStab.Network.FixTransformer</A> T26(X=.15/9);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus5;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus6;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>ObjectStab.Network.Pilink</A> L56(
+    R=0.0001*25, 
+    X=0.001*25, 
+    B=0.00175*25);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>ObjectStab.Network.Pilink</A> L67(
+    R=0.0001*10, 
+    X=0.001*10, 
+    B=0.00175*10);
+  <A HREF="ObjectStab_Loads.html#ObjectStab.Loads.ZIPLoad"
+>ObjectStab.Loads.ZIPLoad</A> L7(
+    P0=9.67, 
+    Q0=1, 
+    pZ=0, 
+    pI=1, 
+    qZ=1, 
+    qI=0);
+  <font color="blue">replaceable </font><A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>ObjectStab.Network.Pilink</A> L78_1(
+    R=0.0001*110, 
+    X=0.001*110, 
+    B=0.00175*110);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus8;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>ObjectStab.Network.Pilink</A> L78_2(
+    R=0.0001*110, 
+    X=0.001*110, 
+    B=0.00175*110);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus7;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus9;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>ObjectStab.Network.Pilink</A> L89_1(
+    R=0.0001*110, 
+    X=0.001*110, 
+    B=0.00175*110);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>ObjectStab.Network.Pilink</A> L89_2(
+    R=0.0001*110, 
+    X=0.001*110, 
+    B=0.00175*110);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>ObjectStab.Network.Pilink</A> L910(
+    R=0.0001*10, 
+    X=0.001*10, 
+    B=0.00175*10);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus10;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.FixTransformer"
+>ObjectStab.Network.FixTransformer</A> T410(X=.15/9);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus4;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>ObjectStab.Network.Pilink</A> L1011(
+    R=0.0001*25, 
+    X=0.001*25, 
+    B=0.00175*25);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.FixTransformer"
+>ObjectStab.Network.FixTransformer</A> T311(X=0.15/9);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus3;
+  <A HREF="ObjectStab_Loads.html#ObjectStab.Loads.ZIPLoad"
+>ObjectStab.Loads.ZIPLoad</A> L9(
+    P0=17.67, 
+    Q0=1, 
+    pZ=0, 
+    pI=1, 
+    qZ=1, 
+    qI=0);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.ShuntCapacitor"
+>ObjectStab.Network.ShuntCapacitor</A> C7(B=2);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.ShuntCapacitor"
+>ObjectStab.Network.ShuntCapacitor</A> C9(B=3.5);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus11;
+<font color="blue">equation </font>
+  <font color="red">connect</font>(T15.T1, Bus1.T);
+  <font color="red">connect</font>(Bus1.T, G1.T);
+  <font color="red">connect</font>(G2.T, Bus2.T);
+  <font color="red">connect</font>(T26.T1, Bus2.T);
+  <font color="red">connect</font>(Bus5.T, T15.T2);
+  <font color="red">connect</font>(Bus5.T, L56.T1);
+  <font color="red">connect</font>(L56.T2, Bus6.T);
+  <font color="red">connect</font>(T26.T2, Bus6.T);
+  <font color="red">connect</font>(Bus6.T, L67.T1);
+  <font color="red">connect</font>(L78_1.T2, Bus8.T);
+  <font color="red">connect</font>(L78_2.T2, Bus8.T);
+  <font color="red">connect</font>(L67.T2, Bus7.T);
+  <font color="red">connect</font>(Bus7.T, L78_1.T1);
+  <font color="red">connect</font>(L78_2.T1, Bus7.T);
+  <font color="red">connect</font>(L89_2.T1, Bus8.T);
+  <font color="red">connect</font>(L89_1.T1, Bus8.T);
+  <font color="red">connect</font>(L89_1.T2, Bus9.T);
+  <font color="red">connect</font>(L89_2.T2, Bus9.T);
+  <font color="red">connect</font>(L910.T1, Bus9.T);
+  <font color="red">connect</font>(Bus10.T, L910.T2);
+  <font color="red">connect</font>(L7.T, Bus7.T);
+  <font color="red">connect</font>(Bus4.T, T410.T1);
+  <font color="red">connect</font>(T410.T2, Bus10.T);
+  <font color="red">connect</font>(L1011.T1, Bus10.T);
+  <font color="red">connect</font>(Bus3.T, T311.T2);
+  <font color="red">connect</font>(L9.T, Bus9.T);
+  <font color="red">connect</font>(G4.T, Bus4.T);
+  <font color="red">connect</font>(G3.T, Bus3.T);
+  <font color="red">connect</font>(C7.T, Bus7.T);
+  <font color="red">connect</font>(C9.T, Bus9.T);
+  <font color="red">connect</font>(Bus11.T, L1011.T2);
+  <font color="red">connect</font>(Bus11.T, T311.T1);
+<font color="blue">end </font>system;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.Kundur126.linefaultI.png" ALT="ObjectStab.Examples.Kundur126.linefault" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.Kundur126.linefault"></A><A HREF="ObjectStab_Examples_Kundur126.html#ObjectStab.Examples.Kundur126"
+>ObjectStab.Examples.Kundur126</A>.linefault</H2>
+<IMG SRC="ObjectStab.Examples.Kundur126.linefaultD.png" ALT="ObjectStab.Examples.Kundur126.linefault">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>wmin</TD><TD>0.5</TD><TD>[p.u.]</TD></TR>
+<TR><TD>wmax</TD><TD>1.5</TD><TD>[p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> linefault 
+  <font color="blue">extends </font><A HREF="ObjectStab_Examples_Kundur126.html#ObjectStab.Examples.Kundur126.system"
+>system</A>(<font color="blue">redeclare </font><A HREF="ObjectStab_Network.html#ObjectStab.Network.FaultedPilink"
+>ObjectStab.Network.FaultedPilink</A> L78_1(
+      FaultTime=2, 
+      alpha=0.5, 
+      FaultR=0.01, 
+      FaultX=0, 
+      ClearTime=0.07, 
+      RecloseTime=3.5));
+  <font color="blue">output </font>Real V=Bus8.V;
+<font color="blue">end </font>linefault;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.Kundur126.lineopenI.png" ALT="ObjectStab.Examples.Kundur126.lineopen" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.Kundur126.lineopen"></A><A HREF="ObjectStab_Examples_Kundur126.html#ObjectStab.Examples.Kundur126"
+>ObjectStab.Examples.Kundur126</A>.lineopen</H2>
+<IMG SRC="ObjectStab.Examples.Kundur126.lineopenD.png" ALT="ObjectStab.Examples.Kundur126.lineopen">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>wmin</TD><TD>0.5</TD><TD>[p.u.]</TD></TR>
+<TR><TD>wmax</TD><TD>1.5</TD><TD>[p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> lineopen 
+  <font color="blue">extends </font><A HREF="ObjectStab_Examples_Kundur126.html#ObjectStab.Examples.Kundur126.system"
+>system</A>(<font color="blue">redeclare </font><A HREF="ObjectStab_Network.html#ObjectStab.Network.OpenedPilink"
+>ObjectStab.Network.OpenedPilink</A> L78_1(OpenTime=2, CloseTime=5));
+<font color="blue">end </font>lineopen;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.dynasim.se/">Dymola</a> Mon Sep 30 21:52:36 2002
+.
+</address></BODY>
+</HTML>

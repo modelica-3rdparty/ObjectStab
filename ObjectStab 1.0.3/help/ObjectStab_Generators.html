@@ -1,0 +1,197 @@
+<HTML>
+<HEAD><META name="HTML-Generator" content="Dymola"><TITLE>ObjectStab</TITLE></HEAD>
+<BODY><P>
+<H2><A NAME="ObjectStab.Generators"></A><A HREF="ObjectStab.html#ObjectStab"
+>ObjectStab</A>.Generators</H2>
+<B>Generator subpackage</B>
+<P>
+<A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials"
+><IMG SRC="ObjectStab.Generators.PartialsI.png" ALT="ObjectStab.Generators.Partials" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators.html#ObjectStab.Generators.Slack"
+><IMG SRC="ObjectStab.Generators.SlackI.png" ALT="ObjectStab.Generators.Slack" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators.html#ObjectStab.Generators.PVNode"
+><IMG SRC="ObjectStab.Generators.PVNodeI.png" ALT="ObjectStab.Generators.PVNode" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators.html#ObjectStab.Generators.GovExc3rdGen"
+><IMG SRC="ObjectStab.Generators.GovExc3rdGenI.png" ALT="ObjectStab.Generators.GovExc3rdGen" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators.html#ObjectStab.Generators.GovExc6thGen"
+><IMG SRC="ObjectStab.Generators.GovExc6thGenI.png" ALT="ObjectStab.Generators.GovExc6thGen" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers"
+><IMG SRC="ObjectStab.Generators.ControllersI.png" ALT="ObjectStab.Generators.Controllers" WIDTH=80  HEIGHT=80 ></A>
+<P><P>
+<HR>
+<H2><IMG SRC="ObjectStab.Generators.GovExc3rdGenI.png" ALT="ObjectStab.Generators.GovExc3rdGen" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.GovExc3rdGen"></A><A HREF="ObjectStab_Generators.html#ObjectStab.Generators"
+>ObjectStab.Generators</A>.GovExc3rdGen</H2>
+<B>3rd order generator model with constant mechanical power and field voltage</B><p>
+<IMG SRC="ObjectStab.Generators.GovExc3rdGenD.png" ALT="ObjectStab.Generators.GovExc3rdGen">
+<H3>Information</H3>
+<PRE>The 3rd order Generator model extended with governor and exciter
+
+The governor and exciter models can be redeclared with models
+from the controller library or used-defined models.
+
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+<TR><TD>Sbase</TD><TD>100</TD><TD>Generator rated power [MVA]</TD></TR>
+<TR><TD>H</TD><TD>6</TD><TD>Inertia Constant [s]</TD></TR>
+<TR><TD>D</TD><TD>0</TD><TD>Damping Coefficient [1]</TD></TR>
+<TR><TD>rt</TD><TD>0</TD><TD>Step-up Transformer Resistance [p.u.]</TD></TR>
+<TR><TD>xt</TD><TD>0.0</TD><TD>Step-up Transformer Reactance [p.u.]</TD></TR>
+<TR><TD>ra</TD><TD>0</TD><TD>Armature Resistance [p.u.]</TD></TR>
+<TR><TD>xd</TD><TD>0.8948</TD><TD>Direct Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xq</TD><TD>0.84</TD><TD>Quadrature Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xdp</TD><TD>0.30</TD><TD>Direct Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>Td0p</TD><TD>7</TD><TD>Open-circuit Direct Axis Transient Time Constant [s]</TD></TR>
+<TR><TD>Gov</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Exc</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> GovExc3rdGen <font color="darkgreen">
+  &quot;3rd order generator model with constant mechanical power and field voltage&quot;</font>
+   
+  <font color="darkgreen"></font>
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials.DetGen3"
+>Partials.DetGen3</A>;
+  <font color="blue">replaceable </font><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.ConstPm"
+>ObjectStab.Generators.Controllers.ConstPm</A> Gov;
+  <font color="blue">replaceable </font><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.ConstEfd"
+>ObjectStab.Generators.Controllers.ConstEfd</A> Exc;
+<font color="blue">equation </font>
+  <font color="darkgreen">// connection equations for governor and exciter</font>
+  Gov.u = w;
+  Pm = Gov.y;
+  Exc.u = <font color="red">sqrt</font>(vd^2 + vq^2);
+  Efd = Exc.y;
+<font color="blue">end </font>GovExc3rdGen;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Generators.SlackI.png" ALT="ObjectStab.Generators.Slack" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.Slack"></A><A HREF="ObjectStab_Generators.html#ObjectStab.Generators"
+>ObjectStab.Generators</A>.Slack</H2>
+<B>Slack Node</B><p>
+<IMG SRC="ObjectStab.Generators.SlackD.png" ALT="ObjectStab.Generators.Slack">
+<H3>Information</H3>
+<PRE>The slack node model acts as slack bus in initialization or load-flow 
+calculations and as an infinite bus during dynamic simulation. 
+
+
+At least one slack node or detailed generator with its attribute 'isSlack' set to true must be included
+in each network model.
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>true</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Slack <font color="darkgreen">&quot;Slack Node&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials.InfiniteBus"
+>Partials.InfiniteBus</A>(isSlack=true);
+<font color="blue">end </font>Slack;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Generators.GovExc6thGenI.png" ALT="ObjectStab.Generators.GovExc6thGen" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.GovExc6thGen"></A><A HREF="ObjectStab_Generators.html#ObjectStab.Generators"
+>ObjectStab.Generators</A>.GovExc6thGen</H2>
+<B>6th order generator model with  constant mechanical power and field voltage</B><p>
+<IMG SRC="ObjectStab.Generators.GovExc6thGenD.png" ALT="ObjectStab.Generators.GovExc6thGen">
+<H3>Information</H3>
+<PRE>The 6th order Generator model extended with governor and exciter
+
+The governor and exciter models can be redeclared with models
+from the controller library or used-defined models.
+
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+<TR><TD>Sbase</TD><TD>100</TD><TD>Generator rated power [MVA]</TD></TR>
+<TR><TD>H</TD><TD>6</TD><TD>Inertia Constant [s]</TD></TR>
+<TR><TD>D</TD><TD>0</TD><TD>Damping Coefficient [1]</TD></TR>
+<TR><TD>rt</TD><TD>0</TD><TD>Step-up Transformer Resistance [p.u.]</TD></TR>
+<TR><TD>xt</TD><TD>0.0</TD><TD>Step-up Transformer Reactance [p.u.]</TD></TR>
+<TR><TD>ra</TD><TD>0</TD><TD>Armature Resistance [p.u.]</TD></TR>
+<TR><TD>xd</TD><TD>0.8948</TD><TD>Direct Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xq</TD><TD>0.84</TD><TD>Quadrature Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xdp</TD><TD>0.30</TD><TD>Direct Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>xqp</TD><TD>0.10</TD><TD>Quadrature Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>xdpp</TD><TD>0.20</TD><TD>Direct Axis Subtransient Reactance [p.u.]</TD></TR>
+<TR><TD>xqpp</TD><TD>0.10</TD><TD>Quadrature Axis Subtransient Reactance [p.u.]</TD></TR>
+<TR><TD>Td0p</TD><TD>7</TD><TD>Open-circuit Direct Axis Transient Time Constant [s]</TD></TR>
+<TR><TD>Tq0p</TD><TD>0.44</TD><TD>Open-circuit Quadrature Axis Transient Time Constant [s]</TD></TR>
+<TR><TD>Td0pp</TD><TD>0.02</TD><TD>Open-circuit Direct Axis Subtransient Time Constant [s]</TD></TR>
+<TR><TD>Tq0pp</TD><TD>0.03</TD><TD>Open-circuit Quadrature Axis Subtransient Time Constant [s]</TD></TR>
+<TR><TD>Gov</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Exc</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> GovExc6thGen <font color="darkgreen">
+  &quot;6th order generator model with  constant mechanical power and field voltage&quot;</font>
+   
+  <font color="darkgreen"></font>
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials.DetGen6"
+>Partials.DetGen6</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">replaceable </font><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.ConstPm"
+>ObjectStab.Generators.Controllers.ConstPm</A> Gov;
+  <font color="blue">replaceable </font><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.ConstEfd"
+>ObjectStab.Generators.Controllers.ConstEfd</A> Exc;
+<font color="blue">equation </font>
+  <font color="darkgreen">// connection equations for governor and exciter</font>
+  Gov.u = w;
+  Pm = Gov.y;
+  Exc.u = <font color="red">sqrt</font>(vd^2 + vq^2);
+  Efd = Exc.y;
+<font color="blue">end </font>GovExc6thGen;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Generators.PVNodeI.png" ALT="ObjectStab.Generators.PVNode" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.PVNode"></A><A HREF="ObjectStab_Generators.html#ObjectStab.Generators"
+>ObjectStab.Generators</A>.PVNode</H2>
+<B>PV Node</B><p>
+<IMG SRC="ObjectStab.Generators.PVNodeD.png" ALT="ObjectStab.Generators.PVNode">
+<H3>Information</H3>
+<PRE>The PV node models a load-flow PV node with unlimited reactive
+power generation resources.
+
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> PVNode <font color="darkgreen">&quot;PV Node&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Partials.html#ObjectStab.Generators.Partials.InfiniteBus"
+>Partials.InfiniteBus</A>(isSlack=false);
+<font color="blue">end </font>PVNode;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.dynasim.se/">Dymola</a> Mon Sep 30 21:52:05 2002
+.
+</address></BODY>
+</HTML>

@@ -1,0 +1,162 @@
+<HTML>
+<HEAD><META name="HTML-Generator" content="Dymola"><TITLE>ObjectStab</TITLE></HEAD>
+<BODY><P>
+<H2><IMG SRC="ObjectStab.Generators.Controllers.Partials.ExciterI.png" ALT="ObjectStab.Generators.Controllers.Partials.Exciter" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.Controllers.Partials.Exciter"></A><A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials"
+>ObjectStab.Generators.Controllers.Partials</A>.Exciter</H2>
+<IMG SRC="ObjectStab.Generators.Controllers.Partials.ExciterD.png" ALT="ObjectStab.Generators.Controllers.Partials.Exciter">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>K</TD><TD>100</TD><TD>Steady-State Gain</TD></TR>
+<TR><TD>Efmax</TD><TD>Modelica.Constants.inf</TD><TD>Maximum Field Voltage [p.u]</TD></TR>
+<TR><TD>Efmin</TD><TD>0</TD><TD>Minimum Field Voltage [p.u]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">model</font> Exciter 
+  <font color="blue">extends </font><A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.SISO"
+>Modelica.Blocks.Interfaces.SISO</A>;
+  <font color="blue">parameter </font>Real K=100 <font color="darkgreen">&quot;Steady-State Gain&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> Efmax=Modelica.Constants.inf <font color="darkgreen">&quot;Maximum Field Voltage&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> Efmin=0 <font color="darkgreen">&quot;Minimum Field Voltage&quot;</font>;
+  <font color="darkgreen"></font>
+  <font color="blue">discrete </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> Vref(start=1);
+  <font color="blue">discrete </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> Ef0(start=1);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Nonlinear.html#Modelica.Blocks.Nonlinear.Limiter"
+>Modelica.Blocks.Nonlinear.Limiter</A> Limiter(uMax={Efmax}, uMin={Efmin});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add"
+>Modelica.Blocks.Math.Add</A> Verror(k1=-1, k2=1);
+<font color="blue">equation </font>
+  <font color="red">connect</font>(Limiter.outPort, outPort);
+  <font color="red">connect</font>(inPort, Verror.inPort1);
+  Verror.u2 = {Vref};
+  Vref = <font color="red">pre</font>(Vref);
+<font color="blue">end </font>Exciter;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Generators.Controllers.Partials.GovernorI.png" ALT="ObjectStab.Generators.Controllers.Partials.Governor" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.Controllers.Partials.Governor"></A><A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials"
+>ObjectStab.Generators.Controllers.Partials</A>.Governor</H2>
+<IMG SRC="ObjectStab.Generators.Controllers.Partials.GovernorD.png" ALT="ObjectStab.Generators.Controllers.Partials.Governor">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>wref</TD><TD>1</TD><TD>[p.u.]</TD></TR>
+<TR><TD>Pmmax</TD><TD>1.05</TD><TD>Maximum Mechanical Power [p.u.]</TD></TR>
+<TR><TD>Pmmin</TD><TD>0</TD><TD>Minimum Mechanical Power [p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">model</font> Governor 
+  <font color="blue">extends </font><A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.SISO"
+>Modelica.Blocks.Interfaces.SISO</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.AngularVelocity"
+>Base.AngularVelocity</A> wref=1;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.MechanicalPower"
+>Base.MechanicalPower</A> Pmmax=1.05 <font color="darkgreen">&quot;Maximum Mechanical Power&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.MechanicalPower"
+>Base.MechanicalPower</A> Pmmin=0 <font color="darkgreen">&quot;Minimum Mechanical Power&quot;</font>;
+  <font color="darkgreen"></font>
+<font color="blue">protected </font>
+  <font color="blue">discrete </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.MechanicalPower"
+>Base.MechanicalPower</A> Pm0(start=1, fixed=false) <font color="darkgreen">
+    &quot;Initial Mechanical Power (automatically initialized)&quot;</font>;
+<font color="blue">public </font>
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Nonlinear.html#Modelica.Blocks.Nonlinear.Limiter"
+>Modelica.Blocks.Nonlinear.Limiter</A> Limiter(uMax={Pmmax}, uMin={Pmmin});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add"
+>Modelica.Blocks.Math.Add</A> werror(k1=-1, k2=+1);
+<font color="blue">equation </font>
+  <font color="red">connect</font>(Limiter.outPort, outPort);
+  <font color="red">connect</font>(werror.inPort1, inPort);
+  werror.u2 = {wref};
+  Pm0 = <font color="red">pre</font>(Pm0);
+<font color="blue">end </font>Governor;
+</PRE>
+<HR>
+<H2><A NAME="ObjectStab.Generators.Controllers.Partials"></A><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers"
+>ObjectStab.Generators.Controllers</A>.Partials</H2>
+<A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials.Exciter"
+><IMG SRC="ObjectStab.Generators.Controllers.Partials.ExciterI.png" ALT="ObjectStab.Generators.Controllers.Partials.Exciter" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials.Governor"
+><IMG SRC="ObjectStab.Generators.Controllers.Partials.GovernorI.png" ALT="ObjectStab.Generators.Controllers.Partials.Governor" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials.ExcLimiter"
+><IMG SRC="ObjectStab.Generators.Controllers.Partials.ExcLimiterI.png" ALT="ObjectStab.Generators.Controllers.Partials.ExcLimiter" WIDTH=80  HEIGHT=80 ></A>
+<P><P>
+<HR>
+<H2><IMG SRC="ObjectStab.Generators.Controllers.Partials.ExcLimiterI.png" ALT="ObjectStab.Generators.Controllers.Partials.ExcLimiter" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.Controllers.Partials.ExcLimiter"></A><A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials"
+>ObjectStab.Generators.Controllers.Partials</A>.ExcLimiter</H2>
+<B>Limiter Logic For Excitation System</B><p>
+<IMG SRC="ObjectStab.Generators.Controllers.Partials.ExcLimiterD.png" ALT="ObjectStab.Generators.Controllers.Partials.ExcLimiter">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>DelayTime</TD><TD>10</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Limit</TD><TD>2.1</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> ExcLimiter <font color="darkgreen">&quot;Limiter Logic For Excitation System&quot;</font> 
+  <font color="blue">extends </font><A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.SISO"
+>Modelica.Blocks.Interfaces.SISO</A>;
+  <font color="blue">parameter </font>Real DelayTime=10;
+  <font color="blue">parameter </font>Real Limit=2.1;
+  <font color="darkgreen"></font>
+  <font color="blue">discrete </font>Real countstart(start=1e6, fixed=true);
+  <font color="darkgreen">//  Integer status1;</font>
+  <font color="darkgreen">//  Integer status2;</font>
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> LimitExc;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> LimitOK;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> TimerExp;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Place11"
+>ModelicaAdditions.PetriNets.Place11</A> activated;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> UnActivate;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Place21"
+>ModelicaAdditions.PetriNets.Place21</A> wait(initialState=true);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Place12"
+>ModelicaAdditions.PetriNets.Place12</A> count;
+<font color="blue">equation </font>
+  <font color="red">connect</font>(LimitExc.inTransition, wait.outTransition);
+  <font color="red">connect</font>(LimitExc.outTransition, count.inTransition);
+  <font color="red">connect</font>(TimerExp.outTransition, activated.inTransition);
+  <font color="red">connect</font>(count.outTransition1, LimitOK.inTransition);
+  <font color="red">connect</font>(activated.outTransition, UnActivate.inTransition);
+  <font color="red">connect</font>(UnActivate.outTransition, wait.inTransition2);
+  <font color="red">connect</font>(LimitOK.outTransition, wait.inTransition1);
+  <font color="red">connect</font>(count.outTransition2, TimerExp.inTransition);
+  LimitExc.condition = y &gt; Limit;
+  LimitOK.condition = y &lt; (Limit - 1e-5);
+  UnActivate.condition = y &lt; (Limit - 1e-5);
+  TimerExp.condition = ((time - countstart) &gt; DelayTime)<font color="blue"> and </font>(y &gt; Limit);
+  <font color="darkgreen"></font>
+  <font color="blue">when </font>count.state<font color="blue"> then</font>
+    countstart = time;
+    <font color="darkgreen">//   status1 = LogVariable(count.state);</font>
+  <font color="blue">end when</font>;
+  <font color="blue">when </font>activated.state<font color="blue"> then</font>
+    <font color="darkgreen">//  status2 = LogVariable(activated.state);</font>
+  <font color="blue">end when</font>;
+  <font color="darkgreen"></font>
+  y = <font color="blue">if </font>activated.state<font color="blue"> then </font><font color="red">min</font>(u, Limit)<font color="blue"> else </font>u;
+<font color="blue">initial </font><font color="blue">equation </font>
+  count.state = false;
+  wait.state = true;
+  activated.state = false;
+<font color="blue">end </font>ExcLimiter;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.dynasim.se/">Dymola</a> Mon Sep 30 21:55:15 2002
+.
+</address></BODY>
+</HTML>

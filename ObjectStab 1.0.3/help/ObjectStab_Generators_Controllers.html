@@ -1,0 +1,417 @@
+<HTML>
+<HEAD><META name="HTML-Generator" content="Dymola"><TITLE>ObjectStab</TITLE></HEAD>
+<BODY><P>
+<H2><IMG SRC="ObjectStab.Generators.Controllers.FirstOrderExciterI.png" ALT="ObjectStab.Generators.Controllers.FirstOrderExciter" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.Controllers.FirstOrderExciter"></A><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers"
+>ObjectStab.Generators.Controllers</A>.FirstOrderExciter</H2>
+<IMG SRC="ObjectStab.Generators.Controllers.FirstOrderExciterD.png" ALT="ObjectStab.Generators.Controllers.FirstOrderExciter">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>K</TD><TD>100</TD><TD>Steady-State Gain</TD></TR>
+<TR><TD>Efmax</TD><TD>Modelica.Constants.inf</TD><TD>Maximum Field Voltage [p.u]</TD></TR>
+<TR><TD>Efmin</TD><TD>0</TD><TD>Minimum Field Voltage [p.u]</TD></TR>
+<TR><TD>T</TD><TD>0.05</TD><TD>Voltage Regulator Time Constant</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> FirstOrderExciter 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials.Exciter"
+>Partials.Exciter</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font>Real T=0.05 <font color="darkgreen">&quot;Voltage Regulator Time Constant&quot;</font>;
+  <font color="darkgreen"></font>
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> AVR(b={K}, a={T,1});
+<font color="blue">equation </font>
+  <font color="red">connect</font>(AVR.outPort, Limiter.inPort);
+  <font color="red">connect</font>(Verror.outPort, AVR.inPort);
+  Ef0 = 0;
+  <font color="darkgreen"></font>
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="red">der</font>(AVR.x) = {0};
+<font color="blue">end </font>FirstOrderExciter;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Generators.Controllers.IsoGoverI.png" ALT="ObjectStab.Generators.Controllers.IsoGover" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.Controllers.IsoGover"></A><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers"
+>ObjectStab.Generators.Controllers</A>.IsoGover</H2>
+<B>Governor Control With Frequency Regulation</B><p>
+<IMG SRC="ObjectStab.Generators.Controllers.IsoGoverD.png" ALT="ObjectStab.Generators.Controllers.IsoGover">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>wref</TD><TD>1</TD><TD>[p.u.]</TD></TR>
+<TR><TD>Pmmax</TD><TD>1.05</TD><TD>Maximum Mechanical Power [p.u.]</TD></TR>
+<TR><TD>Pmmin</TD><TD>0</TD><TD>Minimum Mechanical Power [p.u.]</TD></TR>
+<TR><TD>Kgov</TD><TD>1</TD><TD>Governor Gain</TD></TR>
+<TR><TD>TRH</TD><TD>10</TD><TD>&nbsp;</TD></TR>
+<TR><TD>PROPH</TD><TD>0.3</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Tfreq</TD><TD>15</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">class</font> IsoGover <font color="darkgreen">&quot;Governor Control With Frequency Regulation&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials.Governor"
+>Partials.Governor</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.AngularVelocity"
+>Base.AngularVelocity</A> wref=1 <font color="darkgreen">&quot;Reference Angular Velocity&quot;</font>;
+  <font color="blue">parameter </font>Real Kgov=1 <font color="darkgreen">&quot;Governor Gain&quot;</font>;
+  <font color="blue">parameter </font>Real TRH=10;
+  <font color="blue">parameter </font>Real PROPH=0.3;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font>Real Tfreq=15;
+  <font color="darkgreen"></font>
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> Gov(
+    b={Kgov*PROPH*TRH,Kgov}, 
+    a={TRH,1}, 
+    x(start={0}));
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> IsoFreq(b={Kgov/Tfreq}, a={1,0
+        });
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add3"
+>Modelica.Blocks.Math.Add3</A> Add3;
+<font color="blue">equation </font>
+  <font color="red">connect</font>(werror.outPort, Gov.inPort);
+  <font color="red">connect</font>(Add3.outPort, Limiter.inPort);
+  <font color="red">connect</font>(Add3.inPort1, Gov.outPort);
+  <font color="red">connect</font>(werror.outPort, IsoFreq.inPort);
+  <font color="red">connect</font>(IsoFreq.outPort, Add3.inPort2);
+  Add3.inPort3.signal[1] = Pm0;
+<font color="blue">initial </font><font color="blue">equation </font>
+  Add3.inPort1.signal[1] = 0;
+  Add3.inPort2.signal[1] = 0;
+<font color="blue">end </font>IsoGover;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Generators.Controllers.ConstPmI.png" ALT="ObjectStab.Generators.Controllers.ConstPm" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.Controllers.ConstPm"></A><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers"
+>ObjectStab.Generators.Controllers</A>.ConstPm</H2>
+<IMG SRC="ObjectStab.Generators.Controllers.ConstPmD.png" ALT="ObjectStab.Generators.Controllers.ConstPm">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>wref</TD><TD>1</TD><TD>[p.u.]</TD></TR>
+<TR><TD>Pmmax</TD><TD>1.05</TD><TD>Maximum Mechanical Power [p.u.]</TD></TR>
+<TR><TD>Pmmin</TD><TD>0</TD><TD>Minimum Mechanical Power [p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> ConstPm 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials.Governor"
+>Partials.Governor</A>;
+<font color="blue">equation </font>
+  Limiter.u = {Pm0};
+<font color="blue">end </font>ConstPm;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Generators.Controllers.ConstEfdI.png" ALT="ObjectStab.Generators.Controllers.ConstEfd" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.Controllers.ConstEfd"></A><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers"
+>ObjectStab.Generators.Controllers</A>.ConstEfd</H2>
+<IMG SRC="ObjectStab.Generators.Controllers.ConstEfdD.png" ALT="ObjectStab.Generators.Controllers.ConstEfd">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>K</TD><TD>100</TD><TD>Steady-State Gain</TD></TR>
+<TR><TD>Efmax</TD><TD>Modelica.Constants.inf</TD><TD>Maximum Field Voltage [p.u]</TD></TR>
+<TR><TD>Efmin</TD><TD>0</TD><TD>Minimum Field Voltage [p.u]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> ConstEfd 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials.Exciter"
+>Partials.Exciter</A>;
+<font color="blue">equation </font>
+  Ef0 = <font color="red">pre</font>(Ef0);
+  Limiter.u = {Ef0};
+<font color="blue">initial </font><font color="blue">equation </font>
+  Vref = Modelica.Constants.inf;
+<font color="blue">end </font>ConstEfd;
+</PRE>
+<HR>
+<H2><A NAME="ObjectStab.Generators.Controllers"></A><A HREF="ObjectStab_Generators.html#ObjectStab.Generators"
+>ObjectStab.Generators</A>.Controllers</H2>
+<B>Library for Governor and Excitation system models</B>
+<P>
+<A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials"
+><IMG SRC="ObjectStab.Generators.Controllers.PartialsI.png" ALT="ObjectStab.Generators.Controllers.Partials" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.FirstOrderExciter"
+><IMG SRC="ObjectStab.Generators.Controllers.FirstOrderExciterI.png" ALT="ObjectStab.Generators.Controllers.FirstOrderExciter" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.FirstOrderGovernor"
+><IMG SRC="ObjectStab.Generators.Controllers.FirstOrderGovernorI.png" ALT="ObjectStab.Generators.Controllers.FirstOrderGovernor" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.ExcST1A"
+><IMG SRC="ObjectStab.Generators.Controllers.ExcST1AI.png" ALT="ObjectStab.Generators.Controllers.ExcST1A" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.ConstEfd"
+><IMG SRC="ObjectStab.Generators.Controllers.ConstEfdI.png" ALT="ObjectStab.Generators.Controllers.ConstEfd" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.ConstPm"
+><IMG SRC="ObjectStab.Generators.Controllers.ConstPmI.png" ALT="ObjectStab.Generators.Controllers.ConstPm" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.Gover2"
+><IMG SRC="ObjectStab.Generators.Controllers.Gover2I.png" ALT="ObjectStab.Generators.Controllers.Gover2" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.IsoGover"
+><IMG SRC="ObjectStab.Generators.Controllers.IsoGoverI.png" ALT="ObjectStab.Generators.Controllers.IsoGover" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.ExcST1ALim"
+><IMG SRC="ObjectStab.Generators.Controllers.ExcST1ALimI.png" ALT="ObjectStab.Generators.Controllers.ExcST1ALim" WIDTH=80  HEIGHT=80 ></A>
+<P><P>
+<H3>Information</H3>
+<PRE>This library contains sample governor and excitation 
+system models
+
+By default generators are declared with constant power
+governor and constant field voltage. 
+
+An extended generator model can for example by inheriting from
+the basic generator models and augment it with first order
+exitation system and governor using the clauses as follows:
+ 
+model NewGen 
+  extends ObjectStab.Generators.GovExc6thGen(
+    redeclare ObjectStab.Generators.Controllers.FirstOrderExciter Exc, 
+    redeclare ObjectStab.Generators.Controllers.FirstOrderGovernor Gov);
+end NewGen;
+</PRE><P>
+<HR>
+<H2><IMG SRC="ObjectStab.Generators.Controllers.FirstOrderGovernorI.png" ALT="ObjectStab.Generators.Controllers.FirstOrderGovernor" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.Controllers.FirstOrderGovernor"></A><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers"
+>ObjectStab.Generators.Controllers</A>.FirstOrderGovernor</H2>
+<IMG SRC="ObjectStab.Generators.Controllers.FirstOrderGovernorD.png" ALT="ObjectStab.Generators.Controllers.FirstOrderGovernor">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>wref</TD><TD>1</TD><TD>[p.u.]</TD></TR>
+<TR><TD>Pmmax</TD><TD>1.05</TD><TD>Maximum Mechanical Power [p.u.]</TD></TR>
+<TR><TD>Pmmin</TD><TD>0</TD><TD>Minimum Mechanical Power [p.u.]</TD></TR>
+<TR><TD>K</TD><TD>10</TD><TD>Governor Gain</TD></TR>
+<TR><TD>T</TD><TD>5</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> FirstOrderGovernor 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials.Governor"
+>Partials.Governor</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font>Real K=10 <font color="darkgreen">&quot;Governor Gain&quot;</font>;
+  <font color="blue">parameter </font>Real T=5;
+  <font color="darkgreen"></font>
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> TF(
+    b={K}, 
+    a={T,1}, 
+    x(start={0}));
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add"
+>Modelica.Blocks.Math.Add</A> PmAdd;
+<font color="blue">equation </font>
+  <font color="red">connect</font>(PmAdd.outPort, Limiter.inPort);
+  <font color="red">connect</font>(TF.outPort, PmAdd.inPort1);
+  <font color="red">connect</font>(werror.outPort, TF.inPort);
+  PmAdd.u2 = {Pm0};
+  <font color="darkgreen"></font>
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="red">der</font>(TF.y) = 0;
+<font color="blue">end </font>FirstOrderGovernor;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Generators.Controllers.ExcST1ALimI.png" ALT="ObjectStab.Generators.Controllers.ExcST1ALim" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.Controllers.ExcST1ALim"></A><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers"
+>ObjectStab.Generators.Controllers</A>.ExcST1ALim</H2>
+<IMG SRC="ObjectStab.Generators.Controllers.ExcST1ALimD.png" ALT="ObjectStab.Generators.Controllers.ExcST1ALim">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>K</TD><TD>200</TD><TD>Steady-State Gain</TD></TR>
+<TR><TD>Efmax</TD><TD>7</TD><TD>Maximum Field Voltage [p.u]</TD></TR>
+<TR><TD>Efmin</TD><TD>0</TD><TD>Minimum Field Voltage [p.u]</TD></TR>
+<TR><TD>Tr</TD><TD>1.5</TD><TD>AVR Time Constant</TD></TR>
+<TR><TD>Kstab</TD><TD>20</TD><TD>Power System Stabilizer (PSS) Gain</TD></TR>
+<TR><TD>Tw</TD><TD>10</TD><TD>Signal Washout Filter Time Constant</TD></TR>
+<TR><TD>T1</TD><TD>0.05</TD><TD>PSS Phase Compensation Time Constant 1</TD></TR>
+<TR><TD>T2</TD><TD>0.02</TD><TD>PSS Phase Compensation Time Constant 2</TD></TR>
+<TR><TD>T3</TD><TD>3</TD><TD>PSS Phase Compensation Time Constant 3</TD></TR>
+<TR><TD>T4</TD><TD>5.4</TD><TD>PSS Phase Compensation Time Constant 4</TD></TR>
+<TR><TD>vsmax</TD><TD>0.2</TD><TD>PSS Maximum Output Limit</TD></TR>
+<TR><TD>vsmin</TD><TD>-0.2</TD><TD>PSS Maximum Output Limit</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> ExcST1ALim 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials.Exciter"
+>Partials.Exciter</A>(
+    K=200, 
+    Efmin=0, 
+    Efmax=7);
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font>Real Tr=1.5 <font color="darkgreen">&quot;AVR Time Constant&quot;</font>;
+  <font color="blue">parameter </font>Real Kstab=20 <font color="darkgreen">&quot;Power System Stabilizer (PSS) Gain&quot;</font>;
+  <font color="blue">parameter </font>Real Tw=10 <font color="darkgreen">&quot;Signal Washout Filter Time Constant&quot;</font>;
+  <font color="blue">parameter </font>Real T1=0.05 <font color="darkgreen">&quot;PSS Phase Compensation Time Constant 1&quot;</font>;
+  <font color="blue">parameter </font>Real T2=0.02 <font color="darkgreen">&quot;PSS Phase Compensation Time Constant 2&quot;</font>;
+  <font color="blue">parameter </font>Real T3=3 <font color="darkgreen">&quot;PSS Phase Compensation Time Constant 3&quot;</font>;
+  <font color="blue">parameter </font>Real T4=5.4 <font color="darkgreen">&quot;PSS Phase Compensation Time Constant 4&quot;</font>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font>Real vsmax=0.2 <font color="darkgreen">&quot;PSS Maximum Output Limit&quot;</font>;
+  <font color="blue">parameter </font>Real vsmin=-0.2 <font color="darkgreen">&quot;PSS Maximum Output Limit&quot;</font>;
+  <font color="darkgreen"></font>
+  <font color="blue">outer </font>Real w;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> AVR(b={1}, a={Tr,1});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add"
+>Modelica.Blocks.Math.Add</A> Sum(k1=+K, k2=+K);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Gain"
+>Modelica.Blocks.Math.Gain</A> PSSGain(k={Kstab});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> WashOut(b={Tw,0}, a={Tw,1});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> Phase_Compensation1(b={T1,1}, 
+      a={T2,1});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Nonlinear.html#Modelica.Blocks.Nonlinear.Limiter"
+>Modelica.Blocks.Nonlinear.Limiter</A> PSSLimiter(uMax={vsmax}, uMin={vsmin});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> Phase_Compensation2(b={T3,1}, 
+      a={T4,1});
+  <A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials.ExcLimiter"
+>Partials.ExcLimiter</A> ExcLimit;
+<font color="blue">equation </font>
+  <font color="red">connect</font>(AVR.outPort, Sum.inPort1);
+  <font color="red">connect</font>(WashOut.inPort, PSSGain.outPort);
+  <font color="red">connect</font>(Phase_Compensation1.inPort, WashOut.outPort);
+  <font color="red">connect</font>(PSSLimiter.outPort, Sum.inPort2);
+  <font color="red">connect</font>(Phase_Compensation2.inPort, Phase_Compensation1.outPort);
+  <font color="red">connect</font>(Phase_Compensation2.outPort, PSSLimiter.inPort);
+  <font color="red">connect</font>(Sum.outPort, ExcLimit.inPort);
+  <font color="red">connect</font>(ExcLimit.outPort, Limiter.inPort);
+  <font color="red">connect</font>(Verror.outPort, AVR.inPort);
+  PSSGain.u = {w};
+  Ef0 = 0;
+  <font color="darkgreen"></font>
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="red">der</font>(AVR.y) = 0;
+  WashOut.y = 0;
+  Phase_Compensation2.y = 0;
+  Phase_Compensation1.y = 0;
+<font color="blue">end </font>ExcST1ALim;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Generators.Controllers.ExcST1AI.png" ALT="ObjectStab.Generators.Controllers.ExcST1A" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.Controllers.ExcST1A"></A><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers"
+>ObjectStab.Generators.Controllers</A>.ExcST1A</H2>
+<IMG SRC="ObjectStab.Generators.Controllers.ExcST1AD.png" ALT="ObjectStab.Generators.Controllers.ExcST1A">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>K</TD><TD>200</TD><TD>Steady-State Gain</TD></TR>
+<TR><TD>Efmax</TD><TD>7</TD><TD>Maximum Field Voltage [p.u]</TD></TR>
+<TR><TD>Efmin</TD><TD>0</TD><TD>Minimum Field Voltage [p.u]</TD></TR>
+<TR><TD>Tr</TD><TD>1.5</TD><TD>AVR Time Constant</TD></TR>
+<TR><TD>Kstab</TD><TD>20</TD><TD>Power System Stabilizer (PSS) Gain</TD></TR>
+<TR><TD>Tw</TD><TD>10</TD><TD>Signal Washout Filter Time Constant</TD></TR>
+<TR><TD>T1</TD><TD>0.05</TD><TD>PSS Phase Compensation Time Constant 1</TD></TR>
+<TR><TD>T2</TD><TD>0.02</TD><TD>PSS Phase Compensation Time Constant 2</TD></TR>
+<TR><TD>T3</TD><TD>3</TD><TD>PSS Phase Compensation Time Constant 3</TD></TR>
+<TR><TD>T4</TD><TD>5.4</TD><TD>PSS Phase Compensation Time Constant 4</TD></TR>
+<TR><TD>vsmax</TD><TD>0.2</TD><TD>PSS Maximum Output Limit</TD></TR>
+<TR><TD>vsmin</TD><TD>-0.2</TD><TD>PSS Maximum Output Limit</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> ExcST1A 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials.Exciter"
+>Partials.Exciter</A>(
+    K=200, 
+    Efmin=0, 
+    Efmax=7);
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font>Real Tr=1.5 <font color="darkgreen">&quot;AVR Time Constant&quot;</font>;
+  <font color="blue">parameter </font>Real Kstab=20 <font color="darkgreen">&quot;Power System Stabilizer (PSS) Gain&quot;</font>;
+  <font color="blue">parameter </font>Real Tw=10 <font color="darkgreen">&quot;Signal Washout Filter Time Constant&quot;</font>;
+  <font color="blue">parameter </font>Real T1=0.05 <font color="darkgreen">&quot;PSS Phase Compensation Time Constant 1&quot;</font>;
+  <font color="blue">parameter </font>Real T2=0.02 <font color="darkgreen">&quot;PSS Phase Compensation Time Constant 2&quot;</font>;
+  <font color="blue">parameter </font>Real T3=3 <font color="darkgreen">&quot;PSS Phase Compensation Time Constant 3&quot;</font>;
+  <font color="blue">parameter </font>Real T4=5.4 <font color="darkgreen">&quot;PSS Phase Compensation Time Constant 4&quot;</font>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font>Real vsmax=0.2 <font color="darkgreen">&quot;PSS Maximum Output Limit&quot;</font>;
+  <font color="blue">parameter </font>Real vsmin=-0.2 <font color="darkgreen">&quot;PSS Maximum Output Limit&quot;</font>;
+  <font color="darkgreen"></font>
+  <font color="blue">outer </font>Real w;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> AVR(b={1}, a={Tr,1});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add"
+>Modelica.Blocks.Math.Add</A> Sum(k1=+K, k2=+K);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Gain"
+>Modelica.Blocks.Math.Gain</A> PSSGain(k={Kstab});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> WashOut(b={Tw,0}, a={Tw,1});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> Phase_Compensation1(b={T1,1}, 
+      a={T2,1});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Nonlinear.html#Modelica.Blocks.Nonlinear.Limiter"
+>Modelica.Blocks.Nonlinear.Limiter</A> PSSLimiter(uMax={vsmax}, uMin={vsmin});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> Phase_Compensation2(b={T3,1}, 
+      a={T4,1});
+<font color="blue">equation </font>
+  <font color="red">connect</font>(AVR.outPort, Sum.inPort1);
+  <font color="red">connect</font>(Phase_Compensation1.inPort, WashOut.outPort);
+  <font color="red">connect</font>(PSSLimiter.outPort, Sum.inPort2);
+  <font color="red">connect</font>(Phase_Compensation2.inPort, Phase_Compensation1.outPort);
+  <font color="red">connect</font>(Phase_Compensation2.outPort, PSSLimiter.inPort);
+  <font color="red">connect</font>(Sum.outPort, Limiter.inPort);
+  <font color="red">connect</font>(PSSGain.outPort, WashOut.inPort);
+  <font color="red">connect</font>(Verror.outPort, AVR.inPort);
+  PSSGain.u = {w};
+  Ef0 = 0;
+  <font color="darkgreen"></font>
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="red">der</font>(AVR.y) = 0;
+  WashOut.y = 0;
+  Phase_Compensation2.y = 0;
+  Phase_Compensation1.y = 0;
+<font color="blue">end </font>ExcST1A;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Generators.Controllers.Gover2I.png" ALT="ObjectStab.Generators.Controllers.Gover2" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Generators.Controllers.Gover2"></A><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers"
+>ObjectStab.Generators.Controllers</A>.Gover2</H2>
+<IMG SRC="ObjectStab.Generators.Controllers.Gover2D.png" ALT="ObjectStab.Generators.Controllers.Gover2">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>wref</TD><TD>1</TD><TD>[p.u.]</TD></TR>
+<TR><TD>Pmmax</TD><TD>100</TD><TD>Maximum Mechanical Power [p.u.]</TD></TR>
+<TR><TD>Pmmin</TD><TD>-100</TD><TD>Minimum Mechanical Power [p.u.]</TD></TR>
+<TR><TD>Kgov</TD><TD>1</TD><TD>Governor Gain</TD></TR>
+<TR><TD>TRH</TD><TD>10</TD><TD>&nbsp;</TD></TR>
+<TR><TD>PROPH</TD><TD>0.3</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Gover2 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials.Governor"
+>ObjectStab.Generators.Controllers.Partials.Governor</A>(Pmmax=100, Pmmin=-100)
+    ;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.AngularVelocity"
+>Base.AngularVelocity</A> wref=1 <font color="darkgreen">&quot;Reference Angular Velocity&quot;</font>;
+  <font color="blue">parameter </font>Real Kgov=1 <font color="darkgreen">&quot;Governor Gain&quot;</font>;
+  <font color="blue">parameter </font>Real TRH=10;
+  <font color="blue">parameter </font>Real PROPH=0.3;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> TF(
+    b={Kgov*PROPH*TRH,Kgov}, 
+    a={TRH,1}, 
+    x(start={0}));
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add"
+>Modelica.Blocks.Math.Add</A> PmAdd;
+<font color="blue">equation </font>
+  <font color="red">connect</font>(TF.outPort, PmAdd.inPort1);
+  <font color="red">connect</font>(Limiter.inPort, PmAdd.outPort);
+  <font color="red">connect</font>(werror.outPort, TF.inPort);
+  PmAdd.u2 = {Pm0};
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="red">der</font>(TF.y) = 0;
+<font color="blue">end </font>Gover2;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.dynasim.se/">Dymola</a> Mon Sep 30 21:52:46 2002
+.
+</address></BODY>
+</HTML>

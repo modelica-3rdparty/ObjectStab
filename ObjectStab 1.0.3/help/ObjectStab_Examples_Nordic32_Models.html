@@ -1,0 +1,812 @@
+<HTML>
+<HEAD><META name="HTML-Generator" content="Dymola"><TITLE>ObjectStab</TITLE></HEAD>
+<BODY><P>
+<H2><A NAME="ObjectStab.Examples.Nordic32.Models"></A><A HREF="ObjectStab_Examples_Nordic32.html#ObjectStab.Examples.Nordic32"
+>ObjectStab.Examples.Nordic32</A>.Models</H2>
+<A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.SI4SO"
+><IMG SRC="ObjectStab.Examples.Nordic32.Models.SI4SOI.png" ALT="ObjectStab.Examples.Nordic32.Models.SI4SO" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.Limiter"
+><IMG SRC="ObjectStab.Examples.Nordic32.Models.LimiterI.png" ALT="ObjectStab.Examples.Nordic32.Models.Limiter" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.WaterWays"
+><IMG SRC="ObjectStab.Examples.Nordic32.Models.WaterWaysI.png" ALT="ObjectStab.Examples.Nordic32.Models.WaterWays" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.SweGov"
+><IMG SRC="ObjectStab.Examples.Nordic32.Models.SweGovI.png" ALT="ObjectStab.Examples.Nordic32.Models.SweGov" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.SweExc"
+><IMG SRC="ObjectStab.Examples.Nordic32.Models.SweExcI.png" ALT="ObjectStab.Examples.Nordic32.Models.SweExc" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.SweExcLim"
+><IMG SRC="ObjectStab.Examples.Nordic32.Models.SweExcLimI.png" ALT="ObjectStab.Examples.Nordic32.Models.SweExcLim" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.SweLoad"
+><IMG SRC="ObjectStab.Examples.Nordic32.Models.SweLoadI.png" ALT="ObjectStab.Examples.Nordic32.Models.SweLoad" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.GenA6"
+><IMG SRC="ObjectStab.Examples.Nordic32.Models.GenA6I.png" ALT="ObjectStab.Examples.Nordic32.Models.GenA6" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.GenB6"
+><IMG SRC="ObjectStab.Examples.Nordic32.Models.GenB6I.png" ALT="ObjectStab.Examples.Nordic32.Models.GenB6" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.GenC6"
+><IMG SRC="ObjectStab.Examples.Nordic32.Models.GenC6I.png" ALT="ObjectStab.Examples.Nordic32.Models.GenC6" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.GenA0"
+><IMG SRC="ObjectStab.Examples.Nordic32.Models.GenA0I.png" ALT="ObjectStab.Examples.Nordic32.Models.GenA0" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.GenB0"
+><IMG SRC="ObjectStab.Examples.Nordic32.Models.GenB0I.png" ALT="ObjectStab.Examples.Nordic32.Models.GenB0" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.GenC0"
+><IMG SRC="ObjectStab.Examples.Nordic32.Models.GenC0I.png" ALT="ObjectStab.Examples.Nordic32.Models.GenC0" WIDTH=80  HEIGHT=80 ></A>
+<P><P>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.Nordic32.Models.SI4SOI.png" ALT="ObjectStab.Examples.Nordic32.Models.SI4SO" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.Nordic32.Models.SI4SO"></A><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models"
+>ObjectStab.Examples.Nordic32.Models</A>.SI4SO</H2>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> SI4SO 
+  <font color="blue">extends </font><A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.BlockIcon"
+>Modelica.Blocks.Interfaces.BlockIcon</A>;
+  <font color="darkgreen"></font>
+<font color="blue">public </font>
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.InPort"
+>Modelica.Blocks.Interfaces.InPort</A> inPort1(<font color="blue">final </font>n=1);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.InPort"
+>Modelica.Blocks.Interfaces.InPort</A> inPort2(n=1);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.InPort"
+>Modelica.Blocks.Interfaces.InPort</A> inPort3(<font color="blue">final </font>n=1);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.InPort"
+>Modelica.Blocks.Interfaces.InPort</A> inPort4(<font color="blue">final </font>n=1);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.OutPort"
+>Modelica.Blocks.Interfaces.OutPort</A> outPort(<font color="blue">final </font>n=1);
+<font color="blue">protected </font>
+  Real u1=inPort1.signal[1] <font color="darkgreen">&quot;Input signal 1&quot;</font>;
+  Real u2=inPort2.signal[1] <font color="darkgreen">&quot;Input signal 2&quot;</font>;
+  Real u3=inPort3.signal[1] <font color="darkgreen">&quot;Input signal 3&quot;</font>;
+  Real u4=inPort4.signal[1] <font color="darkgreen">&quot;Input signal 4&quot;</font>;
+  Real y=outPort.signal[1] <font color="darkgreen">&quot;Output signal&quot;</font>;
+<font color="blue">end </font>SI4SO;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.Nordic32.Models.LimiterI.png" ALT="ObjectStab.Examples.Nordic32.Models.Limiter" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.Nordic32.Models.Limiter"></A><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models"
+>ObjectStab.Examples.Nordic32.Models</A>.Limiter</H2>
+<IMG SRC="ObjectStab.Examples.Nordic32.Models.LimiterD.png" ALT="ObjectStab.Examples.Nordic32.Models.Limiter">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Limitf</TD><TD>3.74</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Tdf</TD><TD>20</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Taf</TD><TD>120e6</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Kf</TD><TD>20</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Limits</TD><TD>1.05</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Tds</TD><TD>20</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Tas</TD><TD>120e6</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Ks</TD><TD>2</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Limiter 
+  <font color="blue">extends </font><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.SI4SO"
+>SI4SO</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font>Real Limitf=3.74;
+  <font color="blue">parameter </font>Real Tdf=20;
+  <font color="blue">parameter </font>Real Taf=120e6;
+  <font color="blue">parameter </font>Real Kf=20;
+  <font color="blue">parameter </font>Real Limits=1.05;
+  <font color="blue">parameter </font>Real Tds=20;
+  <font color="blue">parameter </font>Real Tas=120e6;
+  <font color="blue">parameter </font>Real Ks=2;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>ObjectStab.Base.Time</A> counterf(start=1e6, fixed=true);
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>ObjectStab.Base.Time</A> counters(start=1e6, fixed=true);
+<font color="blue">protected </font>
+  Real fcorr(start=1e3);
+  Real scorr(start=1e3);
+  <font color="darkgreen"></font>
+<font color="blue">public </font>
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> Tr1f;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Place12"
+>ModelicaAdditions.PetriNets.Place12</A> countf;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> Tr2f;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Place21"
+>ModelicaAdditions.PetriNets.Place21</A> waitf(initialState=true);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Place11"
+>ModelicaAdditions.PetriNets.Place11</A> activatef;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> Tr3f;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> Tr4f;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> Tr1s;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Place12"
+>ModelicaAdditions.PetriNets.Place12</A> counts;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> Tr2s;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Place21"
+>ModelicaAdditions.PetriNets.Place21</A> waits(initialState=true);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Place11"
+>ModelicaAdditions.PetriNets.Place11</A> activates;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> Tr3s;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets.html#ModelicaAdditions.PetriNets.Transition"
+>ModelicaAdditions.PetriNets.Transition</A> Tr4s;
+<font color="blue">equation </font>
+  <font color="red">connect</font>(countf.inTransition, Tr1f.outTransition);
+  <font color="red">connect</font>(Tr1f.inTransition, waitf.outTransition);
+  <font color="red">connect</font>(Tr2f.inTransition, countf.outTransition1);
+  <font color="red">connect</font>(activatef.inTransition, Tr2f.outTransition);
+  <font color="red">connect</font>(activatef.outTransition, Tr3f.inTransition);
+  <font color="red">connect</font>(Tr3f.outTransition, waitf.inTransition1);
+  <font color="red">connect</font>(Tr4f.inTransition, countf.outTransition2);
+  <font color="red">connect</font>(Tr4f.outTransition, waitf.inTransition2);
+  <font color="red">connect</font>(counts.inTransition, Tr1s.outTransition);
+  <font color="red">connect</font>(Tr1s.inTransition, waits.outTransition);
+  <font color="red">connect</font>(Tr2s.inTransition, counts.outTransition1);
+  <font color="red">connect</font>(activates.inTransition, Tr2s.outTransition);
+  <font color="red">connect</font>(activates.outTransition, Tr3s.inTransition);
+  <font color="red">connect</font>(Tr3s.outTransition, waits.inTransition1);
+  <font color="red">connect</font>(Tr4s.inTransition, counts.outTransition2);
+  <font color="red">connect</font>(Tr4s.outTransition, waits.inTransition2);
+  <font color="darkgreen">// field current limiter</font>
+  Tr1f.condition = u1 &gt; Limitf;
+  Tr2f.condition = (time - counterf) &gt; Tdf;
+  Tr3f.condition = (time - counterf) &gt; Taf<font color="blue"> and </font>(u1 &lt; Limitf);
+  Tr4f.condition = (u1 &lt; Limitf);
+  <font color="darkgreen"></font>
+  <font color="blue">when </font>countf.state<font color="blue"> then</font>
+    counterf = time;
+  <font color="blue">end when</font>;
+  <font color="darkgreen"></font>
+  fcorr = <font color="blue">if </font>(u4 &gt; 0)<font color="blue"> and </font>(activatef.state)<font color="blue"> then </font>Kf*(Limitf - u1)<font color="blue"> else </font>1e3;
+  <font color="darkgreen"></font>
+  <font color="darkgreen">// stator current limiter</font>
+  Tr1s.condition = u2 &gt; Limits;
+  Tr2s.condition = (time - counters) &gt; Tds;
+  Tr3s.condition = (time - counters) &gt; Tas<font color="blue"> and </font>(u2 &lt; Limits);
+  Tr4s.condition = (u2 &lt; Limits);
+  <font color="darkgreen"></font>
+  <font color="blue">when </font>counts.state<font color="blue"> then</font>
+    counters = time;
+  <font color="blue">end when</font>;
+  <font color="darkgreen"></font>
+  scorr = <font color="blue">if </font>(u4 &gt; 0)<font color="blue"> and </font>(activates.state)<font color="blue"> then </font>Ks*(Limits - u2)<font color="blue"> else </font>1e3;
+  <font color="darkgreen"></font>
+  <font color="darkgreen">// output equation</font>
+  y = <font color="red">noEvent</font>(<font color="red">min</font>(scorr, <font color="red">min</font>(fcorr, u3)));
+  <font color="darkgreen"></font>
+<font color="blue">initial </font><font color="blue">equation </font>
+  waitf.state = true;
+  countf.state = false;
+  activatef.state = false;
+  waits.state = true;
+  counts.state = false;
+  activates.state = false;
+<font color="blue">end </font>Limiter;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.Nordic32.Models.WaterWaysI.png" ALT="ObjectStab.Examples.Nordic32.Models.WaterWays" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.Nordic32.Models.WaterWays"></A><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models"
+>ObjectStab.Examples.Nordic32.Models</A>.WaterWays</H2>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Tw</TD><TD>1</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> WaterWays 
+  <font color="blue">extends </font><A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.SISO"
+>Modelica.Blocks.Interfaces.SISO</A>;
+  <font color="blue">parameter </font>Real Tw=1;
+  <font color="darkgreen"></font>
+  Real x(start=0);
+<font color="blue">equation </font>
+  Tw*<font color="red">der</font>(x) = (1 - (x/(u + 1e-8))^2);
+  y = (x/(u + 1e-8))^2*x;
+  <font color="darkgreen"></font>
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="red">der</font>(x) = 0;
+<font color="blue">end </font>WaterWays;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.Nordic32.Models.SweGovI.png" ALT="ObjectStab.Examples.Nordic32.Models.SweGov" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.Nordic32.Models.SweGov"></A><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models"
+>ObjectStab.Examples.Nordic32.Models</A>.SweGov</H2>
+<IMG SRC="ObjectStab.Examples.Nordic32.Models.SweGovD.png" ALT="ObjectStab.Examples.Nordic32.Models.SweGov">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>wref</TD><TD>1</TD><TD>[p.u.]</TD></TR>
+<TR><TD>Pmmax</TD><TD>1.05</TD><TD>Maximum Mechanical Power [p.u.]</TD></TR>
+<TR><TD>Pmmin</TD><TD>0</TD><TD>Minimum Mechanical Power [p.u.]</TD></TR>
+<TR><TD>Rdyn</TD><TD>0.8</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Rstat</TD><TD>0.04</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Tr</TD><TD>5</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Tw</TD><TD>1</TD><TD>&nbsp;</TD></TR>
+<TR><TD>GateMax</TD><TD>0.95</TD><TD>&nbsp;</TD></TR>
+<TR><TD>GateMin</TD><TD>0.0</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> SweGov 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials.Governor"
+>ObjectStab.Generators.Controllers.Partials.Governor</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font>Real Rdyn=0.8;
+  <font color="blue">parameter </font>Real Rstat=0.04;
+  <font color="blue">parameter </font>Real Tr=5;
+  <font color="blue">parameter </font>Real Tw=1;
+  <font color="blue">parameter </font>Real GateMax=0.95;
+  <font color="blue">parameter </font>Real GateMin=0.0;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> Filter(b={1}, a={0.05,1});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Feedback"
+>Modelica.Blocks.Math.Feedback</A> Feedback1;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Gain"
+>Modelica.Blocks.Math.Gain</A> Gain2(k={Rstat});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.Integrator"
+>Modelica.Blocks.Continuous.Integrator</A> Int(k={1/Tr});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add"
+>Modelica.Blocks.Math.Add</A> Add3(k1=+1/Rdyn, k2=+1/Rdyn);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Nonlinear.html#Modelica.Blocks.Nonlinear.Limiter"
+>Modelica.Blocks.Nonlinear.Limiter</A> Limiter1(uMax={GateMax}, uMin={GateMin})
+    ;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> Servo(
+    b={1}, 
+    a={0.2,1}, 
+    x(start={1}));
+  <A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.WaterWays"
+>Nordic32.Models.WaterWays</A> Water;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add"
+>Modelica.Blocks.Math.Add</A> AddPm0;
+<font color="blue">equation </font>
+  <font color="red">connect</font>(Int.inPort, Filter.outPort);
+  <font color="red">connect</font>(Int.outPort, Add3.inPort2);
+  <font color="red">connect</font>(Feedback1.inPort2, Gain2.outPort);
+  <font color="red">connect</font>(Add3.inPort1, Filter.outPort);
+  <font color="red">connect</font>(Gain2.inPort, Add3.outPort);
+  <font color="red">connect</font>(Water.inPort, Servo.outPort);
+  <font color="red">connect</font>(Servo.inPort, Limiter1.outPort);
+  <font color="red">connect</font>(Feedback1.outPort, Filter.inPort);
+  <font color="red">connect</font>(AddPm0.outPort, Limiter1.inPort);
+  <font color="red">connect</font>(werror.outPort, Feedback1.inPort1);
+  <font color="red">connect</font>(Water.outPort, Limiter.inPort);
+  <font color="red">connect</font>(AddPm0.inPort1, Gain2.inPort);
+  <font color="darkgreen"></font>
+  AddPm0.u2 = {Pm0};
+  <font color="darkgreen"></font>
+<font color="blue">initial </font><font color="blue">equation </font>
+  Filter.y = 0;
+  <font color="red">der</font>(Servo.x) = {0};
+  Int.y = {0};
+  <font color="darkgreen"></font>
+<font color="blue">end </font>SweGov;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.Nordic32.Models.SweExcI.png" ALT="ObjectStab.Examples.Nordic32.Models.SweExc" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.Nordic32.Models.SweExc"></A><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models"
+>ObjectStab.Examples.Nordic32.Models</A>.SweExc</H2>
+<IMG SRC="ObjectStab.Examples.Nordic32.Models.SweExcD.png" ALT="ObjectStab.Examples.Nordic32.Models.SweExc">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>K</TD><TD>100</TD><TD>Steady-State Gain</TD></TR>
+<TR><TD>Efmax</TD><TD>5</TD><TD>Maximum Field Voltage [p.u]</TD></TR>
+<TR><TD>Efmin</TD><TD>0</TD><TD>Minimum Field Voltage [p.u]</TD></TR>
+<TR><TD>Sbase</TD><TD>100</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Ta</TD><TD>5</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Tb</TD><TD>50</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Tc</TD><TD>0.1</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Limits</TD><TD>100</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Kpss</TD><TD>1</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Limitf</TD><TD>3.74</TD><TD>&nbsp;</TD></TR>
+<TR><TD>StepTime</TD><TD>1.0</TD><TD>Time for voltage reference step [s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> SweExc 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials.Exciter"
+>ObjectStab.Generators.Controllers.Partials.Exciter</A>(Efmax=5, Efmin=0);
+  <font color="blue">parameter </font>Real Sbase=100;
+  <font color="blue">parameter </font>Real Ta=5;
+  <font color="blue">parameter </font>Real Tb=50;
+  <font color="blue">parameter </font>Real Tc=0.1;
+  <font color="blue">parameter </font>Real Limits=100;
+  <font color="blue">parameter </font>Real Kpss=1;
+  <font color="blue">parameter </font>Real Limitf=3.74;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>ObjectStab.Base.Time</A> StepTime=1.0 <font color="darkgreen">&quot;Time for voltage reference step&quot;</font>;
+  Real u5=inPort5.signal[1];
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> PSStf(b={0.6,1.3}, a={2,1});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> AVRtf(b={K*Ta,K}, a={Tb*Tc,(Tc
+         + Tb),1});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> PSStf1(b={-91.125,0,0,0}, a={
+        91.125,60.75,13.5,1});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Nonlinear.html#Modelica.Blocks.Nonlinear.Limiter"
+>Modelica.Blocks.Nonlinear.Limiter</A> PSSLim(uMax={.05}, uMin={-.05});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add"
+>Modelica.Blocks.Math.Add</A> PSSAdd(k1=+1, k2=+1);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.InPort"
+>Modelica.Blocks.Interfaces.InPort</A> inPort5(<font color="blue">final </font>n=1);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Gain"
+>Modelica.Blocks.Math.Gain</A> G(k={Kpss*ObjectStab.Base.Sbase/Sbase});
+<font color="blue">equation </font>
+  <font color="red">connect</font>(PSStf1.outPort, PSStf.inPort);
+  <font color="red">connect</font>(PSSAdd.outPort, AVRtf.inPort);
+  <font color="red">connect</font>(G.inPort, PSStf.outPort);
+  <font color="red">connect</font>(AVRtf.outPort, Limiter.inPort);
+  <font color="red">connect</font>(PSSAdd.inPort2, PSSLim.outPort);
+  <font color="red">connect</font>(G.outPort, PSSLim.inPort);
+  <font color="red">connect</font>(Verror.outPort, PSSAdd.inPort1);
+  <font color="red">connect</font>(inPort5, PSStf1.inPort);
+  <font color="darkgreen"></font>
+  Ef0 = 0;
+  <font color="darkgreen"></font>
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="darkgreen"></font>
+  <font color="red">der</font>(AVRtf.x) = {0,0};
+  PSStf.x = {0};
+  PSStf1.x = {0,0,0};
+<font color="blue">end </font>SweExc;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.Nordic32.Models.SweExcLimI.png" ALT="ObjectStab.Examples.Nordic32.Models.SweExcLim" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.Nordic32.Models.SweExcLim"></A><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models"
+>ObjectStab.Examples.Nordic32.Models</A>.SweExcLim</H2>
+<IMG SRC="ObjectStab.Examples.Nordic32.Models.SweExcLimD.png" ALT="ObjectStab.Examples.Nordic32.Models.SweExcLim">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>K</TD><TD>120</TD><TD>Steady-State Gain</TD></TR>
+<TR><TD>Efmax</TD><TD>5</TD><TD>Maximum Field Voltage [p.u]</TD></TR>
+<TR><TD>Efmin</TD><TD>0</TD><TD>Minimum Field Voltage [p.u]</TD></TR>
+<TR><TD>Sbase</TD><TD>100</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Ta</TD><TD>5</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Tb</TD><TD>50</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Tc</TD><TD>0.1</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Limits</TD><TD>100</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Kpss</TD><TD>1</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Limitf</TD><TD>3.74</TD><TD>&nbsp;</TD></TR>
+<TR><TD>StepTime</TD><TD>1.0</TD><TD>Time for voltage reference step [s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> SweExcLim 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators_Controllers_Partials.html#ObjectStab.Generators.Controllers.Partials.Exciter"
+>ObjectStab.Generators.Controllers.Partials.Exciter</A>(
+    K=120, 
+    Efmax=5, 
+    Efmin=0);
+  <font color="blue">parameter </font>Real Sbase=100;
+  <font color="blue">parameter </font>Real Ta=5;
+  <font color="blue">parameter </font>Real Tb=50;
+  <font color="blue">parameter </font>Real Tc=0.1;
+  <font color="blue">parameter </font>Real Limits=100;
+  <font color="blue">parameter </font>Real Kpss=1;
+  <font color="blue">parameter </font>Real Limitf=3.74;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>ObjectStab.Base.Time</A> StepTime=1.0 <font color="darkgreen">&quot;Time for voltage reference step&quot;</font>;
+  <font color="darkgreen"></font>
+  Real u3;
+  Real u4;
+  Real u5;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add"
+>Modelica.Blocks.Math.Add</A> PSSAdd;
+  <A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.Limiter"
+>Nordic32.Models.Limiter</A> ExcLimit(
+    Limitf=Limitf, 
+    Taf=120, 
+    Limits=Limits, 
+    Tas=120);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.InPort"
+>Modelica.Blocks.Interfaces.InPort</A> inPort3(<font color="blue">final </font>n=1);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.InPort"
+>Modelica.Blocks.Interfaces.InPort</A> inPort4(<font color="blue">final </font>n=1);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.InPort"
+>Modelica.Blocks.Interfaces.InPort</A> inPort5(<font color="blue">final </font>n=1);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> AVRtf(b={K*Ta,K}, a={Tb*Tc,(Tc
+         + Tb),1});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> PSStf1(b={-91.125,0,0,0}, a={
+        91.125,60.75,13.5,1});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.TransferFunction"
+>Modelica.Blocks.Continuous.TransferFunction</A> PSStf(b={0.6,1.3}, a={2,1});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Nonlinear.html#Modelica.Blocks.Nonlinear.Limiter"
+>Modelica.Blocks.Nonlinear.Limiter</A> PSSLim(uMax={.05}, uMin={-.05});
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Gain"
+>Modelica.Blocks.Math.Gain</A> G(k={Kpss*ObjectStab.Base.Sbase/Sbase});
+<font color="blue">equation </font>
+  <font color="red">connect</font>(PSStf1.outPort, PSStf.inPort);
+  <font color="red">connect</font>(G.inPort, PSStf.outPort);
+  <font color="red">connect</font>(G.outPort, PSSLim.inPort);
+  <font color="red">connect</font>(PSSAdd.inPort2, PSSLim.outPort);
+  <font color="red">connect</font>(ExcLimit.inPort3, PSSAdd.outPort);
+  <font color="red">connect</font>(ExcLimit.inPort2, inPort3);
+  <font color="red">connect</font>(ExcLimit.outPort, AVRtf.inPort);
+  <font color="red">connect</font>(AVRtf.outPort, Limiter.inPort);
+  <font color="red">connect</font>(Limiter.outPort, ExcLimit.inPort1);
+  <font color="red">connect</font>(PSStf1.inPort, inPort5);
+  <font color="red">connect</font>(ExcLimit.inPort4, inPort4);
+  <font color="red">connect</font>(Verror.outPort, PSSAdd.inPort1);
+  <font color="darkgreen"></font>
+  u3 = inPort3.signal[1];
+  u4 = inPort4.signal[1];
+  u5 = inPort5.signal[1];
+  Ef0 = 0;
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="darkgreen"></font>
+  <font color="red">der</font>(AVRtf.x) = {0,0};
+  <font color="red">der</font>(PSStf.x) = {0};
+  <font color="red">der</font>(PSStf1.x) = {0,0,0};
+<font color="blue">end </font>SweExcLim;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.Nordic32.Models.SweLoadI.png" ALT="ObjectStab.Examples.Nordic32.Models.SweLoad" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.Nordic32.Models.SweLoad"></A><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models"
+>ObjectStab.Examples.Nordic32.Models</A>.SweLoad</H2>
+<B>Nordic32 Static Load Model        </B><p>
+<H3>Information</H3>
+<PRE> 
+Static load model used in the CIGRE report.
+Active power has constant current and Reactive power has 
+constant impedance characteristic.
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>P0</TD><TD>1</TD><TD>Initial Active Load Power [p.u.]</TD></TR>
+<TR><TD>Q0</TD><TD>0.2</TD><TD>Initial Reactive Load Power [p.u.]</TD></TR>
+<TR><TD>a</TD><TD>0.75</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> SweLoad <font color="darkgreen">&quot;Nordic32 Static Load Model\t&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Loads_Partials.html#ObjectStab.Loads.Partials.Load"
+>ObjectStab.Loads.Partials.Load</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">outer </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.AngularVelocity"
+>Base.AngularVelocity</A> wref;
+  <font color="blue">parameter </font>Real a=0.75;
+<font color="blue">equation </font>
+  Pl = P0*(V/V0)*wref^a;
+  Ql = Q0*(V/V0)^2*wref^a;
+<font color="blue">end </font>SweLoad;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.Nordic32.Models.GenA6I.png" ALT="ObjectStab.Examples.Nordic32.Models.GenA6" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.Nordic32.Models.GenA6"></A><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models"
+>ObjectStab.Examples.Nordic32.Models</A>.GenA6</H2>
+<IMG SRC="ObjectStab.Examples.Nordic32.Models.GenA6D.png" ALT="ObjectStab.Examples.Nordic32.Models.GenA6">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+<TR><TD>Sbase</TD><TD>100</TD><TD>Generator rated power [MVA]</TD></TR>
+<TR><TD>H</TD><TD>6</TD><TD>Inertia Constant [s]</TD></TR>
+<TR><TD>D</TD><TD>2.50</TD><TD>Damping Coefficient [1]</TD></TR>
+<TR><TD>rt</TD><TD>0</TD><TD>Step-up Transformer Resistance [p.u.]</TD></TR>
+<TR><TD>xt</TD><TD>0.1</TD><TD>Step-up Transformer Reactance [p.u.]</TD></TR>
+<TR><TD>ra</TD><TD>0</TD><TD>Armature Resistance [p.u.]</TD></TR>
+<TR><TD>xd</TD><TD>2.2</TD><TD>Direct Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xq</TD><TD>2</TD><TD>Quadrature Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xdp</TD><TD>0.30</TD><TD>Direct Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>xqp</TD><TD>0.4</TD><TD>Quadrature Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>xdpp</TD><TD>0.2</TD><TD>Direct Axis Subtransient Reactance [p.u.]</TD></TR>
+<TR><TD>xqpp</TD><TD>0.20</TD><TD>Quadrature Axis Subtransient Reactance [p.u.]</TD></TR>
+<TR><TD>Td0p</TD><TD>7</TD><TD>Open-circuit Direct Axis Transient Time Constant [s]</TD></TR>
+<TR><TD>Tq0p</TD><TD>1.5</TD><TD>Open-circuit Quadrature Axis Transient Time Constant [s]</TD></TR>
+<TR><TD>Td0pp</TD><TD>0.05</TD><TD>Open-circuit Direct Axis Subtransient Time Constant [s]</TD></TR>
+<TR><TD>Tq0pp</TD><TD>0.05</TD><TD>Open-circuit Quadrature Axis Subtransient Time Constant [s]</TD></TR>
+<TR><TD>Gov</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> GenA6 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators.html#ObjectStab.Generators.GovExc6thGen"
+>ObjectStab.Generators.GovExc6thGen</A>(
+    rt=0, 
+    xt=0.1, 
+    D=2.50, 
+    H=6, 
+    ra=0, 
+    xd=2.2, 
+    xq=2, 
+    xdp=0.30, 
+    xqp=0.4, 
+    xqpp=0.20, 
+    xdpp=0.2, 
+    Td0p=7, 
+    Tq0p=1.5, 
+    Td0pp=0.05, 
+    Tq0pp=0.05, 
+    <font color="blue">redeclare </font><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.SweExcLim"
+>SweExcLim</A> Exc(
+      Efmax=5, 
+      Efmin=0, 
+      K=120, 
+      Ta=5, 
+      Tb=50, 
+      Tc=0.1, 
+      Limits=1.05, 
+      Limitf=3.74, 
+      Sbase=Sbase, 
+      Kpss=1));
+<font color="blue">equation </font>
+  Exc.u3 = Iarm;
+  Exc.u4 = Qg;
+  Exc.u5 = Pg - Gov.Pm0*Sbase/ObjectStab.Base.Sbase;
+<font color="blue">end </font>GenA6;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.Nordic32.Models.GenB6I.png" ALT="ObjectStab.Examples.Nordic32.Models.GenB6" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.Nordic32.Models.GenB6"></A><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models"
+>ObjectStab.Examples.Nordic32.Models</A>.GenB6</H2>
+<IMG SRC="ObjectStab.Examples.Nordic32.Models.GenB6D.png" ALT="ObjectStab.Examples.Nordic32.Models.GenB6">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+<TR><TD>Sbase</TD><TD>100</TD><TD>Generator rated power [MVA]</TD></TR>
+<TR><TD>H</TD><TD>3</TD><TD>Inertia Constant [s]</TD></TR>
+<TR><TD>D</TD><TD>2.50</TD><TD>Damping Coefficient [1]</TD></TR>
+<TR><TD>rt</TD><TD>0</TD><TD>Step-up Transformer Resistance [p.u.]</TD></TR>
+<TR><TD>xt</TD><TD>0.15</TD><TD>Step-up Transformer Reactance [p.u.]</TD></TR>
+<TR><TD>ra</TD><TD>0</TD><TD>Armature Resistance [p.u.]</TD></TR>
+<TR><TD>xd</TD><TD>1.1</TD><TD>Direct Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xq</TD><TD>0.7</TD><TD>Quadrature Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xdp</TD><TD>0.25</TD><TD>Direct Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>xqp</TD><TD>0.2</TD><TD>Quadrature Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>xdpp</TD><TD>0.2</TD><TD>Direct Axis Subtransient Reactance [p.u.]</TD></TR>
+<TR><TD>xqpp</TD><TD>0.20</TD><TD>Quadrature Axis Subtransient Reactance [p.u.]</TD></TR>
+<TR><TD>Td0p</TD><TD>5</TD><TD>Open-circuit Direct Axis Transient Time Constant [s]</TD></TR>
+<TR><TD>Tq0p</TD><TD>1</TD><TD>Open-circuit Quadrature Axis Transient Time Constant [s]</TD></TR>
+<TR><TD>Td0pp</TD><TD>0.05</TD><TD>Open-circuit Direct Axis Subtransient Time Constant [s]</TD></TR>
+<TR><TD>Tq0pp</TD><TD>0.1</TD><TD>Open-circuit Quadrature Axis Subtransient Time Constant [s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> GenB6 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators.html#ObjectStab.Generators.GovExc6thGen"
+>ObjectStab.Generators.GovExc6thGen</A>(
+    rt=0, 
+    xt=0.15, 
+    xd=1.1, 
+    xq=0.7, 
+    xdp=0.25, 
+    xqp=0.2, 
+    xdpp=0.2, 
+    xqpp=0.20, 
+    Td0p=5, 
+    Tq0p=1, 
+    Td0pp=0.05, 
+    Tq0pp=0.1, 
+    D=2.50, 
+    H=3, 
+    <font color="blue">redeclare </font><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.SweExcLim"
+>SweExcLim</A> Exc(
+      Efmax=4, 
+      Efmin=0, 
+      K=50, 
+      Ta=4, 
+      Tb=20, 
+      Tc=0.1, 
+      Limitf=2.68, 
+      Limits=100, 
+      Sbase=Sbase, 
+      Kpss=1), 
+    <font color="blue">redeclare </font><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.SweGov"
+>SweGov</A> Gov);
+  <font color="darkgreen"></font>
+<font color="blue">equation </font>
+  Exc.u3 = Iarm;
+  Exc.u4 = Qg;
+  Exc.u5 = Pg - Gov.Pm0*Sbase/ObjectStab.Base.Sbase;
+<font color="blue">end </font>GenB6;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.Nordic32.Models.GenC6I.png" ALT="ObjectStab.Examples.Nordic32.Models.GenC6" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.Nordic32.Models.GenC6"></A><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models"
+>ObjectStab.Examples.Nordic32.Models</A>.GenC6</H2>
+<IMG SRC="ObjectStab.Examples.Nordic32.Models.GenC6D.png" ALT="ObjectStab.Examples.Nordic32.Models.GenC6">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+<TR><TD>Sbase</TD><TD>100</TD><TD>Generator rated power [MVA]</TD></TR>
+<TR><TD>H</TD><TD>2</TD><TD>Inertia Constant [s]</TD></TR>
+<TR><TD>D</TD><TD>2.5</TD><TD>Damping Coefficient [1]</TD></TR>
+<TR><TD>rt</TD><TD>0</TD><TD>Step-up Transformer Resistance [p.u.]</TD></TR>
+<TR><TD>xt</TD><TD>0.1</TD><TD>Step-up Transformer Reactance [p.u.]</TD></TR>
+<TR><TD>ra</TD><TD>0</TD><TD>Armature Resistance [p.u.]</TD></TR>
+<TR><TD>xd</TD><TD>1.55</TD><TD>Direct Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xq</TD><TD>1</TD><TD>Quadrature Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xdp</TD><TD>0.3</TD><TD>Direct Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>xqp</TD><TD>0.2</TD><TD>Quadrature Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>xdpp</TD><TD>0.2</TD><TD>Direct Axis Subtransient Reactance [p.u.]</TD></TR>
+<TR><TD>xqpp</TD><TD>0.20</TD><TD>Quadrature Axis Subtransient Reactance [p.u.]</TD></TR>
+<TR><TD>Td0p</TD><TD>7</TD><TD>Open-circuit Direct Axis Transient Time Constant [s]</TD></TR>
+<TR><TD>Tq0p</TD><TD>1</TD><TD>Open-circuit Quadrature Axis Transient Time Constant [s]</TD></TR>
+<TR><TD>Td0pp</TD><TD>0.05</TD><TD>Open-circuit Direct Axis Subtransient Time Constant [s]</TD></TR>
+<TR><TD>Tq0pp</TD><TD>0.1</TD><TD>Open-circuit Quadrature Axis Subtransient Time Constant [s]</TD></TR>
+<TR><TD>Gov</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> GenC6 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators.html#ObjectStab.Generators.GovExc6thGen"
+>ObjectStab.Generators.GovExc6thGen</A>(
+    rt=0, 
+    xt=0.1, 
+    xd=1.55, 
+    xq=1, 
+    xdp=0.3, 
+    xqp=0.2, 
+    xdpp=0.2, 
+    xqpp=0.20, 
+    Td0p=7, 
+    Tq0p=1, 
+    Td0pp=0.05, 
+    Tq0pp=0.1, 
+    D=2.5, 
+    H=2, 
+    <font color="blue">redeclare </font><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models.SweExcLim"
+>SweExcLim</A> Exc(
+      Efmax=4, 
+      Efmin=0, 
+      K=50, 
+      Ta=4, 
+      Tb=20, 
+      Tc=0.1, 
+      Limitf=3.26, 
+      Limits=100, 
+      Sbase=Sbase, 
+      Kpss=0));
+  <font color="darkgreen">//   D=2, </font>
+<font color="blue">equation </font>
+  Exc.u3 = Iarm;
+  Exc.u4 = Qg;
+  Exc.u5 = Pg - Gov.Pm0*Sbase/ObjectStab.Base.Sbase;
+<font color="blue">end </font>GenC6;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.Nordic32.Models.GenA0I.png" ALT="ObjectStab.Examples.Nordic32.Models.GenA0" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.Nordic32.Models.GenA0"></A><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models"
+>ObjectStab.Examples.Nordic32.Models</A>.GenA0</H2>
+<IMG SRC="ObjectStab.Examples.Nordic32.Models.GenA0D.png" ALT="ObjectStab.Examples.Nordic32.Models.GenA0">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+<TR><TD>Sbase</TD><TD>100</TD><TD>Generator rated power [p.u.]</TD></TR>
+<TR><TD>ra</TD><TD>0</TD><TD>Armature Resistance [p.u.]</TD></TR>
+<TR><TD>xd</TD><TD>2.2</TD><TD>Direct Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xq</TD><TD>2</TD><TD>Quadrature Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>K</TD><TD>120</TD><TD>Voltage Regulator Steady-State Gain</TD></TR>
+<TR><TD>Efmax</TD><TD>3.74</TD><TD>Maximum Field Voltage [p.u]</TD></TR>
+<TR><TD>Efmin</TD><TD>-3.5</TD><TD>Minimum Field Voltage [p.u]</TD></TR>
+<TR><TD>Iarmmax</TD><TD>1.05</TD><TD>Armature Current Limit [p.u.]</TD></TR>
+<TR><TD>rt</TD><TD>0</TD><TD>Step-up Transformer Resistance [p.u.]</TD></TR>
+<TR><TD>xt</TD><TD>0.1</TD><TD>Step-up Transformer Reactance [p.u.]</TD></TR>
+<TR><TD>Tdelay</TD><TD>20</TD><TD>[s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> GenA0 
+  <font color="blue">extends </font><A HREF="ObjectStab_Extras.html#ObjectStab.Extras.DetGen0"
+>ObjectStab.Extras.DetGen0</A>(
+    rt=0, 
+    xt=0.1, 
+    ra=0, 
+    xd=2.2, 
+    xq=2, 
+    K=120, 
+    Iarmmax=1.05, 
+    Efmax=3.74);
+  <font color="darkgreen"></font>
+<font color="blue">end </font>GenA0;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.Nordic32.Models.GenB0I.png" ALT="ObjectStab.Examples.Nordic32.Models.GenB0" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.Nordic32.Models.GenB0"></A><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models"
+>ObjectStab.Examples.Nordic32.Models</A>.GenB0</H2>
+<IMG SRC="ObjectStab.Examples.Nordic32.Models.GenB0D.png" ALT="ObjectStab.Examples.Nordic32.Models.GenB0">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+<TR><TD>Sbase</TD><TD>100</TD><TD>Generator rated power [p.u.]</TD></TR>
+<TR><TD>ra</TD><TD>0</TD><TD>Armature Resistance [p.u.]</TD></TR>
+<TR><TD>xd</TD><TD>1.1</TD><TD>Direct Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xq</TD><TD>0.7</TD><TD>Quadrature Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>K</TD><TD>50</TD><TD>Voltage Regulator Steady-State Gain</TD></TR>
+<TR><TD>Efmax</TD><TD>2.68</TD><TD>Maximum Field Voltage [p.u]</TD></TR>
+<TR><TD>Efmin</TD><TD>-3.5</TD><TD>Minimum Field Voltage [p.u]</TD></TR>
+<TR><TD>Iarmmax</TD><TD>100</TD><TD>Armature Current Limit [p.u.]</TD></TR>
+<TR><TD>rt</TD><TD>0</TD><TD>Step-up Transformer Resistance [p.u.]</TD></TR>
+<TR><TD>xt</TD><TD>0.15</TD><TD>Step-up Transformer Reactance [p.u.]</TD></TR>
+<TR><TD>Tdelay</TD><TD>20</TD><TD>[s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> GenB0 
+  <font color="blue">extends </font><A HREF="ObjectStab_Extras.html#ObjectStab.Extras.DetGen0"
+>ObjectStab.Extras.DetGen0</A>(
+    rt=0, 
+    xt=0.15, 
+    xd=1.1, 
+    xq=0.7, 
+    K=50, 
+    Efmax=2.68, 
+    Iarmmax=100);
+<font color="blue">end </font>GenB0;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.Nordic32.Models.GenC0I.png" ALT="ObjectStab.Examples.Nordic32.Models.GenC0" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.Nordic32.Models.GenC0"></A><A HREF="ObjectStab_Examples_Nordic32_Models.html#ObjectStab.Examples.Nordic32.Models"
+>ObjectStab.Examples.Nordic32.Models</A>.GenC0</H2>
+<IMG SRC="ObjectStab.Examples.Nordic32.Models.GenC0D.png" ALT="ObjectStab.Examples.Nordic32.Models.GenC0">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+<TR><TD>Sbase</TD><TD>100</TD><TD>Generator rated power [p.u.]</TD></TR>
+<TR><TD>ra</TD><TD>0</TD><TD>Armature Resistance [p.u.]</TD></TR>
+<TR><TD>xd</TD><TD>1.55</TD><TD>Direct Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xq</TD><TD>1</TD><TD>Quadrature Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>K</TD><TD>50</TD><TD>Voltage Regulator Steady-State Gain</TD></TR>
+<TR><TD>Efmax</TD><TD>3.26</TD><TD>Maximum Field Voltage [p.u]</TD></TR>
+<TR><TD>Efmin</TD><TD>-3.5</TD><TD>Minimum Field Voltage [p.u]</TD></TR>
+<TR><TD>Iarmmax</TD><TD>100</TD><TD>Armature Current Limit [p.u.]</TD></TR>
+<TR><TD>rt</TD><TD>0</TD><TD>Step-up Transformer Resistance [p.u.]</TD></TR>
+<TR><TD>xt</TD><TD>0.1</TD><TD>Step-up Transformer Reactance [p.u.]</TD></TR>
+<TR><TD>Tdelay</TD><TD>20</TD><TD>[s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> GenC0 
+  <font color="blue">extends </font><A HREF="ObjectStab_Extras.html#ObjectStab.Extras.DetGen0"
+>ObjectStab.Extras.DetGen0</A>(
+    rt=0, 
+    xt=0.1, 
+    xd=1.55, 
+    xq=1, 
+    K=50, 
+    Efmax=3.26, 
+    Iarmmax=100);
+<font color="blue">end </font>GenC0;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.dynasim.se/">Dymola</a> Mon Sep 30 21:53:02 2002
+.
+</address></BODY>
+</HTML>

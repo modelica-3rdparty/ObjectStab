@@ -1,0 +1,244 @@
+<HTML>
+<HEAD><META name="HTML-Generator" content="Dymola"><TITLE>ObjectStab</TITLE></HEAD>
+<BODY><P>
+<H2><A NAME="ObjectStab.Examples"></A><A HREF="ObjectStab.html#ObjectStab"
+>ObjectStab</A>.Examples</H2>
+<A HREF="ObjectStab_Examples.html#ObjectStab.Examples.ninebus"
+><IMG SRC="ObjectStab.Examples.ninebusI.png" ALT="ObjectStab.Examples.ninebus" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples.html#ObjectStab.Examples.TCULExamp"
+><IMG SRC="ObjectStab.Examples.TCULExampI.png" ALT="ObjectStab.Examples.TCULExamp" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_BPA.html#ObjectStab.Examples.BPA"
+><IMG SRC="ObjectStab.Examples.BPAI.png" ALT="ObjectStab.Examples.BPA" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_Kundur126.html#ObjectStab.Examples.Kundur126"
+><IMG SRC="ObjectStab.Examples.Kundur126I.png" ALT="ObjectStab.Examples.Kundur126" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_Nordic32.html#ObjectStab.Examples.Nordic32"
+><IMG SRC="ObjectStab.Examples.Nordic32I.png" ALT="ObjectStab.Examples.Nordic32" WIDTH=80  HEIGHT=80 ></A>
+<P><P>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.ninebusI.png" ALT="ObjectStab.Examples.ninebus" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.ninebus"></A><A HREF="ObjectStab_Examples.html#ObjectStab.Examples"
+>ObjectStab.Examples</A>.ninebus</H2>
+<B>Nine bus test system, using 3rd order generator models</B><p>
+<IMG SRC="ObjectStab.Examples.ninebusD.png" ALT="ObjectStab.Examples.ninebus">
+<H3>Information</H3>
+<PRE>System from [1]
+
+Nine bus test system, using 3rd order generator models
+---
+[1]
+P.M. Anderson and A.A. Fouad, Power System Control and Stability,
+ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>wmin</TD><TD>0.5</TD><TD>[p.u.]</TD></TR>
+<TR><TD>wmax</TD><TD>1.5</TD><TD>[p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">class</font> ninebus <font color="darkgreen">
+  &quot;Nine bus test system, using 3rd order generator models&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.System"
+>ObjectStab.Base.System</A>;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus1;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus2;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus3;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.FaultedBus"
+>ObjectStab.Network.FaultedBus</A> Bus4(
+    FaultTime=5, 
+    FaultDuration=1, 
+    FaultR=1);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus5;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus6;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus7;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus8;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus9;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>ObjectStab.Network.Pilink</A> L57(
+    R=0.032, 
+    X=0.161, 
+    B=0.153*2, 
+    G=0);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>ObjectStab.Network.Pilink</A> L69(
+    R=0.039, 
+    X=0.170, 
+    G=0, 
+    B=0.179*2);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>ObjectStab.Network.Pilink</A> L78(
+    R=0.0085, 
+    X=0.072, 
+    G=0, 
+    B=0.0745*2);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>ObjectStab.Network.Pilink</A> L89(
+    R=0.0119, 
+    X=0.1008, 
+    G=0, 
+    B=0.1045*2);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.FixTransformer"
+>ObjectStab.Network.FixTransformer</A> T27(R=0, X=0.0625);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.FixTransformer"
+>ObjectStab.Network.FixTransformer</A> T39(R=0, X=0.0586);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.FixTransformer"
+>ObjectStab.Network.FixTransformer</A> T14(R=0, X=0.0576);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>ObjectStab.Network.Pilink</A> L45(
+    R=0.01, 
+    X=0.085, 
+    B=0.088*2, 
+    G=0);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>ObjectStab.Network.Pilink</A> L46(
+    R=0.017, 
+    X=0.092, 
+    B=0.079*2, 
+    G=0);
+  <A HREF="ObjectStab_Generators.html#ObjectStab.Generators.GovExc3rdGen"
+>ObjectStab.Generators.GovExc3rdGen</A> G2(
+    V0=1.025, 
+    Pg0=1.63, 
+    Sbase=200, 
+    H=6.40, 
+    xd=0.8958, 
+    xq=0.8645, 
+    xdp=0.1198, 
+    Td0p=6, 
+    <font color="blue">redeclare </font><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.FirstOrderExciter"
+>ObjectStab.Generators.Controllers.FirstOrderExciter</A> Exc);
+  <A HREF="ObjectStab_Generators.html#ObjectStab.Generators.GovExc3rdGen"
+>ObjectStab.Generators.GovExc3rdGen</A> G3(
+    isSlack=false, 
+    V0=1.025, 
+    Pg0=0.85, 
+    H=3.01, 
+    xd=1.3125, 
+    xq=1.2578, 
+    xdp=0.1813, 
+    Td0p=5.89, 
+    <font color="blue">redeclare </font><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.FirstOrderExciter"
+>ObjectStab.Generators.Controllers.FirstOrderExciter</A> Exc);
+  <A HREF="ObjectStab_Loads.html#ObjectStab.Loads.DynLoad"
+>ObjectStab.Loads.DynLoad</A> LoadA(P0=1.25, Q0=0.5);
+  <A HREF="ObjectStab_Loads.html#ObjectStab.Loads.DynLoad"
+>ObjectStab.Loads.DynLoad</A> LoadC(P0=1, Q0=0.35);
+  <A HREF="ObjectStab_Loads.html#ObjectStab.Loads.DynLoad"
+>ObjectStab.Loads.DynLoad</A> LoadB(P0=0.9, Q0=0.3);
+  <A HREF="ObjectStab_Generators.html#ObjectStab.Generators.Slack"
+>ObjectStab.Generators.Slack</A> G1(V0=1.04);
+<font color="blue">equation </font>
+  <font color="red">connect</font>(T14.T2, Bus1.T);
+  <font color="red">connect</font>(Bus5.T, L45.T1);
+  <font color="red">connect</font>(Bus6.T, L46.T2);
+  <font color="red">connect</font>(Bus5.T, L57.T1);
+  <font color="red">connect</font>(L57.T2, Bus7.T);
+  <font color="red">connect</font>(L69.T2, Bus9.T);
+  <font color="red">connect</font>(L69.T1, Bus6.T);
+  <font color="red">connect</font>(L78.T2, Bus8.T);
+  <font color="red">connect</font>(L78.T1, Bus7.T);
+  <font color="red">connect</font>(L89.T1, Bus8.T);
+  <font color="red">connect</font>(L89.T2, Bus9.T);
+  <font color="red">connect</font>(T27.T1, Bus7.T);
+  <font color="red">connect</font>(Bus2.T, T27.T2);
+  <font color="red">connect</font>(T39.T1, Bus9.T);
+  <font color="red">connect</font>(T39.T2, Bus3.T);
+  <font color="red">connect</font>(G2.T, Bus2.T);
+  <font color="red">connect</font>(G3.T, Bus3.T);
+  <font color="red">connect</font>(Bus4.T, L46.T1);
+  <font color="red">connect</font>(Bus4.T, L45.T2);
+  <font color="red">connect</font>(Bus4.T, T14.T1);
+  <font color="red">connect</font>(LoadB.T, Bus6.T);
+  <font color="red">connect</font>(LoadA.T, Bus5.T);
+  <font color="red">connect</font>(Bus8.T, LoadC.T);
+  <font color="red">connect</font>(G1.T, Bus1.T);
+<font color="blue">end </font>ninebus;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.TCULExampI.png" ALT="ObjectStab.Examples.TCULExamp" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.TCULExamp"></A><A HREF="ObjectStab_Examples.html#ObjectStab.Examples"
+>ObjectStab.Examples</A>.TCULExamp</H2>
+<IMG SRC="ObjectStab.Examples.TCULExampD.png" ALT="ObjectStab.Examples.TCULExamp">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>wmin</TD><TD>0.5</TD><TD>[p.u.]</TD></TR>
+<TR><TD>wmax</TD><TD>1.5</TD><TD>[p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">class</font> TCULExamp 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.System"
+>ObjectStab.Base.System</A>;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus1;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus2;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus3;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus4;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus5;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus6;
+  <A HREF="ObjectStab_Generators.html#ObjectStab.Generators.Slack"
+>ObjectStab.Generators.Slack</A> Slack1;
+  <A HREF="ObjectStab_Generators.html#ObjectStab.Generators.GovExc6thGen"
+>ObjectStab.Generators.GovExc6thGen</A> Gen(
+    V0=1.05, 
+    Pg0=1, 
+    Sbase=200, 
+    <font color="blue">redeclare </font><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.FirstOrderExciter"
+>ObjectStab.Generators.Controllers.FirstOrderExciter</A> Exc, 
+    <font color="blue">redeclare </font><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.IsoGover"
+>ObjectStab.Generators.Controllers.IsoGover</A> Gov);
+  <A HREF="ObjectStab_Loads.html#ObjectStab.Loads.ImpedanceLoad"
+>ObjectStab.Loads.ImpedanceLoad</A> ImpedanceLoad1;
+  <A HREF="ObjectStab_Loads.html#ObjectStab.Loads.ImpedanceLoad"
+>ObjectStab.Loads.ImpedanceLoad</A> ImpedanceLoad2;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.ShuntCapacitor"
+>ObjectStab.Network.ShuntCapacitor</A> ShuntCapacitor1(B=0.6);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.OpenedPilink"
+>ObjectStab.Network.OpenedPilink</A> OpenedPilink1;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>ObjectStab.Network.Pilink</A> Line1(X=0.2);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>ObjectStab.Network.Pilink</A> Line4(X=0.02, B=0.05);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.TCULDis"
+>ObjectStab.Network.TCULDis</A> T1(Controller(InitByVoltage=true));
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.TCULCon"
+>ObjectStab.Network.TCULCon</A> T2(n=1, Controller(InitByVoltage=true));
+<font color="blue">equation </font>
+  <font color="red">connect</font>(Bus4.T, Slack1.T);
+  <font color="red">connect</font>(T1.T2, Bus5.T);
+  <font color="red">connect</font>(ImpedanceLoad1.T, Bus5.T);
+  <font color="red">connect</font>(ImpedanceLoad2.T, Bus6.T);
+  <font color="red">connect</font>(T2.T2, Bus6.T);
+  <font color="red">connect</font>(Line4.T1, Bus3.T);
+  <font color="red">connect</font>(T2.T1, Bus3.T);
+  <font color="red">connect</font>(Bus3.T, ShuntCapacitor1.T);
+  <font color="red">connect</font>(T1.T1, Bus3.T);
+  <font color="red">connect</font>(Bus4.T, OpenedPilink1.T2);
+  <font color="red">connect</font>(Line4.T2, Bus2.T);
+  <font color="red">connect</font>(OpenedPilink1.T1, Bus2.T);
+  <font color="red">connect</font>(Line1.T2, Bus2.T);
+  <font color="red">connect</font>(Bus1.T, Line1.T1);
+  <font color="red">connect</font>(Gen.T, Bus1.T);
+<font color="blue">end </font>TCULExamp;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.dynasim.se/">Dymola</a> Mon Sep 30 21:51:59 2002
+.
+</address></BODY>
+</HTML>

@@ -1,0 +1,360 @@
+<HTML>
+<HEAD><META name="HTML-Generator" content="Dymola"><TITLE>ObjectStab</TITLE></HEAD>
+<BODY><P>
+<H2><A NAME="ObjectStab.Examples.BPA"></A><A HREF="ObjectStab_Examples.html#ObjectStab.Examples"
+>ObjectStab.Examples</A>.BPA</H2>
+<A HREF="ObjectStab_Examples_BPA.html#ObjectStab.Examples.BPA.BPAGen"
+><IMG SRC="ObjectStab.Examples.BPA.BPAGenI.png" ALT="ObjectStab.Examples.BPA.BPAGen" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_BPA.html#ObjectStab.Examples.BPA.system"
+><IMG SRC="ObjectStab.Examples.BPA.systemI.png" ALT="ObjectStab.Examples.BPA.system" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_BPA.html#ObjectStab.Examples.BPA.linefault"
+><IMG SRC="ObjectStab.Examples.BPA.linefaultI.png" ALT="ObjectStab.Examples.BPA.linefault" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_BPA.html#ObjectStab.Examples.BPA.loadshed"
+><IMG SRC="ObjectStab.Examples.BPA.loadshedI.png" ALT="ObjectStab.Examples.BPA.loadshed" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Examples_BPA.html#ObjectStab.Examples.BPA.taplock"
+><IMG SRC="ObjectStab.Examples.BPA.taplockI.png" ALT="ObjectStab.Examples.BPA.taplock" WIDTH=80  HEIGHT=80 ></A>
+<P><P>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.BPA.BPAGenI.png" ALT="ObjectStab.Examples.BPA.BPAGen" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.BPA.BPAGen"></A><A HREF="ObjectStab_Examples_BPA.html#ObjectStab.Examples.BPA"
+>ObjectStab.Examples.BPA</A>.BPAGen</H2>
+<IMG SRC="ObjectStab.Examples.BPA.BPAGenD.png" ALT="ObjectStab.Examples.BPA.BPAGen">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>isSlack</TD><TD>false</TD><TD>Acts as slack node during initialization ? (true=yes)</TD></TR>
+<TR><TD>V0</TD><TD>1</TD><TD>Initial Terminal Voltage [p.u]</TD></TR>
+<TR><TD>theta0</TD><TD>0</TD><TD>Initial Voltage Angle (only used if isSlack=true) [rad]</TD></TR>
+<TR><TD>Pg0</TD><TD>1</TD><TD>Initial Generated Active Power (on system base, only used if isSlack=false) [p.u.]</TD></TR>
+<TR><TD>TripTime</TD><TD>Modelica.Constants.inf</TD><TD>Time of Tripping of Generator [s]</TD></TR>
+<TR><TD>Sbase</TD><TD>100</TD><TD>Generator rated power [MVA]</TD></TR>
+<TR><TD>H</TD><TD>6</TD><TD>Inertia Constant [s]</TD></TR>
+<TR><TD>D</TD><TD>0</TD><TD>Damping Coefficient [1]</TD></TR>
+<TR><TD>rt</TD><TD>0</TD><TD>Step-up Transformer Resistance [p.u.]</TD></TR>
+<TR><TD>xt</TD><TD>0.0</TD><TD>Step-up Transformer Reactance [p.u.]</TD></TR>
+<TR><TD>ra</TD><TD>0</TD><TD>Armature Resistance [p.u.]</TD></TR>
+<TR><TD>xd</TD><TD>2.07</TD><TD>Direct Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xq</TD><TD>1.99</TD><TD>Quadrature Axis Synchronous Reactance [p.u.]</TD></TR>
+<TR><TD>xdp</TD><TD>0.28</TD><TD>Direct Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>xqp</TD><TD>0.49</TD><TD>Quadrature Axis Transient Reactance [p.u.]</TD></TR>
+<TR><TD>xdpp</TD><TD>0.215</TD><TD>Direct Axis Subtransient Reactance [p.u.]</TD></TR>
+<TR><TD>xqpp</TD><TD>0.215</TD><TD>Quadrature Axis Subtransient Reactance [p.u.]</TD></TR>
+<TR><TD>Td0p</TD><TD>4.10</TD><TD>Open-circuit Direct Axis Transient Time Constant [s]</TD></TR>
+<TR><TD>Tq0p</TD><TD>0.56</TD><TD>Open-circuit Quadrature Axis Transient Time Constant [s]</TD></TR>
+<TR><TD>Td0pp</TD><TD>0.033</TD><TD>Open-circuit Direct Axis Subtransient Time Constant [s]</TD></TR>
+<TR><TD>Tq0pp</TD><TD>0.062</TD><TD>Open-circuit Quadrature Axis Subtransient Time Constant [s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> BPAGen 
+  <font color="blue">extends </font><A HREF="ObjectStab_Generators.html#ObjectStab.Generators.GovExc6thGen"
+>ObjectStab.Generators.GovExc6thGen</A>(
+    ra=0, 
+    D=0, 
+    xd=2.07, 
+    xq=1.99, 
+    xdp=0.28, 
+    xqp=0.49, 
+    xdpp=0.215, 
+    xqpp=0.215, 
+    Td0p=4.10, 
+    Tq0p=0.56, 
+    Td0pp=0.033, 
+    Tq0pp=0.062, 
+    <font color="blue">redeclare </font><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.FirstOrderGovernor"
+>ObjectStab.Generators.Controllers.FirstOrderGovernor</A> Gov, 
+    <font color="blue">redeclare </font><A HREF="ObjectStab_Generators_Controllers.html#ObjectStab.Generators.Controllers.ExcST1ALim"
+>ObjectStab.Generators.Controllers.ExcST1ALim</A> Exc(
+      K=200, 
+      Kstab=1, 
+      ExcLimit(Limit=2.9)));
+<font color="blue">end </font>BPAGen;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.BPA.systemI.png" ALT="ObjectStab.Examples.BPA.system" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.BPA.system"></A><A HREF="ObjectStab_Examples_BPA.html#ObjectStab.Examples.BPA"
+>ObjectStab.Examples.BPA</A>.system</H2>
+<IMG SRC="ObjectStab.Examples.BPA.systemD.png" ALT="ObjectStab.Examples.BPA.system">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>wmin</TD><TD>0.5</TD><TD>[p.u.]</TD></TR>
+<TR><TD>wmax</TD><TD>1.5</TD><TD>[p.u.]</TD></TR>
+<TR><TD>L8</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L11</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>T6</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_1</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_2</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_3</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_4</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_5</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">class</font> system 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.System"
+>ObjectStab.Base.System</A>;
+  Real Ploss;
+  Real Qloss;
+  Real Pload;
+  Real Qload;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Examples_BPA.html#ObjectStab.Examples.BPA.BPAGen"
+>BPAGen</A> G2(
+    V0=0.9646, 
+    Pg0=17.36, 
+    Sbase=2200, 
+    H=2.33, 
+    D=0.2);
+  <A HREF="ObjectStab_Examples_BPA.html#ObjectStab.Examples.BPA.BPAGen"
+>BPAGen</A> G3(
+    V0=0.9553, 
+    Pg0=11.55, 
+    Sbase=1600, 
+    H=2.09, 
+    D=0.2);
+  <font color="blue">replaceable </font><A HREF="ObjectStab_Loads.html#ObjectStab.Loads.DynLoad"
+>ObjectStab.Loads.DynLoad</A> L8(
+    P0=33.7, 
+    Q0=10.5, 
+    as=0, 
+    at=2, 
+    bs=0, 
+    bt=2, 
+    Tp=1, 
+    Tq=1);
+  <font color="blue">replaceable </font><A HREF="ObjectStab_Loads.html#ObjectStab.Loads.ImpedanceLoad"
+>ObjectStab.Loads.ImpedanceLoad</A> L11(P0=34.9, Q0=0);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus1;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus2;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus3;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus5;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus6;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus7;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus8;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus9;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus10;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+>ObjectStab.Network.Bus</A> Bus11;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.ShuntCapacitor"
+>ObjectStab.Network.ShuntCapacitor</A> C7(B=9.63);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.ShuntCapacitor"
+>ObjectStab.Network.ShuntCapacitor</A> C8(B=7);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.ShuntCapacitor"
+>ObjectStab.Network.ShuntCapacitor</A> C9(B=4);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.ShuntCapacitor"
+>ObjectStab.Network.ShuntCapacitor</A> C11(B=1);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.FixTransformer"
+>ObjectStab.Network.FixTransformer</A> T1(X=0.0020, n=0.8857);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.FixTransformer"
+>ObjectStab.Network.FixTransformer</A> T2(X=0.0045, n=0.8857);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.FixTransformer"
+>ObjectStab.Network.FixTransformer</A> T3(X=0.0125/2, n=0.9024);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.FixTransformer"
+>ObjectStab.Network.FixTransformer</A> T5(X=0.0026, n=1.08);
+  <font color="blue">replaceable </font><A HREF="ObjectStab_Network.html#ObjectStab.Network.TCULDis"
+>ObjectStab.Network.TCULDis</A> T6(
+    X=0.0010, 
+    n=1/0.96, 
+    Controller(
+      method=3, 
+      Vref=0.922, 
+      maxtap=15, 
+      mintap=-15, 
+      stepsize=0.01, 
+      DB=0.02, 
+      Vblock=0.01));
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+>ObjectStab.Network.Pilink</A> L56(
+    R=0, 
+    X=0.0040, 
+    B=2);
+  <font color="blue">replaceable </font><A HREF="ObjectStab_Extras.html#ObjectStab.Extras.PQPilink"
+>ObjectStab.Extras.PQPilink</A> L67_1(
+    R=0.0015, 
+    X=0.0288, 
+    B=1.1730);
+  <font color="blue">replaceable </font><A HREF="ObjectStab_Extras.html#ObjectStab.Extras.PQPilink"
+>ObjectStab.Extras.PQPilink</A> L67_2(
+    R=0.0015, 
+    X=0.0288, 
+    B=1.1730);
+  <font color="blue">replaceable </font><A HREF="ObjectStab_Extras.html#ObjectStab.Extras.PQPilink"
+>ObjectStab.Extras.PQPilink</A> L67_3(
+    R=0.0015, 
+    X=0.0288, 
+    B=1.1730);
+  <font color="blue">replaceable </font><A HREF="ObjectStab_Extras.html#ObjectStab.Extras.PQPilink"
+>ObjectStab.Extras.PQPilink</A> L67_4(
+    R=0.0015, 
+    X=0.0288, 
+    B=1.1730);
+  <font color="blue">replaceable </font><A HREF="ObjectStab_Extras.html#ObjectStab.Extras.PQPilink"
+>ObjectStab.Extras.PQPilink</A> L67_5(
+    R=0.0015, 
+    X=0.0288, 
+    B=1.1730);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Impedance"
+>ObjectStab.Network.Impedance</A> L910(R=0.0010, X=0.0030);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.FixTransformer"
+>ObjectStab.Network.FixTransformer</A> T4(X=0.0030, n=1.0664);
+  <A HREF="ObjectStab_Generators.html#ObjectStab.Generators.Slack"
+>ObjectStab.Generators.Slack</A> G1(V0=0.98);
+<font color="blue">equation </font>
+  <font color="red">connect</font>(L910.T1, Bus9.T);
+  <font color="red">connect</font>(L910.T2, Bus10.T);
+  <font color="red">connect</font>(L11.T, Bus11.T);
+  <font color="red">connect</font>(G3.T, Bus3.T);
+  <font color="red">connect</font>(L67_1.T1, Bus6.T);
+  <font color="red">connect</font>(L67_2.T1, Bus6.T);
+  <font color="red">connect</font>(C7.T, Bus7.T);
+  <font color="red">connect</font>(L67_1.T2, Bus7.T);
+  <font color="red">connect</font>(L67_2.T2, Bus7.T);
+  <font color="red">connect</font>(L8.T, Bus8.T);
+  <font color="red">connect</font>(L8.T, Bus8.T);
+  <font color="red">connect</font>(L67_4.T1, Bus6.T);
+  <font color="red">connect</font>(L67_4.T2, Bus7.T);
+  <font color="red">connect</font>(L67_5.T1, Bus6.T);
+  <font color="red">connect</font>(L67_5.T2, Bus7.T);
+  <font color="red">connect</font>(L56.T1, Bus5.T);
+  <font color="red">connect</font>(L56.T2, Bus6.T);
+  <font color="red">connect</font>(L67_3.T1, Bus6.T);
+  <font color="red">connect</font>(T1.T2, Bus1.T);
+  <font color="red">connect</font>(T1.T1, Bus5.T);
+  <font color="red">connect</font>(T3.T1, Bus7.T);
+  <font color="red">connect</font>(L67_3.T2, Bus7.T);
+  <font color="red">connect</font>(T3.T2, Bus3.T);
+  <font color="red">connect</font>(G2.T, Bus2.T);
+  <font color="red">connect</font>(Bus2.T, T2.T2);
+  <font color="red">connect</font>(T2.T1, Bus6.T);
+  <font color="red">connect</font>(C8.T, Bus8.T);
+  <font color="red">connect</font>(C11.T, Bus11.T);
+  <font color="red">connect</font>(C9.T, Bus9.T);
+  <font color="red">connect</font>(T6.T1, Bus10.T);
+  <font color="red">connect</font>(T6.T2, Bus11.T);
+  <font color="red">connect</font>(T5.T2, Bus7.T);
+  <font color="red">connect</font>(T5.T1, Bus9.T);
+  <font color="red">connect</font>(T4.T2, Bus7.T);
+  <font color="red">connect</font>(T4.T1, Bus8.T);
+  <font color="red">connect</font>(G1.T, Bus1.T);
+  Ploss = L67_1.Ploss + L67_2.Ploss + L67_3.Ploss + L67_4.Ploss + L67_5.Ploss;
+  Qloss = L67_1.Qloss + L67_2.Qloss + L67_3.Qloss + L67_4.Qloss + L67_5.Qloss;
+  Pload = L8.Pl + L11.Pl;
+  Qload = L8.Ql + L11.Ql;
+<font color="blue">end </font>system;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.BPA.linefaultI.png" ALT="ObjectStab.Examples.BPA.linefault" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.BPA.linefault"></A><A HREF="ObjectStab_Examples_BPA.html#ObjectStab.Examples.BPA"
+>ObjectStab.Examples.BPA</A>.linefault</H2>
+<IMG SRC="ObjectStab.Examples.BPA.linefaultD.png" ALT="ObjectStab.Examples.BPA.linefault">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>wmin</TD><TD>0.5</TD><TD>[p.u.]</TD></TR>
+<TR><TD>wmax</TD><TD>1.5</TD><TD>[p.u.]</TD></TR>
+<TR><TD>L8</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L11</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>T6</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_1</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_2</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_3</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_4</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> linefault 
+  <font color="blue">extends </font><A HREF="ObjectStab_Examples_BPA.html#ObjectStab.Examples.BPA.system"
+>system</A>(<font color="blue">redeclare </font><A HREF="ObjectStab_Extras.html#ObjectStab.Extras.FaultedPQPilink"
+>ObjectStab.Extras.FaultedPQPilink</A> L67_5(
+      FaultTime=10, 
+      FaultR=0, 
+      FaultX=0, 
+      ClearTime=0.07, 
+      RecloseTime=30000));
+<font color="blue">end </font>linefault;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.BPA.loadshedI.png" ALT="ObjectStab.Examples.BPA.loadshed" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.BPA.loadshed"></A><A HREF="ObjectStab_Examples_BPA.html#ObjectStab.Examples.BPA"
+>ObjectStab.Examples.BPA</A>.loadshed</H2>
+<IMG SRC="ObjectStab.Examples.BPA.loadshedD.png" ALT="ObjectStab.Examples.BPA.loadshed">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>wmin</TD><TD>0.5</TD><TD>[p.u.]</TD></TR>
+<TR><TD>wmax</TD><TD>1.5</TD><TD>[p.u.]</TD></TR>
+<TR><TD>L11</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>T6</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_1</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_2</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_3</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_4</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_5</TD><TD>redeclare ObjectStab.Extras.FaultedPQPilink L67_5(FaultTime=10, FaultR=0, FaultX=0, ClearTime=0.07, RecloseTime=30000)</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> loadshed 
+  <font color="blue">extends </font><A HREF="ObjectStab_Examples_BPA.html#ObjectStab.Examples.BPA.linefault"
+>linefault</A>(<font color="blue">redeclare </font><A HREF="ObjectStab_Extras.html#ObjectStab.Extras.UVLSLoad"
+>Extras.UVLSLoad</A> L8(
+      Relay1(
+        ShedAmount=0.05, 
+        Threshold=0.82, 
+        DelayTime=4.5), 
+      Relay2(
+        ShedAmount=0.05, 
+        Threshold=0.80, 
+        DelayTime=3), 
+      Relay3(
+        ShedAmount=0.05, 
+        Threshold=0.78, 
+        DelayTime=1.5)));
+<font color="blue">end </font>loadshed;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Examples.BPA.taplockI.png" ALT="ObjectStab.Examples.BPA.taplock" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Examples.BPA.taplock"></A><A HREF="ObjectStab_Examples_BPA.html#ObjectStab.Examples.BPA"
+>ObjectStab.Examples.BPA</A>.taplock</H2>
+<IMG SRC="ObjectStab.Examples.BPA.taplockD.png" ALT="ObjectStab.Examples.BPA.taplock">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>wmin</TD><TD>0.5</TD><TD>[p.u.]</TD></TR>
+<TR><TD>wmax</TD><TD>1.5</TD><TD>[p.u.]</TD></TR>
+<TR><TD>L8</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L11</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_1</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_2</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_3</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_4</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>L67_5</TD><TD>redeclare ObjectStab.Extras.FaultedPQPilink L67_5(FaultTime=10, FaultR=0, FaultX=0, ClearTime=0.07, RecloseTime=30000)</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> taplock 
+  <font color="blue">extends </font><A HREF="ObjectStab_Examples_BPA.html#ObjectStab.Examples.BPA.linefault"
+>linefault</A>(T6(Controller(
+        method=3, 
+        Vref=0.922, 
+        maxtap=15, 
+        mintap=-15, 
+        stepsize=0.01, 
+        DB=0.02, 
+        Vblock=0.82)));
+<font color="blue">end </font>taplock;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.dynasim.se/">Dymola</a> Mon Sep 30 21:52:22 2002
+.
+</address></BODY>
+</HTML>

@@ -1,0 +1,122 @@
+<HTML>
+<HEAD><META name="HTML-Generator" content="Dymola"><TITLE>ObjectStab</TITLE></HEAD>
+<BODY><P>
+<H2><IMG SRC="ObjectStab.Loads.Partials.LoadI.png" ALT="ObjectStab.Loads.Partials.Load" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Loads.Partials.Load"></A><A HREF="ObjectStab_Loads_Partials.html#ObjectStab.Loads.Partials"
+>ObjectStab.Loads.Partials</A>.Load</H2>
+<B>Shell model for loads</B><p>
+<H3>Information</H3>
+<PRE>The complex power a load draws from the network is given by:
+
+S = P+jQ = v * conj(i)
+
+The parameters P0 and Q0 denote the rated load power, i.e., the power
+the load draws if the voltage is 1 p.u.
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>P0</TD><TD>1</TD><TD>Initial Active Load Power [p.u.]</TD></TR>
+<TR><TD>Q0</TD><TD>0.2</TD><TD>Initial Reactive Load Power [p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">model</font> Load <font color="darkgreen">&quot;Shell model for loads&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.OnePin"
+>Base.OnePin</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.ActivePower"
+>Base.ActivePower</A> P0=1 <font color="darkgreen">&quot;Initial Active Load Power&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.ReactivePower"
+>Base.ReactivePower</A> Q0=0.2 <font color="darkgreen">&quot;Initial Reactive Load Power&quot;</font>;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.ActivePower"
+>Base.ActivePower</A> Pl <font color="darkgreen">&quot;Active Load Power&quot;</font>;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.ReactivePower"
+>Base.ReactivePower</A> Ql <font color="darkgreen">&quot;Reactive Load Power&quot;</font>;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> V=<font color="red">sqrt</font>((1 + T.va)*(1 + T.va) + T.vb*T.vb) <font color="darkgreen">&quot;Voltage Amplitude&quot;</font>
+    ;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.VoltageAngle"
+>Base.VoltageAngle</A> theta=<font color="red">Modelica.Math.atan2</font>(T.vb, (1 + T.va)) <font color="darkgreen">
+    &quot;Voltage Angle&quot;</font>;
+  <font color="darkgreen"></font>
+  <font color="blue">discrete </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> V0(start=1) <font color="darkgreen">
+    &quot;Inital Terminal Voltage (automatically initialized)&quot;</font>;
+<font color="blue">equation </font>
+  V0 = <font color="red">pre</font>(V0);
+  T.ia = (T.vb*Ql + Pl + Pl*T.va)/(1 + 2*T.va + T.va*T.va + T.vb*T.vb);
+  T.ib = (Pl*T.vb - Ql - T.va*Ql)/(1 + 2*T.va + T.va*T.va + T.vb*T.vb);
+  <font color="darkgreen"></font>
+<font color="blue">initial </font><font color="blue">equation </font>
+  V0 = V;
+<font color="blue">end </font>Load;
+</PRE>
+<HR>
+<H2><A NAME="ObjectStab.Loads.Partials"></A><A HREF="ObjectStab_Loads.html#ObjectStab.Loads"
+>ObjectStab.Loads</A>.Partials</H2>
+<B>Contains uninstatiable classes related to loads</B>
+<P>
+<A HREF="ObjectStab_Loads_Partials.html#ObjectStab.Loads.Partials.Load"
+><IMG SRC="ObjectStab.Loads.Partials.LoadI.png" ALT="ObjectStab.Loads.Partials.Load" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Loads_Partials.html#ObjectStab.Loads.Partials.ExtLoad"
+><IMG SRC="ObjectStab.Loads.Partials.ExtLoadI.png" ALT="ObjectStab.Loads.Partials.ExtLoad" WIDTH=80  HEIGHT=80 ></A>
+<P><P>
+<HR>
+<H2><IMG SRC="ObjectStab.Loads.Partials.ExtLoadI.png" ALT="ObjectStab.Loads.Partials.ExtLoad" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Loads.Partials.ExtLoad"></A><A HREF="ObjectStab_Loads_Partials.html#ObjectStab.Loads.Partials"
+>ObjectStab.Loads.Partials</A>.ExtLoad</H2>
+<B>Shell model for loads</B><p>
+<H3>Information</H3>
+<PRE>The complex power a load draws from the network is given by:
+
+S = P+jQ = v * conj(i)
+
+The parameters P0 and Q0 denote the rated load power, i.e., the power
+the load draws if the voltage is 1 p.u.
+</PRE>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">model</font> ExtLoad <font color="darkgreen">&quot;Shell model for loads&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.OnePin"
+>Base.OnePin</A>;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.ActivePower"
+>Base.ActivePower</A> P0(start=1) <font color="darkgreen">&quot;Initial Active Load Power&quot;</font>;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.ReactivePower"
+>Base.ReactivePower</A> Q0(start=0.2) <font color="darkgreen">&quot;Initial Reactive Load Power&quot;</font>;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.ActivePower"
+>Base.ActivePower</A> Pl <font color="darkgreen">&quot;Active Load Power&quot;</font>;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.ReactivePower"
+>Base.ReactivePower</A> Ql <font color="darkgreen">&quot;Reactive Load Power&quot;</font>;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> V=<font color="red">sqrt</font>((1 + T.va)*(1 + T.va) + T.vb*T.vb) <font color="darkgreen">&quot;Voltage Amplitude&quot;</font>
+    ;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.VoltageAngle"
+>Base.VoltageAngle</A> theta=<font color="red">Modelica.Math.atan2</font>(T.vb, (1 + T.va)) <font color="darkgreen">
+    &quot;Voltage Angle&quot;</font>;
+  <font color="darkgreen"></font>
+  <font color="blue">discrete </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> V0(start=1) <font color="darkgreen">&quot;Inital Terminal Voltage&quot;</font>;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.InPort"
+>Modelica.Blocks.Interfaces.InPort</A> InPort(n=2);
+<font color="blue">equation </font>
+  V0 = <font color="red">pre</font>(V0);
+  T.ia = (T.vb*Ql + Pl + Pl*T.va)/(1 + 2*T.va + T.va*T.va + T.vb*T.vb);
+  T.ib = (Pl*T.vb - Ql - T.va*Ql)/(1 + 2*T.va + T.va*T.va + T.vb*T.vb);
+  <font color="darkgreen"></font>
+  P0 = InPort.signal[1];
+  Q0 = InPort.signal[2];
+  <font color="darkgreen"></font>
+<font color="blue">initial </font><font color="blue">equation </font>
+  V0 = V;
+<font color="blue">end </font>ExtLoad;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.dynasim.se/">Dymola</a> Mon Sep 30 21:52:46 2002
+.
+</address></BODY>
+</HTML>

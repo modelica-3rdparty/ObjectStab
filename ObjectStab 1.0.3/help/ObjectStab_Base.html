@@ -1,0 +1,340 @@
+<HTML>
+<HEAD><META name="HTML-Generator" content="Dymola"><TITLE>ObjectStab</TITLE></HEAD>
+<BODY><P>
+<H2><A NAME="ObjectStab.Base"></A><A HREF="ObjectStab.html#ObjectStab"
+>ObjectStab</A>.Base</H2>
+<B>Base package</B>
+<P>
+<A HREF="ObjectStab_Base.html#ObjectStab.Base.Pin"
+><IMG SRC="ObjectStab.Base.PinI.png" ALT="ObjectStab.Base.Pin" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Base.html#ObjectStab.Base.OnePin"
+><IMG SRC="ObjectStab.Base.OnePinI.png" ALT="ObjectStab.Base.OnePin" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Base.html#ObjectStab.Base.OnePinCenter"
+><IMG SRC="ObjectStab.Base.OnePinCenterI.png" ALT="ObjectStab.Base.OnePinCenter" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Base.html#ObjectStab.Base.TwoPin"
+><IMG SRC="ObjectStab.Base.TwoPinI.png" ALT="ObjectStab.Base.TwoPin" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Base.html#ObjectStab.Base.VoltageMeasurement"
+><IMG SRC="ObjectStab.Base.VoltageMeasurementI.png" ALT="ObjectStab.Base.VoltageMeasurement" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Base.html#ObjectStab.Base.CurrentMeasurement"
+><IMG SRC="ObjectStab.Base.CurrentMeasurementI.png" ALT="ObjectStab.Base.CurrentMeasurement" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Base.html#ObjectStab.Base.PowerMeasurement"
+><IMG SRC="ObjectStab.Base.PowerMeasurementI.png" ALT="ObjectStab.Base.PowerMeasurement" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Base.html#ObjectStab.Base.wRefPin"
+><IMG SRC="ObjectStab.Base.wRefPinI.png" ALT="ObjectStab.Base.wRefPin" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Base.html#ObjectStab.Base.System"
+><IMG SRC="ObjectStab.Base.SystemI.png" ALT="ObjectStab.Base.System" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Base.html#ObjectStab.Base.Scaler"
+><IMG SRC="ObjectStab.Base.ScalerI.png" ALT="ObjectStab.Base.Scaler" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Base.html#ObjectStab.Base.wRefContainer"
+><IMG SRC="ObjectStab.Base.wRefContainerI.png" ALT="ObjectStab.Base.wRefContainer" WIDTH=80  HEIGHT=80 ></A>
+<P><P>
+<H3>Information</H3>
+<PRE>The base package contains definitions common to all
+subpackages, including the new datatypes for the p.u. 
+quantities are defined.
+ 
+The constant f0 sets the rated frequency. 
+This can be changed into 60 Hz for american users.
+</PRE><P>
+<H3>Types and constants</H3>
+<A NAME="ObjectStab.Base.Time"></A><font color="blue">type</font> Time = Real (<font color="blue">final </font>quantity=&quot;Time&quot;, <font color="blue">final </font>unit=&quot;s&quot;);<p>
+<A NAME="ObjectStab.Base.Duration"></A><font color="blue">type</font> Duration = <A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Time</A> (min=0);<p>
+<A NAME="ObjectStab.Base.AngularVelocity"></A><font color="blue">type</font> AngularVelocity = Real (
+    <font color="blue">final </font>quantity=&quot;AngularVelocity&quot;, 
+    <font color="blue">final </font>unit=&quot;p.u.&quot;, 
+    displayUnit=&quot;p.u.&quot;);<p>
+<A NAME="ObjectStab.Base.Angle"></A><font color="blue">type</font> Angle = Real (
+    <font color="blue">final </font>quantity=&quot;Angle&quot;, 
+    <font color="blue">final </font>unit=&quot;rad&quot;, 
+    displayUnit=&quot;deg&quot;, 
+    min=-Modelica.Constants.PI, 
+    max=Modelica.Constants.PI);<p>
+<A NAME="ObjectStab.Base.InertiaConstant"></A><font color="blue">type</font> InertiaConstant = Real (<font color="blue">final </font>quantity=&quot;InertiaConstant&quot;, <font color="blue">final </font>unit=&quot;s&quot;);<p>
+<A NAME="ObjectStab.Base.DampingCoefficient"></A><font color="blue">type</font> DampingCoefficient = Real (<font color="blue">final </font>quantity=&quot;DampingCoefficient&quot;, <font color="blue">final </font>unit
+      =&quot;1&quot;);<p>
+<A NAME="ObjectStab.Base.Current"></A><font color="blue">type</font> Current = Real (<font color="blue">final </font>quantity=&quot;CurrentPhasor&quot;, <font color="blue">final </font>unit=&quot;p.u.&quot;);<p>
+<A NAME="ObjectStab.Base.Voltage"></A><font color="blue">type</font> Voltage = Real (<font color="blue">final </font>quantity=&quot;VoltagePhasor&quot;, <font color="blue">final </font>unit=&quot;p.u&quot;);<p>
+<A NAME="ObjectStab.Base.VoltageAngle"></A><font color="blue">type</font> VoltageAngle = <A HREF="ObjectStab_Base.html#ObjectStab.Base.Angle"
+>Angle</A>;<p>
+<A NAME="ObjectStab.Base.Resistance"></A><font color="blue">type</font> Resistance = Real (
+    <font color="blue">final </font>quantity=&quot;Resistance&quot;, 
+    <font color="blue">final </font>unit=&quot;p.u.&quot;, 
+    min=0);<p>
+<A NAME="ObjectStab.Base.Reactance"></A><font color="blue">type</font> Reactance = Real (<font color="blue">final </font>quantity=&quot;Resistance&quot;, <font color="blue">final </font>unit=&quot;p.u.&quot;);<p>
+<A NAME="ObjectStab.Base.Conductance"></A><font color="blue">type</font> Conductance = Real (
+    <font color="blue">final </font>quantity=&quot;Conductance&quot;, 
+    <font color="blue">final </font>unit=&quot;p.u.&quot;, 
+    min=0);<p>
+<A NAME="ObjectStab.Base.Capacitance"></A><font color="blue">type</font> Capacitance = Real (<font color="blue">final </font>quantity=&quot;Capacitance&quot;, <font color="blue">final </font>unit=&quot;p.u.&quot;);<p>
+<A NAME="ObjectStab.Base.Susceptance"></A><font color="blue">type</font> Susceptance = Real (<font color="blue">final </font>quantity=&quot;Conductance&quot;, <font color="blue">final </font>unit=&quot;p.u.&quot;);<p>
+<A NAME="ObjectStab.Base.ActivePower"></A><font color="blue">type</font> ActivePower = Real (<font color="blue">final </font>quantity=&quot;Power&quot;, <font color="blue">final </font>unit=&quot;p.u.&quot;);<p>
+<A NAME="ObjectStab.Base.ApparentPower"></A><font color="blue">type</font> ApparentPower = Real (<font color="blue">final </font>quantity=&quot;Power&quot;, <font color="blue">final </font>unit=&quot;p.u.&quot;);<p>
+<A NAME="ObjectStab.Base.ReactivePower"></A><font color="blue">type</font> ReactivePower = Real (<font color="blue">final </font>quantity=&quot;Power&quot;, <font color="blue">final </font>unit=&quot;p.u.&quot;);<p>
+<A NAME="ObjectStab.Base.PowerFactor"></A><font color="blue">type</font> PowerFactor = Real (<font color="blue">final </font>quantity=&quot;PowerFactor&quot;, <font color="blue">final </font>unit=&quot;1&quot;);<p>
+<A NAME="ObjectStab.Base.TapRatio"></A><font color="blue">type</font> TapRatio = Real (<font color="blue">final </font>quantity=&quot;Transformer Ratio&quot;, <font color="blue">final </font>unit=&quot;p.u.&quot;);<p>
+<A NAME="ObjectStab.Base.TapStep"></A><font color="blue">type</font> TapStep = Integer;<p>
+<A NAME="ObjectStab.Base.ElectricalTorque"></A><font color="blue">type</font> ElectricalTorque = Real (<font color="blue">final </font>quantity=&quot;Torque&quot;, <font color="blue">final </font>unit=&quot;p.u.&quot;);<p>
+<A NAME="ObjectStab.Base.MechanicalTorque"></A><font color="blue">type</font> MechanicalTorque = Real (<font color="blue">final </font>quantity=&quot;Torque&quot;, <font color="blue">final </font>unit=&quot;p.u.&quot;);<p>
+<A NAME="ObjectStab.Base.MechanicalPower"></A><font color="blue">type</font> MechanicalPower = Real (<font color="blue">final </font>quantity=&quot;Power&quot;, <font color="blue">final </font>unit=&quot;p.u.&quot;);<p>
+<font color="blue">constant </font>Real f0=50;<p>
+<font color="blue">constant </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.AngularVelocity"
+>AngularVelocity</A> ws=2*Modelica.Constants.PI*f0;<p>
+<font color="blue">constant </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.ApparentPower"
+>ApparentPower</A> Sbase=100;<p>
+<HR>
+<H2><IMG SRC="ObjectStab.Base.PinI.png" ALT="ObjectStab.Base.Pin" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Base.Pin"></A><A HREF="ObjectStab_Base.html#ObjectStab.Base"
+>ObjectStab.Base</A>.Pin</H2>
+<B>Electrical connector for ObjectStab models</B><p>
+<H3>Information</H3>
+<PRE>The electrical connectors of ObjectStab models are modelled by the voltages and 
+currents in phasor representation:
+
+I =   ia + j ib 
+V = 1+va + j vb
+
+The constant one has been introduced in order to help the initial value solver.
+Two connected Pins results in the following equations:  
+
+Pin1.va = Pin2.va
+Pin1.vb = Pin2.vb
+Pin1.ia + Pin2.ia = 0
+Pin1.ib + Pin2.ib = 0
+
+By definition, currents are considered positive when injected into a component.
+</PRE>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">connector</font> Pin <font color="darkgreen">&quot;Electrical connector for ObjectStab models&quot;</font> 
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> va;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> vb;
+  <font color="blue">flow </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Current"
+>Base.Current</A> ia;
+  <font color="blue">flow </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Current"
+>Base.Current</A> ib;
+  <font color="darkgreen"></font>
+<font color="blue">end </font>Pin;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Base.OnePinI.png" ALT="ObjectStab.Base.OnePin" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Base.OnePin"></A><A HREF="ObjectStab_Base.html#ObjectStab.Base"
+>ObjectStab.Base</A>.OnePin</H2>
+<B>Shell model for ObjectStab models with one electrical connector </B><p>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">model</font> OnePin <font color="darkgreen">
+  &quot;Shell model for ObjectStab models with one electrical connector &quot;</font> 
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Pin"
+>ObjectStab.Base.Pin</A> T;
+<font color="blue">equation </font>
+  <font color="darkgreen">//  assert(cardinality(T) &gt; 0, &quot;One Pin not connected&quot;);</font>
+<font color="blue">end </font>OnePin;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Base.OnePinCenterI.png" ALT="ObjectStab.Base.OnePinCenter" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Base.OnePinCenter"></A><A HREF="ObjectStab_Base.html#ObjectStab.Base"
+>ObjectStab.Base</A>.OnePinCenter</H2>
+<B>Shell model for models with one connector in the center of the model</B><p>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">model</font> OnePinCenter <font color="darkgreen">
+  &quot;Shell model for models with one connector in the center of the model&quot;</font>
+   
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Pin"
+>ObjectStab.Base.Pin</A> T;
+<font color="blue">end </font>OnePinCenter;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Base.TwoPinI.png" ALT="ObjectStab.Base.TwoPin" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Base.TwoPin"></A><A HREF="ObjectStab_Base.html#ObjectStab.Base"
+>ObjectStab.Base</A>.TwoPin</H2>
+<B>Shell model for ObjectStab models with two electrical connectors </B><p>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">model</font> TwoPin <font color="darkgreen">
+  &quot;Shell model for ObjectStab models with two electrical connectors &quot;</font>
+   
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Pin"
+>ObjectStab.Base.Pin</A> T1;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Pin"
+>ObjectStab.Base.Pin</A> T2;
+<font color="blue">end </font>TwoPin;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Base.VoltageMeasurementI.png" ALT="ObjectStab.Base.VoltageMeasurement" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Base.VoltageMeasurement"></A><A HREF="ObjectStab_Base.html#ObjectStab.Base"
+>ObjectStab.Base</A>.VoltageMeasurement</H2>
+<B>Voltage Measurement for Electrical Cuts</B><p>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">class</font> VoltageMeasurement <font color="darkgreen">&quot;Voltage Measurement for Electrical Cuts&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.OnePin"
+>ObjectStab.Base.OnePin</A>;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> V=<font color="red">sqrt</font>((1 + T.va)*(1 + T.va) + T.vb*T.vb) <font color="darkgreen">&quot;Voltage Amplitude&quot;</font>
+    ;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.VoltageAngle"
+>Base.VoltageAngle</A> theta=<font color="red">Modelica.Math.atan2</font>(T.vb, (1 + T.va)) <font color="darkgreen">
+    &quot;Voltage Angle&quot;</font>;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.OutPort"
+>Modelica.Blocks.Interfaces.OutPort</A> outPort(<font color="blue">final </font>n=1);
+<font color="blue">equation </font>
+  T.ia = 0;
+  T.ib = 0;
+  outPort.signal[1] = V;
+<font color="blue">end </font>VoltageMeasurement;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Base.CurrentMeasurementI.png" ALT="ObjectStab.Base.CurrentMeasurement" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Base.CurrentMeasurement"></A><A HREF="ObjectStab_Base.html#ObjectStab.Base"
+>ObjectStab.Base</A>.CurrentMeasurement</H2>
+<B>CurrentMeasurement</B><p>
+<H3>Information</H3>
+<PRE>Current Measurement for Electrical Cuts. 
+Should be connected in series.
+</PRE>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">class</font> CurrentMeasurement <font color="darkgreen">&quot;CurrentMeasurement&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.TwoPin"
+>ObjectStab.Base.TwoPin</A>;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.OutPort"
+>Modelica.Blocks.Interfaces.OutPort</A> outPort(<font color="blue">final </font>n=1);
+<font color="blue">equation </font>
+  outPort.signal[1] = <font color="red">sqrt</font>((T1.ia)^2 + T1.ib^2);
+  T1.va = T2.va;
+  T1.vb = T2.vb;
+  T1.ia = -T2.ia;
+  T1.ib = -T2.ib;
+<font color="blue">end </font>CurrentMeasurement;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Base.PowerMeasurementI.png" ALT="ObjectStab.Base.PowerMeasurement" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Base.PowerMeasurement"></A><A HREF="ObjectStab_Base.html#ObjectStab.Base"
+>ObjectStab.Base</A>.PowerMeasurement</H2>
+<B>Power Measurement</B><p>
+<H3>Information</H3>
+<PRE>Current Measurement for Electrical Cuts. 
+Should be connected in series.
+</PRE>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">class</font> PowerMeasurement <font color="darkgreen">&quot;Power Measurement&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.TwoPin"
+>ObjectStab.Base.TwoPin</A>;
+  Real P=(1 + T1.va)*T1.ia + T1.vb*T1.ib;
+  Real Q=(T1.vb*T1.ia - (1 + T1.va)*T1.ib);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.OutPort"
+>Modelica.Blocks.Interfaces.OutPort</A> outPort(<font color="blue">final </font>n=2);
+<font color="blue">equation </font>
+  <font color="darkgreen"></font>
+  outPort.signal[1] = P;
+  outPort.signal[2] = Q;
+  T1.va = T2.va;
+  T1.vb = T2.vb;
+  T1.ia = -T2.ia;
+  T1.ib = -T2.ib;
+<font color="blue">end </font>PowerMeasurement;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Base.wRefPinI.png" ALT="ObjectStab.Base.wRefPin" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Base.wRefPin"></A><A HREF="ObjectStab_Base.html#ObjectStab.Base"
+>ObjectStab.Base</A>.wRefPin</H2>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">connector</font> wRefPin 
+  <font color="blue">flow </font>Real Hwsum(start=1);
+  <font color="blue">flow </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.InertiaConstant"
+>Base.InertiaConstant</A> Hsum(start=1);
+<font color="blue">end </font>wRefPin;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Base.SystemI.png" ALT="ObjectStab.Base.System" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Base.System"></A><A HREF="ObjectStab_Base.html#ObjectStab.Base"
+>ObjectStab.Base</A>.System</H2>
+<B>Shell model for connected systems</B><p>
+<IMG SRC="ObjectStab.Base.SystemD.png" ALT="ObjectStab.Base.System">
+<H3>Information</H3>
+<PRE>This model defines global variables necessary for the system frequency reference.
+The reference is computed using the center-of-inertia method.
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>wmin</TD><TD>0.5</TD><TD>[p.u.]</TD></TR>
+<TR><TD>wmax</TD><TD>1.5</TD><TD>[p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">class</font> System <font color="darkgreen">&quot;Shell model for connected systems&quot;</font> 
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.AngularVelocity"
+>AngularVelocity</A> wmin=0.5;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.AngularVelocity"
+>AngularVelocity</A> wmax=1.5;
+  <font color="darkgreen"></font>
+  <font color="blue">inner </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.AngularVelocity"
+>AngularVelocity</A> wref(start=1);
+<font color="blue">protected </font>
+  <font color="blue">inner </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.wRefContainer"
+>wRefContainer</A> wrcon;
+<font color="blue">equation </font>
+  wref = wrcon.wr.Hwsum/(wrcon.wr.Hsum);
+  <font color="darkgreen"></font>
+  <font color="blue">when </font>(wref &lt; wmin)<font color="blue"> or </font>(wref &gt; wmax)<font color="blue"> then</font>
+    <font color="red">terminate</font>(
+      &quot;Simulation terminated since reference freqeuency is unreasonable !! (as decided by parameters wmin and wmax)&quot;
+      );
+  <font color="blue">end when</font>;
+  <font color="darkgreen"></font>
+<font color="blue">end </font>System;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Base.ScalerI.png" ALT="ObjectStab.Base.Scaler" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Base.Scaler"></A><A HREF="ObjectStab_Base.html#ObjectStab.Base"
+>ObjectStab.Base</A>.Scaler</H2>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Scaler 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.TwoPin"
+>TwoPin</A>;
+  Real k=InPort.signal[1];
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.InPort"
+>Modelica.Blocks.Interfaces.InPort</A> InPort;
+<font color="blue">equation </font>
+  [T2.ia; T2.ib] = k*[T1.ia; T1.ib];
+  [T2.va; T2.vb] = k*[T1.va; T1.vb];
+<font color="blue">end </font>Scaler;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Base.wRefContainerI.png" ALT="ObjectStab.Base.wRefContainer" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Base.wRefContainer"></A><A HREF="ObjectStab_Base.html#ObjectStab.Base"
+>ObjectStab.Base</A>.wRefContainer</H2>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">class</font> wRefContainer 
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.wRefPin"
+>wRefPin</A> wr;
+<font color="blue">end </font>wRefContainer;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.dynasim.se/">Dymola</a> Mon Sep 30 21:51:56 2002
+.
+</address></BODY>
+</HTML>

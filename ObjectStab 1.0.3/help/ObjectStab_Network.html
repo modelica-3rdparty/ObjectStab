@@ -1,0 +1,810 @@
+<HTML>
+<HEAD><META name="HTML-Generator" content="Dymola"><TITLE>ObjectStab</TITLE></HEAD>
+<BODY><P>
+<H2><A NAME="ObjectStab.Network"></A><A HREF="ObjectStab.html#ObjectStab"
+>ObjectStab</A>.Network</H2>
+<B>Network subpackage</B>
+<P>
+<A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials"
+><IMG SRC="ObjectStab.Network.PartialsI.png" ALT="ObjectStab.Network.Partials" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network_Controllers.html#ObjectStab.Network.Controllers"
+><IMG SRC="ObjectStab.Network.ControllersI.png" ALT="ObjectStab.Network.Controllers" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.Ground"
+><IMG SRC="ObjectStab.Network.GroundI.png" ALT="ObjectStab.Network.Ground" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.Impedance"
+><IMG SRC="ObjectStab.Network.ImpedanceI.png" ALT="ObjectStab.Network.Impedance" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.Admittance"
+><IMG SRC="ObjectStab.Network.AdmittanceI.png" ALT="ObjectStab.Network.Admittance" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.ShuntCapacitor"
+><IMG SRC="ObjectStab.Network.ShuntCapacitorI.png" ALT="ObjectStab.Network.ShuntCapacitor" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.ShuntReactor"
+><IMG SRC="ObjectStab.Network.ShuntReactorI.png" ALT="ObjectStab.Network.ShuntReactor" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink"
+><IMG SRC="ObjectStab.Network.PilinkI.png" ALT="ObjectStab.Network.Pilink" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink2"
+><IMG SRC="ObjectStab.Network.Pilink2I.png" ALT="ObjectStab.Network.Pilink2" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.OpenedPilink"
+><IMG SRC="ObjectStab.Network.OpenedPilinkI.png" ALT="ObjectStab.Network.OpenedPilink" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.Bus"
+><IMG SRC="ObjectStab.Network.BusI.png" ALT="ObjectStab.Network.Bus" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.FaultedBus"
+><IMG SRC="ObjectStab.Network.FaultedBusI.png" ALT="ObjectStab.Network.FaultedBus" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.Breaker"
+><IMG SRC="ObjectStab.Network.BreakerI.png" ALT="ObjectStab.Network.Breaker" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.SeriesFault"
+><IMG SRC="ObjectStab.Network.SeriesFaultI.png" ALT="ObjectStab.Network.SeriesFault" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.FaultedPilink"
+><IMG SRC="ObjectStab.Network.FaultedPilinkI.png" ALT="ObjectStab.Network.FaultedPilink" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.IdealTransformer"
+><IMG SRC="ObjectStab.Network.IdealTransformerI.png" ALT="ObjectStab.Network.IdealTransformer" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.FixTransformer"
+><IMG SRC="ObjectStab.Network.FixTransformerI.png" ALT="ObjectStab.Network.FixTransformer" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.TCULCon"
+><IMG SRC="ObjectStab.Network.TCULConI.png" ALT="ObjectStab.Network.TCULCon" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.TCULDis"
+><IMG SRC="ObjectStab.Network.TCULDisI.png" ALT="ObjectStab.Network.TCULDis" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.ExtBreaker"
+><IMG SRC="ObjectStab.Network.ExtBreakerI.png" ALT="ObjectStab.Network.ExtBreaker" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network.html#ObjectStab.Network.OpenedPilink2"
+><IMG SRC="ObjectStab.Network.OpenedPilink2I.png" ALT="ObjectStab.Network.OpenedPilink2" WIDTH=80  HEIGHT=80 ></A>
+<P><P>
+<H3>Information</H3>
+<PRE>The network subpackage contains the various network components.
+</PRE><P>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.BusI.png" ALT="ObjectStab.Network.Bus" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.Bus"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.Bus</H2>
+<B>Busbar model</B><p>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Bus <font color="darkgreen">&quot;Busbar model&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.OnePinCenter"
+>Base.OnePinCenter</A>;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> V=<font color="red">sqrt</font>((1 + T.va)*(1 + T.va) + T.vb*T.vb) <font color="darkgreen">&quot;Voltage Amplitude&quot;</font>
+    ;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.VoltageAngle"
+>Base.VoltageAngle</A> theta=<font color="red">Modelica.Math.atan2</font>(T.vb, (1 + T.va)) <font color="darkgreen">
+    &quot;Voltage Angle&quot;</font>;
+  Real thetadeg=theta*180/Modelica.Constants.PI;
+  <font color="darkgreen"></font>
+<font color="blue">equation </font>
+  T.ia = 0;
+  T.ib = 0;
+<font color="blue">end </font>Bus;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.FaultedBusI.png" ALT="ObjectStab.Network.FaultedBus" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.FaultedBus"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.FaultedBus</H2>
+<B>Busbar model with shunt fault</B><p>
+<IMG SRC="ObjectStab.Network.FaultedBusD.png" ALT="ObjectStab.Network.FaultedBus">
+<H3>Information</H3>
+<PRE>The shunt fault is modelled as an impedance connected to ground through
+a breaker. The fault is applied at simulation time FaultTime and stays
+active for the duration of FaultDuration.
+
+For numerical reasons, the fault impedance must not be exactly equal
+to zero.
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>FaultTime</TD><TD>10</TD><TD>Time of fault occurence [s]</TD></TR>
+<TR><TD>FaultDuration</TD><TD>1</TD><TD>Duration of fault [s]</TD></TR>
+<TR><TD>FaultR</TD><TD>0.1</TD><TD>Fault Resistance [p.u.]</TD></TR>
+<TR><TD>FaultX</TD><TD>0</TD><TD>Fault Reactance [p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> FaultedBus <font color="darkgreen">&quot;Busbar model with shunt fault&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.OnePinCenter"
+>Base.OnePinCenter</A>;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Voltage"
+>Base.Voltage</A> V=<font color="red">sqrt</font>((1 + T.va)*(1 + T.va) + T.vb*T.vb) <font color="darkgreen">&quot;Voltage Amplitude&quot;</font>
+    ;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.VoltageAngle"
+>Base.VoltageAngle</A> theta=<font color="red">Modelica.Math.atan2</font>(T.vb, (1 + T.va)) <font color="darkgreen">
+    &quot;Voltage Angle&quot;</font>;
+  Real thetadeg=theta*180/Modelica.Constants.PI;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Base.Time</A> FaultTime=10 <font color="darkgreen">&quot;Time of fault occurence&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Duration"
+>Base.Duration</A> FaultDuration=1 <font color="darkgreen">&quot;Duration of fault&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Resistance"
+>Base.Resistance</A> FaultR=0.1 <font color="darkgreen">&quot;Fault Resistance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>Base.Reactance</A> FaultX=0 <font color="darkgreen">&quot;Fault Reactance&quot;</font>;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.Current"
+>Base.Current</A> iFault <font color="darkgreen">&quot;Fault Current&quot;</font>;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Impedance"
+>ObjectStab.Network.Impedance</A> Imp(R=FaultR, X=FaultX);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Ground"
+>ObjectStab.Network.Ground</A> G;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Breaker"
+>ObjectStab.Network.Breaker</A> B1(OpenTime=FaultTime + FaultDuration, 
+      CloseTime=FaultTime);
+<font color="blue">equation </font>
+  <font color="red">connect</font>(Imp.T1, G.T);
+  <font color="red">connect</font>(Imp.T2, B1.T1);
+  <font color="red">connect</font>(B1.T2, T);
+  iFault = <font color="red">sqrt</font>(G.T.ia^2 + G.T.ib^2);
+<font color="blue">end </font>FaultedBus;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.PilinkI.png" ALT="ObjectStab.Network.Pilink" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.Pilink"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.Pilink</H2>
+<B>Pilink Line Model</B><p>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>R</TD><TD>0.0</TD><TD>Series Resistance [p.u.]</TD></TR>
+<TR><TD>X</TD><TD>0.1</TD><TD>Series Reactance [p.u.]</TD></TR>
+<TR><TD>B</TD><TD>0.1</TD><TD>Shunt Susceptance [p.u.]</TD></TR>
+<TR><TD>G</TD><TD>0.0</TD><TD>Shunt Conductance [p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Pilink <font color="darkgreen">&quot;Pilink Line Model&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials.PilinkBase"
+>Partials.PilinkBase</A>;
+  <font color="darkgreen"></font>
+<font color="blue">equation </font>
+  [T1.ia; T1.ib] = [G, -B; B, G]/2*[1 + T1.va; T1.vb] + [R, X; -X, R]/(R^2 + X^
+    2)*[T1.va - T2.va; T1.vb - T2.vb];
+  [T2.ia; T2.ib] = [G, -B; B, G]/2*[1 + T2.va; T2.vb] - [R, X; -X, R]/(R^2 + X^
+    2)*[T1.va - T2.va; T1.vb - T2.vb];
+  <font color="darkgreen"></font>
+<font color="blue">end </font>Pilink;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.FixTransformerI.png" ALT="ObjectStab.Network.FixTransformer" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.FixTransformer"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.FixTransformer</H2>
+<B>Fixed Ratio Transformer</B><p>
+<IMG SRC="ObjectStab.Network.FixTransformerD.png" ALT="ObjectStab.Network.FixTransformer">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>R</TD><TD>0.0</TD><TD>Leakage Resistance [p.u.]</TD></TR>
+<TR><TD>X</TD><TD>0.1</TD><TD>Leakage Reactance [p.u.]</TD></TR>
+<TR><TD>n</TD><TD>1</TD><TD>Transformer Ratio [p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> FixTransformer <font color="darkgreen">&quot;Fixed Ratio Transformer&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials.ImpTransformer"
+>Partials.ImpTransformer</A>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.TapRatio"
+>Base.TapRatio</A> n=1 <font color="darkgreen">&quot;Transformer Ratio&quot;</font>;
+<font color="blue">equation </font>
+  Tr.n = n;
+<font color="blue">end </font>FixTransformer;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.ShuntCapacitorI.png" ALT="ObjectStab.Network.ShuntCapacitor" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.ShuntCapacitor"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.ShuntCapacitor</H2>
+<B>Shunt Capacitor</B><p>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>G</TD><TD>0</TD><TD>[p.u.]</TD></TR>
+<TR><TD>B</TD><TD>0.5</TD><TD>[p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">class</font> ShuntCapacitor <font color="darkgreen">&quot;Shunt Capacitor&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.OnePin"
+>ObjectStab.Base.OnePin</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Conductance"
+>ObjectStab.Base.Conductance</A> G=0;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Susceptance"
+>ObjectStab.Base.Susceptance</A> B=0.5;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.ActivePower"
+>Base.ActivePower</A> Pg <font color="darkgreen">&quot;Generated Active Power&quot;</font>;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.ReactivePower"
+>Base.ReactivePower</A> Qg <font color="darkgreen">&quot;Generated Reactive Power&quot;</font>;
+<font color="blue">equation </font>
+  [T.ia; T.ib] = [G, -B; B, G]*[1 + T.va; T.vb];
+  Pg = -((1 + T.va)*T.ia + T.vb*T.ib);
+  Qg = -(T.vb*T.ia - (1 + T.va)*T.ib);
+<font color="blue">end </font>ShuntCapacitor;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.OpenedPilinkI.png" ALT="ObjectStab.Network.OpenedPilink" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.OpenedPilink"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.OpenedPilink</H2>
+<B>Pilink model with breakers</B><p>
+<IMG SRC="ObjectStab.Network.OpenedPilinkD.png" ALT="ObjectStab.Network.OpenedPilink">
+<H3>Information</H3>
+<PRE>Breakers B1 and B2 opens simultaneously at simulation time OpenTime, and stays 
+until time CloseTime, after which they are simultanously closed.
+
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>R</TD><TD>0.0</TD><TD>Series Resistance [p.u.]</TD></TR>
+<TR><TD>X</TD><TD>0.1</TD><TD>Series Reactance [p.u.]</TD></TR>
+<TR><TD>B</TD><TD>0.1</TD><TD>Shunt Susceptance [p.u.]</TD></TR>
+<TR><TD>G</TD><TD>0.0</TD><TD>Shunt Conductance [p.u.]</TD></TR>
+<TR><TD>OpenTime</TD><TD>10</TD><TD>Time of branch opening [s]</TD></TR>
+<TR><TD>CloseTime</TD><TD>1e10</TD><TD>Duration of the branch opening [s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> OpenedPilink <font color="darkgreen">&quot;Pilink model with breakers&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials.PilinkBase"
+>Partials.PilinkBase</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Base.Time</A> OpenTime=10 <font color="darkgreen">&quot;Time of branch opening&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Duration"
+>Base.Duration</A> CloseTime=1e10 <font color="darkgreen">&quot;Duration of the branch opening&quot;</font>;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink2"
+>ObjectStab.Network.Pilink2</A> L1(
+    R=R, 
+    X=X, 
+    B=B, 
+    G=G);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Breaker"
+>ObjectStab.Network.Breaker</A> B1(OpenTime=OpenTime, CloseTime=CloseTime);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Breaker"
+>ObjectStab.Network.Breaker</A> B2(OpenTime=OpenTime, CloseTime=CloseTime);
+<font color="blue">equation </font>
+  <font color="red">connect</font>(B1.T1, T1);
+  <font color="red">connect</font>(B1.T2, L1.T1);
+  <font color="red">connect</font>(B2.T1, L1.T2);
+  <font color="red">connect</font>(T2, B2.T2);
+<font color="blue">end </font>OpenedPilink;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.TCULDisI.png" ALT="ObjectStab.Network.TCULDis" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.TCULDis"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.TCULDis</H2>
+<B>Tap-Changing Under Load (TCUL) transformer with discrete implementation</B><p>
+<IMG SRC="ObjectStab.Network.TCULDisD.png" ALT="ObjectStab.Network.TCULDis">
+<H3>Information</H3>
+<PRE>Discrete implementation of Tap-Changing Under Load (TCUL) transformer according to
+method D1-D4 using a state-machine implementation of the control system and
+tap changer mechanism. See documentation for 'Controllers.TCULDiscrete' for
+documentation on the control system.
+Note that the tap position of a discrete tap changer is not properly 
+initialized by the initial value solver in Dymola version 4.0c. 
+This can by manually by adding e.g., the string: Controller(tappos(start=8))
+in the 'Modifiers' field (initializes the tap to position 8).
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>R</TD><TD>0.0</TD><TD>Leakage Resistance [p.u.]</TD></TR>
+<TR><TD>X</TD><TD>0.1</TD><TD>Leakage Reactance [p.u.]</TD></TR>
+<TR><TD>n</TD><TD>1</TD><TD>Transformer Ratio [p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> TCULDis <font color="darkgreen">
+  &quot;Tap-Changing Under Load (TCUL) transformer with discrete implementation&quot;</font>
+   
+  <font color="darkgreen"></font>
+  <font color="blue">extends </font><A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials.ImpTransformer"
+>Partials.ImpTransformer</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.TapRatio"
+>Base.TapRatio</A> n=1 <font color="darkgreen">&quot;Transformer Ratio&quot;</font>;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Network_Controllers.html#ObjectStab.Network.Controllers.TCULDiscrete"
+>ObjectStab.Network.Controllers.TCULDiscrete</A> Controller(n=n);
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.VoltageMeasurement"
+>ObjectStab.Base.VoltageMeasurement</A> PrimaryVoltage;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.VoltageMeasurement"
+>ObjectStab.Base.VoltageMeasurement</A> SecondaryVoltage;
+<font color="blue">equation </font>
+  <font color="red">connect</font>(Tr.T2, T2);
+  <font color="red">connect</font>(Imp.T2, Tr.T1);
+  <font color="red">connect</font>(SecondaryVoltage.T, T2);
+  <font color="red">connect</font>(PrimaryVoltage.T, Imp.T1);
+  <font color="red">connect</font>(Controller.inPort2, PrimaryVoltage.outPort);
+  <font color="red">connect</font>(Controller.outPort, Tr.inPort);
+  <font color="red">connect</font>(SecondaryVoltage.outPort, Controller.inPort1);
+<font color="blue">end </font>TCULDis;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.TCULConI.png" ALT="ObjectStab.Network.TCULCon" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.TCULCon"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.TCULCon</H2>
+<B>Tap-Changing Under Load (TCUL) transformer with continuous implementation</B><p>
+<IMG SRC="ObjectStab.Network.TCULConD.png" ALT="ObjectStab.Network.TCULCon">
+<H3>Information</H3>
+<PRE>Continuous approximation of Tap-Changing Under Load (TCUL) according to
+method C1-C4
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>R</TD><TD>0.0</TD><TD>Leakage Resistance [p.u.]</TD></TR>
+<TR><TD>X</TD><TD>0.1</TD><TD>Leakage Reactance [p.u.]</TD></TR>
+<TR><TD>n</TD><TD>1</TD><TD>Transformer Ratio [p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> TCULCon <font color="darkgreen">
+  &quot;Tap-Changing Under Load (TCUL) transformer with continuous implementation&quot;</font>
+   
+  <font color="darkgreen"></font>
+  <font color="blue">extends </font><A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials.ImpTransformer"
+>Partials.ImpTransformer</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.TapRatio"
+>Base.TapRatio</A> n=1 <font color="darkgreen">&quot;Transformer Ratio&quot;</font>;
+  <A HREF="ObjectStab_Network_Controllers.html#ObjectStab.Network.Controllers.TCULContinuous"
+>ObjectStab.Network.Controllers.TCULContinuous</A> Controller(n=n);
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.VoltageMeasurement"
+>ObjectStab.Base.VoltageMeasurement</A> PrimaryVoltage;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.VoltageMeasurement"
+>ObjectStab.Base.VoltageMeasurement</A> SecondaryVoltage;
+<font color="blue">equation </font>
+  <font color="red">connect</font>(Imp.T1, T1);
+  <font color="red">connect</font>(Imp.T2, Tr.T1);
+  <font color="red">connect</font>(Tr.T2, T2);
+  <font color="red">connect</font>(SecondaryVoltage.T, T2);
+  <font color="red">connect</font>(Controller.outPort, Tr.inPort);
+  <font color="red">connect</font>(PrimaryVoltage.T, Imp.T1);
+  <font color="red">connect</font>(Controller.inPort2, PrimaryVoltage.outPort);
+  <font color="red">connect</font>(SecondaryVoltage.outPort, Controller.inPort1);
+<font color="blue">end </font>TCULCon;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.FaultedPilinkI.png" ALT="ObjectStab.Network.FaultedPilink" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.FaultedPilink"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.FaultedPilink</H2>
+<B>Pilink with shunt fault model</B><p>
+<IMG SRC="ObjectStab.Network.FaultedPilinkD.png" ALT="ObjectStab.Network.FaultedPilink">
+<H3>Information</H3>
+<PRE>The model of the Pilink with a shunt fault is realized using the Pilink
+models and the ideal breaker models.
+
+At time FaultTime, the breaker B3 closes and the ground fault becomes active
+for the duration of FaultDuration seconds, after which the line is disconnected
+at both ends. The ground fault location is determined by alpha, where alpha=0
+corresponds to a fault located at T1 and alpha=1 to a fault location at T2.
+
+For numerical reasons the fault and pilink impedance may not be exactly zero,
+and alpha not be equal to 0 or 1.
+
+
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>R</TD><TD>0.0</TD><TD>Series Resistance [p.u.]</TD></TR>
+<TR><TD>X</TD><TD>0.1</TD><TD>Series Reactance [p.u.]</TD></TR>
+<TR><TD>B</TD><TD>0.1</TD><TD>Shunt Susceptance [p.u.]</TD></TR>
+<TR><TD>G</TD><TD>0.0</TD><TD>Shunt Conductance [p.u.]</TD></TR>
+<TR><TD>FaultTime</TD><TD>1</TD><TD>Time of fault occurence [s] [s]</TD></TR>
+<TR><TD>ClearTime</TD><TD>0.07</TD><TD>Fault Clearing Time [s] [s]</TD></TR>
+<TR><TD>RecloseTime</TD><TD>1e60</TD><TD>Time of Reclosing [s] [s]</TD></TR>
+<TR><TD>alpha</TD><TD>0.5</TD><TD>Position of Fault</TD></TR>
+<TR><TD>FaultR</TD><TD>1e-5</TD><TD>Fault Resistance [p.u.]</TD></TR>
+<TR><TD>FaultX</TD><TD>0</TD><TD>Fault Reactance [p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> FaultedPilink <font color="darkgreen">&quot;Pilink with shunt fault model&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials.PilinkBase"
+>Partials.PilinkBase</A>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Base.Time</A> FaultTime=1 <font color="darkgreen">&quot;Time of fault occurence [s]&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Duration"
+>Base.Duration</A> ClearTime=0.07 <font color="darkgreen">&quot;Fault Clearing Time [s]&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Base.Time</A> RecloseTime=1e60 <font color="darkgreen">&quot;Time of Reclosing [s]&quot;</font>;
+  <font color="blue">parameter </font>Real alpha=0.5 <font color="darkgreen">&quot;Position of Fault&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Resistance"
+>Base.Resistance</A> FaultR=1e-5 <font color="darkgreen">&quot;Fault Resistance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>Base.Reactance</A> FaultX=0 <font color="darkgreen">&quot;Fault Reactance&quot;</font>;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink2"
+>ObjectStab.Network.Pilink2</A> L1(
+    R=R*alpha, 
+    X=X*alpha, 
+    B=B*alpha, 
+    G=G*alpha);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Pilink2"
+>ObjectStab.Network.Pilink2</A> L2(
+    R=R*(1 - alpha), 
+    X=X*(1 - alpha), 
+    B=B*(1 - alpha), 
+    G=G*(1 - alpha));
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Breaker"
+>ObjectStab.Network.Breaker</A> B1(OpenTime=FaultTime + ClearTime, CloseTime=
+        RecloseTime);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Breaker"
+>ObjectStab.Network.Breaker</A> B2(OpenTime=FaultTime + ClearTime, CloseTime=
+        RecloseTime);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Impedance"
+>ObjectStab.Network.Impedance</A> FaultImp(R=FaultR, X=FaultX);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Breaker"
+>ObjectStab.Network.Breaker</A> B3(OpenTime=FaultTime + ClearTime, CloseTime=
+        FaultTime);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Ground"
+>ObjectStab.Network.Ground</A> Gr;
+<font color="blue">equation </font>
+  <font color="red">connect</font>(B1.T1, T1);
+  <font color="red">connect</font>(B1.T2, L1.T1);
+  <font color="red">connect</font>(Gr.T, FaultImp.T1);
+  <font color="red">connect</font>(FaultImp.T2, B3.T1);
+  <font color="red">connect</font>(B2.T2, T2);
+  <font color="red">connect</font>(B2.T1, L2.T2);
+  <font color="red">connect</font>(L1.T2, B3.T2);
+  <font color="red">connect</font>(B3.T2, L2.T1);
+<font color="blue">end </font>FaultedPilink;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.GroundI.png" ALT="ObjectStab.Network.Ground" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.Ground"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.Ground</H2>
+<B>Ground Point</B><p>
+<IMG SRC="ObjectStab.Network.GroundD.png" ALT="ObjectStab.Network.Ground">
+<H3>Information</H3>
+<PRE>This model can be used to define a ground point, i.e., a point where the voltage is
+zero:
+
+V = 0   &lt;=&gt; 1+va = 0, vb = 0
+
+Several (or no) ground points may be used in a power system model.
+</PRE>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Ground <font color="darkgreen">&quot;Ground Point&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.OnePin"
+>Base.OnePin</A>;
+<font color="blue">equation </font>
+  1 + T.va = 0;
+  T.vb = 0;
+<font color="blue">end </font>Ground;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.ImpedanceI.png" ALT="ObjectStab.Network.Impedance" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.Impedance"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.Impedance</H2>
+<B>Impedance model</B><p>
+<IMG SRC="ObjectStab.Network.ImpedanceD.png" ALT="ObjectStab.Network.Impedance">
+<H3>Information</H3>
+<PRE>The impedance model is governed by the equations:
+
+           R+jX
+           ----
+V1, I1  ---    --- V2, I2
+    -&gt;     ----        &lt;-
+
+
+V1 - V2 = (R+jX) * I1
+I1 + I2 = 0:
+
+
+For numerical reasons, R and X may not both be set to zero.
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>R</TD><TD>0.0</TD><TD>Resistance [p.u.]</TD></TR>
+<TR><TD>X</TD><TD>0.1</TD><TD>Reactance [p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Impedance <font color="darkgreen">&quot;Impedance model&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.TwoPin"
+>Base.TwoPin</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Resistance"
+>Base.Resistance</A> R=0.0 <font color="darkgreen">&quot;Resistance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>Base.Reactance</A> X=0.1 <font color="darkgreen">&quot;Reactance&quot;</font>;
+  <font color="darkgreen"></font>
+<font color="blue">equation </font>
+  [T1.va - T2.va; T1.vb - T2.vb] = [R, -X; X, R]*[T1.ia; T1.ib];
+  [T1.ia; T1.ib] + [T2.ia; T2.ib] = [0; 0];
+<font color="blue">end </font>Impedance;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.AdmittanceI.png" ALT="ObjectStab.Network.Admittance" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.Admittance"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.Admittance</H2>
+<B>Admittance Model</B><p>
+<IMG SRC="ObjectStab.Network.AdmittanceD.png" ALT="ObjectStab.Network.Admittance">
+<H3>Information</H3>
+<PRE>The admittance model is governed by the equations:
+
+           G+jB
+           ----
+V1, I1  ---    --- V2, I2
+    -&gt;     ----        &lt;- 
+
+
+I1 = (G+jB) * (V1-V2)
+I1 + I2 = 0:
+
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>G</TD><TD>0.0</TD><TD>Conductance [p.u.]</TD></TR>
+<TR><TD>B</TD><TD>0.1</TD><TD>Susceptance [p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Admittance <font color="darkgreen">&quot;Admittance Model&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.TwoPin"
+>Base.TwoPin</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Conductance"
+>Base.Conductance</A> G=0.0 <font color="darkgreen">&quot;Conductance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Susceptance"
+>Base.Susceptance</A> B=0.1 <font color="darkgreen">&quot;Susceptance&quot;</font>;
+  <font color="darkgreen"></font>
+<font color="blue">equation </font>
+  [T1.ia; T1.ib] = [G, -B; B, G]*[T1.va - T2.va; T1.vb - T2.vb];
+  [T1.ia; T1.ib] + [T2.ia; T2.ib] = [0; 0];
+<font color="blue">end </font>Admittance;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.ShuntReactorI.png" ALT="ObjectStab.Network.ShuntReactor" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.ShuntReactor"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.ShuntReactor</H2>
+<B>Shunt Reactor</B><p>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>G</TD><TD>0</TD><TD>[p.u.]</TD></TR>
+<TR><TD>B</TD><TD>-0.5</TD><TD>[p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">class</font> ShuntReactor <font color="darkgreen">&quot;Shunt Reactor&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.OnePin"
+>ObjectStab.Base.OnePin</A>;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Conductance"
+>ObjectStab.Base.Conductance</A> G=0;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Susceptance"
+>ObjectStab.Base.Susceptance</A> B=-0.5;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.ActivePower"
+>Base.ActivePower</A> Pg <font color="darkgreen">&quot;Generated Active Power&quot;</font>;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.ReactivePower"
+>Base.ReactivePower</A> Qg <font color="darkgreen">&quot;Generated Reactive Power&quot;</font>;
+<font color="blue">equation </font>
+  [T.ia; T.ib] = [G, -B; B, G]*[1 + T.va; T.vb];
+  Pg = -((1 + T.va)*T.ia + T.vb*T.ib);
+  Qg = -(T.vb*T.ia - (1 + T.va)*T.ib);
+<font color="blue">end </font>ShuntReactor;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.Pilink2I.png" ALT="ObjectStab.Network.Pilink2" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.Pilink2"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.Pilink2</H2>
+<B>Pilink transmission line model built using Basic Components</B><p>
+<IMG SRC="ObjectStab.Network.Pilink2D.png" ALT="ObjectStab.Network.Pilink2">
+<H3>Information</H3>
+<PRE>Transmission line modelled in pi-equivalent form according to [1,pp. 44-45]
+realized using the Impedance and Admittance submodels.
+
+For numerical reasons, the R+jX must not be set equal to zero.
+
+---
+[1] J. Machowski, J.W. Bialek, and J.R. Bumby, Power System Dynamics 
+and Stability, Number ISBN 0-471-97174. Wiley, 1993.
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>R</TD><TD>0.0</TD><TD>Series Resistance [p.u.]</TD></TR>
+<TR><TD>X</TD><TD>0.1</TD><TD>Series Reactance [p.u.]</TD></TR>
+<TR><TD>B</TD><TD>0.1</TD><TD>Shunt Susceptance [p.u.]</TD></TR>
+<TR><TD>G</TD><TD>0.0</TD><TD>Shunt Conductance [p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Pilink2 <font color="darkgreen">
+  &quot;Pilink transmission line model built using Basic Components&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials.PilinkBase"
+>Partials.PilinkBase</A>;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Impedance"
+>ObjectStab.Network.Impedance</A> Imp(R=R, X=X);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Admittance"
+>ObjectStab.Network.Admittance</A> T2Adm(G=G/2, B=B/2);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Admittance"
+>ObjectStab.Network.Admittance</A> T1Adm(G=G/2, B=B/2);
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Ground"
+>ObjectStab.Network.Ground</A> GT1;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Ground"
+>ObjectStab.Network.Ground</A> GT2;
+<font color="blue">equation </font>
+  <font color="red">connect</font>(T2Adm.T1, GT2.T);
+  <font color="red">connect</font>(GT1.T, T1Adm.T1);
+  <font color="red">connect</font>(T2, Imp.T2);
+  <font color="red">connect</font>(T2Adm.T2, T2);
+  <font color="red">connect</font>(T1, Imp.T1);
+  <font color="red">connect</font>(T1Adm.T2, T1);
+<font color="blue">end </font>Pilink2;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.BreakerI.png" ALT="ObjectStab.Network.Breaker" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.Breaker"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.Breaker</H2>
+<B>Ideal Breaker model</B><p>
+<H3>Information</H3>
+<PRE>The ideal breaker model is governed by the following models:
+if breaker is closed then
+  V1 = V2
+  I1 + I2 = 0
+else
+  I1 = 0
+  I2 = 0
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>OpenTime</TD><TD>1</TD><TD>Opening time [s]</TD></TR>
+<TR><TD>CloseTime</TD><TD>1e10</TD><TD>Closing time [s]</TD></TR>
+<TR><TD>small</TD><TD>1e-6</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Breaker <font color="darkgreen">&quot;Ideal Breaker model&quot;</font> 
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Base.Time</A> OpenTime=1 <font color="darkgreen">&quot;Opening time&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Base.Time</A> CloseTime=1e10 <font color="darkgreen">&quot;Closing time&quot;</font>;
+  <font color="blue">extends </font><A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials.BreakerBase"
+>Partials.BreakerBase</A>(closed(start=OpenTime &lt; CloseTime));
+  <font color="darkgreen"></font>
+<font color="blue">equation </font>
+  <font color="blue">if </font>(OpenTime &gt; CloseTime)<font color="blue"> then</font>
+    closed = (time &gt; CloseTime<font color="blue"> and </font>time &lt; OpenTime);
+  <font color="blue">else</font>
+    closed = (time &lt; OpenTime<font color="blue"> or </font>time &gt; CloseTime);
+  <font color="blue">end if</font>;
+<font color="blue">end </font>Breaker;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.SeriesFaultI.png" ALT="ObjectStab.Network.SeriesFault" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.SeriesFault"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.SeriesFault</H2>
+<B>Series Fault model</B><p>
+<IMG SRC="ObjectStab.Network.SeriesFaultD.png" ALT="ObjectStab.Network.SeriesFault">
+<H3>Information</H3>
+<PRE>The series fault is realized using the ideal breaker model.
+The fault becomes active (non-conductive) at time FaultTime
+and stays non-conductive for the duration of FaultDuration seconds,
+after which the fault is cleared.
+
+
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>FaultTime</TD><TD>1</TD><TD>Opening time [s]</TD></TR>
+<TR><TD>FaultDuration</TD><TD>1</TD><TD>Duration of Fault [s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> SeriesFault <font color="darkgreen">&quot;Series Fault model&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.TwoPin"
+>Base.TwoPin</A>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Base.Time</A> FaultTime=1 <font color="darkgreen">&quot;Opening time&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Duration"
+>Base.Duration</A> FaultDuration=1 <font color="darkgreen">&quot;Duration of Fault&quot;</font>;
+  <font color="darkgreen"></font>
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Breaker"
+>ObjectStab.Network.Breaker</A> B1(OpenTime=FaultTime, CloseTime=FaultTime + 
+        FaultDuration);
+<font color="blue">equation </font>
+  <font color="red">connect</font>(T1, B1.T1);
+  <font color="red">connect</font>(B1.T2, T2);
+<font color="blue">end </font>SeriesFault;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.IdealTransformerI.png" ALT="ObjectStab.Network.IdealTransformer" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.IdealTransformer"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.IdealTransformer</H2>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> IdealTransformer 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.TwoPin"
+>ObjectStab.Base.TwoPin</A>;
+  <A HREF="ObjectStab_Base.html#ObjectStab.Base.TapRatio"
+>Base.TapRatio</A> n(start=1);
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.InPort"
+>Modelica.Blocks.Interfaces.InPort</A> inPort(<font color="blue">final </font>n=1);
+<font color="blue">equation </font>
+  <font color="darkgreen"></font>
+  (1 + T1.va)*n = 1 + T2.va;
+  T1.vb*n = T2.vb;
+  T1.ia = -T2.ia*n;
+  T1.ib = -T2.ib*n;
+  n = inPort.signal[1];
+<font color="blue">end </font>IdealTransformer;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.ExtBreakerI.png" ALT="ObjectStab.Network.ExtBreaker" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.ExtBreaker"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.ExtBreaker</H2>
+<H3>Information</H3>
+<PRE>The ideal breaker model is governed by the following models:
+
+
+if breaker is closed then
+  V1 = V2
+  I1 + I2 = 0
+
+else
+  I1 = 0
+  I2 = 0
+
+</PRE>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>small</TD><TD>1e-6</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> ExtBreaker 
+  <font color="blue">extends </font><A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials.BreakerBase"
+>Partials.BreakerBase</A>;
+  <font color="darkgreen"></font>
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/Modelica/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.BooleanInPort"
+>Modelica.Blocks.Interfaces.BooleanInPort</A> InPort;
+<font color="blue">equation </font>
+  closed = InPort.signal[1];
+<font color="blue">end </font>ExtBreaker;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.OpenedPilink2I.png" ALT="ObjectStab.Network.OpenedPilink2" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.OpenedPilink2"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.OpenedPilink2</H2>
+<B>Pilink model with breakers</B><p>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>R</TD><TD>0.0</TD><TD>Series Resistance [p.u.]</TD></TR>
+<TR><TD>X</TD><TD>0.1</TD><TD>Series Reactance [p.u.]</TD></TR>
+<TR><TD>B</TD><TD>0.1</TD><TD>Shunt Susceptance [p.u.]</TD></TR>
+<TR><TD>G</TD><TD>0.0</TD><TD>Shunt Conductance [p.u.]</TD></TR>
+<TR><TD>OpenTime</TD><TD>10</TD><TD>Time of branch opening [s]</TD></TR>
+<TR><TD>CloseTime</TD><TD>1e10</TD><TD>Duration of the branch opening [s]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> OpenedPilink2 <font color="darkgreen">&quot;Pilink model with breakers&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials.PilinkBase"
+>Partials.PilinkBase</A>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Time"
+>Base.Time</A> OpenTime=10 <font color="darkgreen">&quot;Time of branch opening&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Duration"
+>Base.Duration</A> CloseTime=1e10 <font color="darkgreen">&quot;Duration of the branch opening&quot;</font>;
+  <font color="darkgreen"></font>
+<font color="blue">equation </font>
+  [T1.ia; T1.ib] = <font color="blue">if </font>time &lt; OpenTime<font color="blue"> then </font>[G, -B; B, G]/2*[1 + T1.va; T1.vb]
+     + [R, X; -X, R]/(R^2 + X^2)*[T1.va - T2.va; T1.vb - T2.vb]<font color="blue"> else </font>[0; 0];
+  [T2.ia; T2.ib] = <font color="blue">if </font>time &lt; OpenTime<font color="blue"> then </font>[G, -B; B, G]/2*[1 + T2.va; T2.vb]
+     - [R, X; -X, R]/(R^2 + X^2)*[T1.va - T2.va; T1.vb - T2.vb]<font color="blue"> else </font>[0; 0];
+<font color="blue">end </font>OpenedPilink2;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.dynasim.se/">Dymola</a> Mon Sep 30 21:52:10 2002
+.
+</address></BODY>
+</HTML>

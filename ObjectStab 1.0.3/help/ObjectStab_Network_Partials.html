@@ -1,0 +1,162 @@
+<HTML>
+<HEAD><META name="HTML-Generator" content="Dymola"><TITLE>ObjectStab</TITLE></HEAD>
+<BODY><P>
+<H2><A NAME="ObjectStab.Network.Partials"></A><A HREF="ObjectStab_Network.html#ObjectStab.Network"
+>ObjectStab.Network</A>.Partials</H2>
+<B>Contains uninstatiable classes related to network components</B>
+<P>
+<A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials.PilinkBase"
+><IMG SRC="ObjectStab.Network.Partials.PilinkBaseI.png" ALT="ObjectStab.Network.Partials.PilinkBase" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials.ImpTransformer"
+><IMG SRC="ObjectStab.Network.Partials.ImpTransformerI.png" ALT="ObjectStab.Network.Partials.ImpTransformer" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials.Place32"
+><IMG SRC="ObjectStab.Network.Partials.Place32I.png" ALT="ObjectStab.Network.Partials.Place32" WIDTH=80  HEIGHT=80 ></A>
+<A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials.BreakerBase"
+><IMG SRC="ObjectStab.Network.Partials.BreakerBaseI.png" ALT="ObjectStab.Network.Partials.BreakerBase" WIDTH=80  HEIGHT=80 ></A>
+<P><P>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.Partials.PilinkBaseI.png" ALT="ObjectStab.Network.Partials.PilinkBase" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.Partials.PilinkBase"></A><A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials"
+>ObjectStab.Network.Partials</A>.PilinkBase</H2>
+<B>Pilink</B><p>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>R</TD><TD>0.0</TD><TD>Series Resistance [p.u.]</TD></TR>
+<TR><TD>X</TD><TD>0.1</TD><TD>Series Reactance [p.u.]</TD></TR>
+<TR><TD>B</TD><TD>0.1</TD><TD>Shunt Susceptance [p.u.]</TD></TR>
+<TR><TD>G</TD><TD>0.0</TD><TD>Shunt Conductance [p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">model</font> PilinkBase <font color="darkgreen">&quot;Pilink&quot;</font> 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.TwoPin"
+>Base.TwoPin</A>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Resistance"
+>Base.Resistance</A> R=0.0 <font color="darkgreen">&quot;Series Resistance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>Base.Reactance</A> X=0.1 <font color="darkgreen">&quot;Series Reactance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Susceptance"
+>Base.Susceptance</A> B=0.1 <font color="darkgreen">&quot;Shunt Susceptance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Conductance"
+>Base.Conductance</A> G=0.0 <font color="darkgreen">&quot;Shunt Conductance&quot;</font>;
+<font color="blue">end </font>PilinkBase;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.Partials.ImpTransformerI.png" ALT="ObjectStab.Network.Partials.ImpTransformer" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.Partials.ImpTransformer"></A><A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials"
+>ObjectStab.Network.Partials</A>.ImpTransformer</H2>
+<IMG SRC="ObjectStab.Network.Partials.ImpTransformerD.png" ALT="ObjectStab.Network.Partials.ImpTransformer">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>R</TD><TD>0.0</TD><TD>Leakage Resistance [p.u.]</TD></TR>
+<TR><TD>X</TD><TD>0.1</TD><TD>Leakage Reactance [p.u.]</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">model</font> ImpTransformer 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.TwoPin"
+>ObjectStab.Base.TwoPin</A>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Resistance"
+>Base.Resistance</A> R=0.0 <font color="darkgreen">&quot;Leakage Resistance&quot;</font>;
+  <font color="blue">parameter </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.Reactance"
+>Base.Reactance</A> X=0.1 <font color="darkgreen">&quot;Leakage Reactance&quot;</font>;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.IdealTransformer"
+>ObjectStab.Network.IdealTransformer</A> Tr;
+  <A HREF="ObjectStab_Network.html#ObjectStab.Network.Impedance"
+>ObjectStab.Network.Impedance</A> Imp(R=R, X=X);
+<font color="blue">equation </font>
+  <font color="red">connect</font>(Imp.T1, T1);
+  <font color="red">connect</font>(Imp.T2, Tr.T1);
+  <font color="red">connect</font>(Tr.T2, T2);
+<font color="blue">end </font>ImpTransformer;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.Partials.BreakerBaseI.png" ALT="ObjectStab.Network.Partials.BreakerBase" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.Partials.BreakerBase"></A><A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials"
+>ObjectStab.Network.Partials</A>.BreakerBase</H2>
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>small</TD><TD>1e-6</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">class</font> BreakerBase 
+  <font color="blue">extends </font><A HREF="ObjectStab_Base.html#ObjectStab.Base.TwoPin"
+>ObjectStab.Base.TwoPin</A>;
+  <font color="darkgreen"></font>
+  Boolean closed;
+  <font color="darkgreen"></font>
+  <font color="blue">parameter </font>Real small=1e-6;
+  <font color="darkgreen"></font>
+  <font color="darkgreen">//  Real s1;</font>
+  <font color="darkgreen">//  Real s2;</font>
+<font color="blue">equation </font>
+  <font color="darkgreen"></font>
+  <font color="darkgreen">
+    //  [T1.va - T2.va; T1.vb - T2.vb] = (if closed then small*[1, -1; 1, 1] else [1</font>
+  <font color="darkgreen">//    , 0; 0, 1])*[s1; s2];</font>
+  <font color="darkgreen"></font>
+  <font color="darkgreen">
+    //  [T1.ia; T1.ib] = (if closed then [1, 0; 0, 1] else small*[1, -1; 1, 1])*[s1</font>
+  <font color="darkgreen">//    ; s2];</font>
+  <font color="darkgreen"></font>
+  <font color="blue">if </font>closed<font color="blue"> then</font>
+    [T1.va - T2.va; T1.vb - T2.vb] = small*[1, -1; 1, 1]*[T1.ia; T1.ib];
+  <font color="blue">else</font>
+    [T1.ia; T1.ib] = small*[1, -1; 1, 1]*[T1.va - T2.va; T1.vb - T2.vb];
+  <font color="blue">end if</font>;
+  [T1.ia; T1.ib] = -[T2.ia; T2.ib];
+<font color="blue">end </font>BreakerBase;
+</PRE>
+<HR>
+<H2><IMG SRC="ObjectStab.Network.Partials.Place32I.png" ALT="ObjectStab.Network.Partials.Place32" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="ObjectStab.Network.Partials.Place32"></A><A HREF="ObjectStab_Network_Partials.html#ObjectStab.Network.Partials"
+>ObjectStab.Network.Partials</A>.Place32</H2>
+<B>Place with two input and two output transitions</B><p>
+<IMG SRC="ObjectStab.Network.Partials.Place32D.png" ALT="ObjectStab.Network.Partials.Place32">
+<H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>initialState</TD><TD>false</TD><TD>Initial value of state</TD></TR>
+</TABLE>
+<H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Place32 <font color="darkgreen">&quot;Place with two input and two output transitions&quot;</font> 
+  <font color="blue">parameter </font>Boolean initialState=false <font color="darkgreen">&quot;Initial value of state&quot;</font>;
+  Boolean state(<font color="blue">final </font>start=initialState) <font color="darkgreen">&quot;State of place&quot;</font>;
+<font color="blue">protected </font>
+  Boolean newState(<font color="blue">final </font>start=initialState);
+<font color="blue">public </font>
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets_Interfaces.html#ModelicaAdditions.PetriNets.Interfaces.FirePortOut"
+>ModelicaAdditions.PetriNets.Interfaces.FirePortOut</A> outTransition1;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets_Interfaces.html#ModelicaAdditions.PetriNets.Interfaces.FirePortOut"
+>ModelicaAdditions.PetriNets.Interfaces.FirePortOut</A> outTransition2;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets_Interfaces.html#ModelicaAdditions.PetriNets.Interfaces.SetPortIn"
+>ModelicaAdditions.PetriNets.Interfaces.SetPortIn</A> inTransition1;
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets_Interfaces.html#ModelicaAdditions.PetriNets.Interfaces.SetPortIn"
+>ModelicaAdditions.PetriNets.Interfaces.SetPortIn</A> inTransition2;
+<font color="blue">public </font>
+  <A HREF="file:///C:/WP/Dymola/Modelica/Library/ModelicaAdditions/help/ModelicaAdditions_PetriNets_Interfaces.html#ModelicaAdditions.PetriNets.Interfaces.SetPortIn"
+>ModelicaAdditions.PetriNets.Interfaces.SetPortIn</A> inTransition3;
+<font color="blue">equation </font>
+  <font color="darkgreen">// Set new state for next iteration</font>
+  state = <font color="red">pre</font>(newState);
+  newState = inTransition1.set<font color="blue"> or </font>inTransition2.set<font color="blue"> or </font>inTransition3.set<font color="blue"> or </font>
+    state<font color="blue"> and </font><font color="blue">not </font>(outTransition1.fire<font color="blue"> or </font>outTransition2.fire);
+  <font color="darkgreen"></font>
+  <font color="darkgreen">// Report state to input and output transitions</font>
+  inTransition1.state = state;
+  inTransition2.state = inTransition1.state<font color="blue"> or </font>inTransition1.set;
+  inTransition3.state = inTransition1.state<font color="blue"> or </font>inTransition1.set;
+  outTransition1.state = state;
+  outTransition2.state = outTransition1.state<font color="blue"> and </font><font color="blue">not </font>outTransition1.fire;
+<font color="blue">end </font>Place32;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.dynasim.se/">Dymola</a> Mon Sep 30 21:52:47 2002
+.
+</address></BODY>
+</HTML>
