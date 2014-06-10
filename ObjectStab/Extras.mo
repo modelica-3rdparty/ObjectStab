@@ -77,8 +77,8 @@ package Extras
             -26.05,49.95},{-39,50}}));
     connect(T2.outTransition, wait.inTransition2) annotation (Line(points={{-25,
             -14},{-72,-14},{-72,56},{-62,56}}));
-    connect(T3.outTransition, wait.inTransition1) annotation (Line(points={{-24,
-            20},{-68,20},{-68,44},{-62,44}}));
+    connect(T3.outTransition, wait.inTransition1) annotation (Line(points={{-25,20},
+            {-68,20},{-68,44},{-62,44}}));
     T1.condition = (u < Threshold) and (y < ShedAmount/10);
     T2.condition = (u > Threshold);
     T3.condition = time > timerstart + DelayTime;

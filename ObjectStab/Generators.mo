@@ -563,21 +563,25 @@ from the controller library or used-defined models.
               transformation(extent={{-2,20},{18,40}})));
       equation
         connect(LimitExc.inTransition, wait.outTransition) annotation (Line(
-              points={{-26,30},{-38,30}}, color={255,0,0}));
+              points={{-26.05,29.95},{-33,29.95},{-33,30},{-38,30}},
+                                          color={255,0,0}));
         connect(LimitExc.outTransition, count.inTransition) annotation (Line(
-              points={{-14,30},{-6,30}}, color={255,0,0}));
+              points={{-15,30},{-4,30}}, color={255,0,0}));
         connect(TimerExp.outTransition, activated.inTransition) annotation (Line(
-              points={{44,30},{58,30}}, color={255,0,0}));
+              points={{45,30},{58,30}}, color={255,0,0}));
         connect(count.outTransition1, LimitOK.inTransition) annotation (Line(
-              points={{18,24},{28,24},{28,-10},{-12,-10}}, color={255,0,0}));
+              points={{19,24},{28,24},{28,-9.95},{-13.95,-9.95}},
+                                                           color={255,0,0}));
         connect(activated.outTransition, UnActivate.inTransition) annotation (Line(
-              points={{81,30},{86,30},{86,-30},{58,-30}}, color={255,0,0}));
+              points={{81,30},{86,30},{86,-29.95},{56.05,-29.95}},
+                                                          color={255,0,0}));
         connect(UnActivate.outTransition, wait.inTransition2) annotation (Line(
               points={{45,-30},{-76,-30},{-76,36},{-62,36}}, color={255,0,0}));
         connect(LimitOK.outTransition, wait.inTransition1) annotation (Line(
-              points={{-24,-10},{-67,-10},{-67,24},{-62,24}}, color={255,0,0}));
+              points={{-25,-10},{-67,-10},{-67,24},{-62,24}}, color={255,0,0}));
         connect(count.outTransition2, TimerExp.inTransition) annotation (Line(
-              points={{20,36},{26,36},{26,30},{32,30}}, color={255,0,0}));
+              points={{19.1,36},{26,36},{26,29.95},{33.95,29.95}},
+                                                        color={255,0,0}));
         LimitExc.condition = y > Limit;
         LimitOK.condition = y < (Limit - 1e-5);
         UnActivate.condition = y < (Limit - 1e-5);
@@ -614,7 +618,7 @@ from the controller library or used-defined models.
       Ef0 = 0;
 
     initial equation
-      der(AVR.x) = {0};
+      der(AVR.x) = 0;
     end FirstOrderExciter;
 
     model FirstOrderGovernor
@@ -631,12 +635,12 @@ from the controller library or used-defined models.
               extent={{42,-10},{62,10}})));
     equation
       connect(PmAdd.y, Limiter.u)
-        annotation (Line(points={{64,0},{76,0}}, color={0,0,255}));
+        annotation (Line(points={{63,0},{74,0}}, color={0,0,255}));
       connect(TF.y, PmAdd.u1)
         annotation (Line(points={{-13,0},{-2,0},{-2,6},{40,6}}, color={0,0,255}));
       connect(werror.y, TF.u)
         annotation (Line(points={{-59,0},{-36,0}}, color={0,0,255}));
-      PmAdd.u2 = {Pm0};
+      PmAdd.u2 = Pm0;
 
     initial equation
       der(TF.y) = 0;
@@ -700,10 +704,10 @@ from the controller library or used-defined models.
       connect(Sum.y, Limiter.u)
         annotation (Line(points={{17,0},{72,0}}, color={0,0,255}));
       connect(PSSGain.y, WashOut.u)
-        annotation (Line(points={{-58,-60},{-44,-60}}, color={0,0,255}));
+        annotation (Line(points={{-59,-60},{-42,-60}}, color={0,0,255}));
       connect(Verror.y, AVR.u)
-        annotation (Line(points={{-58,0},{-48,0}}, color={0,0,255}));
-      PSSGain.u = {w};
+        annotation (Line(points={{-59,0},{-50,0}}, color={0,0,255}));
+      PSSGain.u = w;
       Ef0 = 0;
 
     initial equation
@@ -734,7 +738,7 @@ from the controller library or used-defined models.
       extends Partials.Exciter;
     equation
       Ef0 = pre(Ef0);
-      Limiter.u = {Ef0};
+      Limiter.u = Ef0;
     initial equation
       Vref = Modelica.Constants.inf;
       annotation (
@@ -784,10 +788,10 @@ from the controller library or used-defined models.
         annotation (Line(points={{1,0},{20.5,0},{20.5,6},{40,6}}, color={0,0,
               255}));
       connect(Limiter.u, PmAdd.y)
-        annotation (Line(points={{74,0},{62,0}}, color={0,0,255}));
+        annotation (Line(points={{74,0},{63,0}}, color={0,0,255}));
       connect(werror.y, TF.u)
-        annotation (Line(points={{-60,0},{-20,0}}, color={0,0,255}));
-      PmAdd.u2 = {Pm0};
+        annotation (Line(points={{-59,0},{-22,0}}, color={0,0,255}));
+      PmAdd.u2 = Pm0;
     initial equation
       der(TF.y) = 0;
       annotation (
@@ -826,12 +830,13 @@ from the controller library or used-defined models.
       connect(Add3.y, Limiter.u)
         annotation (Line(points={{61,0},{74,0}}, color={0,0,255}));
       connect(Add3.u1, Gov.y)
-        annotation (Line(points={{36,8},{16,8},{16,30},{2,30}}, color={0,0,255}));
+        annotation (Line(points={{38,8},{16,8},{16,30},{1,30}}, color={0,0,255}));
       connect(werror.y, IsoFreq.u)
-        annotation (Line(points={{-60,0},{-40,0},{-40,-30},{-22,-30}}, color={0,
+        annotation (Line(points={{-59,0},{-40,0},{-40,-30},{-22,-30}}, color={0,
               0,255}));
       connect(IsoFreq.y, Add3.u2)
-        annotation (Line(points={{0,-30},{12,-30},{12,2},{36,2}}, color={0,0,
+        annotation (Line(points={{1,-30},{12,-30},{12,6.66134e-16},{38,
+              6.66134e-16}},                                      color={0,0,
               255}));
       Add3.u3.signal[1] = Pm0;
     initial equation
@@ -890,12 +895,12 @@ from the controller library or used-defined models.
       connect(Phase_Compensation2.y, PSSLimiter.u)
         annotation (Line(points={{55,-60},{62,-60}}));
       connect(Sum.y, ExcLimit.u)
-        annotation (Line(points={{16,0},{36,0}}, color={0,0,255}));
+        annotation (Line(points={{17,0},{34,0}}, color={0,0,255}));
       connect(ExcLimit.y, Limiter.u)
-        annotation (Line(points={{56,0},{72,0}}, color={0,0,255}));
+        annotation (Line(points={{57,0},{72,0}}, color={0,0,255}));
       connect(Verror.y, AVR.u)
-        annotation (Line(points={{-58,0},{-50,0}}, color={0,0,255}));
-      PSSGain.u = {w};
+        annotation (Line(points={{-59,0},{-50,0}}, color={0,0,255}));
+      PSSGain.u = w;
       Ef0 = 0;
 
     initial equation

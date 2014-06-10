@@ -215,13 +215,13 @@ Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
       extends TCULController;
       ObjectStab.Base.Time Tc;
       Modelica.Blocks.Continuous.LimIntegrator integrator(
-        y(start={n}),
+        y(start=n),
         k=1,
         outMax=1 + maxtap*stepsize,
         outMin=1 + mintap*stepsize) annotation (Placement(transformation(extent=
                {{-20,-20},{20,20}})));
     equation
-      connect(integrator.y, y) annotation (Line(points={{20,0},{110,0}}));
+      connect(integrator.y, y) annotation (Line(points={{22,0},{110,0}}));
       if (method == 2) then
         Tc = (Td0*DB/2 + Tm0*noEvent(abs(udev)))/stepsize;
       elseif (method == 3) then
@@ -230,15 +230,15 @@ Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
         Tc = (Td0*DB/2 + (Tm0 + Td1)*noEvent(abs(udev)))/stepsize;
       end if;
       if not blocked then
-        integrator.u = {-udev/Tc};
+        integrator.u = -udev/Tc;
       else
-        integrator.u = {0};
+        integrator.u = 0;
       end if;
     initial equation
       if InitByVoltage then
-        der(integrator.y) = {0};
+        der(integrator.y) = 0;
       else
-        integrator.y = {n};
+        integrator.y = n;
       end if;
       annotation (
         Icon(coordinateSystem(
