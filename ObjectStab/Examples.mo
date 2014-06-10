@@ -9,9 +9,9 @@ package Examples
           extent={{-10,-10},{10,10}},
           rotation=90)));
     ObjectStab.Network.Bus Bus2 annotation (Placement(transformation(extent={{
-              -92,40},{-72,60}}, rotation=0)));
+              -92,40},{-72,60}})));
     ObjectStab.Network.Bus Bus3 annotation (Placement(transformation(extent={{
-              68,40},{88,60}}, rotation=0)));
+              68,40},{88,60}})));
     ObjectStab.Network.FaultedBus Bus4(
       FaultTime=5,
       FaultDuration=1,
@@ -28,11 +28,11 @@ package Examples
           extent={{-10,-10},{10,10}},
           rotation=180)));
     ObjectStab.Network.Bus Bus7 annotation (Placement(transformation(extent={{
-              -52,40},{-32,60}}, rotation=0)));
+              -52,40},{-32,60}})));
     ObjectStab.Network.Bus Bus8 annotation (Placement(transformation(extent={{
-              -12,40},{8,60}}, rotation=0)));
+              -12,40},{8,60}})));
     ObjectStab.Network.Bus Bus9 annotation (Placement(transformation(extent={{
-              28,40},{48,60}}, rotation=0)));
+              28,40},{48,60}})));
     ObjectStab.Network.Pilink L57(
       R=0.032,
       X=0.161,
@@ -53,21 +53,19 @@ package Examples
       R=0.0085,
       X=0.072,
       G=0,
-      B=0.0745*2) annotation (Placement(transformation(extent={{-32,40},{-12,60}},
-            rotation=0)));
+      B=0.0745*2) annotation (Placement(transformation(extent={{-32,40},{-12,60}})));
     ObjectStab.Network.Pilink L89(
       R=0.0119,
       X=0.1008,
       G=0,
-      B=0.1045*2) annotation (Placement(transformation(extent={{8,40},{28,60}},
-            rotation=0)));
+      B=0.1045*2) annotation (Placement(transformation(extent={{8,40},{28,60}})));
     ObjectStab.Network.FixTransformer T27(R=0, X=0.0625) annotation (Placement(
           transformation(
           origin={-62,50},
           extent={{-10,-10},{10,10}},
           rotation=180)));
     ObjectStab.Network.FixTransformer T39(R=0, X=0.0586) annotation (Placement(
-          transformation(extent={{48,40},{68,60}}, rotation=0)));
+          transformation(extent={{48,40},{68,60}})));
     ObjectStab.Network.FixTransformer T14(R=0, X=0.0576) annotation (Placement(
           transformation(
           origin={-2,-30},
@@ -77,14 +75,12 @@ package Examples
       R=0.01,
       X=0.085,
       B=0.088*2,
-      G=0) annotation (Placement(transformation(extent={{-32,0},{-12,20}},
-            rotation=0)));
+      G=0) annotation (Placement(transformation(extent={{-32,0},{-12,20}})));
     ObjectStab.Network.Pilink L46(
       R=0.017,
       X=0.092,
       B=0.079*2,
-      G=0) annotation (Placement(transformation(extent={{8,0},{28,20}},
-            rotation=0)));
+      G=0) annotation (Placement(transformation(extent={{8,0},{28,20}})));
     ObjectStab.Generators.GovExc3rdGen G2(
       V0=1.025,
       Pg0=1.63,
@@ -114,14 +110,14 @@ package Examples
           extent={{10,10},{-10,-10}},
           rotation=180)));
     ObjectStab.Loads.DynLoad LoadA(P0=1.25, Q0=0.5) annotation (Placement(
-          transformation(extent={{-42,0},{-62,20}}, rotation=0)));
+          transformation(extent={{-42,0},{-62,20}})));
     ObjectStab.Loads.DynLoad LoadC(P0=1, Q0=0.35) annotation (Placement(
           transformation(
           origin={-2,68},
           extent={{-10,-10},{10,10}},
           rotation=90)));
     ObjectStab.Loads.DynLoad LoadB(P0=0.9, Q0=0.3) annotation (Placement(
-          transformation(extent={{38,0},{58,20}}, rotation=0)));
+          transformation(extent={{38,0},{58,20}})));
     ObjectStab.Generators.Slack G1(V0=1.04) annotation (Placement(
           transformation(
           origin={-2,-60},
@@ -153,11 +149,6 @@ package Examples
     connect(Bus8.T, LoadC.T) annotation (Line(points={{-2,50},{-2,58}}));
     connect(G1.T, Bus1.T) annotation (Line(points={{-2,-50},{-2,-50}}));
     annotation (
-      Window(
-        x=0.45,
-        y=0.01,
-        width=0.44,
-        height=0.65),
       Diagram(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-110,-80},{112,80}},
@@ -188,7 +179,7 @@ Nine bus test system, using 3rd order generator models
 P.M. Anderson and A.A. Fouad, Power System Control and Stability,
 ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
 "),             extent=[100, 20; 120, 40],
-      Placement(transformation(extent={{100,20},{120,40}}, rotation=0)));
+      Placement(transformation(extent={{100,20},{120,40}})));
   end ninebus;
 
   class TCULExamp
@@ -219,7 +210,7 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
           extent={{-10,-10},{10,10}},
           rotation=270)));
     ObjectStab.Generators.Slack Slack1 annotation (Placement(transformation(
-            extent={{20,60},{40,80}}, rotation=0)));
+            extent={{20,60},{40,80}})));
     ObjectStab.Generators.GovExc6thGen Gen(
       V0=1.05,
       Pg0=1,
@@ -246,9 +237,9 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
           extent={{-10,-10},{10,10}},
           rotation=270)));
     ObjectStab.Network.OpenedPilink OpenedPilink1 annotation (Placement(
-          transformation(extent={{-10,60},{10,80}}, rotation=0)));
+          transformation(extent={{-10,60},{10,80}})));
     ObjectStab.Network.Pilink Line1(X=0.2) annotation (Placement(transformation(
-            extent={{-50,60},{-30,80}}, rotation=0)));
+            extent={{-50,60},{-30,80}})));
     ObjectStab.Network.Pilink Line4(X=0.02, B=0.05) annotation (Placement(
           transformation(
           origin={-10,50},
@@ -281,20 +272,6 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
     connect(Line1.T2, Bus2.T) annotation (Line(points={{-30,70},{-20,70}}));
     connect(Bus1.T, Line1.T1) annotation (Line(points={{-60,70},{-50,70}}));
     connect(Gen.T, Bus1.T) annotation (Line(points={{-60,70},{-60,70}}));
-    annotation (
-      Icon(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics),
-      Window(
-        x=0.45,
-        y=0.01,
-        width=0.44,
-        height=0.65),
-      Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics));
   end TCULExamp;
 
   package BPA
@@ -319,11 +296,6 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
           K=200,
           Kstab=1,
           ExcLimit(Limit=2.9)));
-      annotation (             Window(
-          x=0.4,
-          y=0.4,
-          width=0.6,
-          height=0.6));
     end BPAGen;
 
     class system
@@ -347,8 +319,7 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
         Pg0=11.55,
         Sbase=1600,
         H=2.09,
-        D=0.2) annotation (Placement(transformation(extent={{60,60},{80,80}},
-              rotation=0)));
+        D=0.2) annotation (Placement(transformation(extent={{60,60},{80,80}})));
       replaceable ObjectStab.Loads.DynLoad L8(
         P0=33.7,
         Q0=10.5,
@@ -357,18 +328,17 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
         bs=0,
         bt=2,
         Tp=1,
-        Tq=1) annotation (Placement(transformation(extent={{60,20},{80,40}},
-              rotation=0)));
+        Tq=1) annotation (Placement(transformation(extent={{60,20},{80,40}})));
       replaceable ObjectStab.Loads.ImpedanceLoad L11(P0=34.9, Q0=0) annotation (Placement(
-            transformation(extent={{130,-40},{152,-20}}, rotation=0)));
+            transformation(extent={{130,-40},{152,-20}})));
       ObjectStab.Network.Bus Bus1 annotation (Placement(transformation(extent={
-                {-120,60},{-100,80}}, rotation=0)));
+                {-120,60},{-100,80}})));
       ObjectStab.Network.Bus Bus2 annotation (Placement(transformation(extent={
-                {-80,-20},{-60,0}}, rotation=0)));
+                {-80,-20},{-60,0}})));
       ObjectStab.Network.Bus Bus3 annotation (Placement(transformation(extent={
-                {40,60},{60,80}}, rotation=0)));
+                {40,60},{60,80}})));
       ObjectStab.Network.Bus Bus5 annotation (Placement(transformation(extent={
-                {-80,60},{-60,80}}, rotation=0)));
+                {-80,60},{-60,80}})));
       ObjectStab.Network.Bus Bus6 annotation (Placement(transformation(
             origin={-30,20},
             extent={{-10,-80},{10,80}},
@@ -378,13 +348,13 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
             extent={{-10,-80},{10,80}},
             rotation=180)));
       ObjectStab.Network.Bus Bus8 annotation (Placement(transformation(extent={
-                {40,20},{60,40}}, rotation=0)));
+                {40,20},{60,40}})));
       ObjectStab.Network.Bus Bus9 annotation (Placement(transformation(extent={
-                {40,-40},{60,-20}}, rotation=0)));
+                {40,-40},{60,-20}})));
       ObjectStab.Network.Bus Bus10 annotation (Placement(transformation(extent=
-                {{80,-40},{100,-20}}, rotation=0)));
+                {{80,-40},{100,-20}})));
       ObjectStab.Network.Bus Bus11 annotation (Placement(transformation(extent=
-                {{120,-40},{140,-20}}, rotation=0)));
+                {{120,-40},{140,-20}})));
       ObjectStab.Network.ShuntCapacitor C7(B=9.63) annotation (Placement(
             transformation(
             origin={0,-44},
@@ -416,7 +386,7 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
             extent={{-10,-10},{10,10}},
             rotation=180)));
       ObjectStab.Network.FixTransformer T3(X=0.0125/2, n=0.9024) annotation (Placement(
-            transformation(extent={{20,60},{40,80}}, rotation=0)));
+            transformation(extent={{20,60},{40,80}})));
       ObjectStab.Network.FixTransformer T5(X=0.0026, n=1.08) annotation (Placement(
             transformation(
             origin={30,-30},
@@ -433,39 +403,33 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
           stepsize=0.01,
           DB=0.02,
           Vblock=0.01)) annotation (Placement(transformation(extent={{102,-40},
-                {122,-20}}, rotation=0)));
+                {122,-20}})));
       ObjectStab.Network.Pilink L56(
         R=0,
         X=0.0040,
-        B=2) annotation (Placement(transformation(extent={{-60,60},{-40,80}},
-              rotation=0)));
+        B=2) annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
       replaceable ObjectStab.Extras.PQPilink L67_1(
         R=0.0015,
         X=0.0288,
-        B=1.1730) annotation (Placement(transformation(extent={{-20,60},{0,80}},
-              rotation=0)));
+        B=1.1730) annotation (Placement(transformation(extent={{-20,60},{0,80}})));
       replaceable ObjectStab.Extras.PQPilink L67_2(
         R=0.0015,
         X=0.0288,
-        B=1.1730) annotation (Placement(transformation(extent={{-20,40},{0,60}},
-              rotation=0)));
+        B=1.1730) annotation (Placement(transformation(extent={{-20,40},{0,60}})));
       replaceable ObjectStab.Extras.PQPilink L67_3(
         R=0.0015,
         X=0.0288,
-        B=1.1730) annotation (Placement(transformation(extent={{-20,20},{0,40}},
-              rotation=0)));
+        B=1.1730) annotation (Placement(transformation(extent={{-20,20},{0,40}})));
       replaceable ObjectStab.Extras.PQPilink L67_4(
         R=0.0015,
         X=0.0288,
-        B=1.1730) annotation (Placement(transformation(extent={{-20,0},{0,20}},
-              rotation=0)));
+        B=1.1730) annotation (Placement(transformation(extent={{-20,0},{0,20}})));
       replaceable ObjectStab.Extras.PQPilink L67_5(
         R=0.0015,
         X=0.0288,
-        B=1.1730) annotation (Placement(transformation(extent={{-20,-20},{0,0}},
-              rotation=0)));
+        B=1.1730) annotation (Placement(transformation(extent={{-20,-20},{0,0}})));
       ObjectStab.Network.Impedance L910(R=0.0010, X=0.0030) annotation (Placement(
-            transformation(extent={{60,-40},{80,-20}}, rotation=0)));
+            transformation(extent={{60,-40},{80,-20}})));
       ObjectStab.Network.FixTransformer T4(X=0.0030, n=1.0664) annotation (Placement(
             transformation(
             origin={30,30},
@@ -534,11 +498,6 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
       Pload = L8.Pl + L11.Pl;
       Qload = L8.Ql + L11.Ql;
       annotation (
-        Window(
-          x=0.4,
-          y=0.4,
-          width=0.6,
-          height=0.6),
         Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-140,-60},{160,120}},
@@ -552,11 +511,6 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
           FaultX=0,
           ClearTime=0.07,
           RecloseTime=30000));
-      annotation (             Window(
-          x=0.45,
-          y=0.01,
-          width=0.44,
-          height=0.65));
     end linefault;
 
     model loadshed
@@ -573,11 +527,6 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
             ShedAmount=0.05,
             Threshold=0.78,
             DelayTime=1.5)));
-      annotation (             Window(
-          x=0.45,
-          y=0.01,
-          width=0.44,
-          height=0.65));
     end loadshed;
 
     model taplock
@@ -589,19 +538,7 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
             stepsize=0.01,
             DB=0.02,
             Vblock=0.82)));
-      annotation (             Window(
-          x=0.4,
-          y=0.4,
-          width=0.6,
-          height=0.6));
     end taplock;
-    annotation (             Window(
-        x=0,
-        y=0.6,
-        width=0.4,
-        height=0.4,
-        library=1,
-        autolayout=1));
   end BPA;
 
   package Kundur126 "Example 12.6 from Kundur's book"
@@ -639,11 +576,6 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
           T4=5.4),
         redeclare ObjectStab.Generators.Controllers.FirstOrderGovernor Gov);
 
-      annotation (             Window(
-          x=0.4,
-          y=0.4,
-          width=0.6,
-          height=0.6));
     end Gen;
 
     class system
@@ -671,7 +603,7 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
         Sbase=900,
         H=6.175,
         isSlack=true) annotation (Placement(transformation(extent={{162,148},{
-                204,188}}, rotation=0)));
+                204,188}})));
       Gen G4(
         V0=1.01,
         Pg0=7,
@@ -681,9 +613,9 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
             extent={{-20,-20},{20,20}},
             rotation=270)));
       ObjectStab.Network.FixTransformer T15(X=0.15/9) annotation (Placement(
-            transformation(extent={{-146,158},{-126,178}}, rotation=0)));
+            transformation(extent={{-146,158},{-126,178}})));
       ObjectStab.Network.Bus Bus1 annotation (Placement(transformation(extent={
-                {-166,158},{-146,178}}, rotation=0)));
+                {-166,158},{-146,178}})));
       ObjectStab.Network.Bus Bus2 annotation (Placement(transformation(
             origin={-86,128},
             extent={{-10,-10},{10,10}},
@@ -695,19 +627,19 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
             extent={{-10,-10},{10,10}},
             rotation=90)));
       ObjectStab.Network.Bus Bus5 annotation (Placement(transformation(extent={
-                {-126,158},{-106,178}}, rotation=0)));
+                {-126,158},{-106,178}})));
       ObjectStab.Network.Bus Bus6 annotation (Placement(transformation(extent={
-                {-86,158},{-66,178}}, rotation=0)));
+                {-86,158},{-66,178}})));
       ObjectStab.Network.Pilink L56(
         R=0.0001*25,
         X=0.001*25,
         B=0.00175*25) annotation (Placement(transformation(extent={{-106,158},{
-                -86,178}}, rotation=0)));
+                -86,178}})));
       ObjectStab.Network.Pilink L67(
         R=0.0001*10,
         X=0.001*10,
         B=0.00175*10) annotation (Placement(transformation(extent={{-66,158},{
-                -46,178}}, rotation=0)));
+                -46,178}})));
       ObjectStab.Loads.ZIPLoad L7(
         P0=9.67,
         Q0=1,
@@ -722,7 +654,7 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
         R=0.0001*110,
         X=0.001*110,
         B=0.00175*110) annotation (Placement(transformation(extent={{-26,168},{
-                -6,188}}, rotation=0)));
+                -6,188}})));
       ObjectStab.Network.Bus Bus8 annotation (Placement(transformation(
             origin={4,168},
             extent={{-10,-20},{10,20}},
@@ -731,7 +663,7 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
         R=0.0001*110,
         X=0.001*110,
         B=0.00175*110) annotation (Placement(transformation(extent={{-26,148},{
-                -6,168}}, rotation=0)));
+                -6,168}})));
       ObjectStab.Network.Bus Bus7 annotation (Placement(transformation(
             origin={-36,168},
             extent={{-10,-20},{10,20}},
@@ -744,19 +676,19 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
         R=0.0001*110,
         X=0.001*110,
         B=0.00175*110) annotation (Placement(transformation(extent={{14,168},{
-                34,188}}, rotation=0)));
+                34,188}})));
       ObjectStab.Network.Pilink L89_2(
         R=0.0001*110,
         X=0.001*110,
         B=0.00175*110) annotation (Placement(transformation(extent={{14,148},{
-                34,168}}, rotation=0)));
+                34,168}})));
       ObjectStab.Network.Pilink L910(
         R=0.0001*10,
         X=0.001*10,
         B=0.00175*10) annotation (Placement(transformation(extent={{54,158},{74,
-                178}}, rotation=0)));
+                178}})));
       ObjectStab.Network.Bus Bus10 annotation (Placement(transformation(extent=
-                {{74,158},{94,178}}, rotation=0)));
+                {{74,158},{94,178}})));
       ObjectStab.Network.FixTransformer T410(X=0.15
                                                   /9) annotation (Placement(
             transformation(
@@ -771,11 +703,11 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
         R=0.0001*25,
         X=0.001*25,
         B=0.00175*25) annotation (Placement(transformation(extent={{94,158},{
-                114,178}}, rotation=0)));
+                114,178}})));
       ObjectStab.Network.FixTransformer T311(X=0.15/9) annotation (Placement(
-            transformation(extent={{134,158},{154,178}}, rotation=0)));
+            transformation(extent={{134,158},{154,178}})));
       ObjectStab.Network.Bus Bus3 annotation (Placement(transformation(extent={
-                {154,158},{174,178}}, rotation=0)));
+                {154,158},{174,178}})));
       ObjectStab.Loads.ZIPLoad L9(
         P0=17.67,
         Q0=1,
@@ -797,7 +729,7 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
             extent={{-10,-10},{10,10}},
             rotation=270)));
       ObjectStab.Network.Bus Bus11 annotation (Placement(transformation(extent=
-                {{114,158},{134,178}}, rotation=0)));
+                {{114,158},{134,178}})));
     equation
       connect(T15.T1, Bus1.T) annotation (Line(points={{-146,168},{-156,168}}));
       connect(Bus1.T, G1.T) annotation (Line(points={{-156,168},{-156,168}}));
@@ -845,11 +777,6 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
       connect(Bus11.T, L1011.T2) annotation (Line(points={{124,168},{114,168}}));
       connect(Bus11.T, T311.T1) annotation (Line(points={{124,168},{134,168}}));
       annotation (
-        Window(
-          x=0,
-          y=0.37,
-          width=0.6,
-          height=0.6),
         Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-200,-200},{200,200}},
@@ -866,30 +793,13 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
           ClearTime=0.07,
           RecloseTime=3.5));
       output Real V=Bus8.V;
-      annotation (             Window(
-          x=0.45,
-          y=0.01,
-          width=0.44,
-          height=0.65));
     end linefault;
 
     model lineopen
       extends system(redeclare ObjectStab.Network.OpenedPilink L78_1(OpenTime=2,
               CloseTime=5));
-      annotation (             Window(
-          x=0.45,
-          y=0.01,
-          width=0.44,
-          height=0.65));
     end lineopen;
     annotation (
-      Window(
-        x=0.45,
-        y=0.01,
-        width=0.39,
-        height=0.58,
-        library=1,
-        autolayout=1),
       Documentation(info="
 "));
   end Kundur126;
@@ -904,31 +814,21 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
 
       public
         Modelica.Blocks.Interfaces.RealInput inPort1
-          annotation (Placement(transformation(extent={{-140,60},{-100,100}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{-140,60},{-100,100}})));
         Modelica.Blocks.Interfaces.RealInput inPort2
-          annotation (Placement(transformation(extent={{-140,10},{-100,50}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{-140,10},{-100,50}})));
         Modelica.Blocks.Interfaces.RealInput inPort3
-          annotation (Placement(transformation(extent={{-140,-50},{-100,-10}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{-140,-50},{-100,-10}})));
         Modelica.Blocks.Interfaces.RealInput inPort4
-          annotation (Placement(transformation(extent={{-140,-100},{-100,-60}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{-140,-100},{-100,-60}})));
         Modelica.Blocks.Interfaces.RealOutput outPort
-          annotation (Placement(transformation(extent={{100,-10},{120,10}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{100,-10},{120,10}})));
       protected
         Real u1=inPort1 "Input signal 1";
         Real u2=inPort2 "Input signal 2";
         Real u3=inPort3 "Input signal 3";
         Real u4=inPort4 "Input signal 4";
         Real y=outPort "Output signal";
-        annotation (             Window(
-            x=0.4,
-            y=0.4,
-            width=0.6,
-            height=0.6));
       end SI4SO;
 
       model Limiter
@@ -1090,11 +990,6 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
         counts.state = false;
         activates.state = false;
         annotation (
-          Window(
-            x=0.4,
-            y=0.4,
-            width=0.6,
-            height=0.6),
           Diagram(coordinateSystem(
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
@@ -1115,11 +1010,6 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
 
       initial equation
         der(x) = 0;
-        annotation (             Window(
-            x=0.4,
-            y=0.4,
-            width=0.6,
-            height=0.6));
       end WaterWays;
 
       model SweGov
@@ -1132,32 +1022,28 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
         parameter Real GateMax=0.95;
         parameter Real GateMin=0.0;
         Modelica.Blocks.Continuous.TransferFunction Filter(a={0.05,1}, b={1})
-          annotation (Placement(transformation(extent={{-20,60},{0,80}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{-20,60},{0,80}})));
         Modelica.Blocks.Math.Feedback Feedback1 annotation (Placement(
-              transformation(extent={{-50,60},{-30,80}}, rotation=0)));
+              transformation(extent={{-50,60},{-30,80}})));
         Modelica.Blocks.Math.Gain Gain2(k=Rstat)
           annotation (Placement(transformation(
               origin={-40,40},
               extent={{-10,-10},{10,10}},
               rotation=90)));
         Modelica.Blocks.Continuous.Integrator Int(k=1/Tr)
-          annotation (Placement(transformation(extent={{20,60},{40,80}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{20,60},{40,80}})));
         Modelica.Blocks.Math.Add Add3(k1=+1/Rdyn, k2=+1/Rdyn) annotation (Placement(
-              transformation(extent={{60,60},{80,80}}, rotation=0)));
+              transformation(extent={{60,60},{80,80}})));
         Modelica.Blocks.Nonlinear.Limiter Limiter1(uMax=GateMax, uMin=GateMin)
-          annotation (Placement(transformation(extent={{-6,-10},{14,10}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{-6,-10},{14,10}})));
         Modelica.Blocks.Continuous.TransferFunction Servo(
           x(start={1}),
           a={0.2,1},
-          b={1}) annotation (Placement(transformation(extent={{22,-10},{42,10}},
-                rotation=0)));
+          b={1}) annotation (Placement(transformation(extent={{22,-10},{42,10}})));
         Nordic32.Models.WaterWays Water annotation (Placement(transformation(
-                extent={{50,10},{70,-10}}, rotation=0)));
+                extent={{50,10},{70,-10}})));
         Modelica.Blocks.Math.Add AddPm0 annotation (Placement(transformation(
-                extent={{-34,-10},{-14,10}}, rotation=0)));
+                extent={{-34,-10},{-14,10}})));
       equation
         connect(Int.u, Filter.y) annotation (Line(points={{18,70},{1,70}}));
         connect(Int.y, Add3.u2) annotation (Line(points={{41,70},{58,64}}));
@@ -1190,11 +1076,6 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
         Int.y = {0};
 
         annotation (
-          Window(
-            x=0.04,
-            y=0.25,
-            width=0.75,
-            height=0.6),
           Icon(coordinateSystem(
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
@@ -1206,15 +1087,6 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
               grid={2,2}), graphics={Text(extent={{-56,-18},{-36,-26}},
                   textString =                             "Pm0"), Line(points=
                     {{-38,-6},{-44,-18}})}),
-          Coordsys(
-            extent=[-100, -100; 100, 100],
-            grid=[2, 2],
-            component=[20, 20]),
-          Window(
-            x=0.4,
-            y=0.35,
-            width=0.6,
-            height=0.6),
           Diagram);
       end SweGov;
 
@@ -1233,25 +1105,21 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
           "Time for voltage reference step";
         Real u5=inPort5;
         Modelica.Blocks.Continuous.TransferFunction PSStf(a={2,1}, b={0.6,1.3})
-          annotation (Placement(transformation(extent={{-60,-70},{-40,-50}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{-60,-70},{-40,-50}})));
         Modelica.Blocks.Continuous.TransferFunction AVRtf(a={Tb*Tc,(Tc + Tb),1},
             b={K*Ta,K}) annotation (Placement(transformation(extent={{26,-10},{
-                  46,10}}, rotation=0)));
+                  46,10}})));
         Modelica.Blocks.Continuous.TransferFunction PSStf1(a={91.125,60.75,13.5,
               1}, b={-91.125,0,0,0}) annotation (Placement(transformation(
-                extent={{-90,-70},{-70,-50}}, rotation=0)));
+                extent={{-90,-70},{-70,-50}})));
         Modelica.Blocks.Nonlinear.Limiter PSSLim(uMax=0.05, uMin=-0.05)
-          annotation (Placement(transformation(extent={{10,-70},{30,-50}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{10,-70},{30,-50}})));
         Modelica.Blocks.Math.Add PSSAdd(k1=+1, k2=+1) annotation (Placement(
-              transformation(extent={{-20,-10},{0,10}}, rotation=0)));
+              transformation(extent={{-20,-10},{0,10}})));
         Modelica.Blocks.Interfaces.RealInput inPort5
-          annotation (Placement(transformation(extent={{-138,-80},{-98,-40}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{-138,-80},{-98,-40}})));
         Modelica.Blocks.Math.Gain G(k=Kpss*ObjectStab.Base.Sbase/Sbase)
-          annotation (Placement(transformation(extent={{-26,-70},{-6,-50}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{-26,-70},{-6,-50}})));
       equation
         connect(PSStf1.y, PSStf.u) annotation (Line(points={{-69,-60},{-62,-60}}));
         connect(PSSAdd.y, AVRtf.u) annotation (Line(points={{1,0},{24,0}}));
@@ -1277,15 +1145,6 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
         PSStf.x = {0};
         PSStf1.x = {0,0,0};
         annotation (
-          Diagram(coordinateSystem(
-              preserveAspectRatio=false,
-              extent={{-100,-100},{100,100}},
-              grid={2,2}), graphics),
-          Window(
-            x=0.13,
-            y=0.03,
-            width=0.6,
-            height=0.6),
           Icon(coordinateSystem(
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
@@ -1313,37 +1172,30 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
         Real u4;
         Real u5;
         Modelica.Blocks.Math.Add PSSAdd annotation (Placement(transformation(
-                extent={{-44,-16},{-24,4}}, rotation=0)));
+                extent={{-44,-16},{-24,4}})));
         Nordic32.Models.Limiter ExcLimit(
           Limitf=Limitf,
           Taf=120,
           Limits=Limits,
-          Tas=120) annotation (Placement(transformation(extent={{0,-10},{20,10}},
-                rotation=0)));
+          Tas=120) annotation (Placement(transformation(extent={{0,-10},{20,10}})));
         Modelica.Blocks.Interfaces.RealInput inPort3
-          annotation (Placement(transformation(extent={{-122,78},{-100,100}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{-122,78},{-100,100}})));
         Modelica.Blocks.Interfaces.RealInput inPort4
-          annotation (Placement(transformation(extent={{-120,20},{-100,40}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{-120,20},{-100,40}})));
         Modelica.Blocks.Interfaces.RealInput inPort5
-          annotation (Placement(transformation(extent={{-120,-70},{-100,-50}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{-120,-70},{-100,-50}})));
         Modelica.Blocks.Continuous.TransferFunction AVRtf(a={Tb*Tc,(Tc + Tb),1},
             b={K*Ta,K}) annotation (Placement(transformation(extent={{30,-10},{
-                  50,10}}, rotation=0)));
+                  50,10}})));
         Modelica.Blocks.Continuous.TransferFunction PSStf1(a={91.125,60.75,13.5,
               1}, b={-91.125,0,0,0}) annotation (Placement(transformation(
-                extent={{-70,-70},{-50,-50}}, rotation=0)));
+                extent={{-70,-70},{-50,-50}})));
         Modelica.Blocks.Continuous.TransferFunction PSStf(a={2,1}, b={0.6,1.3})
-          annotation (Placement(transformation(extent={{-34,-70},{-14,-50}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{-34,-70},{-14,-50}})));
         Modelica.Blocks.Nonlinear.Limiter PSSLim(uMax=0.05, uMin=-0.05)
-          annotation (Placement(transformation(extent={{34,-70},{54,-50}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{34,-70},{54,-50}})));
         Modelica.Blocks.Math.Gain G(k=Kpss*ObjectStab.Base.Sbase/Sbase)
-          annotation (Placement(transformation(extent={{0,-70},{20,-50}},
-                rotation=0)));
+          annotation (Placement(transformation(extent={{0,-70},{20,-50}})));
       equation
         connect(PSStf1.y, PSStf.u) annotation (Line(points={{-49,-60},{-38,-60}}));
         connect(G.u, PSStf.y) annotation (Line(points={{-2,-60},{-13,-60}}));
@@ -1378,15 +1230,6 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
         der(PSStf.x) = {0};
         der(PSStf1.x) = {0,0,0};
         annotation (
-          Diagram(coordinateSystem(
-              preserveAspectRatio=false,
-              extent={{-100,-100},{100,100}},
-              grid={2,2}), graphics),
-          Window(
-            x=0,
-            y=0.36,
-            width=0.6,
-            height=0.6),
           Icon(coordinateSystem(
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
@@ -1403,15 +1246,6 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
         Pl = P0*(V/V0)*wref^a;
         Ql = Q0*(V/V0)^2*wref^a;
         annotation (
-          Window(
-            x=0.46,
-            y=0.05,
-            width=0.57,
-            height=0.89),
-          Icon(coordinateSystem(
-              preserveAspectRatio=false,
-              extent={{-100,-100},{100,100}},
-              grid={2,2}), graphics),
           Documentation(info="
 Static load model used in the CIGRE report.
 Active power has constant current and Reactive power has
@@ -1451,11 +1285,6 @@ constant impedance characteristic.
         Exc.u3 = Iarm;
         Exc.u4 = Qg;
         Exc.u5 = Pg - Gov.Pm0*Sbase/ObjectStab.Base.Sbase;
-        annotation (             Window(
-            x=0.08,
-            y=0.03,
-            width=0.6,
-            height=0.6));
       end GenA6;
 
       model GenB6
@@ -1491,11 +1320,6 @@ constant impedance characteristic.
         Exc.u3 = Iarm;
         Exc.u4 = Qg;
         Exc.u5 = Pg - Gov.Pm0*Sbase/ObjectStab.Base.Sbase;
-        annotation (             Window(
-            x=0.45,
-            y=0.01,
-            width=0.55,
-            height=0.82));
       end GenB6;
 
       model GenC6
@@ -1530,11 +1354,6 @@ constant impedance characteristic.
         Exc.u3 = Iarm;
         Exc.u4 = Qg;
         Exc.u5 = Pg - Gov.Pm0*Sbase/ObjectStab.Base.Sbase;
-        annotation (             Window(
-            x=0.4,
-            y=0.4,
-            width=0.6,
-            height=0.6));
       end GenC6;
 
       model GenA0
@@ -1571,13 +1390,6 @@ constant impedance characteristic.
           Efmax=3.26,
           Iarmmax=100);
       end GenC0;
-      annotation (             Window(
-          x=0.4,
-          y=0.4,
-          width=0.6,
-          height=0.6,
-          library=1,
-          autolayout=1));
     end Models;
 
     package lf028
@@ -2100,12 +1912,12 @@ constant impedance characteristic.
           R=0.005,
           X=0.035,
           B=0.028000) annotation (Placement(transformation(extent={{310,650},{
-                  330,670}}, rotation=0)));
+                  330,670}})));
         replaceable ObjectStab.Network.Pilink Line10121014(
           R=0.007,
           X=0.045,
           B=0.036000) annotation (Placement(transformation(extent={{310,590},{
-                  330,610}}, rotation=0)));
+                  330,610}})));
         replaceable ObjectStab.Network.Pilink Line10131014(
           R=0.003500,
           X=0.025,
@@ -2117,7 +1929,7 @@ constant impedance characteristic.
           R=0.015,
           X=0.100,
           B=0.060000) annotation (Placement(transformation(extent={{100,510},{
-                  120,530}}, rotation=0)));
+                  120,530}})));
         replaceable ObjectStab.Network.Pilink Line10411043(
           R=0.005,
           X=0.030,
@@ -2129,7 +1941,7 @@ constant impedance characteristic.
           R=0.007500,
           X=0.060,
           B=0.050000) annotation (Placement(transformation(extent={{150,190},{
-                  170,210}}, rotation=0)));
+                  170,210}})));
         replaceable ObjectStab.Network.Pilink Line10421044(
           R=0.019,
           X=0.140,
@@ -2148,12 +1960,12 @@ constant impedance characteristic.
           R=0.005,
           X=0.040,
           B=0.032000) annotation (Placement(transformation(extent={{150,250},{
-                  170,270}}, rotation=0)));
+                  170,270}})));
         replaceable ObjectStab.Network.Pilink Line20312032(
           R=0.006,
           X=0.045,
           B=0.030000) annotation (Placement(transformation(extent={{100,468},{
-                  80,488}}, rotation=0)));
+                  80,488}})));
         replaceable ObjectStab.Network.Pilink Line40114012(
           R=0.001,
           X=0.008,
@@ -2179,7 +1991,7 @@ constant impedance characteristic.
           R=0.005,
           X=0.045,
           B=1.400000) annotation (Placement(transformation(extent={{80,650},{
-                  100,670}}, rotation=0)));
+                  100,670}})));
         replaceable ObjectStab.Network.Pilink Line40124022(
           R=0.004,
           X=0.035,
@@ -2219,7 +2031,7 @@ constant impedance characteristic.
           R=0.001,
           X=0.010,
           B=0.300000) annotation (Placement(transformation(extent={{200,468},{
-                  220,488}}, rotation=0)));
+                  220,488}})));
         replaceable ObjectStab.Network.Pilink Line40314041(
           R=0.003,
           X=0.020,
@@ -2231,7 +2043,7 @@ constant impedance characteristic.
           R=0.010,
           X=0.040,
           B=2.000000) annotation (Placement(transformation(extent={{280,450},{
-                  300,470}}, rotation=0)));
+                  300,470}})));
         replaceable ObjectStab.Network.Pilink Line40324044(
           R=0.006,
           X=0.050,
@@ -2243,7 +2055,7 @@ constant impedance characteristic.
           R=0.003,
           X=0.030,
           B=0.900000) annotation (Placement(transformation(extent={{150,330},{
-                  170,350}}, rotation=0)));
+                  170,350}})));
         replaceable ObjectStab.Network.Pilink Line40414061(
           R=0.006,
           X=0.045,
@@ -2269,12 +2081,12 @@ constant impedance characteristic.
           R=0.001,
           X=0.010,
           B=0.300000) annotation (Placement(transformation(extent={{240,350},{
-                  220,370}}, rotation=0)));
+                  220,370}})));
         replaceable ObjectStab.Network.Pilink Line40434046(
           R=0.001,
           X=0.010,
           B=0.300000) annotation (Placement(transformation(extent={{290,340},{
-                  310,360}}, rotation=0)));
+                  310,360}})));
         replaceable ObjectStab.Network.Pilink Line40434047(
           R=0.002,
           X=0.020,
@@ -2300,7 +2112,7 @@ constant impedance characteristic.
           R=0.011,
           X=0.080,
           B=2.400000) annotation (Placement(transformation(extent={{150,130},{
-                  130,150}}, rotation=0)));
+                  130,150}})));
         replaceable ObjectStab.Network.Pilink Line40464047(
           R=0.001,
           X=0.015,
@@ -2333,12 +2145,12 @@ constant impedance characteristic.
           R=0.000,
           X=0.010034,
           n=1.119946) annotation (Placement(transformation(extent={{232,650},{
-                  252,670}}, rotation=0)));
+                  252,670}})));
         replaceable ObjectStab.Network.FixTransformer Tr10124012(
           R=0.000,
           X=0.010034,
           n=1.119946) annotation (Placement(transformation(extent={{232,610},{
-                  252,630}}, rotation=0)));
+                  252,630}})));
         replaceable ObjectStab.Network.FixTransformer Tr10224022(
           R=0.000,
           X=0.013738,
@@ -2737,11 +2549,6 @@ constant impedance characteristic.
         N62.V = V62;
         N63.V = V63;
         annotation (
-          Window(
-            x=0,
-            y=0,
-            width=0.42,
-            height=0.97),
           Diagram(coordinateSystem(
               preserveAspectRatio=false,
               extent={{0,0},{400,700}},
@@ -2889,11 +2696,6 @@ constant impedance characteristic.
               Td0=40,
               Tm0=6.2)));
 
-        annotation (             Window(
-            x=0.4,
-            y=0.4,
-            width=0.6,
-            height=0.6));
       end stat28;
 
       model dyn28
@@ -3042,11 +2844,6 @@ constant impedance characteristic.
               DB=0.03,
               Td0=40,
               Tm0=6.2)));
-        annotation (             Window(
-            x=0.46,
-            y=0.01,
-            width=0.43,
-            height=0.65));
       end dyn28;
 
       package case0
@@ -3057,19 +2854,7 @@ constant impedance characteristic.
               FaultX=0,
               FaultTime=10,
               FaultDuration=0.07));
-          annotation (             Window(
-              x=0.01,
-              y=0.39,
-              width=0.6,
-              height=0.6));
         end dynsim;
-        annotation (             Window(
-            x=0.4,
-            y=0.4,
-            width=0.6,
-            height=0.6,
-            library=1,
-            autolayout=1));
       end case0;
 
       package case4
@@ -3082,11 +2867,6 @@ constant impedance characteristic.
               R=0.006,
               X=0.060,
               B=1.800000));
-          annotation (             Window(
-              x=0,
-              y=0.19,
-              width=0.46,
-              height=0.78));
         end dynsim;
 
         model statsim
@@ -3097,19 +2877,7 @@ constant impedance characteristic.
               R=0.006,
               X=0.060,
               B=1.800000));
-          annotation (             Window(
-              x=0.16,
-              y=0.1,
-              width=0.6,
-              height=0.6));
         end statsim;
-        annotation (             Window(
-            x=0.04,
-            y=0.34,
-            width=0.6,
-            height=0.6,
-            library=1,
-            autolayout=1));
       end case4;
 
       package case14
@@ -3117,46 +2885,15 @@ constant impedance characteristic.
         model statsim
           extends stat28(redeclare Nordic32.Models.GenA0 Gen4062(Sbase=
                   600.000000, TripTime=10));
-          annotation (             Window(
-              x=0.4,
-              y=0.4,
-              width=0.6,
-              height=0.6));
         end statsim;
 
         model dynsim
           extends dyn28(redeclare Nordic32.Models.GenA6 Gen4062(Sbase=
                   600.000000, TripTime=10));
-          annotation (             Window(
-              x=0.01,
-              y=0.35,
-              width=0.6,
-              height=0.6));
         end dynsim;
-        annotation (             Window(
-            x=0.4,
-            y=0.4,
-            width=0.6,
-            height=0.6,
-            library=1,
-            autolayout=1));
       end case14;
-      annotation (             Window(
-          x=0.45,
-          y=0.01,
-          width=0.39,
-          height=0.58,
-          library=1,
-          autolayout=1));
     end lf028;
     annotation (
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6,
-        library=1,
-        autolayout=1),
       Documentation(info="Nordic 32 test system from [1].
 
 Set the switch 'Evaluate=true' for more efficient
@@ -3166,11 +2903,4 @@ simulation.
 [1] Long Term Dynamics Phase II,  CIGRE Task Force 38.02.08
 "));
   end Nordic32;
-  annotation (             Window(
-      x=0.4,
-      y=0.4,
-      width=0.6,
-      height=0.6,
-      library=1,
-      autolayout=1));
 end Examples;

@@ -31,7 +31,7 @@ package Generators "Generator subpackage"
             extent={{-5,-5},{5,5}},
             rotation=180)));
       outer ObjectStab.Base.wRefContainer wrcon annotation (Placement(
-            transformation(extent={{-90,90},{-80,100}}, rotation=0)));
+            transformation(extent={{-90,90},{-80,100}})));
     equation
       connect(wrcon.wr, wrl.wr) annotation (Line(points={{-85,95},{-95,95}}));
       annotation (
@@ -51,16 +51,7 @@ package Generators "Generator subpackage"
               thickness=0.25,
               arrow={Arrow.None,Arrow.None}),
             Text(extent={{-60,-60},{100,-100}}, textString=
-                                                    "%name")}),
-        Window(
-          x=0.4,
-          y=0.4,
-          width=0.6,
-          height=0.6),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics));
+                                                    "%name")}));
     end Generator;
 
     model InfiniteBus "Infinite Bus Model"
@@ -82,11 +73,6 @@ package Generators "Generator subpackage"
       wrl.wr.Hwsum = if online then Modelica.Constants.inf else 0;
       wrl.wr.Hsum = if online then Modelica.Constants.inf else 0;
       annotation (
-        Window(
-          x=0.4,
-          y=0.4,
-          width=0.6,
-          height=0.6),
         Documentation(info="The variables Pg and Qg corresponds to the actual active and reactive power
 delivered to the network referred at the system base.
 "));
@@ -143,15 +129,6 @@ delivered to the network referred at the system base.
         Pg = Pg0;
       end if;
       annotation (
-        Window(
-          x=0.4,
-          y=0.4,
-          width=0.6,
-          height=0.6),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics),
         Documentation(info="Common definitions for detailed generator models, including the generator step-up
 transformer.
 
@@ -169,10 +146,7 @@ so called Kron's transformations [1, pp. 90].
 ---
 [1] J. Machowski, J.W. Bialek, and J.R. Bumby, Power System Dynamics and
 Stability, Number ISBN 0-471-97174. Wiley, 1993.
-"),     Icon(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics));
+"));
     end DetGen;
 
     model DetGen3 "3rd Order Detailed Generator"
@@ -202,10 +176,6 @@ Stability, Number ISBN 0-471-97174. Wiley, 1993.
     initial equation
       der(Eqp) = 0;
       annotation (
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics),
         Icon(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
@@ -213,11 +183,6 @@ Stability, Number ISBN 0-471-97174. Wiley, 1993.
                                                    "Order"), Text(extent={{-20,
                   0},{60,40}}, textString=
                                    "3rd")}),
-        Window(
-          x=0.11,
-          y=0.01,
-          width=0.58,
-          height=0.99),
         Documentation(info="The 3rd order detailed generator model corresponds to Model 3 in [1, pp 348],
 and extends the DetGen class. It adds a single transient EMF source in
 the quatradure axis and the field voltage input. This model neglects the effect
@@ -291,15 +256,6 @@ Stability, Number ISBN 0-471-97174. Wiley, 1993.
                                                   "6th"), Text(extent={{-20,-40},
                   {60,0}}, textString=
                                  "Order")}),
-        Window(
-          x=0.4,
-          y=0.42,
-          width=0.6,
-          height=0.6),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics),
         Documentation(info="The 6th order detailed generator model extends the DetGen class and
 corresponds to Model 6 in [1, pp 347], and adds subtransient EMF voltage sources
 in both the direct quatradure axes and the field voltage input.
@@ -313,23 +269,11 @@ due to friction.
 Stability, Number ISBN 0-471-97174. Wiley, 1993.
 "));
     end DetGen6;
-    annotation (             Window(
-        x=0.45,
-        y=0.01,
-        width=0.39,
-        height=0.58,
-        library=1,
-        autolayout=1));
   end Partials;
 
   model Slack "Slack Node"
     extends Partials.InfiniteBus(isSlack=true);
     annotation (
-      Window(
-        x=0.13,
-        y=0.08,
-        width=0.6,
-        height=0.6),
       Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -343,20 +287,12 @@ calculations and as an infinite bus during dynamic simulation.
 
 At least one slack node or detailed generator with its attribute 'isSlack' set to true must be included
 in each network model.
-"),   Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics));
+"));
   end Slack;
 
   model PVNode "PV Node"
     extends Partials.InfiniteBus(isSlack=false);
     annotation (
-      Window(
-        x=0.06,
-        y=0.08,
-        width=0.6,
-        height=0.6),
       Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -370,10 +306,7 @@ in each network model.
       Documentation(info="The PV node models a load-flow PV node with unlimited reactive
 power generation resources.
 
-"),   Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics));
+"));
   end PVNode;
 
   model GovExc3rdGen
@@ -381,9 +314,9 @@ power generation resources.
 
     extends Partials.DetGen3;
     replaceable ObjectStab.Generators.Controllers.ConstPm Gov annotation (Placement(
-          transformation(extent={{12,-96},{32,-76}}, rotation=0)));
+          transformation(extent={{12,-96},{32,-76}})));
     replaceable ObjectStab.Generators.Controllers.ConstEfd Exc annotation (Placement(
-          transformation(extent={{12,70},{32,90}}, rotation=0)));
+          transformation(extent={{12,70},{32,90}})));
   equation
     // connection equations for governor and exciter
     Gov.u = w;
@@ -438,20 +371,12 @@ power generation resources.
             points={{80,40},{54,20}},
             color={0,0,0},
             arrow={Arrow.None,Arrow.Filled})}),
-      Window(
-        x=0.2,
-        y=0.27,
-        width=0.6,
-        height=0.6),
       Documentation(info="The 3rd order Generator model extended with governor and exciter
 
 The governor and exciter models can be redeclared with models
 from the controller library or used-defined models.
 
-"),   Icon(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics));
+"));
   end GovExc3rdGen;
 
   model GovExc6thGen
@@ -460,9 +385,9 @@ from the controller library or used-defined models.
     extends Partials.DetGen6;
 
     replaceable ObjectStab.Generators.Controllers.ConstPm Gov annotation (Placement(
-          transformation(extent={{12,-96},{32,-76}}, rotation=0)));
+          transformation(extent={{12,-96},{32,-76}})));
     replaceable ObjectStab.Generators.Controllers.ConstEfd Exc annotation (Placement(
-          transformation(extent={{12,70},{32,90}}, rotation=0)));
+          transformation(extent={{12,70},{32,90}})));
   equation
     // connection equations for governor and exciter
     Gov.u = w;
@@ -517,20 +442,12 @@ from the controller library or used-defined models.
             lineColor={0,0,0},
             textString=
                  "w")}),
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6),
       Documentation(info="The 6th order Generator model extended with governor and exciter
 
 The governor and exciter models can be redeclared with models
 from the controller library or used-defined models.
 
-"),   Icon(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics));
+"));
   end GovExc6thGen;
 
   package Controllers "Library for Governor and Excitation system models"
@@ -549,9 +466,9 @@ from the controller library or used-defined models.
         discrete Base.Voltage Ef0(start=1);
         Modelica.Blocks.Nonlinear.Limiter Limiter(uMax=scalar(Efmax), uMin=
               scalar(Efmin)) annotation (Placement(transformation(extent={{74,
-                  -10},{94,10}}, rotation=0)));
+                  -10},{94,10}})));
         Modelica.Blocks.Math.Add Verror(k1=-1, k2=1) annotation (Placement(
-              transformation(extent={{-80,-10},{-60,10}}, rotation=0)));
+              transformation(extent={{-80,-10},{-60,10}})));
       equation
         connect(Limiter.y, y) annotation (Line(points={{95,0},{110,0}}));
         connect(u, Verror.u1)
@@ -560,11 +477,6 @@ from the controller library or used-defined models.
         Verror.u2 = {Vref};
         Vref = pre(Vref);
         annotation (
-          Window(
-            x=0.32,
-            y=0.09,
-            width=0.6,
-            height=0.6),
           Diagram(coordinateSystem(
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
@@ -593,9 +505,9 @@ from the controller library or used-defined models.
       public
         Modelica.Blocks.Nonlinear.Limiter Limiter(uMax=scalar(Pmmax), uMin=
               scalar(Pmmin)) annotation (Placement(transformation(extent={{76,
-                  -10},{96,10}}, rotation=0)));
+                  -10},{96,10}})));
         Modelica.Blocks.Math.Add werror(k1=-1, k2=+1) annotation (Placement(
-              transformation(extent={{-80,-10},{-60,10}}, rotation=0)));
+              transformation(extent={{-80,-10},{-60,10}})));
       equation
         connect(Limiter.y, y) annotation (Line(points={{97,0},{110,0}}));
         connect(werror.u1, u)
@@ -604,11 +516,6 @@ from the controller library or used-defined models.
         werror.u2 = {wref};
         Pm0 = pre(Pm0);
         annotation (
-          Window(
-            x=0.4,
-            y=0.4,
-            width=0.6,
-            height=0.6),
           Diagram(coordinateSystem(
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
@@ -638,25 +545,25 @@ from the controller library or used-defined models.
         //  Integer status1;
         //  Integer status2;
         ObsoletePetriNets.PetriNets.Transition LimitExc annotation (Placement(
-              transformation(extent={{-30,20},{-10,40}}, rotation=0)));
+              transformation(extent={{-30,20},{-10,40}})));
         ObsoletePetriNets.PetriNets.Transition LimitOK annotation (Placement(
               transformation(
               origin={-20,-10},
               extent={{-10,-10},{10,10}},
               rotation=180)));
         ObsoletePetriNets.PetriNets.Transition TimerExp annotation (Placement(
-              transformation(extent={{30,20},{50,40}}, rotation=0)));
+              transformation(extent={{30,20},{50,40}})));
         ObsoletePetriNets.PetriNets.Place11 activated annotation (Placement(
-              transformation(extent={{60,20},{80,40}}, rotation=0)));
+              transformation(extent={{60,20},{80,40}})));
         ObsoletePetriNets.PetriNets.Transition UnActivate annotation (Placement(
               transformation(
               origin={50,-30},
               extent={{-10,-10},{10,10}},
               rotation=180)));
         ObsoletePetriNets.PetriNets.Place21 wait(initialState=true) annotation (Placement(
-              transformation(extent={{-60,20},{-40,40}}, rotation=0)));
+              transformation(extent={{-60,20},{-40,40}})));
         ObsoletePetriNets.PetriNets.Place12 count annotation (Placement(
-              transformation(extent={{-2,20},{18,40}}, rotation=0)));
+              transformation(extent={{-2,20},{18,40}})));
       equation
         connect(LimitExc.inTransition, wait.outTransition) annotation (Line(
               points={{-26,30},{-38,30}}, color={255,0,0}));
@@ -692,19 +599,7 @@ from the controller library or used-defined models.
         count.state = false;
         wait.state = true;
         activated.state = false;
-        annotation (             Window(
-            x=0.13,
-            y=0.07,
-            width=0.6,
-            height=0.6));
       end ExcLimiter;
-      annotation (             Window(
-          x=0.45,
-          y=0.01,
-          width=0.39,
-          height=0.58,
-          library=1,
-          autolayout=1));
     end Partials;
 
     model FirstOrderExciter
@@ -713,8 +608,7 @@ from the controller library or used-defined models.
       parameter Real T=0.05 "Voltage Regulator Time Constant";
 
       Modelica.Blocks.Continuous.TransferFunction AVR(a={T,1}, b={K})
-        annotation (Placement(transformation(extent={{20,-10},{40,10}},
-              rotation=0)));
+        annotation (Placement(transformation(extent={{20,-10},{40,10}})));
     equation
       connect(AVR.y, Limiter.u)
         annotation (Line(points={{41,0},{72,0}}, color={0,0,255}));
@@ -724,20 +618,6 @@ from the controller library or used-defined models.
 
     initial equation
       der(AVR.x) = {0};
-      annotation (
-        Window(
-          x=0.38,
-          y=0.11,
-          width=0.68,
-          height=0.68),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics),
-        Icon(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics));
     end FirstOrderExciter;
 
     model FirstOrderGovernor
@@ -749,10 +629,9 @@ from the controller library or used-defined models.
       Modelica.Blocks.Continuous.TransferFunction TF(
         x(start={0}),
         a={T,1},
-        b={K}) annotation (Placement(transformation(extent={{-34,-10},{-14,10}},
-              rotation=0)));
+        b={K}) annotation (Placement(transformation(extent={{-34,-10},{-14,10}})));
       Modelica.Blocks.Math.Add PmAdd annotation (Placement(transformation(
-              extent={{42,-10},{62,10}}, rotation=0)));
+              extent={{42,-10},{62,10}})));
     equation
       connect(PmAdd.y, Limiter.u)
         annotation (Line(points={{64,0},{76,0}}, color={0,0,255}));
@@ -765,30 +644,12 @@ from the controller library or used-defined models.
     initial equation
       der(TF.y) = 0;
       annotation (
-        Window(
-          x=0.39,
-          y=0.3,
-          width=0.6,
-          height=0.6),
-        Icon(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics),
         Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2}), graphics={Text(extent={{18,-24},{34,-32}}, textString=
                                                        "Pm0"), Line(points={{42,
                   -6},{26,-6},{26,-20}})}),
-        Coordsys(
-          extent=[-100, -100; 100, 100],
-          grid=[2, 2],
-          component=[20, 20]),
-        Window(
-          x=0.4,
-          y=0.35,
-          width=0.6,
-          height=0.6),
         Diagram);
     end FirstOrderGovernor;
 
@@ -811,25 +672,22 @@ from the controller library or used-defined models.
 
       outer Real w;
       Modelica.Blocks.Continuous.TransferFunction AVR(a={Tr,1}, b={1})
-        annotation (Placement(transformation(extent={{-48,-10},{-28,10}},
-              rotation=0)));
+        annotation (Placement(transformation(extent={{-48,-10},{-28,10}})));
       Modelica.Blocks.Math.Add Sum(k1=+K, k2=+K) annotation (Placement(
-            transformation(extent={{-4,-10},{16,10}}, rotation=0)));
+            transformation(extent={{-4,-10},{16,10}})));
       Modelica.Blocks.Math.Gain PSSGain(k=scalar(Kstab))
-        annotation (Placement(transformation(extent={{-80,-70},{-60,-50}},
-              rotation=0)));
+        annotation (Placement(transformation(extent={{-80,-70},{-60,-50}})));
       Modelica.Blocks.Continuous.TransferFunction WashOut(a={Tw,1}, b={Tw,0})
-        annotation (Placement(transformation(extent={{-40,-70},{-20,-50}},
-              rotation=0)));
+        annotation (Placement(transformation(extent={{-40,-70},{-20,-50}})));
       Modelica.Blocks.Continuous.TransferFunction Phase_Compensation1(a={T2,1},
           b={T1,1}) annotation (Placement(transformation(extent={{0,-70},{20,
-                -50}}, rotation=0)));
+                -50}})));
       Modelica.Blocks.Nonlinear.Limiter PSSLimiter(uMax=scalar(vsmax), uMin=
             scalar(vsmin)) annotation (Placement(transformation(extent={{64,-70},
-                {84,-50}}, rotation=0)));
+                {84,-50}})));
       Modelica.Blocks.Continuous.TransferFunction Phase_Compensation2(a={T4,1},
           b={T3,1}) annotation (Placement(transformation(extent={{34,-70},{54,
-                -50}}, rotation=0)));
+                -50}})));
     equation
       connect(AVR.y, Sum.u1) annotation (Line(points={{-27,0},{-18,0},{-18,6},{
               -6,6}}));
@@ -857,11 +715,6 @@ from the controller library or used-defined models.
       Phase_Compensation2.y = 0;
       Phase_Compensation1.y = 0;
       annotation (
-        Window(
-          x=0.43,
-          y=0.29,
-          width=0.6,
-          height=0.6),
         Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
@@ -877,11 +730,7 @@ from the controller library or used-defined models.
                    "PSS"),
             Text(extent={{-112,-56},{-92,-64}}, textString=
                                                     "w-1"),
-            Line(points={{-96,-60},{-80,-60}})}),
-        Icon(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics));
+            Line(points={{-96,-60},{-80,-60}})}));
     end ExcST1A;
 
     model ConstEfd
@@ -892,11 +741,6 @@ from the controller library or used-defined models.
     initial equation
       Vref = Modelica.Constants.inf;
       annotation (
-        Window(
-          x=0.08,
-          y=0.34,
-          width=0.6,
-          height=0.6),
         Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
@@ -908,11 +752,7 @@ from the controller library or used-defined models.
               extent={{100,32},{120,12}},
               lineColor={0,0,0},
               textString=
-                   "Efd")}),
-        Icon(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics));
+                   "Efd")}));
     end ConstEfd;
 
     model ConstPm
@@ -920,21 +760,12 @@ from the controller library or used-defined models.
     equation
       Limiter.u = {Pm0};
       annotation (
-        Window(
-          x=0.46,
-          y=0.1,
-          width=0.6,
-          height=0.6),
         Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2}), graphics={Text(extent={{48,-20},{64,-28}}, textString=
                                                        "Pm0"), Line(points={{72,
-                  0},{56,0},{56,-14}})}),
-        Icon(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics));
+                  0},{56,0},{56,-14}})}));
     end ConstPm;
 
     model Gover2
@@ -948,9 +779,9 @@ from the controller library or used-defined models.
         x(start={0}),
         a={TRH,1},
         b={Kgov*PROPH*TRH,Kgov}) annotation (Placement(transformation(extent={{
-                -20,-10},{0,10}}, rotation=0)));
+                -20,-10},{0,10}})));
       Modelica.Blocks.Math.Add PmAdd annotation (Placement(transformation(
-              extent={{42,-10},{62,10}}, rotation=0)));
+              extent={{42,-10},{62,10}})));
     equation
       connect(TF.y, PmAdd.u1)
         annotation (Line(points={{1,0},{20.5,0},{20.5,6},{40,6}}, color={0,0,
@@ -963,11 +794,6 @@ from the controller library or used-defined models.
     initial equation
       der(TF.y) = 0;
       annotation (
-        Window(
-          x=0.4,
-          y=0.4,
-          width=0.6,
-          height=0.6),
         Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
@@ -990,12 +816,12 @@ from the controller library or used-defined models.
         x(start={0}),
         a={TRH,1},
         b={Kgov*PROPH*TRH,Kgov}) annotation (Placement(transformation(extent={{
-                -20,20},{0,40}}, rotation=0)));
+                -20,20},{0,40}})));
       Modelica.Blocks.Continuous.TransferFunction IsoFreq(a={1,0}, b={Kgov/
             Tfreq}) annotation (Placement(transformation(extent={{-20,-40},{0,
-                -20}}, rotation=0)));
+                -20}})));
       Modelica.Blocks.Math.Add3 Add3 annotation (Placement(transformation(
-              extent={{40,-10},{60,10}}, rotation=0)));
+              extent={{40,-10},{60,10}})));
     equation
       connect(werror.y, Gov.u)
         annotation (Line(points={{-59,0},{-40,0},{-40,30},{-22,30}}, color={0,0,
@@ -1014,16 +840,6 @@ from the controller library or used-defined models.
     initial equation
       Add3.u1.signal[1] = 0;
       Add3.u2.signal[1] = 0;
-      annotation (
-        Window(
-          x=0,
-          y=0,
-          width=0.6,
-          height=0.6),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics));
     end IsoGover;
 
     model ExcST1ALim
@@ -1045,27 +861,24 @@ from the controller library or used-defined models.
 
       outer Real w;
       Modelica.Blocks.Continuous.TransferFunction AVR(a={Tr,1}, b={1})
-        annotation (Placement(transformation(extent={{-48,-10},{-28,10}},
-              rotation=0)));
+        annotation (Placement(transformation(extent={{-48,-10},{-28,10}})));
       Modelica.Blocks.Math.Add Sum(k1=+K, k2=+K) annotation (Placement(
-            transformation(extent={{-4,-10},{16,10}}, rotation=0)));
+            transformation(extent={{-4,-10},{16,10}})));
       Modelica.Blocks.Math.Gain PSSGain(k=scalar(Kstab))
-        annotation (Placement(transformation(extent={{-80,-70},{-60,-50}},
-              rotation=0)));
+        annotation (Placement(transformation(extent={{-80,-70},{-60,-50}})));
       Modelica.Blocks.Continuous.TransferFunction WashOut(a={Tw,1}, b={Tw,0})
-        annotation (Placement(transformation(extent={{-40,-70},{-20,-50}},
-              rotation=0)));
+        annotation (Placement(transformation(extent={{-40,-70},{-20,-50}})));
       Modelica.Blocks.Continuous.TransferFunction Phase_Compensation1(a={T2,1},
           b={T1,1}) annotation (Placement(transformation(extent={{0,-70},{20,
-                -50}}, rotation=0)));
+                -50}})));
       Modelica.Blocks.Nonlinear.Limiter PSSLimiter(uMax=scalar(vsmax), uMin=
             scalar(vsmin)) annotation (Placement(transformation(extent={{64,-70},
-                {84,-50}}, rotation=0)));
+                {84,-50}})));
       Modelica.Blocks.Continuous.TransferFunction Phase_Compensation2(a={T4,1},
           b={T3,1}) annotation (Placement(transformation(extent={{34,-70},{54,
-                -50}}, rotation=0)));
+                -50}})));
       Partials.ExcLimiter ExcLimit annotation (Placement(transformation(extent=
-                {{36,-10},{56,10}}, rotation=0)));
+                {{36,-10},{56,10}})));
     equation
       connect(AVR.y, Sum.u1) annotation (Line(points={{-27,0},{-18,0},{-18,6},{
               -6,6}}));
@@ -1094,11 +907,6 @@ from the controller library or used-defined models.
       Phase_Compensation2.y = 0;
       Phase_Compensation1.y = 0;
       annotation (
-        Window(
-          x=0.03,
-          y=0.08,
-          width=0.6,
-          height=0.6),
         Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
@@ -1114,20 +922,9 @@ from the controller library or used-defined models.
                    "PSS"),
             Text(extent={{-112,-56},{-92,-64}}, textString=
                                                     "w-1"),
-            Line(points={{-96,-60},{-80,-60}})}),
-        Icon(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics));
+            Line(points={{-96,-60},{-80,-60}})}));
     end ExcST1ALim;
     annotation (
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6,
-        library=1,
-        autolayout=1),
       Documentation(info="This library contains sample governor and excitation
 system models
 
@@ -1145,11 +942,4 @@ model NewGen
 end NewGen;
 "));
   end Controllers;
-  annotation (             Window(
-      x=0.4,
-      y=0.4,
-      width=0.6,
-      height=0.6,
-      library=1,
-      autolayout=1));
 end Generators;

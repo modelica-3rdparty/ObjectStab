@@ -13,11 +13,6 @@ package Network "Network subpackage"
       parameter Base.Susceptance B=0.1 "Shunt Susceptance";
       parameter Base.Conductance G=0.0 "Shunt Conductance";
       annotation (
-        Window(
-          x=0.45,
-          y=0.01,
-          width=0.54,
-          height=0.89),
         Icon(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
@@ -34,9 +29,9 @@ package Network "Network subpackage"
       parameter Base.Resistance R=0.0 "Leakage Resistance";
       parameter Base.Reactance X=0.1 "Leakage Reactance";
       ObjectStab.Network.IdealTransformer Tr annotation (Placement(
-            transformation(extent={{20,-20},{60,20}}, rotation=0)));
+            transformation(extent={{20,-20},{60,20}})));
       ObjectStab.Network.Impedance Imp(R=R, X=X) annotation (Placement(
-            transformation(extent={{-60,-20},{-20,20}}, rotation=0)));
+            transformation(extent={{-60,-20},{-20,20}})));
     equation
       connect(Imp.T1, T1) annotation (Line(points={{-60,0},{-100,0}}));
       connect(Imp.T2, Tr.T1) annotation (Line(points={{-20,0},{20,0}}));
@@ -51,12 +46,7 @@ package Network "Network subpackage"
             Line(points={{70,0},{100,0}}, color={0,0,0}),
             Line(points={{-100,0},{-70,0}}, color={0,0,0}),
             Text(extent={{-98,-40},{100,-80}}, textString=
-                                                   "%name")}),
-        Window(
-          x=0.4,
-          y=0.4,
-          width=0.6,
-          height=0.6));
+                                                   "%name")}));
     end ImpTransformer;
 
     model Place32 "Place with two input and two output transitions"
@@ -66,17 +56,13 @@ package Network "Network subpackage"
       Boolean newState(final start=initialState);
     public
       ObsoletePetriNets.PetriNets.Interfaces.FirePortOut outTransition1
-        annotation (Placement(transformation(extent={{100,-70},{120,-50}},
-              rotation=0)));
+        annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
       ObsoletePetriNets.PetriNets.Interfaces.FirePortOut outTransition2
-        annotation (Placement(transformation(extent={{100,70},{120,50}},
-              rotation=0)));
+        annotation (Placement(transformation(extent={{100,70},{120,50}})));
       ObsoletePetriNets.PetriNets.Interfaces.SetPortIn inTransition1
-        annotation (Placement(transformation(extent={{-140,-80},{-100,-40}},
-              rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
       ObsoletePetriNets.PetriNets.Interfaces.SetPortIn inTransition2
-        annotation (Placement(transformation(extent={{-140,80},{-100,40}},
-              rotation=0)));
+        annotation (Placement(transformation(extent={{-140,80},{-100,40}})));
     public
       ObsoletePetriNets.PetriNets.Interfaces.SetPortIn inTransition3
         annotation (Placement(transformation(
@@ -96,11 +82,6 @@ package Network "Network subpackage"
       outTransition1.state = state;
       outTransition2.state = outTransition1.state and not outTransition1.fire;
       annotation (
-        Window(
-          x=0.21,
-          y=0.03,
-          width=0.6,
-          height=0.86),
         Icon(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
@@ -169,20 +150,8 @@ package Network "Network subpackage"
               fillPattern=FillPattern.Solid),
             Line(points={{-100,0},{-44,0}}, color={0,0,0}),
             Text(extent={{80,-60},{-80,-20}}, textString=
-                                                  "%name")}),
-        Window(
-          x=0.04,
-          y=0.36,
-          width=0.87,
-          height=0.6));
+                                                  "%name")}));
     end BreakerBase;
-    annotation (             Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6,
-        library=1,
-        autolayout=1));
   end Partials;
 
   package Controllers
@@ -214,11 +183,6 @@ package Network "Network subpackage"
       tappos = (y - 1)/stepsize;
       udev = u1 - Vref;
       annotation (
-        Window(
-          x=0.4,
-          y=0.4,
-          width=0.6,
-          height=0.6),
         Documentation(info="Common definitions for TCUL control systems according to [1].
 Using the parameter the characteristics of the mechanical delay time (Tm)
 and the controlled delay time (Td) the TCUL can be influenced according
@@ -255,7 +219,7 @@ Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
         k=1,
         outMax=1 + maxtap*stepsize,
         outMin=1 + mintap*stepsize) annotation (Placement(transformation(extent
-              ={{-20,-20},{20,20}}, rotation=0)));
+              ={{-20,-20},{20,20}})));
     equation
       connect(integrator.y, y) annotation (Line(points={{20,0},{110,0}}));
       if (method == 2) then
@@ -277,11 +241,6 @@ Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
         integrator.y = {n};
       end if;
       annotation (
-        Window(
-          x=0.4,
-          y=0.4,
-          width=0.6,
-          height=0.6),
         Icon(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
@@ -487,15 +446,6 @@ Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
       actiondown.state = false;
       updatetap.state = false;
       annotation (
-        Window(
-          x=0.39,
-          y=0,
-          width=0.63,
-          height=0.95),
-        Icon(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics),
         Documentation(info="Discrete implementation of Tap-Changing Under Load (TCUL) control system
 according to method D1-D4 in [1] using a state-machine implementation of the
 control system and tap changer mechanism.
@@ -509,18 +459,8 @@ convergence problems with the initial value solver.
 dynamic models of tap-changing-under-load transformers\", in Proceedings
 of NSF/ECC Workshop on Bulk power System Voltage Phenomena - III :
 Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
-"),     Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics));
+"));
     end TCULDiscrete;
-    annotation (             Window(
-        x=0.45,
-        y=0.01,
-        width=0.39,
-        height=0.58,
-        library=1,
-        autolayout=1));
   end Controllers;
 
   model Ground "Ground Point"
@@ -529,11 +469,6 @@ Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
     1 + T.va = 0;
     T.vb = 0;
     annotation (
-      Window(
-        x=0.23,
-        y=0.22,
-        width=0.6,
-        height=0.6),
       Diagram(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -571,11 +506,6 @@ Several (or no) ground points may be used in a power system model.
     [T1.va - T2.va; T1.vb - T2.vb] = [R, -X; X, R]*[T1.ia; T1.ib];
     [T1.ia; T1.ib] + [T2.ia; T2.ib] = [0; 0];
     annotation (
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6),
       Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -631,11 +561,6 @@ For numerical reasons, R and X may not both be set to zero.
     [T1.ia; T1.ib] = [G, -B; B, G]*[T1.va - T2.va; T1.vb - T2.vb];
     [T1.ia; T1.ib] + [T2.ia; T2.ib] = [0; 0];
     annotation (
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6),
       Diagram(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -700,16 +625,7 @@ I1 + I2 = 0:
           Line(points={{-10,40},{-10,-40}}, color={0,0,0}),
           Line(points={{10,40},{10,-40}}, color={0,0,0}),
           Text(extent={{-100,-40},{100,-80}}, textString=
-                                                  "j%B")}),
-      Window(
-        x=0.18,
-        y=0.38,
-        width=0.6,
-        height=0.6),
-      Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics));
+                                                  "j%B")}));
   end ShuntCapacitor;
 
   class ShuntReactor "Shunt Reactor"
@@ -734,16 +650,7 @@ I1 + I2 = 0:
           Line(points={{-50,0},{-40,20},{-20,-20},{0,20},{18,-20},{30,0}},
               color={0,0,0}),
           Text(extent={{-40,-20},{20,-60}}, textString=
-                                                "j%B")}),
-      Window(
-        x=0.04,
-        y=0.36,
-        width=0.6,
-        height=0.6),
-      Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics));
+                                                "j%B")}));
   end ShuntReactor;
 
   model Pilink "Pilink Line Model"
@@ -755,23 +662,13 @@ I1 + I2 = 0:
     [T2.ia; T2.ib] = [G, -B; B, G]/2*[1 + T2.va; T2.vb] - [R, X; -X, R]/(R^2 +
       X^2)*[T1.va - T2.va; T1.vb - T2.vb];
 
-    annotation (
-      Window(
-        x=0,
-        y=0,
-        width=0.81,
-        height=0.87),
-      Icon(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics));
   end Pilink;
 
   model Pilink2 "Pilink transmission line model built using Basic Components"
     extends Partials.PilinkBase;
 
     ObjectStab.Network.Impedance Imp(R=R, X=X) annotation (Placement(
-          transformation(extent={{-20,-20},{20,20}}, rotation=0)));
+          transformation(extent={{-20,-20},{20,20}})));
     ObjectStab.Network.Admittance T2Adm(G=G/2, B=B/2) annotation (Placement(
           transformation(
           origin={60,-40},
@@ -798,11 +695,6 @@ I1 + I2 = 0:
     connect(T1, Imp.T1) annotation (Line(points={{-100,0},{-20,0}}));
     connect(T1Adm.T2, T1) annotation (Line(points={{-60,-22},{-60,0},{-100,0}}));
     annotation (
-      Window(
-        x=0.38,
-        y=0.18,
-        width=0.6,
-        height=0.6),
       Diagram(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -833,14 +725,11 @@ and Stability, Number ISBN 0-471-97174. Wiley, 1993.
       R=R,
       X=X,
       B=B,
-      G=G) annotation (Placement(transformation(extent={{-20,-20},{20,20}},
-            rotation=0)));
+      G=G) annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
     ObjectStab.Network.Breaker B1(OpenTime=OpenTime, CloseTime=CloseTime)
-      annotation (Placement(transformation(extent={{-80,-20},{-40,20}},
-            rotation=0)));
+      annotation (Placement(transformation(extent={{-80,-20},{-40,20}})));
     ObjectStab.Network.Breaker B2(OpenTime=OpenTime, CloseTime=CloseTime)
-      annotation (Placement(transformation(extent={{40,-20},{80,20}}, rotation=
-              0)));
+      annotation (Placement(transformation(extent={{40,-20},{80,20}})));
   equation
     connect(B1.T1, T1) annotation (Line(points={{-80,0},{-100,0}}));
     connect(B1.T2, L1.T1) annotation (Line(points={{-40,0},{-20,0}}));
@@ -855,15 +744,6 @@ and Stability, Number ISBN 0-471-97174. Wiley, 1993.
           Line(points={{-94,0},{-70,0}}, color={255,255,255}),
           Line(points={{68,0},{92,0}}, color={255,255,255}),
           Line(points={{68,0},{92,20}}, color={0,0,0})}),
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6),
-      Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics),
       Documentation(info="Breakers B1 and B2 opens simultaneously at simulation time OpenTime, and stays
 until time CloseTime, after which they are simultanously closed.
 
@@ -881,15 +761,6 @@ until time CloseTime, after which they are simultanously closed.
     T.ia = 0;
     T.ib = 0;
     annotation (
-      Window(
-        x=0.32,
-        y=0.08,
-        width=0.6,
-        height=0.6),
-      Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics),
       Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -924,7 +795,7 @@ until time CloseTime, after which they are simultanously closed.
           rotation=270)));
     ObjectStab.Network.Breaker B1(OpenTime=FaultTime + FaultDuration, CloseTime=
          FaultTime) annotation (Placement(transformation(extent={{-60,-20},{-20,
-              20}}, rotation=0)));
+              20}})));
   equation
     connect(Imp.T1, G.T) annotation (Line(points={{-60,-50},{-60,-60}}));
     connect(Imp.T2, B1.T1) annotation (Line(points={{-60,-10},{-60,0}}));
@@ -956,11 +827,6 @@ until time CloseTime, after which they are simultanously closed.
             fillPattern=FillPattern.Solid),
           Text(extent={{-20,-80},{20,-100}}, textString=
                                                  "Bus Fault")}),
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6),
       Documentation(info="The shunt fault is modelled as an impedance connected to ground through
 a breaker. The fault is applied at simulation time FaultTime and stays
 active for the duration of FaultDuration.
@@ -986,19 +852,6 @@ to zero.
       closed = (time < OpenTime or time > CloseTime);
     end if;
     annotation (
-      Window(
-        x=0.33,
-        y=0.06,
-        width=0.6,
-        height=0.6),
-      Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics),
-      Icon(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics),
       Documentation(info="The ideal breaker model is governed by the following models:
 if breaker is closed then
   V1 = V2
@@ -1016,16 +869,11 @@ else
 
     ObjectStab.Network.Breaker B1(OpenTime=FaultTime, CloseTime=FaultTime +
           FaultDuration) annotation (Placement(transformation(extent={{-20,-20},
-              {20,20}}, rotation=0)));
+              {20,20}})));
   equation
     connect(T1, B1.T1) annotation (Line(points={{-100,0},{-20,0}}));
     connect(B1.T2, T2) annotation (Line(points={{20,0},{100,0}}));
     annotation (
-      Window(
-        x=0.27,
-        y=0.1,
-        width=0.6,
-        height=0.6),
       Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -1043,10 +891,6 @@ else
             fillPattern=FillPattern.HorizontalCylinder,
             fillColor={255,0,0}),
           Line(points={{-98,0},{100,0}})}),
-      Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics),
       Documentation(info="The series fault is realized using the ideal breaker model.
 The fault becomes active (non-conductive) at time FaultTime
 and stays non-conductive for the duration of FaultDuration seconds,
@@ -1069,20 +913,19 @@ after which the fault is cleared.
       R=R*alpha,
       X=X*alpha,
       B=B*alpha,
-      G=G*alpha) annotation (Placement(transformation(extent={{-50,-10},{-30,10}},
-            rotation=0)));
+      G=G*alpha) annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
     ObjectStab.Network.Pilink2 L2(
       R=R*(1 - alpha),
       X=X*(1 - alpha),
       B=B*(1 - alpha),
       G=G*(1 - alpha)) annotation (Placement(transformation(extent={{40,-10},{
-              60,10}}, rotation=0)));
+              60,10}})));
     ObjectStab.Network.Breaker B1(OpenTime=FaultTime + ClearTime, CloseTime=
           RecloseTime) annotation (Placement(transformation(extent={{-80,-10},{
-              -60,10}}, rotation=0)));
+              -60,10}})));
     ObjectStab.Network.Breaker B2(OpenTime=FaultTime + ClearTime, CloseTime=
           RecloseTime) annotation (Placement(transformation(extent={{68,-10},{
-              88,10}}, rotation=0)));
+              88,10}})));
     ObjectStab.Network.Impedance FaultImp(R=FaultR, X=FaultX) annotation (Placement(
           transformation(
           origin={0,-62},
@@ -1118,11 +961,6 @@ after which the fault is cleared.
                                                     "FaultR+jFaultX"), Text(
               extent={{34,28},{66,2}}, textString=
                                            "(R+jX)*alpha")}),
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6),
       Documentation(info="The model of the Pilink with a shunt fault is realized using the Pilink
 models and the ideal breaker models.
 
@@ -1167,15 +1005,6 @@ and alpha not be equal to 0 or 1.
     T1.ib = -T2.ib*n;
     n =inPort;
     annotation (
-      Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics),
-      Window(
-        x=0.01,
-        y=0.1,
-        width=0.6,
-        height=0.6),
       Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -1200,11 +1029,6 @@ and alpha not be equal to 0 or 1.
   equation
     Tr.n = n;
     annotation (
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6),
       Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -1224,7 +1048,7 @@ and alpha not be equal to 0 or 1.
 
     parameter Base.TapRatio n=1 "Transformer Ratio";
     ObjectStab.Network.Controllers.TCULContinuous Controller(n=n) annotation (Placement(
-          transformation(extent={{0,-60},{20,-40}}, rotation=0)));
+          transformation(extent={{0,-60},{20,-40}})));
     ObjectStab.Base.VoltageMeasurement PrimaryVoltage annotation (Placement(
           transformation(
           origin={-60,-30},
@@ -1262,15 +1086,6 @@ and alpha not be equal to 0 or 1.
             lineColor={0,0,0},
             fillColor={0,0,0},
             fillPattern=FillPattern.Solid)}),
-      Window(
-        x=0.15,
-        y=0.35,
-        width=0.6,
-        height=0.6),
-      Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics),
       Documentation(info="Continuous approximation of Tap-Changing Under Load (TCUL) according to
 method C1-C4
 "));
@@ -1284,7 +1099,7 @@ method C1-C4
     parameter Base.TapRatio n=1 "Transformer Ratio";
 
     ObjectStab.Network.Controllers.TCULDiscrete Controller(n=n) annotation (Placement(
-          transformation(extent={{0,-60},{20,-40}}, rotation=0)));
+          transformation(extent={{0,-60},{20,-40}})));
     ObjectStab.Base.VoltageMeasurement PrimaryVoltage annotation (Placement(
           transformation(
           origin={-60,-30},
@@ -1321,15 +1136,6 @@ method C1-C4
             lineColor={0,0,0},
             fillColor={0,0,0},
             fillPattern=FillPattern.Solid)}),
-      Window(
-        x=0.07,
-        y=0.34,
-        width=0.6,
-        height=0.6),
-      Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics),
       Documentation(info="Discrete implementation of Tap-Changing Under Load (TCUL) transformer according to
 method D1-D4 using a state-machine implementation of the control system and
 tap changer mechanism. See documentation for 'Controllers.TCULDiscrete' for
@@ -1368,11 +1174,7 @@ else
   I1 = 0
   I2 = 0
 
-"),   Window(
-        x=0.22,
-        y=0.04,
-        width=0.6,
-        height=0.78));
+"));
   end ExtBreaker;
 
   model OpenedPilink2 "Pilink model with breakers"
@@ -1385,20 +1187,8 @@ else
        + [R, X; -X, R]/(R^2 + X^2)*[T1.va - T2.va; T1.vb - T2.vb] else [0; 0];
     [T2.ia; T2.ib] = if time < OpenTime then [G, -B; B, G]/2*[1 + T2.va; T2.vb]
        - [R, X; -X, R]/(R^2 + X^2)*[T1.va - T2.va; T1.vb - T2.vb] else [0; 0];
-    annotation (             Window(
-        x=0.05,
-        y=0.15,
-        width=0.6,
-        height=0.6));
   end OpenedPilink2;
   annotation (
-    Window(
-      x=0.4,
-      y=0.4,
-      width=0.6,
-      height=0.6,
-      library=1,
-      autolayout=1),
     Documentation(info="The network subpackage contains the various network components.
 "));
 end Network;

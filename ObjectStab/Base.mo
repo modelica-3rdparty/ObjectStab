@@ -59,11 +59,6 @@ package Base "Base package"
     flow Base.Current ib;
 
     annotation (
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6),
       Diagram(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -102,15 +97,10 @@ By definition, currents are considered positive when injected into a component.
     "Shell model for ObjectStab models with one electrical connector "
 
     ObjectStab.Base.Pin T annotation (Placement(transformation(extent={{-110,
-              -10},{-90,10}}, rotation=0)));
+              -10},{-90,10}})));
   equation
     //  assert(cardinality(T) > 0, "One Pin not connected");
     annotation (
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6),
       Documentation(info=""));
   end OnePin;
 
@@ -118,21 +108,8 @@ By definition, currents are considered positive when injected into a component.
     "Shell model for models with one connector in the center of the model"
 
     ObjectStab.Base.Pin T annotation (Placement(transformation(extent={{-10,-10},
-              {10,10}}, rotation=0)));
+              {10,10}})));
     annotation (
-      Window(
-        x=0.04,
-        y=0.26,
-        width=0.6,
-        height=0.6),
-      Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics),
-      Icon(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics),
       Documentation(info=""));
   end OnePinCenter;
 
@@ -140,14 +117,9 @@ By definition, currents are considered positive when injected into a component.
     "Shell model for ObjectStab models with two electrical connectors "
 
     ObjectStab.Base.Pin T1 annotation (Placement(transformation(extent={{-110,
-              -10},{-90,10}}, rotation=0)));
+              -10},{-90,10}})));
     ObjectStab.Base.Pin T2 annotation (Placement(transformation(extent={{90,-10},
-              {110,10}}, rotation=0)));
-    annotation (             Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6));
+              {110,10}})));
   end TwoPin;
 
   class VoltageMeasurement "Voltage Measurement for Electrical Cuts"
@@ -157,22 +129,12 @@ By definition, currents are considered positive when injected into a component.
     Base.VoltageAngle theta=Modelica.Math.atan2(T.vb, (1 + T.va))
       "Voltage Angle";
     Modelica.Blocks.Interfaces.RealOutput outPort
-      annotation (Placement(transformation(extent={{-10,-10},{10,10}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   equation
     T.ia = 0;
     T.ib = 0;
     outPort = V;
     annotation (
-      Window(
-        x=0.1,
-        y=0.01,
-        width=0.6,
-        height=0.6),
-      Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics),
       Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -189,7 +151,7 @@ By definition, currents are considered positive when injected into a component.
   class CurrentMeasurement "CurrentMeasurement"
     extends ObjectStab.Base.TwoPin;
     Modelica.Blocks.Interfaces.RealOutput outPort
-      annotation (Placement(transformation(extent={{20,50},{40,70}}, rotation=0)));
+      annotation (Placement(transformation(extent={{20,50},{40,70}})));
   equation
     outPort = sqrt((T1.ia)^2 + T1.ib^2);
     T1.va = T2.va;
@@ -197,11 +159,6 @@ By definition, currents are considered positive when injected into a component.
     T1.ia = -T2.ia;
     T1.ib = -T2.ib;
     annotation (
-      Window(
-        x=0.1,
-        y=0.06,
-        width=0.6,
-        height=0.6),
       Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -230,7 +187,7 @@ Should be connected in series.
     Real P=(1 + T1.va)*T1.ia + T1.vb*T1.ib;
     Real Q=(T1.vb*T1.ia - (1 + T1.va)*T1.ib);
     Modelica.Blocks.Interfaces.RealOutput outPort[2]
-      annotation (Placement(transformation(extent={{20,50},{40,70}}, rotation=0)));
+      annotation (Placement(transformation(extent={{20,50},{40,70}})));
   equation
 
     outPort[1] = P;
@@ -240,11 +197,6 @@ Should be connected in series.
     T1.ia = -T2.ia;
     T1.ib = -T2.ib;
     annotation (
-      Window(
-        x=0.1,
-        y=0.06,
-        width=0.6,
-        height=0.6),
       Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -279,12 +231,7 @@ Should be connected in series.
             extent={{-20,22},{20,-20}},
             lineColor={255,255,255},
             fillColor={192,192,192},
-            fillPattern=FillPattern.Solid)}),
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6));
+            fillPattern=FillPattern.Solid)}));
   end wRefPin;
 
   class System "Shell model for connected systems"
@@ -294,7 +241,7 @@ Should be connected in series.
     inner AngularVelocity wref(start=1);
   protected
     inner wRefContainer wrcon annotation (Placement(transformation(extent={{
-              -120,100},{-100,120}}, rotation=0)));
+              -120,100},{-100,120}})));
   equation
     wref = wrcon.wr.Hwsum/(wrcon.wr.Hsum);
 
@@ -330,11 +277,6 @@ Should be connected in series.
             fillPattern=FillPattern.Solid),
           Text(extent={{-83,-6},{71,-54}}, textString=
                                                "ObjectStab")}),
-      Window(
-        x=0.19,
-        y=0.03,
-        width=0.76,
-        height=0.93),
       Documentation(info="This model defines global variables necessary for the system frequency reference.
 The reference is computed using the center-of-inertia method.
 "));
@@ -344,8 +286,7 @@ The reference is computed using the center-of-inertia method.
     extends TwoPin;
     Real k=InPort;
     Modelica.Blocks.Interfaces.RealInput InPort
-      annotation (Placement(transformation(extent={{-40,50},{-20,70}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-40,50},{-20,70}})));
   equation
     [T2.ia; T2.ib] = k*[T1.ia; T1.ib];
     [T2.va; T2.vb] = k*[T1.va; T1.vb];
@@ -359,28 +300,15 @@ The reference is computed using the center-of-inertia method.
   end Scaler;
 
   class wRefContainer
-    wRefPin wr annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-            rotation=0)));
+    wRefPin wr annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     annotation (
       Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Text(extent={{-60,40},{62,-42}}, textString=
-                                                  "wref")}),
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6));
+                                                  "wref")}));
   end wRefContainer;
   annotation (
-    Window(
-      x=0.4,
-      y=0.4,
-      width=0.6,
-      height=0.6,
-      library=1,
-      autolayout=1),
     Documentation(info="The base package contains definitions common to all
 subpackages, including the new datatypes for the p.u.
 quantities are defined.

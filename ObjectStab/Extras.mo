@@ -12,11 +12,6 @@ package Extras
     Real Qloss=noEvent(abs(Q1 + Q2));
     Real I1=sqrt(T1.ia^2 + T1.ib^2);
     Real I2=sqrt(T2.ia^2 + T2.ib^2);
-    annotation (             Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6));
   end PQPilink;
 
   model OpenedPQPilink
@@ -31,7 +26,6 @@ package Extras
     Real Qloss=noEvent(abs(Q1 + Q2));
     Real I1=sqrt(T1.ia^2 + T1.ib^2);
     Real I2=sqrt(T2.ia^2 + T2.ib^2);
-    annotation ();
   end OpenedPQPilink;
 
   model FaultedPQPilink
@@ -46,7 +40,6 @@ package Extras
     Real Qloss=noEvent(abs(Q1 + Q2));
     Real I1=sqrt(T1.ia^2 + T1.ib^2);
     Real I2=sqrt(T2.ia^2 + T2.ib^2);
-    annotation ();
   end FaultedPQPilink;
 
   class ShedRelay
@@ -58,21 +51,21 @@ package Extras
     ObjectStab.Base.Time timerstart(start=-1, fixed=true);
 
     ObsoletePetriNets.PetriNets.Transition T1 annotation (Placement(
-          transformation(extent={{-30,40},{-10,60}}, rotation=0)));
+          transformation(extent={{-30,40},{-10,60}})));
     ObsoletePetriNets.PetriNets.Transition T2 annotation (Placement(
           transformation(
           origin={-20,-14},
           extent={{-10,-10},{10,10}},
           rotation=180)));
     ObsoletePetriNets.PetriNets.Place12 delay annotation (Placement(
-          transformation(extent={{0,40},{20,60}}, rotation=0)));
+          transformation(extent={{0,40},{20,60}})));
     ObsoletePetriNets.PetriNets.Transition T3 annotation (Placement(
           transformation(
           origin={-20,20},
           extent={{-10,-10},{10,10}},
           rotation=180)));
     ObsoletePetriNets.PetriNets.Place21 wait(initialState=true) annotation (Placement(
-          transformation(extent={{-60,40},{-40,60}}, rotation=0)));
+          transformation(extent={{-60,40},{-40,60}})));
   equation
     connect(delay.inTransition, T1.outTransition) annotation (Line(points={{-2,
             50},{-15,50}}));
@@ -101,11 +94,6 @@ package Extras
     wait.state = true;
     delay.state = true;
     y = 0;
-    annotation (             Window(
-        x=0.1,
-        y=0.01,
-        width=0.66,
-        height=0.93));
   end ShedRelay;
 
   model UVLSLoad
@@ -128,19 +116,19 @@ package Extras
       DelayTime=1.5,
       ShedAmount=0.05)
                       annotation (Placement(transformation(extent={{-85,15},{
-              -15,85}}, rotation=0)));
+              -15,85}})));
     ShedRelay Relay2(
       Threshold=0.82,
       DelayTime=3,
       ShedAmount=0.05)
                       annotation (Placement(transformation(extent={{15,15},{85,
-              85}}, rotation=0)));
+              85}})));
     ShedRelay Relay3(
       DelayTime=6,
       ShedAmount=0.05,
       Threshold=0.92)
                      annotation (Placement(transformation(extent={{-85,-85},{
-              -15,-15}}, rotation=0)));
+              -15,-15}})));
   equation
     Pl = (1 - k)*(xp/Tp + P0*(V/V0)^at);
     Ql = (1 - k)*(xq/Tq + Q0*(V/V0)^bt);
@@ -171,16 +159,7 @@ package Extras
           Text(extent={{-100,60},{100,20}}, textString=
                                                 "%P0 + j %Q0"),
           Text(extent={{-100,100},{100,60}}, textString=
-                                                 "UVLS")}),
-      Window(
-        x=0.08,
-        y=0.02,
-        width=0.58,
-        height=0.98),
-      Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics));
+                                                 "UVLS")}));
   end UVLSLoad;
 
   model UFLSLoad
@@ -200,19 +179,19 @@ package Extras
       ShedAmount=0.1,
       Threshold=0.96)
                      annotation (Placement(transformation(extent={{-56.6667,10},
-              {-10,56.6667}}, rotation=0)));
+              {-10,56.6667}})));
     ShedRelay Relay2(
       DelayTime=0.1,
       ShedAmount=0.1,
       Threshold=0.956)
                       annotation (Placement(transformation(extent={{10,10},{
-              56.6667,56.6667}}, rotation=0)));
+              56.6667,56.6667}})));
     ShedRelay Relay3(
       DelayTime=0.1,
       ShedAmount=0.1,
       Threshold=0.952)
                       annotation (Placement(transformation(extent={{-56.6667,
-              -56.6667},{-10,-10}}, rotation=0)));
+              -56.6667},{-10,-10}})));
   equation
     Pl = (1 - k)*P0*(1 + (V - V0)*a + c*(wref - 1));
     Ql = (1 - k)*Q0*(1 + (V - V0)*b + d*(wref - 1));
@@ -226,12 +205,7 @@ package Extras
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Text(extent={{-100,100},{100,60}}, textString=
-                                                    "UFLS")}),
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6));
+                                                    "UFLS")}));
   end UFLSLoad;
 
   model DetGen0 "Detailed Static Generator Model"
@@ -298,11 +272,6 @@ package Extras
       Pg = Pg0;
     end if;
 
-    annotation (             Window(
-        x=0.08,
-        y=0.26,
-        width=0.6,
-        height=0.6));
   end DetGen0;
 
   model GovExcKundurGen
@@ -369,9 +338,9 @@ package Extras
     Real efd=Efd*Rfd/Ladu;
 
     replaceable ObjectStab.Generators.Controllers.ConstPm Gov annotation (Placement(
-          transformation(extent={{12,-96},{32,-76}}, rotation=0)));
+          transformation(extent={{12,-96},{32,-76}})));
     replaceable ObjectStab.Generators.Controllers.ConstEfd Exc annotation (Placement(
-          transformation(extent={{14,70},{34,90}}, rotation=0)));
+          transformation(extent={{14,70},{34,90}})));
   equation
     der(lamfd) = ObjectStab.Base.ws*((Efd*Rfd/Ladu) + (lamad - lamfd)*Rfd/Lfd);
     der(lam1d) = ObjectStab.Base.ws*(lamad - lam1d)/L1d*R1d;
@@ -412,15 +381,6 @@ package Extras
     der(lam1q) = 0;
     der(lam2q) = 0;
     annotation (
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6),
-      Icon(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics),
       Diagram(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -521,18 +481,6 @@ package Extras
           Text(extent={{-60,100},{100,60}}, textString=
                                                 "%name"),
           Text(extent={{-40,-20},{80,20}}, textString=
-                                               "Slack")}),
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6));
+                                               "Slack")}));
   end ExtSlack;
-  annotation (             Window(
-      x=0.4,
-      y=0.4,
-      width=0.6,
-      height=0.6,
-      library=1,
-      autolayout=1));
 end Extras;

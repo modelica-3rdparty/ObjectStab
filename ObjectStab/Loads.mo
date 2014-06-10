@@ -27,15 +27,6 @@ package Loads "Loads subpackage"
     initial equation
       V0 = V;
       annotation (
-        Window(
-          x=0.2,
-          y=0.04,
-          width=0.71,
-          height=0.93),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics),
         Icon(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
@@ -88,15 +79,6 @@ the load draws if the voltage is 1 p.u.
     initial equation
       V0 = V;
       annotation (
-        Window(
-          x=0.4,
-          y=0.4,
-          width=0.6,
-          height=0.6),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics),
         Icon(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
@@ -117,13 +99,6 @@ The parameters P0 and Q0 denote the rated load power, i.e., the power
 the load draws if the voltage is 1 p.u.
 "));
     end ExtLoad;
-    annotation (             Window(
-        x=0.45,
-        y=0.01,
-        width=0.44,
-        height=0.65,
-        library=1,
-        autolayout=1));
   end Partials;
 
   model PQLoad "Constant power (PQ) Load"
@@ -132,11 +107,6 @@ the load draws if the voltage is 1 p.u.
     Pl = P0;
     Ql = Q0;
     annotation (
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6),
       Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -147,10 +117,7 @@ are given by:
 
   Pl = P0
   Ql = Q0
-"),   Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics));
+"));
   end PQLoad;
 
   model ImpedanceLoad "Impedance Load"
@@ -159,11 +126,6 @@ are given by:
     Pl = P0*(V/V0)^2;
     Ql = Q0*(V/V0)^2;
     annotation (
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6),
       Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -192,12 +154,7 @@ X = Q*V^2/(Q^2+P^2)
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Text(extent={{-40,-60},{40,-20}}, textString=
-                                                   "ZIP")}),
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6));
+                                                   "ZIP")}));
   end ZIPLoad;
 
   model DynLoad
@@ -224,11 +181,6 @@ X = Q*V^2/(Q^2+P^2)
     der(xq) = 0;
 
     annotation (
-      Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6),
       Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -257,10 +209,7 @@ characteristics x_q, Qs(V)=Q0 V^bs, Qt(V) = Q0 V^bt and time constant Tq.
 dynamic loads in power systems\", IEEE Transactions on Power Systems,
 vol. 9, no. 1, pp. 157-163, February 1994.
 
-"),   Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics));
+"));
   end DynLoad;
 
   class FreqLoad "Frequency Sensitive Load"
@@ -301,11 +250,6 @@ vol. 9, no. 1, pp. 157-163, February 1994.
     s = 1/2/P0/xp*(V^2 - (V^4 - 4*P0^2*xp^2)^(1/2))*scr;
     Tm = V^2/xp/((s/scr + scr/s))/(1 - s);
     B = -(-Q0*xp*s^2 - Q0*xp*scr^2 + V^2*s^2)/xp/(s^2 + scr^2)/V^2;
-    annotation (             Window(
-        x=0.4,
-        y=0.4,
-        width=0.6,
-        height=0.6));
   end MotorLoad;
 
   model ExtDynLoad
@@ -330,11 +274,6 @@ vol. 9, no. 1, pp. 157-163, February 1994.
     der(xp) = 0;
     der(xq) = 0;
     annotation (
-      Window(
-        x=0.11,
-        y=0.02,
-        width=0.6,
-        height=0.6),
       Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -364,19 +303,9 @@ characteristics x_q, Qs(V)=Q0 V^bs, Qt(V) = Q0 V^bt and time constant Tq.
 dynamic loads in power systems\", IEEE Transactions on Power Systems,
 vol. 9, no. 1, pp. 157-163, February 1994.
 
-"),   Diagram(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics));
+"));
   end ExtDynLoad;
   annotation (
-    Window(
-      x=0.4,
-      y=0.4,
-      width=0.6,
-      height=0.6,
-      library=1,
-      autolayout=1),
     Documentation(info="The loads subpackage contains definitions of various load models.
 
 "));
