@@ -27,14 +27,21 @@ simulations are made, i.e., generator stator and network time constants are negl
 ## Current release
 
 Download [Latest development version](../../archive/master.zip)
+* updated to work with MSL 3.2.1 but still with issues:
+  - [ ] fix `pre` statements outside `when`
+  - [ ] fix mixture of scalar and vector values
+  - [ ] fix usage of deprecated petri nets from ModelicaAdditions (use Modelica 3.3 syntax instead)
 
 #### Release notes
 
 * [Version v1.0.3 (2002-09-25)](../../archive/v1.0.3.zip)
   * Fixed compatibility issues with Dymola 4.3/5.0.
+  * still using [MSL 1.6](https://github.com/modelica/Modelica/archive/v1.6.zip) and
+    [ModelicaAdditions 1.5](https://github.com/modelica-deprecated/ModelicaAdditions/archive/v1.5.zip)
 
 ## License
 Copyright &copy; 1999-2002, Mats Larsson
+          &copy; 2014- , Dietmar Winkler
 
 This Modelica package is free software and the use is completely at your own risk;
 it can be redistributed and/or modified under the terms of the [Modelica License 1.1](https://modelica.org/licenses/ModelicaLicense1.1).
