@@ -40,8 +40,8 @@ Download [Latest development version](../../archive/master.zip)
     [ModelicaAdditions 1.5](https://github.com/modelica-deprecated/ModelicaAdditions/archive/v1.5.zip)
 
 ## License
-Copyright &copy; 1999-2002, Mats Larsson
-          &copy; 2014- , Dietmar Winkler
+Copyright &copy; 1999-2002, Mats Larsson<br>
+Copyright &copy; 2014- , Dietmar Winkler
 
 This Modelica package is free software and the use is completely at your own risk;
 it can be redistributed and/or modified under the terms of the [Modelica License 1.1](https://modelica.org/licenses/ModelicaLicense1.1).
