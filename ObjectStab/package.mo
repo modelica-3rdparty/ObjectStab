@@ -4,8 +4,7 @@ extends Modelica.Icons.Library;
 
 
 annotation (
-  Documentation(info="
-<HTML>
+  Documentation(info="<html>
 <p>The ObjectStab package is a Modelica Library for Power Systems Voltage and
 Transient stability simulations and presently contains the following component models :</p>
 <ul>
@@ -100,7 +99,6 @@ and the accompanying <b>disclaimer</b>.
 
 <b>Copyright (C) 1999-2002, Mats Larsson.</b>
 
-</html>
-"),
+</html>"),
 uses(Modelica(version="3.2.1")));
 end ObjectStab;
