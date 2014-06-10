@@ -366,7 +366,6 @@ power generation resources.
             textString=
                  "w"),
           Line(points={{-18,-14},{-44,-14},{-44,-86},{12,-86}}, color={0,0,0}),
-
           Line(
             points={{80,40},{54,20}},
             color={0,0,0},
@@ -436,7 +435,6 @@ from the controller library or used-defined models.
             color={0,0,0},
             arrow={Arrow.None,Arrow.Filled}),
           Line(points={{-18,-14},{-44,-14},{-44,-86},{12,-86}}, color={0,0,0}),
-
           Text(
             extent={{-64,-54},{-44,-74}},
             lineColor={0,0,0},

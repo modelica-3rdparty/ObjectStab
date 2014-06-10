@@ -218,8 +218,8 @@ Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
         y(start={n}),
         k=1,
         outMax=1 + maxtap*stepsize,
-        outMin=1 + mintap*stepsize) annotation (Placement(transformation(extent
-              ={{-20,-20},{20,20}})));
+        outMin=1 + mintap*stepsize) annotation (Placement(transformation(extent=
+               {{-20,-20},{20,20}})));
     equation
       connect(integrator.y, y) annotation (Line(points={{20,0},{110,0}}));
       if (method == 2) then
@@ -356,22 +356,22 @@ Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
     equation
       connect(Tr1.outTransition, countup.inTransition) annotation (Line(points=
               {{-50,25},{-50,2}}));
-      connect(countup.outTransition1, Tr2.inTransition) annotation (Line(points
-            ={{-56,-21},{-56,-28},{-90,-28},{-89.95,23.95}}));
+      connect(countup.outTransition1, Tr2.inTransition) annotation (Line(points=
+             {{-56,-21},{-56,-28},{-90,-28},{-89.95,23.95}}));
       connect(countdown.inTransition, Tr6.outTransition) annotation (Line(
             points={{50,2},{50,25}}));
       connect(countdown.outTransition2, Tr7.inTransition) annotation (Line(
             points={{56,-21.1},{56,-30},{90,-30},{90.05,23.95}}));
-      connect(actionup.inTransition, Tr3.outTransition) annotation (Line(points
-            ={{-70,-64},{-70,-55}}));
+      connect(actionup.inTransition, Tr3.outTransition) annotation (Line(points=
+             {{-70,-64},{-70,-55}}));
       connect(actiondown.inTransition, Tr9.outTransition) annotation (Line(
             points={{70,-62},{70,-55}}));
       connect(Tr8.inTransition, actiondown.outTransition) annotation (Line(
             points={{30.05,-56.05},{30.05,-96},{70,-96},{70,-85}}));
-      connect(Tr3.inTransition, countup.outTransition2) annotation (Line(points
-            ={{-70.05,-43.95},{-70,-36},{-44,-36},{-44,-21.1}}));
-      connect(actionup.outTransition, Tr4.inTransition) annotation (Line(points
-            ={{-70,-87},{-70,-96},{-30,-96},{-29.95,-56.05}}));
+      connect(Tr3.inTransition, countup.outTransition2) annotation (Line(points=
+             {{-70.05,-43.95},{-70,-36},{-44,-36},{-44,-21.1}}));
+      connect(actionup.outTransition, Tr4.inTransition) annotation (Line(points=
+             {{-70,-87},{-70,-96},{-30,-96},{-29.95,-56.05}}));
       connect(updatetap.inTransition2, Tr4.outTransition) annotation (Line(
             points={{-6,-22},{-6,-36},{-30,-36},{-30,-45}}));
       connect(updatetap.inTransition1, Tr8.outTransition) annotation (Line(
@@ -815,13 +815,11 @@ until time CloseTime, after which they are simultanously closed.
                                                "%name"),
           Polygon(
             points={{24,76},{-30,-8},{38,12},{-4,-54},{70,38},{-10,2},{24,76}},
-
             lineColor={0,0,0},
             fillPattern=FillPattern.HorizontalCylinder,
             fillColor={255,0,0}),
           Polygon(
             points={{4,64},{-50,-20},{20,2},{-24,-66},{50,26},{-30,-10},{4,64}},
-
             lineColor={255,255,0},
             fillColor={255,255,0},
             fillPattern=FillPattern.Solid),
@@ -880,13 +878,11 @@ else
           grid={2,2}), graphics={
           Polygon(
             points={{4,64},{-50,-20},{20,2},{-24,-66},{50,26},{-30,-10},{4,64}},
-
             lineColor={255,255,0},
             fillColor={255,255,0},
             fillPattern=FillPattern.Solid),
           Polygon(
             points={{24,76},{-30,-8},{38,12},{-4,-54},{70,38},{-10,2},{24,76}},
-
             lineColor={0,0,0},
             fillPattern=FillPattern.HorizontalCylinder,
             fillColor={255,0,0}),
@@ -978,12 +974,10 @@ and alpha not be equal to 0 or 1.
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
             points={{24,76},{-30,-8},{38,12},{-4,-54},{70,38},{-10,2},{24,76}},
-
             lineColor={0,0,0},
             fillPattern=FillPattern.HorizontalCylinder,
             fillColor={255,0,0}), Polygon(
             points={{4,64},{-50,-20},{20,2},{-24,-66},{50,26},{-30,-10},{4,64}},
-
             lineColor={255,255,0},
             fillColor={255,255,0},
             fillPattern=FillPattern.Solid)}));

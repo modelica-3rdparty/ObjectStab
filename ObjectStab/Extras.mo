@@ -412,7 +412,6 @@ package Extras
             color={0,0,0},
             arrow={Arrow.None,Arrow.Filled}),
           Line(points={{-6,30},{-46,30},{-46,86},{12,86},{4,86}}, color={0,0,0}),
-
           Line(points={{2,36},{-20,36},{-20,74},{12,74}}, color={0,0,0}),
           Text(
             extent={{-68,66},{-48,46}},
@@ -429,7 +428,6 @@ package Extras
             color={0,0,0},
             arrow={Arrow.None,Arrow.Filled}),
           Line(points={{-18,-14},{-44,-14},{-44,-86},{12,-86}}, color={0,0,0}),
-
           Text(
             extent={{-66,-54},{-46,-74}},
             lineColor={0,0,0},

@@ -923,8 +923,8 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
       equation
         connect(countf.inTransition, Tr1f.outTransition) annotation (Line(
               points={{-50,2},{-50,17}}));
-        connect(Tr1f.inTransition, waitf.outTransition) annotation (Line(points
-              ={{-50.05,28.05},{-50,39}}));
+        connect(Tr1f.inTransition, waitf.outTransition) annotation (Line(points=
+               {{-50.05,28.05},{-50,39}}));
         connect(Tr2f.inTransition, countf.outTransition1) annotation (Line(
               points={{-70.05,-33.95},{-70,-26},{-56,-26},{-56,-21}}));
         connect(activatef.inTransition, Tr2f.outTransition) annotation (Line(
@@ -939,8 +939,8 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
               points={{-10,-5},{-10,72},{-44,72},{-44,62}}));
         connect(counts.inTransition, Tr1s.outTransition) annotation (Line(
               points={{54,2},{54,17}}));
-        connect(Tr1s.inTransition, waits.outTransition) annotation (Line(points
-              ={{53.95,28.05},{54,39}}));
+        connect(Tr1s.inTransition, waits.outTransition) annotation (Line(points=
+               {{53.95,28.05},{54,39}}));
         connect(Tr2s.inTransition, counts.outTransition1) annotation (Line(
               points={{33.95,-33.95},{34,-26},{48,-26},{48,-21}}));
         connect(activates.inTransition, Tr2s.outTransition) annotation (Line(
@@ -994,7 +994,7 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
               grid={2,2}), graphics={Text(extent={{-84,94},{-18,76}},
-                  textString =                           "Field Limiter Logic"), Text(
+                  textString=                            "Field Limiter Logic"), Text(
                   extent={{18,96},{84,78}}, textString=
                                                      "Stator Limiter Logic")}));
       end Limiter;
@@ -1080,12 +1080,12 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
               grid={2,2}), graphics={Text(extent={{-72,30},{82,-34}},
-                  textString =                        "BsweGov")}),
+                  textString=                         "BsweGov")}),
           Diagram(coordinateSystem(
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
               grid={2,2}), graphics={Text(extent={{-56,-18},{-36,-26}},
-                  textString =                             "Pm0"), Line(points=
+                  textString=                              "Pm0"), Line(points=
                     {{-38,-6},{-44,-18}})}),
           Diagram);
       end SweGov;
@@ -1149,7 +1149,7 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
               grid={2,2}), graphics={Text(extent={{-82,30},{84,-32}},
-                  textString =                        "SweExc")}));
+                  textString=                         "SweExc")}));
       end SweExc;
 
       model SweExcLim
@@ -1234,7 +1234,7 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
               grid={2,2}), graphics={Text(extent={{-82,30},{84,-32}},
-                  textString =                        "SweExcLim")}));
+                  textString=                         "SweExcLim")}));
       end SweExcLim;
 
       model SweLoad "Nordic32 Static Load Model\t"
