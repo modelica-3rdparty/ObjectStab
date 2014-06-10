@@ -102,5 +102,5 @@ and the accompanying <b>disclaimer</b>.
 
 </html>
 "),
-uses(Modelica(version="2.2.2")));
+uses(Modelica(version="3.2.1")));
 end ObjectStab;
