@@ -7,8 +7,8 @@ package Base "Base package"
   type Duration = Time (min=0);
   type AngularVelocity = Real (
       final quantity="AngularVelocity",
-      final unit="p.u.",
-      displayUnit="p.u.");
+      final unit="1",
+      displayUnit="1");
   type Angle = Real (
       final quantity="Angle",
       final unit="rad",
@@ -20,29 +20,29 @@ package Base "Base package"
         unit="1");
 
   // per.unit. definitions - Electric  voltage and current phasors
-  type Current = Real (final quantity="CurrentPhasor", final unit="p.u.");
-  type Voltage = Real (final quantity="VoltagePhasor", final unit="p.u");
+  type Current = Real (final quantity="CurrentPhasor", final unit="1");
+  type Voltage = Real (final quantity="VoltagePhasor", final unit="1");
   type VoltageAngle = Angle;
   type Resistance = Real (
       final quantity="Resistance",
-      final unit="p.u.",
+      final unit="1",
       min=0);
-  type Reactance = Real (final quantity="Resistance", final unit="p.u.");
+  type Reactance = Real (final quantity="Resistance", final unit="1");
   type Conductance = Real (
       final quantity="Conductance",
-      final unit="p.u.",
+      final unit="1",
       min=0);
-  type Capacitance = Real (final quantity="Capacitance", final unit="p.u.");
-  type Susceptance = Real (final quantity="Conductance", final unit="p.u.");
-  type ActivePower = Real (final quantity="Power", final unit="p.u.");
-  type ApparentPower = Real (final quantity="Power", final unit="p.u.");
-  type ReactivePower = Real (final quantity="Power", final unit="p.u.");
+  type Capacitance = Real (final quantity="Capacitance", final unit="1");
+  type Susceptance = Real (final quantity="Conductance", final unit="1");
+  type ActivePower = Real (final quantity="Power", final unit="1");
+  type ApparentPower = Real (final quantity="Power", final unit="1");
+  type ReactivePower = Real (final quantity="Power", final unit="1");
   type PowerFactor = Real (final quantity="PowerFactor", final unit="1");
-  type TapRatio = Real (final quantity="Transformer Ratio", final unit="p.u.");
+  type TapRatio = Real (final quantity="Transformer Ratio", final unit="1");
   type TapStep = Integer;
-  type ElectricalTorque = Real (final quantity="Torque", final unit="p.u.");
-  type MechanicalTorque = Real (final quantity="Torque", final unit="p.u.");
-  type MechanicalPower = Real (final quantity="Power", final unit="p.u.");
+  type ElectricalTorque = Real (final quantity="Torque", final unit="1");
+  type MechanicalTorque = Real (final quantity="Torque", final unit="1");
+  type MechanicalPower = Real (final quantity="Power", final unit="1");
 
   // nominal frequency
   constant Real f0=50;
