@@ -462,17 +462,17 @@ from the controller library or used-defined models.
 
         discrete Base.Voltage Vref(start=1);
         discrete Base.Voltage Ef0(start=1);
-        Modelica.Blocks.Nonlinear.Limiter Limiter(uMax=scalar(Efmax), uMin=
-              scalar(Efmin)) annotation (Placement(transformation(extent={{74,
+        Modelica.Blocks.Nonlinear.Limiter Limiter(uMax=Efmax, uMin=Efmin)
+           annotation (Placement(transformation(extent={{74,
                   -10},{94,10}})));
         Modelica.Blocks.Math.Add Verror(k1=-1, k2=1) annotation (Placement(
               transformation(extent={{-80,-10},{-60,10}})));
       equation
         connect(Limiter.y, y) annotation (Line(points={{95,0},{110,0}}));
         connect(u, Verror.u1)
-          annotation (Line(points={{-124,0},{-92,0},{-92,6},{-82,6}}, color={0,
+          annotation (Line(points={{-120,0},{-92,0},{-92,6},{-82,6}}, color={0,
                 0,255}));
-        Verror.u2 = {Vref};
+        Verror.u2 = Vref;
         Vref = pre(Vref);
         annotation (
           Diagram(coordinateSystem(
@@ -501,17 +501,16 @@ from the controller library or used-defined models.
         discrete Base.MechanicalPower Pm0(start=1, fixed=false)
           "Initial Mechanical Power (automatically initialized)";
       public
-        Modelica.Blocks.Nonlinear.Limiter Limiter(uMax=scalar(Pmmax), uMin=
-              scalar(Pmmin)) annotation (Placement(transformation(extent={{76,
-                  -10},{96,10}})));
+        Modelica.Blocks.Nonlinear.Limiter Limiter(uMax=Pmmax, uMin=Pmmin)
+           annotation (Placement(transformation(extent={{76,-10},{96,10}})));
         Modelica.Blocks.Math.Add werror(k1=-1, k2=+1) annotation (Placement(
               transformation(extent={{-80,-10},{-60,10}})));
       equation
         connect(Limiter.y, y) annotation (Line(points={{97,0},{110,0}}));
         connect(werror.u1, u)
-          annotation (Line(points={{-82,6},{-90,6},{-90,0},{-128,0}}, color={0,
+          annotation (Line(points={{-82,6},{-90,6},{-90,0},{-120,0}}, color={0,
                 0,255}));
-        werror.u2 = {wref};
+        werror.u2 = wref;
         Pm0 = pre(Pm0);
         annotation (
           Diagram(coordinateSystem(
@@ -611,7 +610,7 @@ from the controller library or used-defined models.
       connect(AVR.y, Limiter.u)
         annotation (Line(points={{41,0},{72,0}}, color={0,0,255}));
       connect(Verror.y, AVR.u)
-        annotation (Line(points={{-59,0},{16,0}}, color={0,0,255}));
+        annotation (Line(points={{-59,0},{18,0}}, color={0,0,255}));
       Ef0 = 0;
 
     initial equation
@@ -756,7 +755,7 @@ from the controller library or used-defined models.
     model ConstPm
       extends Partials.Governor;
     equation
-      Limiter.u = {Pm0};
+      Limiter.u = Pm0;
       annotation (
         Diagram(coordinateSystem(
             preserveAspectRatio=false,
