@@ -1,3 +1,4 @@
+within ObjectStab;
 package Loads "Loads subpackage" 
   extends Modelica.Icons.Library;
   
@@ -20,22 +21,22 @@ package Loads "Loads subpackage"
         "Inital Terminal Voltage (automatically initialized)";
       annotation (
         Coordsys(
-          extent=[-100, -100; 100, 100], 
-          grid=[2, 2], 
-          component=[20, 20]), 
+          extent=[-100, -100; 100, 100],
+          grid=[2, 2],
+          component=[20, 20]),
         Window(
-          x=0.2, 
-          y=0.04, 
-          width=0.71, 
-          height=0.93), 
-        Diagram, 
+          x=0.2,
+          y=0.04,
+          width=0.71,
+          height=0.93),
+        Diagram,
         Icon(
-          Line(points=[-100, 0; -20, 0], style(color=0)), 
+          Line(points=[-100, 0; -20, 0], style(color=0)),
           Polygon(points=[40, -2; -20, 18; -20, -22; 40, -2], style(
-              color=0, 
-              gradient=3, 
-              fillColor=0)), 
-          Text(extent=[-100, 60; 100, 20], string="%P0 + j %Q0")), 
+              color=0,
+              gradient=3,
+              fillColor=0)),
+          Text(extent=[-100, 60; 100, 20], string="%P0 + j %Q0")),
         Documentation(info="The complex power a load draws from the network is given by:
 
 S = P+jQ = v * conj(i)
@@ -69,22 +70,22 @@ the load draws if the voltage is 1 p.u.
       discrete Base.Voltage V0(start=1) "Inital Terminal Voltage";
       annotation (
         Coordsys(
-          extent=[-100, -100; 100, 100], 
-          grid=[2, 2], 
-          component=[20, 20]), 
+          extent=[-100, -100; 100, 100],
+          grid=[2, 2],
+          component=[20, 20]),
         Window(
-          x=0.4, 
-          y=0.4, 
-          width=0.6, 
-          height=0.6), 
-        Diagram, 
+          x=0.4,
+          y=0.4,
+          width=0.6,
+          height=0.6),
+        Diagram,
         Icon(
-          Line(points=[-100, 0; -20, 0], style(color=0)), 
+          Line(points=[-100, 0; -20, 0], style(color=0)),
           Polygon(points=[40, -2; -20, 18; -20, -22; 40, -2], style(
-              color=0, 
-              gradient=3, 
-              fillColor=0)), 
-          Text(extent=[-60, 60; 60, 20], string="%P0 + j %Q0")), 
+              color=0,
+              gradient=3,
+              fillColor=0)),
+          Text(extent=[-60, 60; 60, 20], string="%P0 + j %Q0")),
         Documentation(info="The complex power a load draws from the network is given by:
 
 S = P+jQ = v * conj(i)
@@ -92,28 +93,28 @@ S = P+jQ = v * conj(i)
 The parameters P0 and Q0 denote the rated load power, i.e., the power
 the load draws if the voltage is 1 p.u.
 "));
-      Modelica.Blocks.Interfaces.InPort InPort(n=2) annotation (extent=[-10, -
-            100; 10, -80], rotation=90);
+      Modelica.Blocks.Interfaces.RealInput InPort[2] 
+        annotation (extent=[-10,-100; 10,-80], rotation=90);
     equation 
       V0 = pre(V0);
       T.ia = (T.vb*Ql + Pl + Pl*T.va)/(1 + 2*T.va + T.va*T.va + T.vb*T.vb);
       T.ib = (Pl*T.vb - Ql - T.va*Ql)/(1 + 2*T.va + T.va*T.va + T.vb*T.vb);
       
-      P0 = InPort.signal[1];
-      Q0 = InPort.signal[2];
+      P0 =InPort[1];
+      Q0 =InPort[2];
       
     initial equation 
       V0 = V;
     end ExtLoad;
     annotation (Coordsys(
-        extent=[0, 0; 442, 394], 
-        grid=[1, 1], 
+        extent=[0, 0; 442, 394],
+        grid=[1, 1],
         component=[20, 20]), Window(
-        x=0.45, 
-        y=0.01, 
-        width=0.44, 
-        height=0.65, 
-        library=1, 
+        x=0.45,
+        y=0.01,
+        width=0.44,
+        height=0.65,
+        library=1,
         autolayout=1));
   end Partials;
   
@@ -121,22 +122,21 @@ the load draws if the voltage is 1 p.u.
     extends Partials.Load;
     annotation (
       Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
-        component=[20, 20]), 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
+        component=[20, 20]),
       Window(
-        x=0.4, 
-        y=0.4, 
-        width=0.6, 
-        height=0.6), 
-      Icon(Text(extent=[-40, -60; 42, -20], string="PQ")), 
+        x=0.4,
+        y=0.4,
+        width=0.6,
+        height=0.6),
+      Icon(Text(extent=[-40, -60; 42, -20], string="PQ")),
       Documentation(info="For a constant power the actual load powers drawn from the network 
 are given by:
 
   Pl = P0
   Ql = Q0
-"), 
-      Diagram);
+"),   Diagram);
   equation 
     Pl = P0;
     Ql = Q0;
@@ -146,15 +146,15 @@ are given by:
     extends Partials.Load;
     annotation (
       Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
-        component=[20, 20]), 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
+        component=[20, 20]),
       Window(
-        x=0.4, 
-        y=0.4, 
-        width=0.6, 
-        height=0.6), 
-      Icon(Text(extent=[-40, -60; 40, -20], string="Zload")), 
+        x=0.4,
+        y=0.4,
+        width=0.6,
+        height=0.6),
+      Icon(Text(extent=[-40, -60; 40, -20], string="Zload")),
       Documentation(info="R = P*V^2/(Q^2+P^2)
 X = Q*V^2/(Q^2+P^2)
  
@@ -166,23 +166,23 @@ X = Q*V^2/(Q^2+P^2)
   
   model ZIPLoad "Impedance Load" 
     extends Partials.Load;
-    parameter Real pZ=.33;
-    parameter Real pI=.33;
+    parameter Real pZ=0.33;
+    parameter Real pI=0.33;
     parameter Real pP=(1 - pZ - pI);
-    parameter Real qZ=.33;
-    parameter Real qI=.33;
+    parameter Real qZ=0.33;
+    parameter Real qI=0.33;
     parameter Real qP=(1 - pZ - pI);
     
     annotation (
-      Icon(Text(extent=[-40, -60; 40, -20], string="ZIP")), 
+      Icon(Text(extent=[-40, -60; 40, -20], string="ZIP")),
       Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
-        component=[20, 20]), 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
+        component=[20, 20]),
       Window(
-        x=0.4, 
-        y=0.4, 
-        width=0.6, 
+        x=0.4,
+        y=0.4,
+        width=0.6,
         height=0.6));
   equation 
     Pl = P0*(pZ*(V/V0)^2 + pI*(V/V0) + pP);
@@ -204,16 +204,16 @@ X = Q*V^2/(Q^2+P^2)
     
     annotation (
       Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
-        component=[20, 20]), 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
+        component=[20, 20]),
       Window(
-        x=0.4, 
-        y=0.4, 
-        width=0.6, 
-        height=0.6), 
-      Icon(Line(points=[-40, -40; -20, -40; -20, -60; -6, -50; 6, -46; 24, -44
-              ; 40, -44])), 
+        x=0.4,
+        y=0.4,
+        width=0.6,
+        height=0.6),
+      Icon(Line(points=[-40, -40; -20, -40; -20, -60; -6, -50; 6, -46; 24, -44;
+                40, -44])),
       Documentation(info="Dynamic exponential recovery load according to Karlsson & Hill [1].
 
 The load powers are given by:
@@ -237,8 +237,7 @@ characteristics x_q, Qs(V)=Q0 V^bs, Qt(V) = Q0 V^bt and time constant Tq.
 dynamic loads in power systems\", IEEE Transactions on Power Systems, 
 vol. 9, no. 1, pp. 157-163, February 1994.
 
-"), 
-      Diagram);
+"),   Diagram);
   equation 
     Pl = (xp/Tp + P0*(V/V0)^at);
     Ql = (xq/Tq + Q0*(V/V0)^bt);
@@ -252,16 +251,16 @@ vol. 9, no. 1, pp. 157-163, February 1994.
   end DynLoad;
   annotation (
     Coordsys(
-      extent=[0, 0; 391, 299], 
-      grid=[1, 1], 
-      component=[20, 20]), 
+      extent=[0, 0; 391, 299],
+      grid=[1, 1],
+      component=[20, 20]),
     Window(
-      x=0.4, 
-      y=0.4, 
-      width=0.6, 
-      height=0.6, 
-      library=1, 
-      autolayout=1), 
+      x=0.4,
+      y=0.4,
+      width=0.6,
+      height=0.6,
+      library=1,
+      autolayout=1),
     Documentation(info="The loads subpackage contains definitions of various load models.
 
 "));
@@ -290,12 +289,12 @@ vol. 9, no. 1, pp. 157-163, February 1994.
     Real w;
     outer Real wref;
     annotation (Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
         component=[20, 20]), Window(
-        x=0.4, 
-        y=0.4, 
-        width=0.6, 
+        x=0.4,
+        y=0.4,
+        width=0.6,
         height=0.6));
   equation 
     Pl = V^2/xp*(1/(s/scr + scr/s));
@@ -327,16 +326,16 @@ vol. 9, no. 1, pp. 157-163, February 1994.
     Real xq "Internal Load State";
     annotation (
       Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
-        component=[20, 20]), 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
+        component=[20, 20]),
       Window(
-        x=0.11, 
-        y=0.02, 
-        width=0.6, 
-        height=0.6), 
-      Icon(Line(points=[-40, -40; -20, -40; -20, -60; -6, -50; 6, -46; 24, -44
-              ; 40, -44])), 
+        x=0.11,
+        y=0.02,
+        width=0.6,
+        height=0.6),
+      Icon(Line(points=[-40, -40; -20, -40; -20, -60; -6, -50; 6, -46; 24, -44;
+                40, -44])),
       Documentation(info="Dynamic exponential recovery load according to Karlsson & Hill [1].
 with external input of P0 and Q0.
 
@@ -361,8 +360,7 @@ characteristics x_q, Qs(V)=Q0 V^bs, Qt(V) = Q0 V^bt and time constant Tq.
 dynamic loads in power systems\", IEEE Transactions on Power Systems, 
 vol. 9, no. 1, pp. 157-163, February 1994.
 
-"), 
-      Diagram);
+"),   Diagram);
   equation 
     Pl = (xp/Tp + P0*(V/V0)^at);
     Ql = (xq/Tq + Q0*(V/V0)^bt);

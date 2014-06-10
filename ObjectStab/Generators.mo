@@ -1,3 +1,4 @@
+within ObjectStab;
 package Generators "Generator subpackage" 
   extends Modelica.Icons.Library;
   
@@ -12,8 +13,7 @@ package Generators "Generator subpackage"
       parameter Base.VoltageAngle theta0=0 
         "Initial Voltage Angle (only used if isSlack=true)";
       parameter Base.ActivePower Pg0=1 
-        "Initial Generated Active Power (on system base, only used if isSlack=false)"
-        ;
+        "Initial Generated Active Power (on system base, only used if isSlack=false)";
       parameter Base.Time TripTime=Modelica.Constants.inf 
         "Time of Tripping of Generator";
       
@@ -28,29 +28,29 @@ package Generators "Generator subpackage"
       annotation (
         Icon(
           Ellipse(extent=[-40, 60; 80, -60], style(
-              color=0, 
-              pattern=1, 
-              thickness=1, 
-              arrow=0)), 
+              color=0,
+              pattern=1,
+              thickness=1,
+              arrow=0)),
           Line(points=[-100, 0; -40, 0], style(
-              color=0, 
-              pattern=1, 
-              thickness=1, 
-              arrow=0)), 
-          Text(extent=[-60, -60; 100, -100], string="%name")), 
+              color=0,
+              pattern=1,
+              thickness=1,
+              arrow=0)),
+          Text(extent=[-60, -60; 100, -100], string="%name")),
         Coordsys(
-          extent=[-100, -100; 100, 100], 
-          grid=[2, 2], 
-          component=[20, 20]), 
+          extent=[-100, -100; 100, 100],
+          grid=[2, 2],
+          component=[20, 20]),
         Window(
-          x=0.4, 
-          y=0.4, 
-          width=0.6, 
-          height=0.6), 
+          x=0.4,
+          y=0.4,
+          width=0.6,
+          height=0.6),
         Diagram);
     protected 
-      ObjectStab.Base.wRefContainer wrl annotation (extent=[-100, 90; -90, 100]
-          , rotation=180);
+      ObjectStab.Base.wRefContainer wrl annotation (extent=[-100, 90; -90, 100],
+            rotation=180);
       outer ObjectStab.Base.wRefContainer wrcon annotation (extent=[-90, 90; -
             80, 100]);
     equation 
@@ -61,14 +61,14 @@ package Generators "Generator subpackage"
       extends Generator;
       annotation (
         Coordsys(
-          extent=[-100, -100; 100, 100], 
-          grid=[2, 2], 
-          component=[20, 20]), 
+          extent=[-100, -100; 100, 100],
+          grid=[2, 2],
+          component=[20, 20]),
         Window(
-          x=0.4, 
-          y=0.4, 
-          width=0.6, 
-          height=0.6), 
+          x=0.4,
+          y=0.4,
+          width=0.6,
+          height=0.6),
         Documentation(info="The variables Pg and Qg corresponds to the actual active and reactive power
 delivered to the network referred at the system base.
 "));
@@ -76,11 +76,11 @@ delivered to the network referred at the system base.
       if online then
         if not isSlack then
           V = V0;
-          Pg = Pg0;
+          Pg = Pg0; 
         else
           1 + T.va = V0*cos(theta0);
           T.vb = V0*sin(theta0);
-        end if;
+        end if; 
       else
         T.ia = 0;
         T.ib = 0;
@@ -115,15 +115,15 @@ delivered to the network referred at the system base.
       outer Base.AngularVelocity wref;
       annotation (
         Coordsys(
-          extent=[-100, -100; 100, 100], 
-          grid=[2, 2], 
-          component=[20, 20]), 
+          extent=[-100, -100; 100, 100],
+          grid=[2, 2],
+          component=[20, 20]),
         Window(
-          x=0.4, 
-          y=0.4, 
-          width=0.6, 
-          height=0.6), 
-        Diagram, 
+          x=0.4,
+          y=0.4,
+          width=0.6,
+          height=0.6),
+        Diagram,
         Documentation(info="Common definitions for detailed generator models, including the generator step-up
 transformer.  
 
@@ -141,8 +141,7 @@ so called Kron's transformations [1, pp. 90].
 ---
 [1] J. Machowski, J.W. Bialek, and J.R. Bumby, Power System Dynamics and
 Stability, Number ISBN 0-471-97174. Wiley, 1993.
-"), 
-        Icon);
+"),     Icon);
     equation 
       //   swing equations
       der(w) = 1/(2*H)*(Pm - Pe - D*(w - wref));
@@ -150,13 +149,12 @@ Stability, Number ISBN 0-471-97174. Wiley, 1993.
       
       // Kron's transformation, see fig 3.30 in Machovski               
       
-      
         // to interface between generators own dq-frame and  system dq-frame          
-      [T.ia; T.ib] = -[-sin(delta), cos(delta); cos(delta), sin(delta)]*[id; iq
-        ]*Sbase/Base.Sbase;
+      [T.ia; T.ib] = -[-sin(delta), cos(delta); cos(delta), sin(delta)]*[id; iq]
+         *Sbase/Base.Sbase;
       
-      [1 + T.va; T.vb] = [-sin(delta), cos(delta); cos(delta), sin(delta)]*([vd
-        ; vq] + [rt, -xt; xt, rt]*[id; iq]);
+      [1 + T.va; T.vb] = [-sin(delta), cos(delta); cos(delta), sin(delta)]*([vd;
+          vq] + [rt, -xt; xt, rt]*[id; iq]);
       
       // contribute to angle reference calculation 
       wrl.wr.Hwsum = if online then H*w*(Sbase/Base.Sbase) else 0;
@@ -165,9 +163,9 @@ Stability, Number ISBN 0-471-97174. Wiley, 1993.
     initial equation 
       w = 1;
       Pm = Pe;
-      V = V0;
+      V = V0; 
       if isSlack then
-        theta = theta0;
+        theta = theta0; 
       else
         Pg = Pg0;
       end if;
@@ -185,18 +183,18 @@ Stability, Number ISBN 0-471-97174. Wiley, 1993.
       
       Base.Voltage Eqp(start=1, stateSelect=StateSelect.prefer);
       annotation (
-        Diagram, 
-        Icon(Text(extent=[-20, -40; 60, 0], string="Order"), Text(extent=[-20, 
-                0; 60, 40], string="3rd")), 
+        Diagram,
+        Icon(Text(extent=[-20, -40; 60, 0], string="Order"), Text(extent=[-20,
+                0; 60, 40], string="3rd")),
         Coordsys(
-          extent=[-100, -100; 100, 100], 
-          grid=[2, 2], 
-          component=[20, 20]), 
+          extent=[-100, -100; 100, 100],
+          grid=[2, 2],
+          component=[20, 20]),
         Window(
-          x=0.11, 
-          y=0.01, 
-          width=0.58, 
-          height=0.99), 
+          x=0.11,
+          y=0.01,
+          width=0.58,
+          height=0.99),
         Documentation(info="The 3rd order detailed generator model corresponds to Model 3 in [1, pp 348],
 and extends the DetGen class. It adds a single transient EMF source in
 the quatradure axis and the field voltage input. This model neglects the effect
@@ -251,18 +249,18 @@ Stability, Number ISBN 0-471-97174. Wiley, 1993.
       Base.Voltage Eqpp(start=0, stateSelect=StateSelect.prefer);
       Base.Voltage Edpp(start=0, stateSelect=StateSelect.prefer);
       annotation (
-        Icon(Text(extent=[-20, 0; 60, 40], string="6th"), Text(extent=[-20, -40
-                ; 60, 0], string="Order")), 
+        Icon(Text(extent=[-20, 0; 60, 40], string="6th"), Text(extent=[-20, -40;
+                  60, 0], string="Order")),
         Coordsys(
-          extent=[-100, -100; 100, 100], 
-          grid=[2, 2], 
-          component=[20, 20]), 
+          extent=[-100, -100; 100, 100],
+          grid=[2, 2],
+          component=[20, 20]),
         Window(
-          x=0.4, 
-          y=0.42, 
-          width=0.6, 
-          height=0.6), 
-        Diagram, 
+          x=0.4,
+          y=0.42,
+          width=0.6,
+          height=0.6),
+        Diagram,
         Documentation(info="The 6th order detailed generator model extends the DetGen class and
 corresponds to Model 6 in [1, pp 347], and adds subtransient EMF voltage sources
 in both the direct quatradure axes and the field voltage input.
@@ -304,14 +302,14 @@ Stability, Number ISBN 0-471-97174. Wiley, 1993.
       //  der(Edpp) = 0;      
     end DetGen6;
     annotation (Coordsys(
-        extent=[0, 0; 442, 394], 
-        grid=[1, 1], 
+        extent=[0, 0; 442, 394],
+        grid=[1, 1],
         component=[20, 20]), Window(
-        x=0.45, 
-        y=0.01, 
-        width=0.39, 
-        height=0.58, 
-        library=1, 
+        x=0.45,
+        y=0.01,
+        width=0.39,
+        height=0.58,
+        library=1,
         autolayout=1));
   end Partials;
   
@@ -319,52 +317,49 @@ Stability, Number ISBN 0-471-97174. Wiley, 1993.
     extends Partials.InfiniteBus(isSlack=true);
     annotation (
       Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
-        component=[20, 20]), 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
+        component=[20, 20]),
       Window(
-        x=0.13, 
-        y=0.08, 
-        width=0.6, 
-        height=0.6), 
-      Icon(Text(extent=[-40, -20; 80, 20], string="Slack"), Text(extent=[-60, 
-              100; 100, 60], string="V=%V0,th=%theta0%")), 
+        x=0.13,
+        y=0.08,
+        width=0.6,
+        height=0.6),
+      Icon(Text(extent=[-40, -20; 80, 20], string="Slack"), Text(extent=[-60,
+              100; 100, 60], string="V=%V0,th=%theta0%")),
       Documentation(info="The slack node model acts as slack bus in initialization or load-flow 
 calculations and as an infinite bus during dynamic simulation. 
 
 
 At least one slack node or detailed generator with its attribute 'isSlack' set to true must be included
 in each network model.
-"), 
-      Diagram);
+"),   Diagram);
   end Slack;
   
   model PVNode "PV Node" 
     extends Partials.InfiniteBus(isSlack=false);
     annotation (
       Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
-        component=[20, 20]), 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
+        component=[20, 20]),
       Window(
-        x=0.06, 
-        y=0.08, 
-        width=0.6, 
-        height=0.6), 
+        x=0.06,
+        y=0.08,
+        width=0.6,
+        height=0.6),
       Icon(
-        Text(extent=[-40, -20; 80, 20], string="PV"), 
-        Text(extent=[-60, 100; 100, 60], string="V=%V0, Pg=%Pg0"), 
-        Text(extent=[-60, -60; 100, -100], string="%name")), 
+        Text(extent=[-40, -20; 80, 20], string="PV"),
+        Text(extent=[-60, 100; 100, 60], string="V=%V0, Pg=%Pg0"),
+        Text(extent=[-60, -60; 100, -100], string="%name")),
       Documentation(info="The PV node models a load-flow PV node with unlimited reactive
 power generation resources.
 
-"), 
-      Diagram);
+"),   Diagram);
   end PVNode;
   
   model GovExc3rdGen 
-    "3rd order generator model with constant mechanical power and field voltage"
-     
+    "3rd order generator model with constant mechanical power and field voltage" 
     
     extends Partials.DetGen3;
     replaceable ObjectStab.Generators.Controllers.ConstPm Gov annotation (
@@ -374,53 +369,52 @@ power generation resources.
     annotation (
       Diagram(
         Line(points=[-100, 0; -20, 0], style(
-            color=0, 
-            pattern=1, 
-            thickness=1, 
-            arrow=0)), 
+            color=0,
+            pattern=1,
+            thickness=1,
+            arrow=0)),
         Ellipse(extent=[-20, 40; 60, -40], style(
-            color=0, 
-            pattern=1, 
-            thickness=1, 
-            arrow=0)), 
-        Line(points=[80, 40; 80, 80; 34, 80], style(color=0)), 
-        Line(points=[-8, 28; -48, 28; -48, 80; 8, 80], style(color=0)), 
+            color=0,
+            pattern=1,
+            thickness=1,
+            arrow=0)),
+        Line(points=[80, 40; 80, 80; 34, 80], style(color=0)),
+        Line(points=[-8, 28; -48, 28; -48, 80; 8, 80], style(color=0)),
         Text(
-          extent=[-68, 66; -48, 46], 
-          string="Vt", 
-          style(color=0)), 
+          extent=[-68, 66; -48, 46],
+          string="Vt",
+          style(color=0)),
         Text(
-          extent=[44, 68; 64, 48], 
-          string="Efd", 
-          style(color=0)), 
+          extent=[44, 68; 64, 48],
+          string="Efd",
+          style(color=0)),
         Line(points=[32, -86; 80, -86; 80, -40; 54, -22], style(color=0, arrow=
-                1)), 
+                1)),
         Text(
-          extent=[58, -56; 78, -76], 
-          string="Pm", 
-          style(color=0)), 
+          extent=[58, -56; 78, -76],
+          string="Pm",
+          style(color=0)),
         Text(
-          extent=[-66, -54; -46, -74], 
-          string="w", 
-          style(color=0)), 
-        Line(points=[-18, -14; -44, -14; -44, -86; 12, -86], style(color=0)), 
-        Line(points=[80, 40; 54, 20], style(color=0, arrow=1))), 
+          extent=[-66, -54; -46, -74],
+          string="w",
+          style(color=0)),
+        Line(points=[-18, -14; -44, -14; -44, -86; 12, -86], style(color=0)),
+        Line(points=[80, 40; 54, 20], style(color=0, arrow=1))),
       Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
-        component=[20, 20]), 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
+        component=[20, 20]),
       Window(
-        x=0.2, 
-        y=0.27, 
-        width=0.6, 
-        height=0.6), 
+        x=0.2,
+        y=0.27,
+        width=0.6,
+        height=0.6),
       Documentation(info="The 3rd order Generator model extended with governor and exciter
 
 The governor and exciter models can be redeclared with models
 from the controller library or used-defined models.
 
-"), 
-      Icon);
+"),   Icon);
   equation 
     // connection equations for governor and exciter
     Gov.u = w;
@@ -430,8 +424,7 @@ from the controller library or used-defined models.
   end GovExc3rdGen;
   
   model GovExc6thGen 
-    "6th order generator model with  constant mechanical power and field voltage"
-     
+    "6th order generator model with  constant mechanical power and field voltage" 
     
     extends Partials.DetGen6;
     
@@ -442,53 +435,52 @@ from the controller library or used-defined models.
     annotation (
       Diagram(
         Line(points=[-100, 0; -20, 0], style(
-            color=0, 
-            pattern=1, 
-            thickness=1, 
-            arrow=0)), 
+            color=0,
+            pattern=1,
+            thickness=1,
+            arrow=0)),
         Ellipse(extent=[-20, 40; 60, -40], style(
-            color=0, 
-            pattern=1, 
-            thickness=1, 
-            arrow=0)), 
+            color=0,
+            pattern=1,
+            thickness=1,
+            arrow=0)),
         Text(
-          extent=[44, 68; 64, 48], 
-          string="Efd", 
-          style(color=0)), 
+          extent=[44, 68; 64, 48],
+          string="Efd",
+          style(color=0)),
         Text(
-          extent=[58, -56; 78, -76], 
-          string="Pm", 
-          style(color=0)), 
-        Line(points=[80, 40; 80, 80; 34, 80], style(color=0)), 
-        Line(points=[80, 40; 54, 20], style(color=0, arrow=1)), 
-        Line(points=[-8, 28; -48, 28; -48, 80; 8, 80], style(color=0)), 
+          extent=[58, -56; 78, -76],
+          string="Pm",
+          style(color=0)),
+        Line(points=[80, 40; 80, 80; 34, 80], style(color=0)),
+        Line(points=[80, 40; 54, 20], style(color=0, arrow=1)),
+        Line(points=[-8, 28; -48, 28; -48, 80; 8, 80], style(color=0)),
         Text(
-          extent=[-68, 66; -48, 46], 
-          string="Vt", 
-          style(color=0)), 
+          extent=[-68, 66; -48, 46],
+          string="Vt",
+          style(color=0)),
         Line(points=[32, -86; 80, -86; 80, -40; 54, -22], style(color=0, arrow=
-                1)), 
-        Line(points=[-18, -14; -44, -14; -44, -86; 12, -86], style(color=0)), 
+                1)),
+        Line(points=[-18, -14; -44, -14; -44, -86; 12, -86], style(color=0)),
         Text(
-          extent=[-64, -54; -44, -74], 
-          string="w", 
-          style(color=0))), 
+          extent=[-64, -54; -44, -74],
+          string="w",
+          style(color=0))),
       Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
-        component=[20, 20]), 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
+        component=[20, 20]),
       Window(
-        x=0.4, 
-        y=0.4, 
-        width=0.6, 
-        height=0.6), 
+        x=0.4,
+        y=0.4,
+        width=0.6,
+        height=0.6),
       Documentation(info="The 6th order Generator model extended with governor and exciter
 
 The governor and exciter models can be redeclared with models
 from the controller library or used-defined models.
 
-"), 
-      Icon);
+"),   Icon);
   equation 
     // connection equations for governor and exciter
     Gov.u = w;
@@ -511,28 +503,28 @@ from the controller library or used-defined models.
         
         discrete Base.Voltage Vref(start=1);
         discrete Base.Voltage Ef0(start=1);
-        Modelica.Blocks.Nonlinear.Limiter Limiter(uMax={Efmax}, uMin={Efmin}) 
-          annotation (extent=[74, -10; 94, 10]);
+        Modelica.Blocks.Nonlinear.Limiter Limiter(uMax=scalar(Efmax), uMin=
+              scalar(Efmin)) annotation (extent=[74,-10; 94,10]);
         Modelica.Blocks.Math.Add Verror(k1=-1, k2=1) annotation (extent=[-80, -
               10; -60, 10]);
       equation 
-        connect(Limiter.outPort, outPort) annotation (points=[95, 0; 110, 0]);
+        connect(Limiter.y, y) annotation (points=[95,0; 110,0]);
         annotation (
           Coordsys(
-            extent=[-100, -100; 100, 100], 
-            grid=[2, 2], 
-            component=[20, 20]), 
+            extent=[-100, -100; 100, 100],
+            grid=[2, 2],
+            component=[20, 20]),
           Window(
-            x=0.32, 
-            y=0.09, 
-            width=0.6, 
-            height=0.6), 
-          Diagram(Line(points=[-84, -6; -90, -18]), Text(extent=[-100, -20; -80
-                  , -28], string="Vref")), 
+            x=0.32,
+            y=0.09,
+            width=0.6,
+            height=0.6),
+          Diagram(Line(points=[-84, -6; -90, -18]), Text(extent=[-100, -20; -80,
+                    -28], string="Vref")),
           Icon(Text(extent=[-80, -20; 80, -60], string="System"), Text(extent=[
                   -80, 60; 80, 20], string="Excitation")));
-        connect(inPort, Verror.inPort1) annotation (points=[-124, 0; -92, 0; -
-              92, 6; -82, 6], style(color=3));
+        connect(u, Verror.u1) 
+          annotation (points=[-124,0; -92,0; -92,6; -82,6], style(color=3));
         Verror.u2 = {Vref};
         Vref = pre(Vref);
       end Exciter;
@@ -548,31 +540,31 @@ from the controller library or used-defined models.
         discrete Base.MechanicalPower Pm0(start=1, fixed=false) 
           "Initial Mechanical Power (automatically initialized)";
       public 
-        Modelica.Blocks.Nonlinear.Limiter Limiter(uMax={Pmmax}, uMin={Pmmin}) 
-          annotation (extent=[76, -10; 96, 10]);
-        Modelica.Blocks.Math.Add werror(k1=-1, k2=+1) annotation (extent=[-80, 
+        Modelica.Blocks.Nonlinear.Limiter Limiter(uMax=scalar(Pmmax), uMin=
+              scalar(Pmmin)) annotation (extent=[76,-10; 96,10]);
+        Modelica.Blocks.Math.Add werror(k1=-1, k2=+1) annotation (extent=[-80,
               -10; -60, 10]);
       equation 
-        connect(Limiter.outPort, outPort) annotation (points=[97, 0; 110, 0]);
+        connect(Limiter.y, y) annotation (points=[97,0; 110,0]);
         annotation (
           Coordsys(
-            extent=[-100, -100; 100, 100], 
-            grid=[2, 2], 
-            component=[20, 20]), 
+            extent=[-100, -100; 100, 100],
+            grid=[2, 2],
+            component=[20, 20]),
           Window(
-            x=0.4, 
-            y=0.4, 
-            width=0.6, 
-            height=0.6), 
+            x=0.4,
+            y=0.4,
+            width=0.6,
+            height=0.6),
           Diagram(
-            Text(extent=[-134, 32; -106, 24], string="w"), 
-            Text(extent=[96, 18; 124, 10], string="Pm"), 
-            Text(extent=[-100, -20; -80, -28], string="wref"), 
-            Line(points=[-84, -6; -90, -18])), 
+            Text(extent=[-134, 32; -106, 24], string="w"),
+            Text(extent=[96, 18; 124, 10], string="Pm"),
+            Text(extent=[-100, -20; -80, -28], string="wref"),
+            Line(points=[-84, -6; -90, -18])),
           Icon(Text(extent=[-80, -20; 80, -60], string="System"), Text(extent=[
                   -80, 60; 80, 20], string="Governing")));
-        connect(werror.inPort1, inPort) annotation (points=[-82, 6; -90, 6; -90
-              , 0; -128, 0], style(color=3));
+        connect(werror.u1, u) 
+          annotation (points=[-82,6; -90,6; -90,0; -128,0], style(color=3));
         werror.u2 = {wref};
         Pm0 = pre(Pm0);
       end Governor;
@@ -586,26 +578,26 @@ from the controller library or used-defined models.
         //  Integer status1;
         //  Integer status2;
         annotation (Coordsys(
-            extent=[-100, -100; 100, 100], 
-            grid=[2, 2], 
+            extent=[-100, -100; 100, 100],
+            grid=[2, 2],
             component=[20, 20]), Window(
-            x=0.13, 
-            y=0.07, 
-            width=0.6, 
+            x=0.13,
+            y=0.07,
+            width=0.6,
             height=0.6));
-        ModelicaAdditions.PetriNets.Transition LimitExc annotation (extent=[-30
-              , 20; -10, 40]);
-        ModelicaAdditions.PetriNets.Transition LimitOK annotation (extent=[-30
-              , -20; -10, 0], rotation=180);
-        ModelicaAdditions.PetriNets.Transition TimerExp annotation (extent=[30
-              , 20; 50, 40]);
-        ModelicaAdditions.PetriNets.Place11 activated annotation (extent=[60, 
+        ObsoletePetriNets.PetriNets.Transition LimitExc annotation (extent=[-30,
+                20; -10, 40]);
+        ObsoletePetriNets.PetriNets.Transition LimitOK annotation (extent=[-30,
+                -20; -10, 0], rotation=180);
+        ObsoletePetriNets.PetriNets.Transition TimerExp annotation (extent=[30,
+                20; 50, 40]);
+        ObsoletePetriNets.PetriNets.Place11 activated annotation (extent=[60,
               20; 80, 40]);
-        ModelicaAdditions.PetriNets.Transition UnActivate annotation (extent=[
+        ObsoletePetriNets.PetriNets.Transition UnActivate annotation (extent=[
               40, -40; 60, -20], rotation=180);
-        ModelicaAdditions.PetriNets.Place21 wait(initialState=true) annotation 
-          (extent=[-60, 20; -40, 40]);
-        ModelicaAdditions.PetriNets.Place12 count annotation (extent=[-2, 20; 
+        ObsoletePetriNets.PetriNets.Place21 wait(initialState=true) annotation (
+           extent=[-60, 20; -40, 40]);
+        ObsoletePetriNets.PetriNets.Place12 count annotation (extent=[-2, 20;
               18, 40]);
       equation 
         connect(LimitExc.inTransition, wait.outTransition) annotation (points=[
@@ -622,8 +614,8 @@ from the controller library or used-defined models.
             points=[45, -30; -76, -30; -76, 36; -62, 36], style(color=41));
         connect(LimitOK.outTransition, wait.inTransition1) annotation (points=[
               -24, -10; -67, -10; -67, 24; -62, 24], style(color=41));
-        connect(count.outTransition2, TimerExp.inTransition) annotation (points
-            =[20, 36; 26, 36; 26, 30; 32, 30], style(color=41));
+        connect(count.outTransition2, TimerExp.inTransition) annotation (points=
+             [20, 36; 26, 36; 26, 30; 32, 30], style(color=41));
         LimitExc.condition = y > Limit;
         LimitOK.condition = y < (Limit - 1e-5);
         UnActivate.condition = y < (Limit - 1e-5);
@@ -632,7 +624,7 @@ from the controller library or used-defined models.
         when count.state then
           countstart = time;
           //   status1 = LogVariable(count.state);
-        end when;
+        end when; 
         when activated.state then
           //  status2 = LogVariable(activated.state);
         end when;
@@ -644,14 +636,14 @@ from the controller library or used-defined models.
         activated.state = false;
       end ExcLimiter;
       annotation (Coordsys(
-          extent=[0, 0; 442, 394], 
-          grid=[2, 2], 
+          extent=[0, 0; 442, 394],
+          grid=[2, 2],
           component=[20, 20]), Window(
-          x=0.45, 
-          y=0.01, 
-          width=0.39, 
-          height=0.58, 
-          library=1, 
+          x=0.45,
+          y=0.01,
+          width=0.39,
+          height=0.58,
+          library=1,
           autolayout=1));
     end Partials;
     
@@ -664,21 +656,21 @@ from the controller library or used-defined models.
         annotation (extent=[20, -10; 40, 10]);
       annotation (
         Coordsys(
-          extent=[-100, -100; 100, 100], 
-          grid=[2, 2], 
-          component=[20, 20]), 
+          extent=[-100, -100; 100, 100],
+          grid=[2, 2],
+          component=[20, 20]),
         Window(
-          x=0.38, 
-          y=0.11, 
-          width=0.68, 
-          height=0.68), 
-        Diagram, 
+          x=0.38,
+          y=0.11,
+          width=0.68,
+          height=0.68),
+        Diagram,
         Icon);
     equation 
-      connect(AVR.outPort, Limiter.inPort) annotation (points=[41, 0; 72, 0], 
-          style(color=3));
-      connect(Verror.outPort, AVR.inPort) annotation (points=[-59, 0; 16, 0], 
-          style(color=3));
+      connect(AVR.y, Limiter.u) 
+        annotation (points=[41,0; 72,0], style(color=3));
+      connect(Verror.y, AVR.u) 
+        annotation (points=[-59,0; 16,0], style(color=3));
       Ef0 = 0;
       
     initial equation 
@@ -693,40 +685,40 @@ from the controller library or used-defined models.
       
       annotation (
         Coordsys(
-          extent=[-100, -100; 100, 100], 
-          grid=[2, 2], 
-          component=[20, 20]), 
+          extent=[-100, -100; 100, 100],
+          grid=[2, 2],
+          component=[20, 20]),
         Window(
-          x=0.39, 
-          y=0.3, 
-          width=0.6, 
-          height=0.6), 
-        Icon, 
-        Diagram(Text(extent=[18, -24; 34, -32], string="Pm0"), Line(points=[42
-                , -6; 26, -6; 26, -20])));
+          x=0.39,
+          y=0.3,
+          width=0.6,
+          height=0.6),
+        Icon,
+        Diagram(Text(extent=[18, -24; 34, -32], string="Pm0"), Line(points=[42,
+                  -6; 26, -6; 26, -20])));
       annotation (
         Coordsys(
-          extent=[-100, -100; 100, 100], 
-          grid=[2, 2], 
-          component=[20, 20]), 
+          extent=[-100, -100; 100, 100],
+          grid=[2, 2],
+          component=[20, 20]),
         Window(
-          x=0.4, 
-          y=0.35, 
-          width=0.6, 
-          height=0.6), 
+          x=0.4,
+          y=0.35,
+          width=0.6,
+          height=0.6),
         Diagram);
       Modelica.Blocks.Continuous.TransferFunction TF(
-        b={K}, 
-        a={T,1}, 
+        b={K},
+        a={T,1},
         x(start={0})) annotation (extent=[-34, -10; -14, 10]);
       Modelica.Blocks.Math.Add PmAdd annotation (extent=[42, -10; 62, 10]);
     equation 
-      connect(PmAdd.outPort, Limiter.inPort) annotation (points=[64, 0; 76, 0]
-          , style(color=3));
-      connect(TF.outPort, PmAdd.inPort1) annotation (points=[-13, 0; -2, 0; -2
-            , 6; 40, 6], style(color=3));
-      connect(werror.outPort, TF.inPort) annotation (points=[-59, 0; -36, 0], 
-          style(color=3));
+      connect(PmAdd.y, Limiter.u) 
+        annotation (points=[64,0; 76,0], style(color=3));
+      connect(TF.y, PmAdd.u1) 
+        annotation (points=[-13,0; -2,0; -2,6; 40,6], style(color=3));
+      connect(werror.y, TF.u) 
+        annotation (points=[-59,0; -36,0], style(color=3));
       PmAdd.u2 = {Pm0};
       
     initial equation 
@@ -735,8 +727,8 @@ from the controller library or used-defined models.
     
     model ExcST1A 
       extends Partials.Exciter(
-        K=200, 
-        Efmin=0, 
+        K=200,
+        Efmin=0,
         Efmax=7);
       
       parameter Real Tr=1.5 "AVR Time Constant";
@@ -755,52 +747,51 @@ from the controller library or used-defined models.
         annotation (extent=[-48, -10; -28, 10]);
       annotation (
         Coordsys(
-          extent=[-100, -100; 100, 100], 
-          grid=[2, 2], 
-          component=[20, 20]), 
+          extent=[-100, -100; 100, 100],
+          grid=[2, 2],
+          component=[20, 20]),
         Window(
-          x=0.43, 
-          y=0.29, 
-          width=0.6, 
-          height=0.6), 
+          x=0.43,
+          y=0.29,
+          width=0.6,
+          height=0.6),
         Diagram(
-          Rectangle(extent=[-88, -30; 94, -90], style(color=9, pattern=3)), 
+          Rectangle(extent=[-88, -30; 94, -90], style(color=9, pattern=3)),
           Text(
-            extent=[92, -96; 66, -76], 
-            string="PSS", 
-            style(color=10)), 
-          Text(extent=[-112, -56; -92, -64], string="w-1"), 
-          Line(points=[-96, -60; -80, -60])), 
+            extent=[92, -96; 66, -76],
+            string="PSS",
+            style(color=10)),
+          Text(extent=[-112, -56; -92, -64], string="w-1"),
+          Line(points=[-96, -60; -80, -60])),
         Icon);
-      Modelica.Blocks.Math.Add Sum(k1=+K, k2=+K) annotation (extent=[-4, -10; 
+      Modelica.Blocks.Math.Add Sum(k1=+K, k2=+K) annotation (extent=[-4, -10;
             16, 10]);
-      Modelica.Blocks.Math.Gain PSSGain(k={Kstab}) annotation (extent=[-80, -70
-            ; -60, -50]);
+      Modelica.Blocks.Math.Gain PSSGain(k=scalar(Kstab))
+        annotation (extent=[-80,-70; -60,-50]);
       Modelica.Blocks.Continuous.TransferFunction WashOut(b={Tw,0}, a={Tw,1}) 
         annotation (extent=[-40, -70; -20, -50]);
-      Modelica.Blocks.Continuous.TransferFunction Phase_Compensation1(b={T1,1}
-          , a={T2,1}) annotation (extent=[0, -70; 20, -50]);
-      Modelica.Blocks.Nonlinear.Limiter PSSLimiter(uMax={vsmax}, uMin={vsmin}) 
-        annotation (extent=[64, -70; 84, -50]);
-      Modelica.Blocks.Continuous.TransferFunction Phase_Compensation2(b={T3,1}
-          , a={T4,1}) annotation (extent=[34, -70; 54, -50]);
+      Modelica.Blocks.Continuous.TransferFunction Phase_Compensation1(b={T1,1},
+            a={T2,1}) annotation (extent=[0, -70; 20, -50]);
+      Modelica.Blocks.Nonlinear.Limiter PSSLimiter(uMax=scalar(vsmax), uMin=
+            scalar(vsmin)) annotation (extent=[64,-70; 84,-50]);
+      Modelica.Blocks.Continuous.TransferFunction Phase_Compensation2(b={T3,1},
+            a={T4,1}) annotation (extent=[34, -70; 54, -50]);
     equation 
-      connect(AVR.outPort, Sum.inPort1) annotation (points=[-27, 0; -18, 0; -18
-            , 6; -6, 6]);
-      connect(Phase_Compensation1.inPort, WashOut.outPort) annotation (points=[
-            -2, -60; -19, -60]);
-      connect(PSSLimiter.outPort, Sum.inPort2) annotation (points=[85, -60; 90
-            , -60; 90, -34; -18, -34; -18, -6; -6, -6]);
-      connect(Phase_Compensation2.inPort, Phase_Compensation1.outPort) 
-        annotation (points=[32, -60; 21, -60]);
-      connect(Phase_Compensation2.outPort, PSSLimiter.inPort) annotation (
-          points=[55, -60; 62, -60]);
-      connect(Sum.outPort, Limiter.inPort) annotation (points=[17, 0; 72, 0], 
-          style(color=3));
-      connect(PSSGain.outPort, WashOut.inPort) annotation (points=[-58, -60; -
-            44, -60], style(color=3));
-      connect(Verror.outPort, AVR.inPort) annotation (points=[-58, 0; -48, 0], 
-          style(color=3));
+      connect(AVR.y, Sum.u1) annotation (points=[-27,0; -18,0; -18,6; -6,6]);
+      connect(Phase_Compensation1.u, WashOut.y) 
+        annotation (points=[-2,-60; -19,-60]);
+      connect(PSSLimiter.y, Sum.u2) 
+        annotation (points=[85,-60; 90,-60; 90,-34; -18,-34; -18,-6; -6,-6]);
+      connect(Phase_Compensation2.u, Phase_Compensation1.y) 
+        annotation (points=[32,-60; 21,-60]);
+      connect(Phase_Compensation2.y, PSSLimiter.u) 
+        annotation (points=[55,-60; 62,-60]);
+      connect(Sum.y, Limiter.u) 
+        annotation (points=[17,0; 72,0], style(color=3));
+      connect(PSSGain.y, WashOut.u) 
+        annotation (points=[-58,-60; -44,-60], style(color=3));
+      connect(Verror.y, AVR.u) 
+        annotation (points=[-58,0; -48,0], style(color=3));
       PSSGain.u = {w};
       Ef0 = 0;
       
@@ -815,21 +806,21 @@ from the controller library or used-defined models.
       extends Partials.Exciter;
       annotation (
         Coordsys(
-          extent=[-100, -100; 100, 100], 
-          grid=[2, 2], 
-          component=[20, 20]), 
+          extent=[-100, -100; 100, 100],
+          grid=[2, 2],
+          component=[20, 20]),
         Window(
-          x=0.08, 
-          y=0.34, 
-          width=0.6, 
-          height=0.6), 
+          x=0.08,
+          y=0.34,
+          width=0.6,
+          height=0.6),
         Diagram(Text(
-            extent=[-130, 36; -110, 16], 
-            string="V", 
+            extent=[-130, 36; -110, 16],
+            string="V",
             style(color=0)), Text(
-            extent=[100, 32; 120, 12], 
-            string="Efd", 
-            style(color=0))), 
+            extent=[100, 32; 120, 12],
+            string="Efd",
+            style(color=0))),
         Icon);
     equation 
       Ef0 = pre(Ef0);
@@ -842,32 +833,32 @@ from the controller library or used-defined models.
       extends Partials.Governor;
       annotation (
         Coordsys(
-          extent=[-100, -100; 100, 100], 
-          grid=[2, 2], 
-          component=[20, 20]), 
+          extent=[-100, -100; 100, 100],
+          grid=[2, 2],
+          component=[20, 20]),
         Window(
-          x=0.46, 
-          y=0.1, 
-          width=0.6, 
-          height=0.6), 
-        Diagram(Text(extent=[48, -20; 64, -28], string="Pm0"), Line(points=[72
-                , 0; 56, 0; 56, -14])), 
+          x=0.46,
+          y=0.1,
+          width=0.6,
+          height=0.6),
+        Diagram(Text(extent=[48, -20; 64, -28], string="Pm0"), Line(points=[72,
+                  0; 56, 0; 56, -14])),
         Icon);
     equation 
       Limiter.u = {Pm0};
     end ConstPm;
     annotation (
       Coordsys(
-        extent=[0, 0; 442, 394], 
-        grid=[1, 1], 
-        component=[20, 20]), 
+        extent=[0, 0; 442, 394],
+        grid=[1, 1],
+        component=[20, 20]),
       Window(
-        x=0.4, 
-        y=0.4, 
-        width=0.6, 
-        height=0.6, 
-        library=1, 
-        autolayout=1), 
+        x=0.4,
+        y=0.4,
+        width=0.6,
+        height=0.6,
+        library=1,
+        autolayout=1),
       Documentation(info="This library contains sample governor and excitation 
 system models
 
@@ -885,36 +876,36 @@ model NewGen
 end NewGen;
 "));
     model Gover2 
-      extends ObjectStab.Generators.Controllers.Partials.Governor(Pmmax=100, 
+      extends ObjectStab.Generators.Controllers.Partials.Governor(Pmmax=100,
           Pmmin=-100);
       parameter Base.AngularVelocity wref=1 "Reference Angular Velocity";
       parameter Real Kgov=1 "Governor Gain";
       parameter Real TRH=10;
       parameter Real PROPH=0.3;
       Modelica.Blocks.Continuous.TransferFunction TF(
-        b={Kgov*PROPH*TRH,Kgov}, 
-        a={TRH,1}, 
+        b={Kgov*PROPH*TRH,Kgov},
+        a={TRH,1},
         x(start={0})) annotation (extent=[-20, -10; 0, 10]);
       annotation (
         Coordsys(
-          extent=[-100, -100; 100, 100], 
-          grid=[2, 2], 
-          component=[20, 20]), 
+          extent=[-100, -100; 100, 100],
+          grid=[2, 2],
+          component=[20, 20]),
         Window(
-          x=0.4, 
-          y=0.4, 
-          width=0.6, 
-          height=0.6), 
-        Diagram(Line(points=[42, -6; 26, -6; 26, -20]), Text(extent=[18, -24; 
+          x=0.4,
+          y=0.4,
+          width=0.6,
+          height=0.6),
+        Diagram(Line(points=[42, -6; 26, -6; 26, -20]), Text(extent=[18, -24;
                 34, -32], string="Pm0")));
       Modelica.Blocks.Math.Add PmAdd annotation (extent=[42, -10; 62, 10]);
     equation 
-      connect(TF.outPort, PmAdd.inPort1) annotation (points=[1, 0; 20.5, 0; 
-            20.5, 6; 40, 6], style(color=3));
-      connect(Limiter.inPort, PmAdd.outPort) annotation (points=[74, 0; 62, 0]
-          , style(color=3));
-      connect(werror.outPort, TF.inPort) annotation (points=[-60, 0; -20, 0], 
-          style(color=3));
+      connect(TF.y, PmAdd.u1) 
+        annotation (points=[1,0; 20.5,0; 20.5,6; 40,6], style(color=3));
+      connect(Limiter.u, PmAdd.y) 
+        annotation (points=[74,0; 62,0], style(color=3));
+      connect(werror.y, TF.u) 
+        annotation (points=[-60,0; -20,0], style(color=3));
       PmAdd.u2 = {Pm0};
     initial equation 
       der(TF.y) = 0;
@@ -932,43 +923,43 @@ end NewGen;
       
       annotation (
         Coordsys(
-          extent=[-100, -100; 100, 100], 
-          grid=[2, 2], 
-          component=[20, 20]), 
+          extent=[-100, -100; 100, 100],
+          grid=[2, 2],
+          component=[20, 20]),
         Window(
-          x=0, 
-          y=0, 
-          width=0.6, 
-          height=0.6), 
+          x=0,
+          y=0,
+          width=0.6,
+          height=0.6),
         Diagram);
       Modelica.Blocks.Continuous.TransferFunction Gov(
-        b={Kgov*PROPH*TRH,Kgov}, 
-        a={TRH,1}, 
+        b={Kgov*PROPH*TRH,Kgov},
+        a={TRH,1},
         x(start={0})) annotation (extent=[-20, 20; 0, 40]);
       Modelica.Blocks.Continuous.TransferFunction IsoFreq(b={Kgov/Tfreq}, a={1,
             0}) annotation (extent=[-20, -40; 0, -20]);
       Modelica.Blocks.Math.Add3 Add3 annotation (extent=[40, -10; 60, 10]);
     equation 
-      connect(werror.outPort, Gov.inPort) annotation (points=[-59, 0; -40, 0; -
-            40, 30; -22, 30], style(color=3));
-      connect(Add3.outPort, Limiter.inPort) annotation (points=[61, 0; 74, 0], 
-          style(color=3));
-      connect(Add3.inPort1, Gov.outPort) annotation (points=[36, 8; 16, 8; 16, 
-            30; 2, 30], style(color=3));
-      connect(werror.outPort, IsoFreq.inPort) annotation (points=[-60, 0; -40, 
-            0; -40, -30; -22, -30], style(color=3));
-      connect(IsoFreq.outPort, Add3.inPort2) annotation (points=[0, -30; 12, -
-            30; 12, 2; 36, 2], style(color=3));
-      Add3.inPort3.signal[1] = Pm0;
+      connect(werror.y, Gov.u) 
+        annotation (points=[-59,0; -40,0; -40,30; -22,30], style(color=3));
+      connect(Add3.y, Limiter.u) 
+        annotation (points=[61,0; 74,0], style(color=3));
+      connect(Add3.u1, Gov.y) 
+        annotation (points=[36,8; 16,8; 16,30; 2,30], style(color=3));
+      connect(werror.y, IsoFreq.u) 
+        annotation (points=[-60,0; -40,0; -40,-30; -22,-30], style(color=3));
+      connect(IsoFreq.y, Add3.u2) 
+        annotation (points=[0,-30; 12,-30; 12,2; 36,2], style(color=3));
+      Add3.u3.signal[1] = Pm0;
     initial equation 
-      Add3.inPort1.signal[1] = 0;
-      Add3.inPort2.signal[1] = 0;
+      Add3.u1.signal[1] = 0;
+      Add3.u2.signal[1] = 0;
     end IsoGover;
     
     model ExcST1ALim 
       extends Partials.Exciter(
-        K=200, 
-        Efmin=0, 
+        K=200,
+        Efmin=0,
         Efmax=7);
       
       parameter Real Tr=1.5 "AVR Time Constant";
@@ -987,55 +978,53 @@ end NewGen;
         annotation (extent=[-48, -10; -28, 10]);
       annotation (
         Coordsys(
-          extent=[-100, -100; 100, 100], 
-          grid=[2, 2], 
-          component=[20, 20]), 
+          extent=[-100, -100; 100, 100],
+          grid=[2, 2],
+          component=[20, 20]),
         Window(
-          x=0.03, 
-          y=0.08, 
-          width=0.6, 
-          height=0.6), 
+          x=0.03,
+          y=0.08,
+          width=0.6,
+          height=0.6),
         Diagram(
-          Rectangle(extent=[-88, -30; 94, -90], style(color=9, pattern=3)), 
+          Rectangle(extent=[-88, -30; 94, -90], style(color=9, pattern=3)),
           Text(
-            extent=[92, -96; 66, -76], 
-            string="PSS", 
-            style(color=10)), 
-          Text(extent=[-112, -56; -92, -64], string="w-1"), 
-          Line(points=[-96, -60; -80, -60])), 
+            extent=[92, -96; 66, -76],
+            string="PSS",
+            style(color=10)),
+          Text(extent=[-112, -56; -92, -64], string="w-1"),
+          Line(points=[-96, -60; -80, -60])),
         Icon);
-      Modelica.Blocks.Math.Add Sum(k1=+K, k2=+K) annotation (extent=[-4, -10; 
+      Modelica.Blocks.Math.Add Sum(k1=+K, k2=+K) annotation (extent=[-4, -10;
             16, 10]);
-      Modelica.Blocks.Math.Gain PSSGain(k={Kstab}) annotation (extent=[-80, -70
-            ; -60, -50]);
+      Modelica.Blocks.Math.Gain PSSGain(k=scalar(Kstab))
+        annotation (extent=[-80,-70; -60,-50]);
       Modelica.Blocks.Continuous.TransferFunction WashOut(b={Tw,0}, a={Tw,1}) 
         annotation (extent=[-40, -70; -20, -50]);
-      Modelica.Blocks.Continuous.TransferFunction Phase_Compensation1(b={T1,1}
-          , a={T2,1}) annotation (extent=[0, -70; 20, -50]);
-      Modelica.Blocks.Nonlinear.Limiter PSSLimiter(uMax={vsmax}, uMin={vsmin}) 
-        annotation (extent=[64, -70; 84, -50]);
-      Modelica.Blocks.Continuous.TransferFunction Phase_Compensation2(b={T3,1}
-          , a={T4,1}) annotation (extent=[34, -70; 54, -50]);
+      Modelica.Blocks.Continuous.TransferFunction Phase_Compensation1(b={T1,1},
+            a={T2,1}) annotation (extent=[0, -70; 20, -50]);
+      Modelica.Blocks.Nonlinear.Limiter PSSLimiter(uMax=scalar(vsmax), uMin=
+            scalar(vsmin)) annotation (extent=[64,-70; 84,-50]);
+      Modelica.Blocks.Continuous.TransferFunction Phase_Compensation2(b={T3,1},
+            a={T4,1}) annotation (extent=[34, -70; 54, -50]);
       Partials.ExcLimiter ExcLimit annotation (extent=[36, -10; 56, 10]);
     equation 
-      connect(AVR.outPort, Sum.inPort1) annotation (points=[-27, 0; -18, 0; -18
-            , 6; -6, 6]);
-      connect(WashOut.inPort, PSSGain.outPort) annotation (points=[-42, -60; -
-            59, -60]);
-      connect(Phase_Compensation1.inPort, WashOut.outPort) annotation (points=[
-            -2, -60; -19, -60]);
-      connect(PSSLimiter.outPort, Sum.inPort2) annotation (points=[85, -60; 90
-            , -60; 90, -34; -18, -34; -18, -6; -6, -6]);
-      connect(Phase_Compensation2.inPort, Phase_Compensation1.outPort) 
-        annotation (points=[32, -60; 21, -60]);
-      connect(Phase_Compensation2.outPort, PSSLimiter.inPort) annotation (
-          points=[55, -60; 62, -60]);
-      connect(Sum.outPort, ExcLimit.inPort) annotation (points=[16, 0; 36, 0], 
-          style(color=3));
-      connect(ExcLimit.outPort, Limiter.inPort) annotation (points=[56, 0; 72, 
-            0], style(color=3));
-      connect(Verror.outPort, AVR.inPort) annotation (points=[-58, 0; -50, 0], 
-          style(color=3));
+      connect(AVR.y, Sum.u1) annotation (points=[-27,0; -18,0; -18,6; -6,6]);
+      connect(WashOut.u, PSSGain.y) annotation (points=[-42,-60; -59,-60]);
+      connect(Phase_Compensation1.u, WashOut.y) 
+        annotation (points=[-2,-60; -19,-60]);
+      connect(PSSLimiter.y, Sum.u2) 
+        annotation (points=[85,-60; 90,-60; 90,-34; -18,-34; -18,-6; -6,-6]);
+      connect(Phase_Compensation2.u, Phase_Compensation1.y) 
+        annotation (points=[32,-60; 21,-60]);
+      connect(Phase_Compensation2.y, PSSLimiter.u) 
+        annotation (points=[55,-60; 62,-60]);
+      connect(Sum.y, ExcLimit.u) 
+        annotation (points=[16,0; 36,0], style(color=3));
+      connect(ExcLimit.y, Limiter.u) 
+        annotation (points=[56,0; 72,0], style(color=3));
+      connect(Verror.y, AVR.u) 
+        annotation (points=[-58,0; -50,0], style(color=3));
       PSSGain.u = {w};
       Ef0 = 0;
       
@@ -1047,13 +1036,13 @@ end NewGen;
     end ExcST1ALim;
   end Controllers;
   annotation (Coordsys(
-      extent=[0, 0; 386, 296], 
-      grid=[1, 1], 
+      extent=[0, 0; 386, 296],
+      grid=[1, 1],
       component=[20, 20]), Window(
-      x=0.4, 
-      y=0.4, 
-      width=0.6, 
-      height=0.6, 
-      library=1, 
+      x=0.4,
+      y=0.4,
+      width=0.6,
+      height=0.6,
+      library=1,
       autolayout=1));
 end Generators;

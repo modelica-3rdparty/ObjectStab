@@ -1,14 +1,15 @@
+within ObjectStab;
 package Extras 
   extends Modelica.Icons.Library;
   annotation (Coordsys(
-      extent=[0, 0; 386, 297], 
-      grid=[2, 2], 
+      extent=[0, 0; 386, 297],
+      grid=[2, 2],
       component=[20, 20]), Window(
-      x=0.4, 
-      y=0.4, 
-      width=0.6, 
-      height=0.6, 
-      library=1, 
+      x=0.4,
+      y=0.4,
+      width=0.6,
+      height=0.6,
+      library=1,
       autolayout=1));
   model PQPilink 
     extends Network.Pilink;
@@ -22,12 +23,12 @@ package Extras
     Real I1=sqrt(T1.ia^2 + T1.ib^2);
     Real I2=sqrt(T2.ia^2 + T2.ib^2);
     annotation (Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
         component=[20, 20]), Window(
-        x=0.4, 
-        y=0.4, 
-        width=0.6, 
+        x=0.4,
+        y=0.4,
+        width=0.6,
         height=0.6));
   end PQPilink;
   
@@ -44,8 +45,8 @@ package Extras
     Real I1=sqrt(T1.ia^2 + T1.ib^2);
     Real I2=sqrt(T2.ia^2 + T2.ib^2);
     annotation (Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
         component=[20, 20]));
   end OpenedPQPilink;
   
@@ -62,8 +63,8 @@ package Extras
     Real I1=sqrt(T1.ia^2 + T1.ib^2);
     Real I2=sqrt(T2.ia^2 + T2.ib^2);
     annotation (Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
         component=[20, 20]));
   end FaultedPQPilink;
   
@@ -76,46 +77,45 @@ package Extras
     ObjectStab.Base.Time timerstart(start=-1, fixed=true);
     
     annotation (Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
         component=[20, 20]), Window(
-        x=0.1, 
-        y=0.01, 
-        width=0.66, 
+        x=0.1,
+        y=0.01,
+        width=0.66,
         height=0.93));
-    ModelicaAdditions.PetriNets.Transition T1 annotation (extent=[-30, 40; -10
-          , 60]);
-    ModelicaAdditions.PetriNets.Transition T2 annotation (extent=[-30, -24; -10
-          , -4], rotation=180);
-    ModelicaAdditions.PetriNets.Place12 delay annotation (extent=[0, 40; 20, 60
-          ]);
-    ModelicaAdditions.PetriNets.Transition T3 annotation (extent=[-30, 10; -10
-          , 30], rotation=180);
-    ModelicaAdditions.PetriNets.Place21 wait(initialState=true) annotation (
+    ObsoletePetriNets.PetriNets.Transition T1 annotation (extent=[-30, 40; -10,
+            60]);
+    ObsoletePetriNets.PetriNets.Transition T2 annotation (extent=[-30, -24; -10,
+            -4], rotation=180);
+    ObsoletePetriNets.PetriNets.Place12 delay annotation (extent=[0, 40; 20, 60]);
+    ObsoletePetriNets.PetriNets.Transition T3 annotation (extent=[-30, 10; -10,
+            30], rotation=180);
+    ObsoletePetriNets.PetriNets.Place21 wait(initialState=true) annotation (
         extent=[-60, 40; -40, 60]);
   equation 
     connect(delay.inTransition, T1.outTransition) annotation (points=[-2, 50; -
           15, 50]);
-    connect(T3.inTransition, delay.outTransition1) annotation (points=[-13.95, 
+    connect(T3.inTransition, delay.outTransition1) annotation (points=[-13.95,
           20.05; 30, 20; 30, 44; 21, 44]);
-    connect(delay.outTransition2, T2.inTransition) annotation (points=[21.1, 56
-          ; 46, 56; 46, -14; -13.95, -13.95]);
-    connect(T1.inTransition, wait.outTransition) annotation (points=[-26.05, 
+    connect(delay.outTransition2, T2.inTransition) annotation (points=[21.1, 56;
+            46, 56; 46, -14; -13.95, -13.95]);
+    connect(T1.inTransition, wait.outTransition) annotation (points=[-26.05,
           49.95; -39, 50]);
-    connect(T2.outTransition, wait.inTransition2) annotation (points=[-25, -14
-          ; -72, -14; -72, 56; -62, 56]);
-    connect(T3.outTransition, wait.inTransition1) annotation (points=[-24, 20; 
+    connect(T2.outTransition, wait.inTransition2) annotation (points=[-25, -14;
+            -72, -14; -72, 56; -62, 56]);
+    connect(T3.outTransition, wait.inTransition1) annotation (points=[-24, 20;
           -68, 20; -68, 44; -62, 44]);
     T1.condition = (u < Threshold) and (y < ShedAmount/10);
     T2.condition = (u > Threshold);
     T3.condition = time > timerstart + DelayTime;
     
     when delay.state then
-      timerstart = time;
+      timerstart = time; 
     end when;
     
     when T3.condition and delay.state then
-      outPort.signal[1] = ShedAmount;
+      y = ShedAmount;
     end when;
   initial equation 
     wait.state = true;
@@ -139,37 +139,40 @@ package Extras
     Real k;
     
     ShedRelay Relay1(
-      Threshold=.8, 
-      DelayTime=1.5, 
-      ShedAmount=.05) annotation (extent=[-85, 15; -15, 85]);
+      Threshold=0.8,
+      DelayTime=1.5,
+      ShedAmount=0.05) 
+                      annotation (extent=[-85, 15; -15, 85]);
     ShedRelay Relay2(
-      Threshold=.82, 
-      DelayTime=3, 
-      ShedAmount=.05) annotation (extent=[15, 15; 85, 85]);
+      Threshold=0.82,
+      DelayTime=3,
+      ShedAmount=0.05) 
+                      annotation (extent=[15, 15; 85, 85]);
     ShedRelay Relay3(
-      DelayTime=6, 
-      ShedAmount=0.05, 
-      Threshold=.92) annotation (extent=[-85, -85; -15, -15]);
+      DelayTime=6,
+      ShedAmount=0.05,
+      Threshold=0.92) 
+                     annotation (extent=[-85, -85; -15, -15]);
     annotation (
       Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
-        component=[20, 20]), 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
+        component=[20, 20]),
       Icon(
-        Line(points=[-100, 0; -20, 0], style(color=0)), 
+        Line(points=[-100, 0; -20, 0], style(color=0)),
         Polygon(points=[40, -2; -20, 18; -20, -22; 40, -2], style(
-            color=0, 
-            gradient=3, 
-            fillColor=0)), 
-        Line(points=[-40, -40; -20, -40; -20, -60; -6, -50; 6, -46; 24, -44; 40
-              , -44]), 
-        Text(extent=[-100, 60; 100, 20], string="%P0 + j %Q0"), 
-        Text(extent=[-100, 100; 100, 60], string="UVLS")), 
+            color=0,
+            gradient=3,
+            fillColor=0)),
+        Line(points=[-40, -40; -20, -40; -20, -60; -6, -50; 6, -46; 24, -44; 40,
+                -44]),
+        Text(extent=[-100, 60; 100, 20], string="%P0 + j %Q0"),
+        Text(extent=[-100, 100; 100, 60], string="UVLS")),
       Window(
-        x=0.08, 
-        y=0.02, 
-        width=0.58, 
-        height=0.98), 
+        x=0.08,
+        y=0.02,
+        width=0.58,
+        height=0.98),
       Diagram);
   equation 
     Pl = (1 - k)*(xp/Tp + P0*(V/V0)^at);
@@ -200,27 +203,30 @@ package Extras
     outer Real wref;
     
     ShedRelay Relay1(
-      DelayTime=0.1, 
-      ShedAmount=0.1, 
-      Threshold=.96) annotation (extent=[-56.6667, 10; -10, 56.6667]);
+      DelayTime=0.1,
+      ShedAmount=0.1,
+      Threshold=0.96) 
+                     annotation (extent=[-56.6667, 10; -10, 56.6667]);
     ShedRelay Relay2(
-      DelayTime=0.1, 
-      ShedAmount=0.1, 
-      Threshold=.956) annotation (extent=[10, 10; 56.6667, 56.6667]);
+      DelayTime=0.1,
+      ShedAmount=0.1,
+      Threshold=0.956) 
+                      annotation (extent=[10, 10; 56.6667, 56.6667]);
     ShedRelay Relay3(
-      DelayTime=0.1, 
-      ShedAmount=0.1, 
-      Threshold=.952) annotation (extent=[-56.6667, -56.6667; -10, -10]);
+      DelayTime=0.1,
+      ShedAmount=0.1,
+      Threshold=0.952) 
+                      annotation (extent=[-56.6667, -56.6667; -10, -10]);
     annotation (
       Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
-        component=[20, 20]), 
-      Icon(Text(extent=[-100, 100; 100, 60], string="UFLS")), 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
+        component=[20, 20]),
+      Icon(Text(extent=[-100, 100; 100, 60], string="UFLS")),
       Window(
-        x=0.4, 
-        y=0.4, 
-        width=0.6, 
+        x=0.4,
+        y=0.4,
+        width=0.6,
         height=0.6));
   equation 
     Pl = (1 - k)*P0*(1 + (V - V0)*a + c*(wref - 1));
@@ -261,12 +267,12 @@ package Extras
     discrete Real Vref(start=1);
     discrete Real Pm0(start=1);
     annotation (Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
         component=[20, 20]), Window(
-        x=0.08, 
-        y=0.26, 
-        width=0.6, 
+        x=0.08,
+        y=0.26,
+        width=0.6,
         height=0.6));
   equation 
     //
@@ -280,7 +286,7 @@ package Extras
     Qgt = -(vtb*T.ia - (1 + vta)*T.ib)/Sbase*Base.Sbase;
     Efd = (Vt^4 + Vt^2*Qgt*xq + Qgt*xd*Vt^2 + Qgt^2*xd*xq + Pgt^2*xq*xd)/(sqrt(
       Pgt^2*xq^2 + Vt^4 + 2*Vt^2*Qgt*xq + Qgt^2*xq^2)*Vt);
-    [1 + T.va; T.vb] = [rt, -xt; xt, rt]*[T.ia; T.ib]/Sbase*Base.Sbase + [1 + 
+    [1 + T.va; T.vb] = [rt, -xt; xt, rt]*[T.ia; T.ib]/Sbase*Base.Sbase + [1 +
       vta; vtb];
     
     // limiter logic
@@ -297,9 +303,9 @@ package Extras
     wrl.wr.Hsum = if time < TripTime then Modelica.Constants.inf else 0;
     
   initial equation 
-    V = V0;
+    V = V0; 
     if isSlack then
-      theta = theta0;
+      theta = theta0; 
     else
       Pg = Pg0;
     end if;
@@ -373,53 +379,52 @@ package Extras
         extent=[12, -96; 32, -76]);
     annotation (
       Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
-        component=[20, 20]), 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
+        component=[20, 20]),
       Window(
-        x=0.4, 
-        y=0.4, 
-        width=0.6, 
-        height=0.6), 
-      Icon, 
+        x=0.4,
+        y=0.4,
+        width=0.6,
+        height=0.6),
+      Icon,
       Diagram(
         Line(points=[-100, 0; -20, 0], style(
-            color=0, 
-            pattern=1, 
-            thickness=1, 
-            arrow=0)), 
+            color=0,
+            pattern=1,
+            thickness=1,
+            arrow=0)),
         Ellipse(extent=[-20, 40; 60, -40], style(
-            color=0, 
-            pattern=1, 
-            thickness=1, 
-            arrow=0)), 
+            color=0,
+            pattern=1,
+            thickness=1,
+            arrow=0)),
         Text(
-          extent=[44, 68; 64, 48], 
-          string="Efd", 
-          style(color=0)), 
+          extent=[44, 68; 64, 48],
+          string="Efd",
+          style(color=0)),
         Text(
-          extent=[58, -56; 78, -76], 
-          string="Pm", 
-          style(color=0)), 
-        Line(points=[80, 40; 80, 80; 34, 80], style(color=0)), 
-        Line(points=[80, 40; 54, 20], style(color=0, arrow=1)), 
-        Line(points=[-6, 30; -46, 30; -46, 86; 12, 86; 4, 86], style(color=0))
-          , 
-        Line(points=[2, 36; -20, 36; -20, 74; 12, 74], style(color=0)), 
+          extent=[58, -56; 78, -76],
+          string="Pm",
+          style(color=0)),
+        Line(points=[80, 40; 80, 80; 34, 80], style(color=0)),
+        Line(points=[80, 40; 54, 20], style(color=0, arrow=1)),
+        Line(points=[-6, 30; -46, 30; -46, 86; 12, 86; 4, 86], style(color=0)),
+        Line(points=[2, 36; -20, 36; -20, 74; 12, 74], style(color=0)),
         Text(
-          extent=[-68, 66; -48, 46], 
-          string="Vt", 
-          style(color=0)), 
+          extent=[-68, 66; -48, 46],
+          string="Vt",
+          style(color=0)),
         Text(
-          extent=[-12, 68; 8, 48], 
-          string="dw", 
-          style(color=0)), 
+          extent=[-12, 68; 8, 48],
+          string="dw",
+          style(color=0)),
         Line(points=[32, -86; 80, -86; 80, -40; 54, -22], style(color=0, arrow=
-                1)), 
-        Line(points=[-18, -14; -44, -14; -44, -86; 12, -86], style(color=0)), 
+                1)),
+        Line(points=[-18, -14; -44, -14; -44, -86; 12, -86], style(color=0)),
         Text(
-          extent=[-66, -54; -46, -74], 
-          string="w", 
+          extent=[-66, -54; -46, -74],
+          string="w",
           style(color=0))));
     replaceable ObjectStab.Generators.Controllers.ConstEfd Exc annotation (
         extent=[14, 70; 34, 90]);
@@ -442,7 +447,7 @@ package Extras
       id = (-vd*Lfd*L1d*L1q*L2q*ra + w*Ldpp*vq*L1q*L2q*Lfd*L1d + w^2*Ldpp*
         Laqspp*lam1q*L2q*Lfd*L1d + w^2*Ldpp*Laqspp*lam2q*L1q*Lfd*L1d + w*Ladspp
         *lamfd*L1d*L1q*L2q*ra + w*Ladspp*lam1d*Lfd*L1q*L2q*ra)/L1q/L2q/(w^2*
-        Lqpp*Ldpp + ra^2)/Lfd/L1d;
+        Lqpp*Ldpp + ra^2)/Lfd/L1d; 
     else
       iq = 0;
       id = 0;
@@ -469,39 +474,39 @@ package Extras
     
     annotation (
       Coordsys(
-        extent=[-100, -100; 100, 100], 
-        grid=[2, 2], 
-        component=[20, 20]), 
+        extent=[-100, -100; 100, 100],
+        grid=[2, 2],
+        component=[20, 20]),
       Icon(
         Ellipse(extent=[-40, 60; 80, -60], style(
-            color=0, 
-            pattern=1, 
-            thickness=1, 
-            arrow=0)), 
+            color=0,
+            pattern=1,
+            thickness=1,
+            arrow=0)),
         Line(points=[-100, 0; -40, 0], style(
-            color=0, 
-            pattern=1, 
-            thickness=1, 
-            arrow=0)), 
-        Text(extent=[-60, 100; 100, 60], string="%name"), 
-        Text(extent=[-40, -20; 80, 20], string="Slack")), 
+            color=0,
+            pattern=1,
+            thickness=1,
+            arrow=0)),
+        Text(extent=[-60, 100; 100, 60], string="%name"),
+        Text(extent=[-40, -20; 80, 20], string="Slack")),
       Window(
-        x=0.4, 
-        y=0.4, 
-        width=0.6, 
+        x=0.4,
+        y=0.4,
+        width=0.6,
         height=0.6));
   public 
-    Modelica.Blocks.Interfaces.InPort InPort(n=1) annotation (extent=[10, -80; 
-          30, -60], rotation=90);
+    Modelica.Blocks.Interfaces.RealInput InPort
+      annotation (extent=[10,-80; 30,-60], rotation=90);
   equation 
     if online then
       if not isSlack then
         V = V0;
-        Pg = Pg0;
+        Pg = Pg0; 
       else
         1 + T.va = V0*cos(theta0);
         T.vb = V0*sin(theta0);
-      end if;
+      end if; 
     else
       T.ia = 0;
       T.ib = 0;

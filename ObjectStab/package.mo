@@ -1,9 +1,9 @@
+within ;
 package ObjectStab "ObjectStab - A Modelica Library for Power System Stability Studies"
 extends Modelica.Icons.Library;
 
 
 annotation (
-  Dymola(checkSum="132352444:3064077516"),
   Documentation(info="
 <HTML>
 <p>The ObjectStab package is a Modelica Library for Power Systems Voltage and
@@ -66,7 +66,7 @@ Click to subscribe to objectstab</a>
 <ul>
   <LI><I>Version 1.0c (September 25, 2002) -</I> Fixed compatibility issues with Dymola 4.3/5.0.</LI>
   <LI><I>Version 1.0b (May 13, 2002) -</I> Fixed minor bugs before inclusion in Dymola distribution.</LI>
-  <LI><I>Version 1.0 (February 28, 2002) -</I> Major update, initialization greatly enhanced 
+  <LI><I>Version 1.0 (February 28, 2002) -</I> Major update, initialization greatly enhanced
 using new features in Modelica V2.0. Now uses petri net library from ModelicaAdditions library.</LI>
   <LI><I>Version 0.4 (November 6, 2000) -</I> Changed ninebus test system to avoid
 'model too complex for demo version'-error during compilation</LI>
@@ -101,16 +101,6 @@ and the accompanying <b>disclaimer</b>.
 <b>Copyright (C) 1999-2002, Mats Larsson.</b>
 
 </html>
-"), 
-  Coordsys(
-    extent=[0, 0; 351, 240], 
-    grid=[1, 1], 
-    component=[20, 20]), 
-  Window(
-    x=0, 
-    y=0, 
-    width=0.35, 
-    height=0.37, 
-    library=1, 
-    autolayout=1));
+"),
+uses(Modelica(version="2.2.2")));
 end ObjectStab;
