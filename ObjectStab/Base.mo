@@ -80,14 +80,14 @@ package Base "Base package"
             lineColor={0,0,255},
             fillColor={0,0,255},
             fillPattern=FillPattern.Solid)}),
-      Documentation(info="The electrical connectors of ObjectStab models are modelled by the voltages and 
+      Documentation(info="The electrical connectors of ObjectStab models are modelled by the voltages and
 currents in phasor representation:
 
-I =   ia + j ib 
+I =   ia + j ib
 V = 1+va + j vb
 
 The constant one has been introduced in order to help the initial value solver.
-Two connected Pins results in the following equations:  
+Two connected Pins results in the following equations:
 
 Pin1.va = Pin2.va
 Pin1.vb = Pin2.vb
@@ -220,7 +220,7 @@ By definition, currents are considered positive when injected into a component.
             lineColor={0,0,0},
             fillColor={0,0,0},
             fillPattern=FillPattern.Solid)}),
-      Documentation(info="Current Measurement for Electrical Cuts. 
+      Documentation(info="Current Measurement for Electrical Cuts.
 Should be connected in series.
 "));
   end CurrentMeasurement;
@@ -263,7 +263,7 @@ Should be connected in series.
             lineColor={0,0,0},
             fillColor={0,0,0},
             fillPattern=FillPattern.Solid)}),
-      Documentation(info="Current Measurement for Electrical Cuts. 
+      Documentation(info="Current Measurement for Electrical Cuts.
 Should be connected in series.
 "));
   end PowerMeasurement;
@@ -382,10 +382,10 @@ The reference is computed using the center-of-inertia method.
       library=1,
       autolayout=1),
     Documentation(info="The base package contains definitions common to all
-subpackages, including the new datatypes for the p.u. 
+subpackages, including the new datatypes for the p.u.
 quantities are defined.
- 
-The constant f0 sets the rated frequency. 
+
+The constant f0 sets the rated frequency.
 This can be changed into 60 Hz for american users.
 "));
 end Base;

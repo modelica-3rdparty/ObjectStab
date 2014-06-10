@@ -142,7 +142,7 @@ the load draws if the voltage is 1 p.u.
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Text(extent={{-40,-60},{42,-20}}, textString=
                                                    "PQ")}),
-      Documentation(info="For a constant power the actual load powers drawn from the network 
+      Documentation(info="For a constant power the actual load powers drawn from the network
 are given by:
 
   Pl = P0
@@ -171,7 +171,7 @@ are given by:
                                                    "Zload")}),
       Documentation(info="R = P*V^2/(Q^2+P^2)
 X = Q*V^2/(Q^2+P^2)
- 
+
 "));
   end ImpedanceLoad;
 
@@ -244,17 +244,17 @@ The load powers are given by:
   Ql = (xq/Tq + Q0*V^bt);
 
 where xp is a continuous dynamic state that can be interpreted as a
-measure of the energy deficit in the load and Ps(V) = P0*V^as 
+measure of the energy deficit in the load and Ps(V) = P0*V^as
 is the steady-state and Pt(V)=P0*V^at the transient voltage dependency.
-Pl is the actual active load power and Tp is the active power recovery 
-time constant. 
+Pl is the actual active load power and Tp is the active power recovery
+time constant.
 
-For the reactive load power, a similar model is used with corresponding 
+For the reactive load power, a similar model is used with corresponding
 characteristics x_q, Qs(V)=Q0 V^bs, Qt(V) = Q0 V^bt and time constant Tq.
 
 ---
-[1] D. Karlsson and D.J. Hill, \"Modelling and identification of nonlinear 
-dynamic loads in power systems\", IEEE Transactions on Power Systems, 
+[1] D. Karlsson and D.J. Hill, \"Modelling and identification of nonlinear
+dynamic loads in power systems\", IEEE Transactions on Power Systems,
 vol. 9, no. 1, pp. 157-163, February 1994.
 
 "),   Diagram(coordinateSystem(
@@ -351,17 +351,17 @@ The load powers are given by:
   Ql = (xq/Tq + Q0*V^bt);
 
 where xp is a continuous dynamic state that can be interpreted as a
-measure of the energy deficit in the load and Ps(V) = P0*V^as 
+measure of the energy deficit in the load and Ps(V) = P0*V^as
 is the steady-state and Pt(V)=P0*V^at the transient voltage dependency.
-Pl is the actual active load power and Tp is the active power recovery 
-time constant. 
+Pl is the actual active load power and Tp is the active power recovery
+time constant.
 
-For the reactive load power, a similar model is used with corresponding 
+For the reactive load power, a similar model is used with corresponding
 characteristics x_q, Qs(V)=Q0 V^bs, Qt(V) = Q0 V^bt and time constant Tq.
 
 ---
-[1] D. Karlsson and D.J. Hill, \"Modelling and identification of nonlinear 
-dynamic loads in power systems\", IEEE Transactions on Power Systems, 
+[1] D. Karlsson and D.J. Hill, \"Modelling and identification of nonlinear
+dynamic loads in power systems\", IEEE Transactions on Power Systems,
 vol. 9, no. 1, pp. 157-163, February 1994.
 
 "),   Diagram(coordinateSystem(

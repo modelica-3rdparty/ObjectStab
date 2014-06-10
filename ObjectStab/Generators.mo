@@ -153,13 +153,13 @@ delivered to the network referred at the system base.
             extent={{-100,-100},{100,100}},
             grid={2,2}), graphics),
         Documentation(info="Common definitions for detailed generator models, including the generator step-up
-transformer.  
+transformer.
 
-At least one slack node or detailed generator with its attribute 'isSlack' 
-set to true must be included in each network model. For this generator the 
-attribute Pg0 is not used. For generators with 'isSlack' set to false, the 
-attribute theta0 is not used. Tripping of the generator can be simulated 
-by setting the tripping time in the attribute 'TripTime'. 
+At least one slack node or detailed generator with its attribute 'isSlack'
+set to true must be included in each network model. For this generator the
+attribute Pg0 is not used. For generators with 'isSlack' set to false, the
+attribute theta0 is not used. Tripping of the generator can be simulated
+by setting the tripping time in the attribute 'TripTime'.
 
 Each generator has it's own dq coordinate system, and its stator equations
 must therefore be related to the network (global) coordinate system using the
@@ -337,8 +337,8 @@ Stability, Number ISBN 0-471-97174. Wiley, 1993.
                                                   "Slack"), Text(extent={{-60,
                 100},{100,60}}, textString=
                                     "V=%V0,th=%theta0%")}),
-      Documentation(info="The slack node model acts as slack bus in initialization or load-flow 
-calculations and as an infinite bus during dynamic simulation. 
+      Documentation(info="The slack node model acts as slack bus in initialization or load-flow
+calculations and as an infinite bus during dynamic simulation.
 
 
 At least one slack node or detailed generator with its attribute 'isSlack' set to true must be included
@@ -1128,19 +1128,19 @@ from the controller library or used-defined models.
         height=0.6,
         library=1,
         autolayout=1),
-      Documentation(info="This library contains sample governor and excitation 
+      Documentation(info="This library contains sample governor and excitation
 system models
 
 By default generators are declared with constant power
-governor and constant field voltage. 
+governor and constant field voltage.
 
 An extended generator model can for example by inheriting from
 the basic generator models and augment it with first order
 exitation system and governor using the clauses as follows:
- 
-model NewGen 
+
+model NewGen
   extends ObjectStab.Generators.GovExc6thGen(
-    redeclare ObjectStab.Generators.Controllers.FirstOrderExciter Exc, 
+    redeclare ObjectStab.Generators.Controllers.FirstOrderExciter Exc,
     redeclare ObjectStab.Generators.Controllers.FirstOrderGovernor Gov);
 end NewGen;
 "));

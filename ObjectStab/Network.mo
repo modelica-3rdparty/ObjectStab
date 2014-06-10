@@ -219,8 +219,8 @@ package Network "Network subpackage"
           y=0.4,
           width=0.6,
           height=0.6),
-        Documentation(info="Common definitions for TCUL control systems according to [1]. 
-Using the parameter the characteristics of the mechanical delay time (Tm) 
+        Documentation(info="Common definitions for TCUL control systems according to [1].
+Using the parameter the characteristics of the mechanical delay time (Tm)
 and the controlled delay time (Td) the TCUL can be influenced according
 to the table below:
 
@@ -236,7 +236,7 @@ to the table below:
 Use the subclasses TCULContinuous for continuous approximation (more computationally)
 efficient or the the subclass TCULDiscrete for the true discrete realization.
 
-The tap changer is locked if the primary side voltage decreases below the 
+The tap changer is locked if the primary side voltage decreases below the
 tap locking voltage specified in Vblock.
 
 ---
@@ -287,8 +287,8 @@ Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
             extent={{-100,-100},{100,100}},
             grid={2,2}), graphics={Text(extent={{-88,36},{82,-36}}, textString=
                                                     "Continuous")}),
-        Documentation(info="Continuous implementation of Tap-Changing Under Load (TCUL) control 
-system  according to method C1-C4 in [1] using a state-machine implementation 
+        Documentation(info="Continuous implementation of Tap-Changing Under Load (TCUL) control
+system  according to method C1-C4 in [1] using a state-machine implementation
 of the control system and tap changer mechanism.
 
 
@@ -496,8 +496,8 @@ Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2}), graphics),
-        Documentation(info="Discrete implementation of Tap-Changing Under Load (TCUL) control system 
-according to method D1-D4 in [1] using a state-machine implementation of the 
+        Documentation(info="Discrete implementation of Tap-Changing Under Load (TCUL) control system
+according to method D1-D4 in [1] using a state-machine implementation of the
 control system and tap changer mechanism.
 
 Ideally the variable 'tappos' should be initialized to give a voltage deviation
@@ -671,7 +671,7 @@ For numerical reasons, R and X may not both be set to zero.
            G+jB
            ----
 V1, I1  ---    --- V2, I2
-    ->     ----        <- 
+    ->     ----        <-
 
 
 I1 = (G+jB) * (V1-V2)
@@ -819,7 +819,7 @@ realized using the Impedance and Admittance submodels.
 For numerical reasons, the R+jX must not be set equal to zero.
 
 ---
-[1] J. Machowski, J.W. Bialek, and J.R. Bumby, Power System Dynamics 
+[1] J. Machowski, J.W. Bialek, and J.R. Bumby, Power System Dynamics
 and Stability, Number ISBN 0-471-97174. Wiley, 1993.
 "));
   end Pilink2;
@@ -864,7 +864,7 @@ and Stability, Number ISBN 0-471-97174. Wiley, 1993.
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics),
-      Documentation(info="Breakers B1 and B2 opens simultaneously at simulation time OpenTime, and stays 
+      Documentation(info="Breakers B1 and B2 opens simultaneously at simulation time OpenTime, and stays
 until time CloseTime, after which they are simultanously closed.
 
 "));
@@ -1334,8 +1334,8 @@ method C1-C4
 method D1-D4 using a state-machine implementation of the control system and
 tap changer mechanism. See documentation for 'Controllers.TCULDiscrete' for
 documentation on the control system.
-Note that the tap position of a discrete tap changer is not properly 
-initialized by the initial value solver in Dymola version 4.0c. 
+Note that the tap position of a discrete tap changer is not properly
+initialized by the initial value solver in Dymola version 4.0c.
 This can by manually by adding e.g., the string: Controller(tappos(start=8))
 in the 'Modifiers' field (initializes the tap to position 8).
 "));

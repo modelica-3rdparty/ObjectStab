@@ -890,7 +890,7 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
         height=0.58,
         library=1,
         autolayout=1),
-      Documentation(info=" 
+      Documentation(info="
 "));
   end Kundur126;
 
@@ -1412,9 +1412,9 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
               grid={2,2}), graphics),
-          Documentation(info=" 
+          Documentation(info="
 Static load model used in the CIGRE report.
-Active power has constant current and Reactive power has 
+Active power has constant current and Reactive power has
 constant impedance characteristic.
 "));
       end SweLoad;
