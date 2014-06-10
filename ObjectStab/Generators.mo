@@ -541,25 +541,25 @@ from the controller library or used-defined models.
         discrete Real countstart(start=1e6, fixed=true);
         //  Integer status1;
         //  Integer status2;
-        ObsoletePetriNets.PetriNets.Transition LimitExc annotation (Placement(
+        ModelicaAdditions.PetriNets.Transition LimitExc annotation (Placement(
               transformation(extent={{-30,20},{-10,40}})));
-        ObsoletePetriNets.PetriNets.Transition LimitOK annotation (Placement(
+        ModelicaAdditions.PetriNets.Transition LimitOK annotation (Placement(
               transformation(
               origin={-20,-10},
               extent={{-10,-10},{10,10}},
               rotation=180)));
-        ObsoletePetriNets.PetriNets.Transition TimerExp annotation (Placement(
+        ModelicaAdditions.PetriNets.Transition TimerExp annotation (Placement(
               transformation(extent={{30,20},{50,40}})));
-        ObsoletePetriNets.PetriNets.Place11 activated annotation (Placement(
+        ModelicaAdditions.PetriNets.Place11 activated annotation (Placement(
               transformation(extent={{60,20},{80,40}})));
-        ObsoletePetriNets.PetriNets.Transition UnActivate annotation (Placement(
+        ModelicaAdditions.PetriNets.Transition UnActivate annotation (Placement(
               transformation(
               origin={50,-30},
               extent={{-10,-10},{10,10}},
               rotation=180)));
-        ObsoletePetriNets.PetriNets.Place21 wait(initialState=true) annotation (Placement(
+        ModelicaAdditions.PetriNets.Place21 wait(initialState=true) annotation (Placement(
               transformation(extent={{-60,20},{-40,40}})));
-        ObsoletePetriNets.PetriNets.Place12 count annotation (Placement(
+        ModelicaAdditions.PetriNets.Place12 count annotation (Placement(
               transformation(extent={{-2,20},{18,40}})));
       equation
         connect(LimitExc.inTransition, wait.outTransition) annotation (Line(

@@ -850,72 +850,72 @@ ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
         Real scorr(start=1e3);
 
       public
-        ObsoletePetriNets.PetriNets.Transition Tr1f annotation (Placement(
+        ModelicaAdditions.PetriNets.Transition Tr1f annotation (Placement(
               transformation(
               origin={-50,22},
               extent={{-10,-10},{10,10}},
               rotation=270)));
-        ObsoletePetriNets.PetriNets.Place12 countf annotation (Placement(
+        ModelicaAdditions.PetriNets.Place12 countf annotation (Placement(
               transformation(
               origin={-50,-10},
               extent={{-10,-10},{10,10}},
               rotation=270)));
-        ObsoletePetriNets.PetriNets.Transition Tr2f annotation (Placement(
+        ModelicaAdditions.PetriNets.Transition Tr2f annotation (Placement(
               transformation(
               origin={-70,-40},
               extent={{-10,-10},{10,10}},
               rotation=270)));
-        ObsoletePetriNets.PetriNets.Place21 waitf(initialState=true)
+        ModelicaAdditions.PetriNets.Place21 waitf(initialState=true)
           annotation (Placement(transformation(
               origin={-50,50},
               extent={{-10,-10},{10,10}},
               rotation=270)));
-        ObsoletePetriNets.PetriNets.Place11 activatef annotation (Placement(
+        ModelicaAdditions.PetriNets.Place11 activatef annotation (Placement(
               transformation(
               origin={-70,-70},
               extent={{-10,-10},{10,10}},
               rotation=270)));
-        ObsoletePetriNets.PetriNets.Transition Tr3f annotation (Placement(
+        ModelicaAdditions.PetriNets.Transition Tr3f annotation (Placement(
               transformation(
               origin={-90,-10},
               extent={{-10,-10},{10,10}},
               rotation=90)));
-        ObsoletePetriNets.PetriNets.Transition Tr4f annotation (Placement(
+        ModelicaAdditions.PetriNets.Transition Tr4f annotation (Placement(
               transformation(
               origin={-10,-10},
               extent={{-10,-10},{10,10}},
               rotation=90)));
-        ObsoletePetriNets.PetriNets.Transition Tr1s annotation (Placement(
+        ModelicaAdditions.PetriNets.Transition Tr1s annotation (Placement(
               transformation(
               origin={54,22},
               extent={{-10,-10},{10,10}},
               rotation=270)));
-        ObsoletePetriNets.PetriNets.Place12 counts annotation (Placement(
+        ModelicaAdditions.PetriNets.Place12 counts annotation (Placement(
               transformation(
               origin={54,-10},
               extent={{-10,-10},{10,10}},
               rotation=270)));
-        ObsoletePetriNets.PetriNets.Transition Tr2s annotation (Placement(
+        ModelicaAdditions.PetriNets.Transition Tr2s annotation (Placement(
               transformation(
               origin={34,-40},
               extent={{-10,-10},{10,10}},
               rotation=270)));
-        ObsoletePetriNets.PetriNets.Place21 waits(initialState=true)
+        ModelicaAdditions.PetriNets.Place21 waits(initialState=true)
           annotation (Placement(transformation(
               origin={54,50},
               extent={{-10,-10},{10,10}},
               rotation=270)));
-        ObsoletePetriNets.PetriNets.Place11 activates annotation (Placement(
+        ModelicaAdditions.PetriNets.Place11 activates annotation (Placement(
               transformation(
               origin={34,-70},
               extent={{-10,-10},{10,10}},
               rotation=270)));
-        ObsoletePetriNets.PetriNets.Transition Tr3s annotation (Placement(
+        ModelicaAdditions.PetriNets.Transition Tr3s annotation (Placement(
               transformation(
               origin={14,-10},
               extent={{-10,-10},{10,10}},
               rotation=90)));
-        ObsoletePetriNets.PetriNets.Transition Tr4s annotation (Placement(
+        ModelicaAdditions.PetriNets.Transition Tr4s annotation (Placement(
               transformation(
               origin={94,-10},
               extent={{-10,-10},{10,10}},

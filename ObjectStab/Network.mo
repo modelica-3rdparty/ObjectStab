@@ -55,16 +55,16 @@ package Network "Network subpackage"
     protected
       Boolean newState(final start=initialState);
     public
-      ObsoletePetriNets.PetriNets.Interfaces.FirePortOut outTransition1
+      ModelicaAdditions.PetriNets.Interfaces.FirePortOut outTransition1
         annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
-      ObsoletePetriNets.PetriNets.Interfaces.FirePortOut outTransition2
+      ModelicaAdditions.PetriNets.Interfaces.FirePortOut outTransition2
         annotation (Placement(transformation(extent={{100,70},{120,50}})));
-      ObsoletePetriNets.PetriNets.Interfaces.SetPortIn inTransition1
+      ModelicaAdditions.PetriNets.Interfaces.SetPortIn inTransition1
         annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
-      ObsoletePetriNets.PetriNets.Interfaces.SetPortIn inTransition2
+      ModelicaAdditions.PetriNets.Interfaces.SetPortIn inTransition2
         annotation (Placement(transformation(extent={{-140,80},{-100,40}})));
     public
-      ObsoletePetriNets.PetriNets.Interfaces.SetPortIn inTransition3
+      ModelicaAdditions.PetriNets.Interfaces.SetPortIn inTransition3
         annotation (Placement(transformation(
             origin={120,0},
             extent={{-20,20},{20,-20}},
@@ -283,72 +283,72 @@ Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
             origin={0,70},
             extent={{-10,-10},{10,10}},
             rotation=270)));
-      ObsoletePetriNets.PetriNets.Transition Tr1(condLabel="Verr<-DB/2")
+      ModelicaAdditions.PetriNets.Transition Tr1(condLabel="Verr<-DB/2")
         annotation (Placement(transformation(
             origin={-50,30},
             extent={{-10,-10},{10,10}},
             rotation=270)));
-      ObsoletePetriNets.PetriNets.Transition Tr2(condLabel="Verr>-DB/2")
+      ModelicaAdditions.PetriNets.Transition Tr2(condLabel="Verr>-DB/2")
         annotation (Placement(transformation(
             origin={-90,30},
             extent={{-10,-10},{10,10}},
             rotation=90)));
-      ObsoletePetriNets.PetriNets.Place12 countup annotation (Placement(
+      ModelicaAdditions.PetriNets.Place12 countup annotation (Placement(
             transformation(
             origin={-50,-10},
             extent={{-10,-10},{10,10}},
             rotation=270)));
-      ObsoletePetriNets.PetriNets.Transition Tr3(condLabel="Timer>Td")
+      ModelicaAdditions.PetriNets.Transition Tr3(condLabel="Timer>Td")
         annotation (Placement(transformation(
             origin={-70,-50},
             extent={{-10,-10},{10,10}},
             rotation=270)));
-      ObsoletePetriNets.PetriNets.Place11 actionup annotation (Placement(
+      ModelicaAdditions.PetriNets.Place11 actionup annotation (Placement(
             transformation(
             origin={-70,-76},
             extent={{-10,-10},{10,10}},
             rotation=270)));
-      ObsoletePetriNets.PetriNets.Transition Tr4(condLabel="Timer>Td+Tm")
+      ModelicaAdditions.PetriNets.Transition Tr4(condLabel="Timer>Td+Tm")
         annotation (Placement(transformation(
             origin={-30,-50},
             extent={{-10,-10},{10,10}},
             rotation=90)));
-      ObsoletePetriNets.PetriNets.Transition Tr6(condLabel="Verr>DB/2")
+      ModelicaAdditions.PetriNets.Transition Tr6(condLabel="Verr>DB/2")
         annotation (Placement(transformation(
             origin={50,30},
             extent={{-10,-10},{10,10}},
             rotation=270)));
-      ObsoletePetriNets.PetriNets.Transition Tr7(condLabel="Verr<DB/2")
+      ModelicaAdditions.PetriNets.Transition Tr7(condLabel="Verr<DB/2")
         annotation (Placement(transformation(
             origin={90,30},
             extent={{-10,-10},{10,10}},
             rotation=90)));
-      ObsoletePetriNets.PetriNets.Place12 countdown annotation (Placement(
+      ModelicaAdditions.PetriNets.Place12 countdown annotation (Placement(
             transformation(
             origin={50,-10},
             extent={{-10,-10},{10,10}},
             rotation=270)));
-      ObsoletePetriNets.PetriNets.Transition Tr8(condLabel="Timer>Td")
+      ModelicaAdditions.PetriNets.Transition Tr8(condLabel="Timer>Td")
         annotation (Placement(transformation(
             origin={30,-50},
             extent={{-10,-10},{10,10}},
             rotation=90)));
-      ObsoletePetriNets.PetriNets.Transition Tr9(condLabel="Timer>Td")
+      ModelicaAdditions.PetriNets.Transition Tr9(condLabel="Timer>Td")
         annotation (Placement(transformation(
             origin={70,-50},
             extent={{-10,-10},{10,10}},
             rotation=270)));
-      ObsoletePetriNets.PetriNets.Place11 actiondown annotation (Placement(
+      ModelicaAdditions.PetriNets.Place11 actiondown annotation (Placement(
             transformation(
             origin={70,-74},
             extent={{-10,-10},{10,10}},
             rotation=270)));
-      ObsoletePetriNets.PetriNets.Place21 updatetap annotation (Placement(
+      ModelicaAdditions.PetriNets.Place21 updatetap annotation (Placement(
             transformation(
             origin={0,-10},
             extent={{-10,-10},{10,10}},
             rotation=90)));
-      ObsoletePetriNets.PetriNets.Transition Tr5(condLabel="") annotation (Placement(
+      ModelicaAdditions.PetriNets.Transition Tr5(condLabel="") annotation (Placement(
             transformation(
             origin={0,24},
             extent={{-10,-10},{10,10}},

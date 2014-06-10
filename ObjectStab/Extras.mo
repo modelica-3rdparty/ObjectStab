@@ -50,21 +50,21 @@ package Extras
     parameter Real ShedAmount=0.05;
     ObjectStab.Base.Time timerstart(start=-1, fixed=true);
 
-    ObsoletePetriNets.PetriNets.Transition T1 annotation (Placement(
+    ModelicaAdditions.PetriNets.Transition T1 annotation (Placement(
           transformation(extent={{-30,40},{-10,60}})));
-    ObsoletePetriNets.PetriNets.Transition T2 annotation (Placement(
+    ModelicaAdditions.PetriNets.Transition T2 annotation (Placement(
           transformation(
           origin={-20,-14},
           extent={{-10,-10},{10,10}},
           rotation=180)));
-    ObsoletePetriNets.PetriNets.Place12 delay annotation (Placement(
+    ModelicaAdditions.PetriNets.Place12 delay annotation (Placement(
           transformation(extent={{0,40},{20,60}})));
-    ObsoletePetriNets.PetriNets.Transition T3 annotation (Placement(
+    ModelicaAdditions.PetriNets.Transition T3 annotation (Placement(
           transformation(
           origin={-20,20},
           extent={{-10,-10},{10,10}},
           rotation=180)));
-    ObsoletePetriNets.PetriNets.Place21 wait(initialState=true) annotation (Placement(
+    ModelicaAdditions.PetriNets.Place21 wait(initialState=true) annotation (Placement(
           transformation(extent={{-60,40},{-40,60}})));
   equation
     connect(delay.inTransition, T1.outTransition) annotation (Line(points={{-2,
