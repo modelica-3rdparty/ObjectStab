@@ -27,9 +27,15 @@ simulations are made, i.e., generator stator and network time constants are negl
 ## Current release
 
 Download [Latest development version](../../archive/master.zip)
-* updated to work with MSL 3.2.1 but still with issues:
-  - [ ] fix `pre` statements outside `when`
-  - [ ] fix mixture of scalar and vector values
+* Partially updated version of ObjectStab v1.0c (September 25, 2002)
+* Updated to work with MSL 3.2.1 but still with issues:
+  - All controllers using Petri-nets have not been changed and will not work in the present form.
+  - The PI-lines (one PI-element) contain a half-capacitor at each end.
+  - Loads consume the desired active\reactive power at initial voltage.
+  - The Examples package contains additionally the 'KundurHJW'-package (slight modification of original).
+Status:
+  - [X] fix `pre` statements outside `when`
+  - [X] fix mixture of scalar and vector values
   - [ ] fix usage of deprecated petri nets from ModelicaAdditions (use Modelica 3.3 syntax instead)
 
 #### Release notes
@@ -41,7 +47,7 @@ Download [Latest development version](../../archive/master.zip)
 
 ## License
 Copyright &copy; 1999-2002, Mats Larsson<br>
-Copyright &copy; 2014- , Dietmar Winkler
+Copyright &copy; 2014- , Dietmar Winkler &amp; HJ Wiesman
 
 This Modelica package is free software and the use is completely at your own risk;
 it can be redistributed and/or modified under the terms of the [Modelica License 1.1](https://modelica.org/licenses/ModelicaLicense1.1).
