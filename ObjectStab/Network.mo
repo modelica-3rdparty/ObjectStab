@@ -1,159 +1,5 @@
 within ObjectStab;
 package Network "Network subpackage"
-  extends Modelica.Icons.Library;
-
-  package Partials
-    "Contains uninstatiable classes related to network components"
-    extends Modelica.Icons.Library;
-
-    partial model PilinkBase "Pilink"
-      extends Base.TwoPin;
-      parameter Base.Resistance R=0.0 "Series Resistance";
-      parameter Base.Reactance X=0.1 "Series Reactance";
-      parameter Base.Susceptance B=0.1 "Shunt Susceptance";
-      parameter Base.Conductance G=0.0 "Shunt Conductance";
-      annotation (
-        Icon(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics={
-            Line(points={{100,0},{60,0}}, color={0,0,0}),
-            Text(extent={{100,20},{-100,60}}, textString=
-                                                  "%name"),
-            Rectangle(extent={{-60,20},{60,-20}}, lineColor={0,0,0}),
-            Line(points={{-60,0},{-100,0}}, color={0,0,0})}));
-    end PilinkBase;
-
-    partial model ImpTransformer
-      extends ObjectStab.Base.TwoPin;
-      parameter Base.Resistance R=0.0 "Leakage Resistance";
-      parameter Base.Reactance X=0.1 "Leakage Reactance";
-      ObjectStab.Network.IdealTransformer Tr annotation (Placement(
-            transformation(extent={{20,-20},{60,20}})));
-      ObjectStab.Network.Impedance Imp(R=R, X=X) annotation (Placement(
-            transformation(extent={{-60,-20},{-20,20}})));
-    equation
-      connect(Imp.T1, T1) annotation (Line(points={{-60,0},{-100,0}}));
-      connect(Imp.T2, Tr.T1) annotation (Line(points={{-20,0},{20,0}}));
-      connect(Tr.T2, T2) annotation (Line(points={{60,0},{100,0}}));
-      annotation (
-        Icon(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics={
-            Ellipse(extent={{-70,40},{12,-40}}, lineColor={0,0,0}),
-            Ellipse(extent={{-12,40},{70,-40}}, lineColor={0,0,0}),
-            Line(points={{70,0},{100,0}}, color={0,0,0}),
-            Line(points={{-100,0},{-70,0}}, color={0,0,0}),
-            Text(extent={{-98,-40},{100,-80}}, textString=
-                                                   "%name")}));
-    end ImpTransformer;
-
-    model Place32 "Place with two input and two output transitions"
-      parameter Boolean initialState=false "Initial value of state";
-      Boolean state(final start=initialState) "State of place";
-    protected
-      Boolean newState(final start=initialState);
-    public
-      ModelicaAdditions.PetriNets.Interfaces.FirePortOut outTransition1
-        annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
-      ModelicaAdditions.PetriNets.Interfaces.FirePortOut outTransition2
-        annotation (Placement(transformation(extent={{100,70},{120,50}})));
-      ModelicaAdditions.PetriNets.Interfaces.SetPortIn inTransition1
-        annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
-      ModelicaAdditions.PetriNets.Interfaces.SetPortIn inTransition2
-        annotation (Placement(transformation(extent={{-140,80},{-100,40}})));
-    public
-      ModelicaAdditions.PetriNets.Interfaces.SetPortIn inTransition3
-        annotation (Placement(transformation(
-            origin={120,0},
-            extent={{-20,20},{20,-20}},
-            rotation=180)));
-    equation
-      // Set new state for next iteration
-      state = pre(newState);
-      newState = inTransition1.set or inTransition2.set or inTransition3.set
-         or state and not (outTransition1.fire or outTransition2.fire);
-
-      // Report state to input and output transitions
-      inTransition1.state = state;
-      inTransition2.state = inTransition1.state or inTransition1.set;
-      inTransition3.state = inTransition1.state or inTransition1.set;
-      outTransition1.state = state;
-      outTransition2.state = outTransition1.state and not outTransition1.fire;
-      annotation (
-        Icon(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics={
-            Ellipse(
-              extent={{-100,-100},{100,100}},
-              lineColor={255,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(points={{-100,60},{-80,60}}, color={255,0,0}),
-            Line(points={{-100,-60},{-80,-60}}, color={255,0,0}),
-            Line(points={{80,-60},{100,-60}}, color={255,0,0}),
-            Line(points={{82,60},{102,60}}, color={255,0,0}),
-            Text(extent={{0,99},{0,159}}, textString=
-                                              "%name")}),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics={
-            Ellipse(extent={{-100,-100},{100,100}}, lineColor={255,0,0}),
-            Line(points={{-100,60},{-80,60}}, color={255,0,0}),
-            Line(points={{-100,-60},{-80,-60}}, color={255,0,0}),
-            Line(points={{80,60},{100,60}}, color={255,0,0}),
-            Line(points={{80,-60},{100,-60}}, color={255,0,0})}));
-    end Place32;
-
-    class BreakerBase
-      extends ObjectStab.Base.TwoPin;
-
-      Boolean closed;
-
-      parameter Real small=1e-6;
-
-      //  Real s1;
-      //  Real s2;
-    equation
-
-        //  [T1.va - T2.va; T1.vb - T2.vb] = (if closed then small*[1, -1; 1, 1] else [1
-      //    , 0; 0, 1])*[s1; s2];
-
-        //  [T1.ia; T1.ib] = (if closed then [1, 0; 0, 1] else small*[1, -1; 1, 1])*[s1
-      //    ; s2];
-
-      if closed then
-        [T1.va - T2.va; T1.vb - T2.vb] = small*[1, -1; 1, 1]*[T1.ia; T1.ib];
-      else
-        [T1.ia; T1.ib] = small*[1, -1; 1, 1]*[T1.va - T2.va; T1.vb - T2.vb];
-      end if;
-      [T1.ia; T1.ib] = -[T2.ia; T2.ib];
-      annotation (
-        Icon(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics={
-            Line(points={{44,0},{100,0}}, color={0,0,0}),
-            Line(points={{-40,0},{32,34}}, color={0,0,0}),
-            Ellipse(
-              extent={{-44,4},{-36,-4}},
-              lineColor={0,0,0},
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{36,4},{44,-4}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(points={{-100,0},{-44,0}}, color={0,0,0}),
-            Text(extent={{80,-60},{-80,-20}}, textString=
-                                                  "%name")}));
-    end BreakerBase;
-  end Partials;
-
   package Controllers
     "Contains controller classes related to network components"
     extends Modelica.Icons.Library;
@@ -162,7 +8,7 @@ package Network "Network subpackage"
 
       extends Modelica.Blocks.Interfaces.SI2SO(y(start=1));
       parameter Integer method=3 "Method number";
-      parameter Base.TapRatio n=1 "Transformer Ratio";
+      parameter ObjectStab.Base.TapRatio n=1 "Transformer Ratio";
 
       parameter ObjectStab.Base.TapRatio stepsize=0.01 "Step Size";
       parameter ObjectStab.Base.TapStep mintap=-12 "Minimum tap step";
@@ -215,13 +61,14 @@ Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
       extends TCULController;
       ObjectStab.Base.Time Tc;
       Modelica.Blocks.Continuous.LimIntegrator integrator(
-        y(start=n),
         k=1,
         outMax=1 + maxtap*stepsize,
-        outMin=1 + mintap*stepsize) annotation (Placement(transformation(extent=
-               {{-20,-20},{20,20}})));
+        outMin=1 + mintap*stepsize,
+        y(start=n))   annotation (Placement(transformation(extent={{-20,-20},{
+                20,20}})));
     equation
-      connect(integrator.y, y) annotation (Line(points={{22,0},{110,0}}));
+      connect(integrator.y,y)              annotation (Line(points={{22,0},{110,
+              0}}));
       if (method == 2) then
         Tc = (Td0*DB/2 + Tm0*noEvent(abs(udev)))/stepsize;
       elseif (method == 3) then
@@ -377,7 +224,7 @@ Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
       connect(updatetap.inTransition1, Tr8.outTransition) annotation (Line(
             points={{6,-22},{6,-34},{30,-34},{30,-45}}));
       connect(Tr5.inTransition, updatetap.outTransition) annotation (Line(
-            points={{0.05,17.95},{7.21645e-16,1}}));
+            points={{0.05,17.95},{6.73533e-016,1}}));
       connect(Tr2.outTransition, wait.inTransition1) annotation (Line(points={{
               -90,35},{-90,92},{-6,92},{-6,82}}));
       connect(Tr1.inTransition, wait.outTransition1) annotation (Line(points={{
@@ -387,7 +234,7 @@ Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
       connect(Tr7.outTransition, wait.inTransition2) annotation (Line(points={{
               90,35},{90,92},{6,92},{6,82}}));
       connect(Tr5.outTransition, wait.inTransition3) annotation (Line(points={{
-              2.77556e-16,29},{-2.22045e-15,58}}));
+              3.06152e-016,29},{-2.20429e-015,58}}));
       connect(Tr9.inTransition, countdown.outTransition1) annotation (Line(
             points={{69.95,-43.95},{70,-36},{44,-36},{44,-21}}));
       if (method == 1) then
@@ -461,10 +308,166 @@ of NSF/ECC Workshop on Bulk power System Voltage Phenomena - III :
 Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
 "));
     end TCULDiscrete;
+
   end Controllers;
 
+  package Partials
+    "Contains uninstatiable classes related to network components"
+    extends Modelica.Icons.Library;
+
+    partial model PilinkBase "Pilink"
+      extends ObjectStab.Base.TwoPin;
+      parameter ObjectStab.Base.Resistance R=0.0 "Series Resistance";
+      parameter ObjectStab.Base.Reactance X=0.1 "Series Reactance";
+      parameter ObjectStab.Base.Susceptance B=0.1 "Shunt Susceptance";
+      parameter ObjectStab.Base.Conductance G=0.0 "Shunt Conductance";
+      annotation (
+        Icon(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2}), graphics={
+            Line(points={{100,0},{60,0}}, color={0,0,0}),
+            Text(extent={{100,20},{-100,60}}, textString=
+                                                  "%name"),
+            Rectangle(extent={{-60,20},{60,-20}}, lineColor={0,0,0}),
+            Line(points={{-60,0},{-100,0}}, color={0,0,0})}));
+    end PilinkBase;
+
+    partial model ImpTransformer
+      extends ObjectStab.Base.TwoPin;
+      parameter ObjectStab.Base.Resistance R=0.0 "Leakage Resistance";
+      parameter ObjectStab.Base.Reactance X=0.1 "Leakage Reactance";
+
+      ObjectStab.Network.IdealTransformer Tr annotation (Placement(
+            transformation(extent={{20,-20},{60,20}})));
+      ObjectStab.Network.Impedance Imp(R=R, X=X) annotation (Placement(
+            transformation(extent={{-60,-20},{-20,20}})));
+    equation
+      connect(Imp.T1, T1) annotation (Line(points={{-60,0},{-100,0}}));
+      connect(Imp.T2, Tr.T1) annotation (Line(points={{-20,0},{20,0}}));
+      connect(Tr.T2, T2) annotation (Line(points={{60,0},{100,0}}));
+      annotation (
+        Icon(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2}), graphics={
+            Ellipse(extent={{-70,40},{12,-40}}, lineColor={0,0,0}),
+            Ellipse(extent={{-12,40},{70,-40}}, lineColor={0,0,0}),
+            Line(points={{70,0},{100,0}}, color={0,0,0}),
+            Line(points={{-100,0},{-70,0}}, color={0,0,0}),
+            Text(extent={{-98,-40},{100,-80}}, textString=
+                                                   "%name")}));
+    end ImpTransformer;
+
+    class BreakerBase
+      extends ObjectStab.Base.TwoPin;
+
+      parameter Real small=1e-6;
+      Boolean closed;
+
+      //  Real s1;
+      //  Real s2;
+    equation
+
+        //  [T1.va - T2.va; T1.vb - T2.vb] = (if closed then small*[1, -1; 1, 1] else [1
+      //    , 0; 0, 1])*[s1; s2];
+
+        //  [T1.ia; T1.ib] = (if closed then [1, 0; 0, 1] else small*[1, -1; 1, 1])*[s1
+      //    ; s2];
+
+      if closed then
+        [T1.va - T2.va; T1.vb - T2.vb] = small*[1, -1; 1, 1]*[T1.ia; T1.ib];
+      else
+        [T1.ia; T1.ib] = small*[1, -1; 1, 1]*[T1.va - T2.va; T1.vb - T2.vb];
+      end if;
+      [T1.ia; T1.ib] = -[T2.ia; T2.ib];
+      annotation (
+        Icon(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2}), graphics={
+            Line(points={{44,0},{100,0}}, color={0,0,0}),
+            Line(points={{-40,0},{32,34}}, color={0,0,0}),
+            Ellipse(
+              extent={{-44,4},{-36,-4}},
+              lineColor={0,0,0},
+              fillColor={0,0,0},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{36,4},{44,-4}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-100,0},{-44,0}}, color={0,0,0}),
+            Text(extent={{80,-60},{-80,-20}}, textString=
+                                                  "%name")}));
+    end BreakerBase;
+
+    model Place32 "Place with two input and two output transitions"
+      parameter Boolean initialState=false "Initial value of state";
+      Boolean state(final start=initialState) "State of place";
+    protected
+      Boolean newState(final start=initialState);
+    public
+      ModelicaAdditions.PetriNets.Interfaces.FirePortOut outTransition1
+        annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
+      ModelicaAdditions.PetriNets.Interfaces.FirePortOut outTransition2
+        annotation (Placement(transformation(extent={{100,70},{120,50}})));
+      ModelicaAdditions.PetriNets.Interfaces.SetPortIn inTransition1
+        annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
+      ModelicaAdditions.PetriNets.Interfaces.SetPortIn inTransition2
+        annotation (Placement(transformation(extent={{-140,80},{-100,40}})));
+    public
+      ModelicaAdditions.PetriNets.Interfaces.SetPortIn inTransition3
+        annotation (Placement(transformation(
+            origin={120,0},
+            extent={{-20,20},{20,-20}},
+            rotation=180)));
+    equation
+      // Set new state for next iteration
+      state = pre(newState);
+      newState = inTransition1.set or inTransition2.set or inTransition3.set
+         or state and not (outTransition1.fire or outTransition2.fire);
+
+      // Report state to input and output transitions
+      inTransition1.state = state;
+      inTransition2.state = inTransition1.state or inTransition1.set;
+      inTransition3.state = inTransition1.state or inTransition1.set;
+      outTransition1.state = state;
+      outTransition2.state = outTransition1.state and not outTransition1.fire;
+      annotation (
+        Icon(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2}), graphics={
+            Ellipse(
+              extent={{-100,-100},{100,100}},
+              lineColor={255,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-100,60},{-80,60}}, color={255,0,0}),
+            Line(points={{-100,-60},{-80,-60}}, color={255,0,0}),
+            Line(points={{80,-60},{100,-60}}, color={255,0,0}),
+            Line(points={{82,60},{102,60}}, color={255,0,0}),
+            Text(extent={{0,99},{0,159}}, textString=
+                                              "%name")}),
+        Diagram(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2}), graphics={
+            Ellipse(extent={{-100,-100},{100,100}}, lineColor={255,0,0}),
+            Line(points={{-100,60},{-80,60}}, color={255,0,0}),
+            Line(points={{-100,-60},{-80,-60}}, color={255,0,0}),
+            Line(points={{80,60},{100,60}}, color={255,0,0}),
+            Line(points={{80,-60},{100,-60}}, color={255,0,0})}));
+    end Place32;
+
+  end Partials;
+  extends Modelica.Icons.Library;
+
   model Ground "Ground Point"
-    extends Base.OnePin;
+    extends ObjectStab.Base.OnePin;
+
   equation
     1 + T.va = 0;
     T.vb = 0;
@@ -497,10 +500,10 @@ Several (or no) ground points may be used in a power system model.
   end Ground;
 
   model Impedance "Impedance model"
-    extends Base.TwoPin;
+    extends ObjectStab.Base.TwoPin;
 
-    parameter Base.Resistance R=0.0 "Resistance";
-    parameter Base.Reactance X=0.1 "Reactance";
+    parameter ObjectStab.Base.Resistance R=0.0 "Resistance";
+    parameter ObjectStab.Base.Reactance X=0.1 "Reactance";
 
   equation
     [T1.va - T2.va; T1.vb - T2.vb] = [R, -X; X, R]*[T1.ia; T1.ib];
@@ -552,10 +555,10 @@ For numerical reasons, R and X may not both be set to zero.
   end Impedance;
 
   model Admittance "Admittance Model"
-    extends Base.TwoPin;
+    extends ObjectStab.Base.TwoPin;
 
-    parameter Base.Conductance G=0.0 "Conductance";
-    parameter Base.Susceptance B=0.1 "Susceptance";
+    parameter ObjectStab.Base.Conductance G=0.0 "Conductance";
+    parameter ObjectStab.Base.Susceptance B=0.1 "Susceptance";
 
   equation
     [T1.ia; T1.ib] = [G, -B; B, G]*[T1.va - T2.va; T1.vb - T2.vb];
@@ -605,13 +608,14 @@ I1 + I2 = 0:
 "));
   end Admittance;
 
-  class ShuntCapacitor "Shunt Capacitor"
+  model ShuntCapacitor "Shunt Capacitor"
     extends ObjectStab.Base.OnePin;
 
     parameter ObjectStab.Base.Conductance G=0;
     parameter ObjectStab.Base.Susceptance B=0.5;
-    Base.ActivePower Pg "Generated Active Power";
-    Base.ReactivePower Qg "Generated Reactive Power";
+    ObjectStab.Base.ActivePower Pg "Generated Active Power";
+    ObjectStab.Base.ReactivePower Qg "Generated Reactive Power";
+
   equation
     [T.ia; T.ib] = [G, -B; B, G]*[1 + T.va; T.vb];
     Pg = -((1 + T.va)*T.ia + T.vb*T.ib);
@@ -628,13 +632,14 @@ I1 + I2 = 0:
                                                   "j%B")}));
   end ShuntCapacitor;
 
-  class ShuntReactor "Shunt Reactor"
+  model ShuntReactor "Shunt Reactor"
     extends ObjectStab.Base.OnePin;
 
     parameter ObjectStab.Base.Conductance G=0;
     parameter ObjectStab.Base.Susceptance B=-0.5;
-    Base.ActivePower Pg "Generated Active Power";
-    Base.ReactivePower Qg "Generated Reactive Power";
+    ObjectStab.Base.ActivePower Pg "Generated Active Power";
+    ObjectStab.Base.ReactivePower Qg "Generated Reactive Power";
+
   equation
     [T.ia; T.ib] = [G, -B; B, G]*[1 + T.va; T.vb];
     Pg = -((1 + T.va)*T.ia + T.vb*T.ib);
@@ -719,8 +724,9 @@ and Stability, Number ISBN 0-471-97174. Wiley, 1993.
   model OpenedPilink "Pilink model with breakers"
     extends Partials.PilinkBase;
 
-    parameter Base.Time OpenTime=10 "Time of branch opening";
-    parameter Base.Duration CloseTime=1e10 "Duration of the branch opening";
+    parameter ObjectStab.Base.Time OpenTime=10 "Time of branch opening";
+    parameter ObjectStab.Base.Duration CloseTime=1e10
+      "Duration of the branch opening";
     ObjectStab.Network.Pilink2 L1(
       R=R,
       X=X,
@@ -750,13 +756,27 @@ until time CloseTime, after which they are simultanously closed.
 "));
   end OpenedPilink;
 
+  model OpenedPilink2 "Pilink model with breakers"
+    extends Partials.PilinkBase;
+    parameter ObjectStab.Base.Time OpenTime=10 "Time of branch opening";
+    parameter ObjectStab.Base.Duration CloseTime=1e10
+      "Duration of the branch opening";
+
+  equation
+    [T1.ia; T1.ib] = if time < OpenTime then [G, -B; B, G]/2*[1 + T1.va; T1.vb]
+       + [R, X; -X, R]/(R^2 + X^2)*[T1.va - T2.va; T1.vb - T2.vb] else [0; 0];
+    [T2.ia; T2.ib] = if time < OpenTime then [G, -B; B, G]/2*[1 + T2.va; T2.vb]
+       - [R, X; -X, R]/(R^2 + X^2)*[T1.va - T2.va; T1.vb - T2.vb] else [0; 0];
+    annotation (Documentation(info="<html>
+</html>"));
+  end OpenedPilink2;
+
   model Bus "Busbar model"
-    extends Base.OnePinCenter;
+    extends ObjectStab.Base.OnePinCenter;
     Base.Voltage V=sqrt((1 + T.va)*(1 + T.va) + T.vb*T.vb) "Voltage Amplitude";
     Base.VoltageAngle theta=Modelica.Math.atan2(T.vb, (1 + T.va))
       "Voltage Angle";
     Real thetadeg=theta*180/Modelica.Constants.pi;
-
   equation
     T.ia = 0;
     T.ib = 0;
@@ -773,16 +793,16 @@ until time CloseTime, after which they are simultanously closed.
   end Bus;
 
   model FaultedBus "Busbar model with shunt fault"
-    extends Base.OnePinCenter;
+    extends ObjectStab.Base.OnePinCenter;
     Base.Voltage V=sqrt((1 + T.va)*(1 + T.va) + T.vb*T.vb) "Voltage Amplitude";
-    Base.VoltageAngle theta=Modelica.Math.atan2(T.vb, (1 + T.va))
+    ObjectStab.Base.VoltageAngle theta=Modelica.Math.atan2(T.vb, T.va)
       "Voltage Angle";
     Real thetadeg=theta*180/Modelica.Constants.pi;
-    parameter Base.Time FaultTime=10 "Time of fault occurence";
-    parameter Base.Duration FaultDuration=1 "Duration of fault";
-    parameter Base.Resistance FaultR=0.1 "Fault Resistance";
-    parameter Base.Reactance FaultX=0 "Fault Reactance";
-    Base.Current iFault "Fault Current";
+    parameter ObjectStab.Base.Time FaultTime=10 "Time of fault occurence";
+    parameter ObjectStab.Base.Duration FaultDuration=1 "Duration of fault";
+    parameter ObjectStab.Base.Resistance FaultR=0.1 "Fault Resistance";
+    parameter ObjectStab.Base.Reactance FaultX=0 "Fault Reactance";
+    ObjectStab.Base.Current iFault "Fault Current";
 
     ObjectStab.Network.Impedance Imp(R=FaultR, X=FaultX) annotation (Placement(
           transformation(
@@ -839,8 +859,8 @@ to zero.
   end FaultedBus;
 
   model Breaker "Ideal Breaker model"
-    parameter Base.Time OpenTime=1 "Opening time";
-    parameter Base.Time CloseTime=1e10 "Closing time";
+    parameter ObjectStab.Base.Time OpenTime=1 "Opening time";
+    parameter ObjectStab.Base.Time CloseTime=1e10 "Closing time";
     extends Partials.BreakerBase(closed(start=OpenTime < CloseTime));
 
   equation
@@ -861,13 +881,14 @@ else
   end Breaker;
 
   model SeriesFault "Series Fault model"
-    extends Base.TwoPin;
-    parameter Base.Time FaultTime=1 "Opening time";
-    parameter Base.Duration FaultDuration=1 "Duration of Fault";
+    extends ObjectStab.Base.TwoPin;
+    parameter ObjectStab.Base.Time FaultTime=1 "Opening time";
+    parameter ObjectStab.Base.Duration FaultDuration=1 "Duration of Fault";
 
     ObjectStab.Network.Breaker B1(OpenTime=FaultTime, CloseTime=FaultTime +
           FaultDuration) annotation (Placement(transformation(extent={{-20,-20},
               {20,20}})));
+
   equation
     connect(T1, B1.T1) annotation (Line(points={{-100,0},{-20,0}}));
     connect(B1.T2, T2) annotation (Line(points={{20,0},{100,0}}));
@@ -898,12 +919,12 @@ after which the fault is cleared.
 
   model FaultedPilink "Pilink with shunt fault model"
     extends Partials.PilinkBase;
-    parameter Base.Time FaultTime=1 "Time of fault occurence [s]";
-    parameter Base.Duration ClearTime=0.07 "Fault Clearing Time [s]";
-    parameter Base.Time RecloseTime=1e60 "Time of Reclosing [s]";
+    parameter ObjectStab.Base.Time FaultTime=1 "Time of fault occurence [s]";
+    parameter ObjectStab.Base.Duration ClearTime=0.07 "Fault Clearing Time [s]";
+    parameter ObjectStab.Base.Time RecloseTime=1e60 "Time of Reclosing [s]";
     parameter Real alpha=0.5 "Position of Fault";
-    parameter Base.Resistance FaultR=1e-5 "Fault Resistance";
-    parameter Base.Reactance FaultX=0 "Fault Reactance";
+    parameter ObjectStab.Base.Resistance FaultR=1e-5 "Fault Resistance";
+    parameter ObjectStab.Base.Reactance FaultX=0 "Fault Reactance";
 
     ObjectStab.Network.Pilink2 L1(
       R=R*alpha,
@@ -939,15 +960,16 @@ after which the fault is cleared.
   equation
     connect(B1.T1, T1) annotation (Line(points={{-80,0},{-100,0}}));
     connect(B1.T2, L1.T1) annotation (Line(points={{-60,0},{-50,0}}));
-    connect(Gr.T, FaultImp.T1) annotation (Line(points={{1.77636e-15,-82},{
-            -5.55112e-16,-72}}));
-    connect(FaultImp.T2, B3.T1) annotation (Line(points={{5.55112e-16,-52},{
-            -5.55112e-16,-40}}));
+    connect(Gr.T, FaultImp.T1) annotation (Line(points={{1.83691e-015,-82},{
+            -6.12303e-016,-72}}));
+    connect(FaultImp.T2, B3.T1) annotation (Line(points={{6.12303e-016,-52},{
+            -6.12303e-016,-40}}));
     connect(B2.T2, T2) annotation (Line(points={{88,0},{100,0}}));
     connect(B2.T1, L2.T2) annotation (Line(points={{68,0},{60,0}}));
-    connect(L1.T2, B3.T2) annotation (Line(points={{-30,0},{0,0},{5.55112e-16,
-            -20}}));
-    connect(B3.T2, L2.T1) annotation (Line(points={{5.55112e-16,-20},{0,0},{40,
+
+    connect(L1.T2, B3.T2) annotation (Line(points={{-30,0},{6.12303e-016,0},{
+            6.12303e-016,-20}}));
+    connect(B3.T2, L2.T1) annotation (Line(points={{6.12303e-016,-20},{0,0},{40,
             0}}));
     annotation (
       Diagram(coordinateSystem(
@@ -985,14 +1007,14 @@ and alpha not be equal to 0 or 1.
 
   model IdealTransformer
     extends ObjectStab.Base.TwoPin;
-    Base.TapRatio n(start=1);
-    Modelica.Blocks.Interfaces.RealInput inPort
-      annotation (Placement(transformation(
+    parameter Real eps=1e-6 "samll number, replacing '1' in Mat's equations";
+    ObjectStab.Base.TapRatio n(start=1);
+    Modelica.Blocks.Interfaces.RealInput inPort annotation (Placement(
+          transformation(
           origin={0,-80},
           extent={{-10,-10},{10,10}},
           rotation=90)));
   equation
-
     (1 + T1.va)*n = 1 + T2.va;
     T1.vb*n = T2.vb;
     T1.ia = -T2.ia*n;
@@ -1019,7 +1041,7 @@ and alpha not be equal to 0 or 1.
 
   model FixTransformer "Fixed Ratio Transformer"
     extends Partials.ImpTransformer;
-    parameter Base.TapRatio n=1 "Transformer Ratio";
+    parameter ObjectStab.Base.TapRatio n=1 "Transformer Ratio";
   equation
     Tr.n = n;
     annotation (
@@ -1035,36 +1057,73 @@ and alpha not be equal to 0 or 1.
                                             "n")}));
   end FixTransformer;
 
+  model ExtBreaker
+    extends Partials.BreakerBase;
+
+    Modelica.Blocks.Interfaces.BooleanInput u annotation (Placement(
+          transformation(
+          origin={0,110},
+          extent={{-10,-10},{10,10}},
+          rotation=270)));
+  equation
+    closed = u;
+    annotation (
+      Icon(coordinateSystem(
+          preserveAspectRatio=false,
+          extent={{-100,-100},{100,100}},
+          grid={2,2}), graphics={Line(points={{0,18},{0,112},{0,108}}, color={0,
+                0,0})}),
+      Documentation(info="The ideal breaker model is governed by the following models:
+
+
+if breaker is closed then
+  V1 = V2
+  I1 + I2 = 0
+
+else
+  I1 = 0
+  I2 = 0
+
+"));
+  end ExtBreaker;
+
   model TCULCon
     "Tap-Changing Under Load (TCUL) transformer with continuous implementation"
 
-    extends Partials.ImpTransformer;
+    extends ObjectStab.Network.Partials.ImpTransformer;
 
-    parameter Base.TapRatio n=1 "Transformer Ratio";
+    parameter ObjectStab.Base.TapRatio n=1 "Transformer Ratio";
     ObjectStab.Network.Controllers.TCULContinuous Controller(n=n) annotation (Placement(
           transformation(extent={{0,-60},{20,-40}})));
     ObjectStab.Base.VoltageMeasurement PrimaryVoltage annotation (Placement(
           transformation(
-          origin={-60,-30},
+          origin={-80,-30},
           extent={{-10,-10},{10,10}},
           rotation=270)));
     ObjectStab.Base.VoltageMeasurement SecondaryVoltage annotation (Placement(
           transformation(
-          origin={80,-10},
+          origin={80,-20},
           extent={{-10,-10},{10,10}},
           rotation=270)));
   equation
-    connect(Imp.T1, T1) annotation (Line(points={{-60,0},{-100,0}}));
-    connect(Imp.T2, Tr.T1) annotation (Line(points={{-20,0},{20,0}}));
-    connect(Tr.T2, T2) annotation (Line(points={{60,0},{100,0}}));
-    connect(SecondaryVoltage.T, T2) annotation (Line(points={{80,0},{100,0}}));
-    connect(Controller.y, Tr.inPort)
-      annotation (Line(points={{21,-50},{40,-50},{40,-16}}));
-    connect(PrimaryVoltage.T, Imp.T1) annotation (Line(points={{-60,-20},{-60,0}}));
-    connect(Controller.u2, PrimaryVoltage.outPort)
-      annotation (Line(points={{-2,-56},{-60,-56},{-60,-30}}, color={0,0,255}));
-    connect(SecondaryVoltage.outPort, Controller.u1) annotation (Line(points={{
-            80,-10},{80,-30},{-20,-30},{-20,-44},{-2,-44}}, color={0,0,255}));
+    connect(T1, T1) annotation (Line(
+        points={{-100,0},{-100,0}},
+        color={0,0,255}));
+    connect(T1, PrimaryVoltage.T) annotation (Line(
+        points={{-100,0},{-80,0},{-80,-20}},
+        color={0,0,255}));
+    connect(T2, SecondaryVoltage.T) annotation (Line(
+        points={{100,0},{80,0},{80,-10}},
+        color={0,0,255}));
+    connect(PrimaryVoltage.V, Controller.u2) annotation (Line(
+        points={{-80,-30},{-80,-56},{-2,-56}},
+        color={0,0,127}));
+    connect(SecondaryVoltage.V, Controller.u1) annotation (Line(
+        points={{80,-20},{80,-30},{-20,-30},{-20,-44},{-2,-44}},
+        color={0,0,127}));
+    connect(Controller.y, Tr.inPort) annotation (Line(
+        points={{21,-50},{40,-50},{40,-16}},
+        color={0,0,127}));
     annotation (
       Icon(coordinateSystem(
           preserveAspectRatio=false,
@@ -1088,33 +1147,41 @@ method C1-C4
   model TCULDis
     "Tap-Changing Under Load (TCUL) transformer with discrete implementation"
 
-    extends Partials.ImpTransformer;
+    extends ObjectStab.Network.Partials.ImpTransformer;
 
-    parameter Base.TapRatio n=1 "Transformer Ratio";
+    parameter ObjectStab.Base.TapRatio n=1 "Transformer Ratio";
 
     ObjectStab.Network.Controllers.TCULDiscrete Controller(n=n) annotation (Placement(
           transformation(extent={{0,-60},{20,-40}})));
     ObjectStab.Base.VoltageMeasurement PrimaryVoltage annotation (Placement(
           transformation(
-          origin={-60,-30},
+          origin={-80,-30},
           extent={{-10,-10},{10,10}},
           rotation=270)));
     ObjectStab.Base.VoltageMeasurement SecondaryVoltage annotation (Placement(
           transformation(
-          origin={80,-10},
+          origin={80,-20},
           extent={{-10,-10},{10,10}},
           rotation=270)));
   equation
-    connect(Tr.T2, T2) annotation (Line(points={{60,0},{100,0}}));
-    connect(Imp.T2, Tr.T1) annotation (Line(points={{-20,0},{20,0}}));
-    connect(SecondaryVoltage.T, T2) annotation (Line(points={{80,0},{100,0}}));
-    connect(PrimaryVoltage.T, Imp.T1) annotation (Line(points={{-60,-20},{-60,0}}));
-    connect(Controller.u2, PrimaryVoltage.outPort)
-      annotation (Line(points={{-2,-56},{-60,-56},{-60,-30}}, color={0,0,255}));
-    connect(Controller.y, Tr.inPort)
-      annotation (Line(points={{22,-50},{40,-50},{40,-18}}, color={0,0,255}));
-    connect(SecondaryVoltage.outPort, Controller.u1) annotation (Line(points={{
-            80,-10},{80,-32},{-20,-32},{-20,-44},{-2,-44}}, color={0,0,255}));
+    connect(T1, T1) annotation (Line(
+        points={{-100,0},{-100,0}},
+        color={0,0,255}));
+    connect(T1, PrimaryVoltage.T) annotation (Line(
+        points={{-100,0},{-80,0},{-80,-20}},
+        color={0,0,255}));
+    connect(T2, SecondaryVoltage.T) annotation (Line(
+        points={{100,0},{80,0},{80,-10}},
+        color={0,0,255}));
+    connect(PrimaryVoltage.V, Controller.u2) annotation (Line(
+        points={{-80,-30},{-80,-56},{-2,-56}},
+        color={0,0,127}));
+    connect(SecondaryVoltage.V, Controller.u1) annotation (Line(
+        points={{80,-20},{80,-30},{-20,-30},{-20,-44},{-2,-44}},
+        color={0,0,127}));
+    connect(Controller.y, Tr.inPort) annotation (Line(
+        points={{21,-50},{40,-50},{40,-16}},
+        color={0,0,127}));
     annotation (
       Icon(coordinateSystem(
           preserveAspectRatio=false,
@@ -1140,48 +1207,6 @@ This can by manually by adding e.g., the string: Controller(tappos(start=8))
 in the 'Modifiers' field (initializes the tap to position 8).
 "));
   end TCULDis;
-
-  model ExtBreaker
-    extends Partials.BreakerBase;
-
-    Modelica.Blocks.Interfaces.BooleanInput InPort
-      annotation (Placement(transformation(
-          origin={0,110},
-          extent={{-10,-10},{10,10}},
-          rotation=270)));
-  equation
-    closed =InPort;
-    annotation (
-      Icon(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics={Line(points={{0,18},{0,112},{0,108}}, color={0,
-                0,0})}),
-      Documentation(info="The ideal breaker model is governed by the following models:
-
-
-if breaker is closed then
-  V1 = V2
-  I1 + I2 = 0
-
-else
-  I1 = 0
-  I2 = 0
-
-"));
-  end ExtBreaker;
-
-  model OpenedPilink2 "Pilink model with breakers"
-    extends Partials.PilinkBase;
-    parameter Base.Time OpenTime=10 "Time of branch opening";
-    parameter Base.Duration CloseTime=1e10 "Duration of the branch opening";
-
-  equation
-    [T1.ia; T1.ib] = if time < OpenTime then [G, -B; B, G]/2*[1 + T1.va; T1.vb]
-       + [R, X; -X, R]/(R^2 + X^2)*[T1.va - T2.va; T1.vb - T2.vb] else [0; 0];
-    [T2.ia; T2.ib] = if time < OpenTime then [G, -B; B, G]/2*[1 + T2.va; T2.vb]
-       - [R, X; -X, R]/(R^2 + X^2)*[T1.va - T2.va; T1.vb - T2.vb] else [0; 0];
-  end OpenedPilink2;
   annotation (
     Documentation(info="The network subpackage contains the various network components.
 "));

@@ -208,10 +208,57 @@ package Extras
                                                     "UFLS")}));
   end UFLSLoad;
 
+  model ExtSlack
+    extends Generators.Partials.Generator(isSlack=true);
+
+  public
+    Modelica.Blocks.Interfaces.RealInput InPort   annotation (Placement(
+          transformation(
+          origin={20,-70},
+          extent={{-10,-10},{10,10}},
+          rotation=90)));
+  equation
+    if online then
+      if not isSlack then
+        V = V0;
+        Pg = Pg0;
+      else
+        1 + T.va = V0*cos(theta0);
+        T.vb = V0*sin(theta0);
+      end if;
+    else
+      T.ia = 0;
+      T.ib = 0;
+    end if;
+    // contribute to angle reference calculation
+    wrl.wr.Hwsum = if online then Modelica.Constants.inf else 0;
+    wrl.wr.Hsum = if online then Modelica.Constants.inf else 0;
+    annotation (
+      Icon(coordinateSystem(
+          preserveAspectRatio=false,
+          extent={{-100,-100},{100,100}},
+          grid={2,2}), graphics={
+          Ellipse(
+            extent={{-40,60},{80,-60}},
+            lineColor={0,0,0},
+            pattern=LinePattern.Solid,
+            lineThickness=0.25),
+          Line(
+            points={{-100,0},{-40,0}},
+            color={0,0,0},
+            pattern=LinePattern.Solid,
+            thickness=0.25,
+            arrow={Arrow.None,Arrow.None}),
+          Text(extent={{-60,100},{100,60}}, textString=
+                                                "%name"),
+          Text(extent={{-40,-20},{80,20}}, textString=
+                                               "Slack")}));
+  end ExtSlack;
+
   model DetGen0 "Detailed Static Generator Model"
     extends ObjectStab.Generators.Partials.Generator;
 
-    parameter Base.ApparentPower Sbase=100 "Generator rated power";
+    parameter ObjectStab.Base.ApparentPower Sbase=100 "Generator rated power";
     parameter ObjectStab.Base.Resistance ra=0 "Armature Resistance";
     parameter ObjectStab.Base.Reactance xd=0.8948
       "Direct Axis Synchronous Reactance";
@@ -221,9 +268,11 @@ package Extras
     parameter ObjectStab.Base.Voltage Efmax=3.5 "Maximum Field Voltage";
     parameter ObjectStab.Base.Voltage Efmin=-3.5 "Minimum Field Voltage";
     parameter ObjectStab.Base.Current Iarmmax=1.05 "Armature Current Limit";
-    parameter Base.Resistance rt=0 "Step-up Transformer Resistance";
-    parameter Base.Reactance xt=0.0 "Step-up Transformer Reactance";
-    parameter Base.Time Tdelay=20;
+    parameter ObjectStab.Base.Resistance rt=0 "Step-up Transformer Resistance";
+    parameter ObjectStab.Base.Reactance xt=0.0 "Step-up Transformer Reactance";
+    parameter ObjectStab.Base.Time Tdelay=20;
+    parameter Real Vref(fixed=false, start=1);
+    parameter Real Pm0(fixed=false, start=1);
 
     Boolean up_limit(start=false);
     Boolean arm_limit(start=false);
@@ -234,35 +283,6 @@ package Extras
     Real Efd(start=1);
     Real Vt(start=1);
     Real Iarm(start=1);
-    discrete Real Vref(start=1);
-    discrete Real Pm0(start=1);
-  equation
-    //
-    0 = if time > TripTime then Qgt else if arm_limit then Qgt - sqrt((Vt*
-      Iarmmax)^2 - Pgt^2) else if up_limit then (Efd - Efmax) else (Vt - (Vref
-       - Efd/K));
-    Pgt = if time > TripTime then 0 else (Pm0 - ra*Iarm^2);
-
-    Vt = sqrt((1 + vta)^2 + vtb^2);
-    Pgt = -((1 + vta)*T.ia + vtb*T.ib)/Sbase*Base.Sbase;
-    Qgt = -(vtb*T.ia - (1 + vta)*T.ib)/Sbase*Base.Sbase;
-    Efd = (Vt^4 + Vt^2*Qgt*xq + Qgt*xd*Vt^2 + Qgt^2*xd*xq + Pgt^2*xq*xd)/(sqrt(
-      Pgt^2*xq^2 + Vt^4 + 2*Vt^2*Qgt*xq + Qgt^2*xq^2)*Vt);
-    [1 + T.va; T.vb] = [rt, -xt; xt, rt]*[T.ia; T.ib]/Sbase*Base.Sbase + [1 +
-      vta; vtb];
-
-    // limiter logic
-    up_limit = (pre(up_limit) and Vt < (Vref)) or not pre(up_limit) and (delay(
-      Efd, Tdelay) > Efmax);
-    arm_limit = (pre(arm_limit) and V < (Vref)) or not pre(arm_limit) and (
-      delay(Iarm, Tdelay) > Iarmmax);
-    Iarm = sqrt(T.ia^2 + T.ib^2)/Sbase*Base.Sbase;
-    Vref = pre(Vref);
-    Pm0 = pre(Pm0);
-
-    // contribute to angle reference calculation
-    wrl.wr.Hwsum = if time < TripTime then Modelica.Constants.inf else 0;
-    wrl.wr.Hsum = if time < TripTime then Modelica.Constants.inf else 0;
 
   initial equation
     V = V0;
@@ -271,6 +291,32 @@ package Extras
     else
       Pg = Pg0;
     end if;
+
+  equation
+    //
+    0 = if time > TripTime then Qgt else if arm_limit then Qgt - sqrt((Vt*
+      Iarmmax)^2 - Pgt^2) else if up_limit then (Efd - Efmax) else (Vt - (Vref
+       - Efd/K));
+    Pgt = if time > TripTime then 0 else (Pm0 - ra*Iarm^2);
+
+    Vt = sqrt(vta^2 + vtb^2);
+    Pgt = -(vta*T.ia + vtb*T.ib)/Sbase*ObjectStab.Base.Sbase;
+    Qgt = -(vtb*T.ia - vta*T.ib)/Sbase*ObjectStab.Base.Sbase;
+    Efd = (Vt^4 + Vt^2*Qgt*xq + Qgt*xd*Vt^2 + Qgt^2*xd*xq + Pgt^2*xq*xd)/(sqrt(
+      Pgt^2*xq^2 + Vt^4 + 2*Vt^2*Qgt*xq + Qgt^2*xq^2)*Vt);
+    [T.va; T.vb] = [rt,-xt; xt,rt]*[T.ia; T.ib]/Sbase*ObjectStab.Base.Sbase
+       + [vta; vtb];
+
+    // limiter logic
+    up_limit = (pre(up_limit) and Vt < (Vref)) or not pre(up_limit) and (delay(
+      Efd, Tdelay) > Efmax);
+    arm_limit = (pre(arm_limit) and V < (Vref)) or not pre(arm_limit) and (
+      delay(Iarm, Tdelay) > Iarmmax);
+    Iarm = sqrt(T.ia^2 + T.ib^2)/Sbase*ObjectStab.Base.Sbase;
+
+    // contribute to angle reference calculation
+    wrl.wr.Hwsum = if time < TripTime then Modelica.Constants.inf else 0;
+    wrl.wr.Hsum = if time < TripTime then Modelica.Constants.inf else 0;
 
   end DetGen0;
 
@@ -339,8 +385,16 @@ package Extras
 
     replaceable ObjectStab.Generators.Controllers.ConstPm Gov annotation (Placement(
           transformation(extent={{12,-96},{32,-76}})));
+
     replaceable ObjectStab.Generators.Controllers.ConstEfd Exc annotation (Placement(
           transformation(extent={{14,70},{34,90}})));
+
+  initial equation
+    der(lamfd) = 0;
+    der(lam1d) = 0;
+    der(lam1q) = 0;
+    der(lam2q) = 0;
+
   equation
     der(lamfd) = ObjectStab.Base.ws*((Efd*Rfd/Ladu) + (lamad - lamfd)*Rfd/Lfd);
     der(lam1d) = ObjectStab.Base.ws*(lamad - lam1d)/L1d*R1d;
@@ -375,11 +429,6 @@ package Extras
     Exc.u = sqrt(vd^2 + vq^2);
     Efd = Exc.y;
 
-  initial equation
-    der(lamfd) = 0;
-    der(lam1d) = 0;
-    der(lam1q) = 0;
-    der(lam2q) = 0;
     annotation (
       Diagram(coordinateSystem(
           preserveAspectRatio=false,
@@ -435,50 +484,4 @@ package Extras
                  "w")}));
   end GovExcKundurGen;
 
-  model ExtSlack
-    extends Generators.Partials.Generator(isSlack=true);
-
-  public
-    Modelica.Blocks.Interfaces.RealInput InPort
-      annotation (Placement(transformation(
-          origin={20,-70},
-          extent={{-10,-10},{10,10}},
-          rotation=90)));
-  equation
-    if online then
-      if not isSlack then
-        V = V0;
-        Pg = Pg0;
-      else
-        1 + T.va = V0*cos(theta0);
-        T.vb = V0*sin(theta0);
-      end if;
-    else
-      T.ia = 0;
-      T.ib = 0;
-    end if;
-    // contribute to angle reference calculation
-    wrl.wr.Hwsum = if online then Modelica.Constants.inf else 0;
-    wrl.wr.Hsum = if online then Modelica.Constants.inf else 0;
-    annotation (
-      Icon(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={2,2}), graphics={
-          Ellipse(
-            extent={{-40,60},{80,-60}},
-            lineColor={0,0,0},
-            pattern=LinePattern.Solid,
-            lineThickness=0.25),
-          Line(
-            points={{-100,0},{-40,0}},
-            color={0,0,0},
-            pattern=LinePattern.Solid,
-            thickness=0.25,
-            arrow={Arrow.None,Arrow.None}),
-          Text(extent={{-60,100},{100,60}}, textString=
-                                                "%name"),
-          Text(extent={{-40,-20},{80,20}}, textString=
-                                               "Slack")}));
-  end ExtSlack;
 end Extras;

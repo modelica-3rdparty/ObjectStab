@@ -16,16 +16,17 @@ package Loads "Loads subpackage"
         "Voltage Amplitude";
       Base.VoltageAngle theta=Modelica.Math.atan2(T.vb, (1 + T.va))
         "Voltage Angle";
-
-      discrete Base.Voltage V0(start=1)
+    protected
+      parameter Base.Voltage V0(fixed=false, start=1)
         "Inital Terminal Voltage (automatically initialized)";
-    equation
-      V0 = pre(V0);
-      T.ia = (T.vb*Ql + Pl + Pl*T.va)/(1 + 2*T.va + T.va*T.va + T.vb*T.vb);
-      T.ib = (Pl*T.vb - Ql - T.va*Ql)/(1 + 2*T.va + T.va*T.va + T.vb*T.vb);
 
     initial equation
       V0 = V;
+
+    equation
+      T.ia = (Pl*(1 + T.va) + Ql*T.vb)/((1 + T.va)*(1 + T.va) + T.vb*T.vb);
+      T.ib = (-Ql*(1 + T.va) + Pl*T.vb)/((1 + T.va)*(1 + T.va) + T.vb*T.vb);
+
       annotation (
         Icon(coordinateSystem(
             preserveAspectRatio=false,
@@ -51,6 +52,7 @@ the load draws if the voltage is 1 p.u.
     partial model ExtLoad "Shell model for loads"
       extends Base.OnePin;
 
+      parameter Base.Voltage V0(fixed=false, start=1) "Inital Terminal Voltage";
       Base.ActivePower P0(start=1) "Initial Active Load Power";
       Base.ReactivePower Q0(start=0.2) "Initial Reactive Load Power";
 
@@ -62,22 +64,22 @@ the load draws if the voltage is 1 p.u.
       Base.VoltageAngle theta=Modelica.Math.atan2(T.vb, (1 + T.va))
         "Voltage Angle";
 
-      discrete Base.Voltage V0(start=1) "Inital Terminal Voltage";
       Modelica.Blocks.Interfaces.RealInput InPort[2]
-        annotation (Placement(transformation(
+                                                    annotation (Placement(
+            transformation(
             origin={0,-90},
             extent={{-10,-10},{10,10}},
             rotation=90)));
+    initial equation
+      V0 = V;
+
     equation
-      V0 = pre(V0);
       T.ia = (T.vb*Ql + Pl + Pl*T.va)/(1 + 2*T.va + T.va*T.va + T.vb*T.vb);
       T.ib = (Pl*T.vb - Ql - T.va*Ql)/(1 + 2*T.va + T.va*T.va + T.vb*T.vb);
 
       P0 =InPort[1];
       Q0 =InPort[2];
 
-    initial equation
-      V0 = V;
       annotation (
         Icon(coordinateSystem(
             preserveAspectRatio=false,
@@ -144,7 +146,7 @@ X = Q*V^2/(Q^2+P^2)
     parameter Real pP=(1 - pZ - pI);
     parameter Real qZ=0.33;
     parameter Real qI=0.33;
-    parameter Real qP=(1 - pZ - pI);
+    parameter Real qP=(1 - qZ - qI);
 
   equation
     Pl = P0*(pZ*(V/V0)^2 + pI*(V/V0) + pP);
@@ -164,8 +166,9 @@ X = Q*V^2/(Q^2+P^2)
     parameter Real at=2 "Transient active power voltage dependency";
     parameter Real bs=1 "Steady-state reactive power voltage dependency";
     parameter Real bt=2 "Transient reactive power voltage dependency";
-    parameter Base.Time Tp=60 "Active power recovery time constant";
-    parameter Base.Time Tq=60 "Reactive power recovery time constant";
+    parameter ObjectStab.Base.Time Tp=60 "Active power recovery time constant";
+    parameter ObjectStab.Base.Time Tq=60
+      "Reactive power recovery time constant";
 
     Real xp "Internal Load State";
     Real xq "Internal Load State";
@@ -212,17 +215,19 @@ vol. 9, no. 1, pp. 157-163, February 1994.
 "));
   end DynLoad;
 
-  class FreqLoad "Frequency Sensitive Load"
+  model FreqLoad "Frequency Sensitive Load"
     extends ObjectStab.Loads.Partials.Load;
 
     parameter Real a=1;
     parameter Real b=1;
     parameter Real c=1;
     parameter Real d=1;
-    outer Base.AngularVelocity wref;
+    outer ObjectStab.Base.AngularVelocity wref;
   equation
     Pl = P0*(1 + (V - V0)*a + c*(wref - 1));
     Ql = Q0*(1 + (V - V0)*b + d*(wref - 1));
+    annotation (Documentation(info="<html>
+</html>"));
   end FreqLoad;
 
   model MotorLoad "Simplified Induction Motor Load Model"
@@ -250,6 +255,8 @@ vol. 9, no. 1, pp. 157-163, February 1994.
     s = 1/2/P0/xp*(V^2 - (V^4 - 4*P0^2*xp^2)^(1/2))*scr;
     Tm = V^2/xp/((s/scr + scr/s))/(1 - s);
     B = -(-Q0*xp*s^2 - Q0*xp*scr^2 + V^2*s^2)/xp/(s^2 + scr^2)/V^2;
+    annotation (Documentation(info="<html>
+</html>"));
   end MotorLoad;
 
   model ExtDynLoad
@@ -259,8 +266,9 @@ vol. 9, no. 1, pp. 157-163, February 1994.
     parameter Real at=2 "Transient active power voltage dependency";
     parameter Real bs=1 "Steady-state reactive power voltage dependency";
     parameter Real bt=2 "Transient reactive power voltage dependency";
-    parameter Base.Time Tp=60 "Active power recovery time constant";
-    parameter Base.Time Tq=60 "Reactive power recovery time constant";
+    parameter ObjectStab.Base.Time Tp=60 "Active power recovery time constant";
+    parameter ObjectStab.Base.Time Tq=60
+      "Reactive power recovery time constant";
 
     Real xp "Internal Load State";
     Real xq "Internal Load State";

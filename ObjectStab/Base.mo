@@ -122,18 +122,17 @@ By definition, currents are considered positive when injected into a component.
               {110,10}})));
   end TwoPin;
 
-  class VoltageMeasurement "Voltage Measurement for Electrical Cuts"
+  model VoltageMeasurement "Voltage Measurement for Electrical Cuts"
     extends ObjectStab.Base.OnePin;
-
-    Base.Voltage V=sqrt((1 + T.va)*(1 + T.va) + T.vb*T.vb) "Voltage Amplitude";
+    Modelica.Blocks.Interfaces.RealOutput V "Voltage Amplitude" annotation (Placement(
+          transformation(extent={{-10,-10},{10,10}})));
     Base.VoltageAngle theta=Modelica.Math.atan2(T.vb, (1 + T.va))
       "Voltage Angle";
-    Modelica.Blocks.Interfaces.RealOutput outPort
-      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   equation
     T.ia = 0;
     T.ib = 0;
-    outPort = V;
+    V=sqrt((1 + T.va)*(1 + T.va) + T.vb*T.vb);
+
     annotation (
       Icon(coordinateSystem(
           preserveAspectRatio=false,
@@ -148,16 +147,17 @@ By definition, currents are considered positive when injected into a component.
                  "Voltage")}));
   end VoltageMeasurement;
 
-  class CurrentMeasurement "CurrentMeasurement"
+  model CurrentMeasurement "CurrentMeasurement"
     extends ObjectStab.Base.TwoPin;
-    Modelica.Blocks.Interfaces.RealOutput outPort
-      annotation (Placement(transformation(extent={{20,50},{40,70}})));
+    Modelica.Blocks.Interfaces.RealOutput I "Current Amplitude"
+      annotation (Placement(
+          transformation(extent={{20,50},{40,70}})));
   equation
-    outPort = sqrt((T1.ia)^2 + T1.ib^2);
     T1.va = T2.va;
     T1.vb = T2.vb;
     T1.ia = -T2.ia;
     T1.ib = -T2.ib;
+    I = sqrt((T1.ia)^2 + T1.ib^2);
     annotation (
       Icon(coordinateSystem(
           preserveAspectRatio=false,
@@ -178,24 +178,19 @@ By definition, currents are considered positive when injected into a component.
             fillColor={0,0,0},
             fillPattern=FillPattern.Solid)}),
       Documentation(info="Current Measurement for Electrical Cuts.
-Should be connected in series.
-"));
+Should be connected in series."));
   end CurrentMeasurement;
 
-  class PowerMeasurement "Power Measurement"
+  model PowerMeasurement "Power Measurement"
     extends ObjectStab.Base.TwoPin;
-    Real P=(1 + T1.va)*T1.ia + T1.vb*T1.ib;
-    Real Q=(T1.vb*T1.ia - (1 + T1.va)*T1.ib);
-    Modelica.Blocks.Interfaces.RealOutput outPort[2]
-      annotation (Placement(transformation(extent={{20,50},{40,70}})));
+    Modelica.Blocks.Interfaces.RealOutput[2] PQ annotation (Placement(
+          transformation(extent={{20,50},{40,70}})));
   equation
-
-    outPort[1] = P;
-    outPort[2] = Q;
     T1.va = T2.va;
     T1.vb = T2.vb;
     T1.ia = -T2.ia;
     T1.ib = -T2.ib;
+    PQ = {(1 + T1.va)*T1.ia + T1.vb*T1.ib, (T1.vb*T1.ia - (1 + T1.va)*T1.ib)};
     annotation (
       Icon(coordinateSystem(
           preserveAspectRatio=false,
@@ -216,8 +211,8 @@ Should be connected in series.
             fillColor={0,0,0},
             fillPattern=FillPattern.Solid)}),
       Documentation(info="Current Measurement for Electrical Cuts.
-Should be connected in series.
-"));
+Should be connected in series."));
+
   end PowerMeasurement;
 
   connector wRefPin
@@ -286,11 +281,12 @@ The reference is computed using the center-of-inertia method.
     extends TwoPin;
     Real k=InPort;
     Modelica.Blocks.Interfaces.RealInput InPort
-      annotation (Placement(transformation(extent={{-40,50},{-20,70}})));
+                                             annotation (Placement(
+          transformation(extent={{-40,50},{-20,70}})));
   equation
     [T2.ia; T2.ib] = k*[T1.ia; T1.ib];
     [T2.va; T2.vb] = k*[T1.va; T1.vb];
-    annotation (             Icon(coordinateSystem(
+    annotation (Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={
@@ -300,6 +296,7 @@ The reference is computed using the center-of-inertia method.
   end Scaler;
 
   class wRefContainer
+
     wRefPin wr annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     annotation (
       Icon(coordinateSystem(

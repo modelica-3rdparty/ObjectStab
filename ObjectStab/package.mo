@@ -99,6 +99,8 @@ and the accompanying <b>disclaimer</b>.
 
 <b>Copyright (C) 1999-2002, Mats Larsson.</b>
 
-</html>"),
-uses(Modelica(version="3.2.1")));
+</html>
+"),
+  version="1.1 Dev",
+  uses(Modelica(version="3.2.1")));
 end ObjectStab;
