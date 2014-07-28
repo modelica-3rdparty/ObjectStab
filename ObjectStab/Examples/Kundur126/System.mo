@@ -1,5 +1,5 @@
 within ObjectStab.Examples.Kundur126;
-class system
+model System
   extends ObjectStab.Base.System;
   Gen G1(
     V0=1.03,
@@ -203,4 +203,4 @@ equation
         extent={{-200,-200},{200,200}},
         grid={2,2}), graphics={Line(points={{164,168},{164,168}}), Line(
             points={{94,128},{94,128}})}));
-end system;
+end System;

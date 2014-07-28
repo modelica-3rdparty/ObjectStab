@@ -1,6 +1,6 @@
 within ObjectStab.Examples.BPA;
-model loadshed
-  extends linefault(redeclare Extras.UVLSLoad L8(
+model Loadshed
+  extends Linefault(redeclare Extras.UVLSLoad L8(
       Relay1(
         ShedAmount=0.05,
         Threshold=0.82,
@@ -13,4 +13,4 @@ model loadshed
         ShedAmount=0.05,
         Threshold=0.78,
         DelayTime=1.5)));
-end loadshed;
+end Loadshed;

@@ -212,7 +212,6 @@ Should be connected in series."));
             fillPattern=FillPattern.Solid)}),
       Documentation(info="Current Measurement for Electrical Cuts.
 Should be connected in series."));
-
   end PowerMeasurement;
 
   connector wRefPin
@@ -229,7 +228,7 @@ Should be connected in series."));
             fillPattern=FillPattern.Solid)}));
   end wRefPin;
 
-  class System "Shell model for connected systems"
+  model System "Shell model for connected systems"
     parameter AngularVelocity wmin=0.5;
     parameter AngularVelocity wmax=1.5;
 
@@ -295,7 +294,7 @@ The reference is computed using the center-of-inertia method.
           Line(points={{-102,0},{100,0}}, color={0,0,0})}));
   end Scaler;
 
-  class wRefContainer
+  model wRefContainer
 
     wRefPin wr annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     annotation (

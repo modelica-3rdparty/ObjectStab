@@ -1,5 +1,5 @@
 within ObjectStab.Examples.BPA;
-class system
+model System
   extends ObjectStab.Base.System;
   Real Ploss;
   Real Qloss;
@@ -203,4 +203,4 @@ equation
         preserveAspectRatio=false,
         extent={{-140,-60},{160,120}},
         grid={2,2}), graphics));
-end system;
+end System;

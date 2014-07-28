@@ -359,7 +359,7 @@ Voltage Stability, Security and Control,  Davos, Switzerland, 1994.
                                                    "%name")}));
     end ImpTransformer;
 
-    class BreakerBase
+    model BreakerBase
       extends ObjectStab.Base.TwoPin;
 
       parameter Real small=1e-6;
@@ -789,7 +789,7 @@ until time CloseTime, after which they are simultanously closed.
             lineColor={0,0,0},
             fillColor={0,0,0},
             fillPattern=FillPattern.Solid), Text(extent={{98,-102},{-98,-80}},
-              textString =                                            "%name")}));
+              textString=                                             "%name")}));
   end Bus;
 
   model FaultedBus "Busbar model with shunt fault"

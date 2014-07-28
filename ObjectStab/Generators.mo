@@ -1,5 +1,6 @@
 within ObjectStab;
 package Generators "Generator subpackage"
+  extends Modelica.Icons.Library;
   package Controllers "Library for Governor and Excitation system models"
     package Partials
       partial model Governor
@@ -246,7 +247,7 @@ package Generators "Generator subpackage"
                                  "Pm0")}));
     end Gover2;
 
-    class IsoGover "Governor Control With Frequency Regulation"
+    model IsoGover "Governor Control With Frequency Regulation"
       extends Partials.Governor;
 
       parameter Base.AngularVelocity wref=1 "Reference Angular Velocity";
@@ -790,7 +791,6 @@ Stability, Number ISBN 0-471-97174. Wiley, 1993.
     end DetGen6;
 
   end Partials;
-  extends Modelica.Icons.Library;
 
   model Slack "Slack Node"
     extends ObjectStab.Generators.Partials.InfiniteBus(isSlack=true);

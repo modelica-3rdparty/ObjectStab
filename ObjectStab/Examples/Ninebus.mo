@@ -1,5 +1,5 @@
 within ObjectStab.Examples;
-class ninebus "Nine bus test system, using 3rd order generator models"
+model Ninebus "Nine bus test system, using 3rd order generator models"
   extends ObjectStab.Base.System;
   ObjectStab.Network.Bus Bus1 annotation (Placement(transformation(
         origin={-2,-50},
@@ -177,4 +177,4 @@ P.M. Anderson and A.A. Fouad, Power System Control and Stability,
 ISBN 0-7803-1029-2. IEEE Press, second edition, 1994.
 "),           extent=[100, 20; 120, 40],
     Placement(transformation(extent={{100,20},{120,40}})));
-end ninebus;
+end Ninebus;

@@ -1,5 +1,5 @@
 within ObjectStab.Examples;
-class TCULExamp
+model TCULExamp
   extends ObjectStab.Base.System;
 
   ObjectStab.Network.Bus Bus1 annotation (Placement(transformation(

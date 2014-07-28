@@ -42,7 +42,7 @@ package Extras
     Real I2=sqrt(T2.ia^2 + T2.ib^2);
   end FaultedPQPilink;
 
-  class ShedRelay
+  model ShedRelay
     extends Modelica.Blocks.Interfaces.SISO;
     parameter Real Threshold=0.95;
     parameter Real DelayTime=1;
