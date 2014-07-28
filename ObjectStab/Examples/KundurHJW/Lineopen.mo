@@ -4,6 +4,5 @@ model Lineopen
           CloseTime=5));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-200,-100},{200,100}}), graphics),
-    experiment(StopTime=6),
-    __Dymola_experimentSetupOutput);
+    experiment(StopTime=6));
 end Lineopen;

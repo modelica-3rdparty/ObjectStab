@@ -1,5 +1,5 @@
 within ObjectStab.Examples;
-package BPA 
+package BPA
   extends Modelica.Icons.Example;
 
 end BPA;
