@@ -6,7 +6,8 @@ model TCULDis
 
   parameter ObjectStab.Base.TapRatio n=1 "Transformer Ratio";
 
-  ObjectStab.Network.Controllers.TCULDiscrete Controller(n=n) annotation (Placement(
+  replaceable ObjectStab.Network.Controllers.TCULDiscrete
+                                              Controller(n=n) annotation (Placement(
         transformation(extent={{0,-60},{20,-40}})));
   ObjectStab.Base.VoltageMeasurement PrimaryVoltage annotation (Placement(
         transformation(
