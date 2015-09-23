@@ -26,7 +26,7 @@ simulations are made, i.e., generator stator and network time constants are negl
 
 ## Current release
 
-Download [Latest development version](../../archive/master.zip)
+Download [Latest development version](https://github.com/modelica-3rdparty/ObjectStab/archive/master.zip)
 * Partially updated version of ObjectStab v1.0c (September 25, 2002)
 * Updated to work with MSL 3.2.1 but still with issues:
   - All controllers using Petri-nets have not been changed and will not work in the present form.
@@ -40,19 +40,20 @@ Status:
 
 #### Release notes
 
-* [Version v1.0.3 (2002-09-25)](../../archive/v1.0.3.zip)
+* [Version v1.0.3 (2002-09-25)](https://github.com/modelica-3rdparty/ObjectStab/releases/tag/v1.0.3)
   * Fixed compatibility issues with Dymola 4.3/5.0.
   * still using [MSL 1.6](https://github.com/modelica/Modelica/archive/v1.6.zip) and
     [ModelicaAdditions 1.5](https://github.com/modelica-deprecated/ModelicaAdditions/archive/v1.5.zip)
 
 ## License
 Copyright &copy; 1999-2002, Mats Larsson<br>
-Copyright &copy; 2014- , Dietmar Winkler &amp; HJ Wiesman
+Copyright &copy; 2014-2015, Dietmar Winkler &amp; HansJ&uuml;rg Wiesmann (&dagger; 2015)
+Copyright &copy; 2015-, Dietmar Winkler
 
 This Modelica package is free software and the use is completely at your own risk;
 it can be redistributed and/or modified under the terms of the [Modelica License 1.1](https://modelica.org/licenses/ModelicaLicense1.1).
 
 ## Development and contribution
-You may report any issues with using the [Issues](../../issues) button.
+You may report any issues with using the [Issues](https://github.com/modelica-3rdparty/ObjectStab/issues) button.
 
-Contributions in shape of [Pull Requests](../../pulls) are always welcome.
+Contributions in shape of [Pull Requests](https://github.com/modelica-3rdparty/ObjectStab/pulls) are always welcome.
