@@ -1,6 +1,6 @@
 within ObjectStab.Examples;
 package Nordic32 "Nordic 32 test system"
-  extends Modelica.Icons.Library;
+  extends Modelica.Icons.Package;
 
 
   annotation (

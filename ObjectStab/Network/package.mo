@@ -2,7 +2,7 @@ within ObjectStab;
 package Network "Network subpackage"
 
 
-  extends Modelica.Icons.Library;
+  extends Modelica.Icons.Package;
 
 
 

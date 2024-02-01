@@ -1,6 +1,6 @@
 within ObjectStab;
 package Loads "Loads subpackage"
-  extends Modelica.Icons.Library;
+  extends Modelica.Icons.Package;
 
 
 

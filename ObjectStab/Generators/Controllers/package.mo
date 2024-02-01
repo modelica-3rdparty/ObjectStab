@@ -5,7 +5,7 @@ package Controllers "Library for Governor and Excitation system models"
 
 
 
-  extends Modelica.Icons.Library;
+  extends Modelica.Icons.Package;
 
 
 
@@ -29,5 +29,4 @@ model NewGen
     redeclare ObjectStab.Generators.Controllers.FirstOrderGovernor Gov);
 end NewGen;
 "));
-
 end Controllers;

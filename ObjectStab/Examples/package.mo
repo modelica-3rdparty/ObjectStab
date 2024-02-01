@@ -1,5 +1,5 @@
 within ObjectStab;
 package Examples
-  extends Modelica.Icons.Library;
+  extends Modelica.Icons.Package;
 
 end Examples;

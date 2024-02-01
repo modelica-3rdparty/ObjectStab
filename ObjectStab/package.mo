@@ -1,6 +1,6 @@
 within ;
 package ObjectStab "ObjectStab - A Modelica Library for Power System Stability Studies"
-extends Modelica.Icons.Library;
+extends Modelica.Icons.Package;
 
 
 annotation (
@@ -101,6 +101,8 @@ and the accompanying <b>disclaimer</b>.
 
 </html>
 "),
-  version="1.1 Dev",
-  uses(Modelica(version="3.2.1")));
+  version="2.0.0",
+  versionDate="2024-02-01",
+  uses(Modelica(version="4.0.0")),
+    conversion(noneFromVersion="1.1 Dev"));
 end ObjectStab;

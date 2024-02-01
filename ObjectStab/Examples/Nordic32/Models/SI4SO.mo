@@ -1,6 +1,6 @@
 within ObjectStab.Examples.Nordic32.Models;
 model SI4SO
-  extends Modelica.Blocks.Interfaces.BlockIcon;
+  extends Modelica.Blocks.Icons.Block;
 
 public
   Modelica.Blocks.Interfaces.RealInput inPort1

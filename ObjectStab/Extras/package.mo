@@ -1,6 +1,6 @@
 within ObjectStab;
 package Extras
-  extends Modelica.Icons.Library;
+  extends Modelica.Icons.Package;
 
 
 

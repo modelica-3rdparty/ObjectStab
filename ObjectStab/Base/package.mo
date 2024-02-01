@@ -1,6 +1,6 @@
 within ObjectStab;
 package Base "Base package"
-  extends Modelica.Icons.Library;
+  extends Modelica.Icons.Package;
 
   // Time and Space
 
